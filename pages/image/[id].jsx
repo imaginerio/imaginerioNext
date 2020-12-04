@@ -23,7 +23,7 @@ export async function getStaticPaths() {
   // Get identifiers from IIIF v2 collection manifest
   const {
     data: { manifests },
-  } = await axios.get('https://images.imaginerio.org/iiif/3/collection/all');
+  } = await axios.get('https://images.imaginerio.org/iiif/2/collection/all');
 
   const paths = manifests.map(manifest => `/image/${manifest['@id'].match(/[^/]+(?=\/manifest)/)}`);
 
