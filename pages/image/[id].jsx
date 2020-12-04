@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Head from 'next/head'
-
+import Head from 'next/head';
 
 const Image = ({ metadata, thumbnail, ...params }) => (
   <>
@@ -24,9 +23,9 @@ export async function getStaticPaths() {
   // Get identifiers from IIIF v2 collection manifest
   const {
     data: { manifests },
-  } = await axios.get('https://situatedviews.axismaps.io/iiif/2/collection/all');
+  } = await axios.get('https://images.imaginerio.org/iiif/3/collection/all');
 
-  const paths = manifests.map(manifest => `/image/${manifest["@id"].match(/[^/]+(?=\/manifest)/)}`);
+  const paths = manifests.map(manifest => `/image/${manifest['@id'].match(/[^/]+(?=\/manifest)/)}`);
 
   return { paths, fallback: false };
 }
@@ -36,9 +35,9 @@ export async function getStaticProps({ params }) {
 
   const {
     data: { metadata },
-  } = await axios.get(`https://situatedviews.axismaps.io/iiif/3/${params.id}/manifest`);
+  } = await axios.get(`https://images.imaginerio.org/iiif/3/${params.id}/manifest`);
 
-  const thumbnail = `https://situatedviews.axismaps.io/iiif-img/3/${params.id}/pct:1,1,98,98/%5E512,/0/default.jpg`
+  const thumbnail = `https://images.imaginerio.org/iiif-img/3/${params.id}/pct:1,1,98,98/%5E512,/0/default.jpg`;
 
   return { props: { metadata, thumbnail, ...params } };
 }

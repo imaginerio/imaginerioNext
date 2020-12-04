@@ -6,7 +6,7 @@ export async function getStaticProps() {
   // Get images from IIIF colleciton manifest
   const {
     data: { manifests },
-  } = await axios.get('https://situatedviews.axismaps.io/iiif/2/collection/all');
+  } = await axios.get('https://images.imaginerio.org/iiif/2/collection/all');
 
   const identifiers = manifests.map(manifest => `${manifest['@id'].match(/[^/]+(?=\/manifest)/)}`);
 
