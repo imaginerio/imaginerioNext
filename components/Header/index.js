@@ -1,0 +1,23 @@
+import React from 'react';
+import Link from 'next/link';
+import { Container, Flex, Spacer, HStack } from '@chakra-ui/react';
+
+const Header = () => (
+  <Container maxW="6xl">
+    <Flex h="90px" align="middle">
+      <img src="/svg/rio-logo.svg" style={{ width: 150 }} />
+      <Spacer />
+      <HStack spacing={30}>
+        <Link href="/">Home</Link>
+        <Link href="/about">About</Link>
+        <Link href="/people">People</Link>
+        <Link href="/research">Research</Link>
+        <Link href="/press">Press</Link>
+        <Link href="/iconography">Iconography</Link>
+        <Link href="/map">Map</Link>
+      </HStack>
+    </Flex>
+  </Container>
+);
+
+export default Header;
