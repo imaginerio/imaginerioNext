@@ -6,6 +6,7 @@ import { Container, Grid, Box, Heading, Text, Flex, Spacer } from '@chakra-ui/re
 
 import Head from '../../components/Head';
 import Header from '../../components/Header';
+import Atlas from '../../components/Atlas';
 
 const ImageDetails = ({ metadata, thumbnail }) => (
   <>
@@ -34,8 +35,8 @@ const ImageDetails = ({ metadata, thumbnail }) => (
         </Text>
       </Grid>
 
-      <Grid templateColumns="480px 1fr">
-        <Box>&nbsp;</Box>
+      <Grid templateColumns="480px 1fr" columnGap="50px">
+        <Atlas year={1880} />
         <Box>
           <Heading size="sm">Properties</Heading>
           {metadata

@@ -15,11 +15,13 @@
     "axios": "^0.19.2",
     "framer-motion": "^2.9.5",
     "html-react-parser": "^0.14.2",
+    "mapbox-gl": "^1.13.0",
     "next": "10.0.3",
     "next-google-fonts": "^1.2.1",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-map-gl": "^5.2.10"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

@@ -25,6 +25,7 @@ export default extendTheme({
           textTransform: 'uppercase',
           opacity: 0.75,
           fontSize: '14px',
+          mt: 0,
         },
       },
       defaultProps: {
