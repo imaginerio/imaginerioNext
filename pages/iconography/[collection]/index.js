@@ -17,6 +17,7 @@ const Collection = ({ images, collection }) => (
     <Header />
     <Container maxW="5xl">
       <Breadcrumbs collection={collection} />
+      <Heading textTransform="capitalize">{collection}</Heading>
       {images.map(img => (
         <Grid
           templateColumns="1fr 150px"
