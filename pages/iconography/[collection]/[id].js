@@ -2,19 +2,23 @@ import React from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import parse from 'html-react-parser';
+import { flatten } from 'lodash';
 import { Container, Grid, Box, Heading, Text, Flex, Spacer } from '@chakra-ui/react';
 
-import Head from '../../components/Head';
-import Header from '../../components/Header';
-import Atlas from '../../components/Atlas';
+import Head from '../../../components/Head';
+import Header from '../../../components/Header';
+import Breadcrumbs from '../../../components/Breadcrumbs';
+import Atlas from '../../../components/Atlas';
 
-import iiif from '../../utils/iiif';
+import iiif from '../../../utils/iiif';
+import config from '../../../utils/config';
 
-const ImageDetails = ({ metadata, thumbnail }) => (
+const ImageDetails = ({ metadata, thumbnail, collection, id }) => (
   <>
-    <Head title={metadata.id} />
+    <Head title={id} />
     <Header />
     <Container maxW="5xl">
+      <Breadcrumbs collection={collection} title={metadata.find(m => m.label === 'Title').value} />
       <Heading>{metadata.find(m => m.label === 'Title').value}</Heading>
       <Text>
         <span>Indentifier: </span>
@@ -50,13 +54,19 @@ const ImageDetails = ({ metadata, thumbnail }) => (
 );
 
 export async function getStaticPaths() {
-  // Get identifiers from IIIF v2 collection manifest
-  const {
-    data: { manifests },
-  } = await axios.get('https://images.imaginerio.org/iiif/2/collection/all');
-
-  const paths = manifests.map(manifest => `/image/${manifest['@id'].match(/[^/]+(?=\/manifest)/)}`);
-
+  const collectionRequests = config.collections.map(collection =>
+    axios
+      .get(`https://images.imaginerio.org/iiif/2/collection/${collection}`)
+      .then(({ data: { manifests } }) =>
+        manifests.map(manifest => ({
+          params: {
+            collection,
+            id: manifest['@id'].match(/[^/]+(?=\/manifest)/)[0],
+          },
+        }))
+      )
+  );
+  const paths = flatten(await Promise.all(collectionRequests));
   return { paths, fallback: false };
 }
 
