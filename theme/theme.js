@@ -22,6 +22,9 @@ export default extendTheme({
         lg: {
           fontSize: '32px',
         },
+        md: {
+          fontSize: '22px',
+        },
         sm: {
           textTransform: 'uppercase',
           opacity: 0.75,
