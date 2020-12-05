@@ -8,31 +8,24 @@ import Head from '../../components/Head';
 import Header from '../../components/Header';
 import Atlas from '../../components/Atlas';
 
+import iiif from '../../utils/iiif';
+
 const ImageDetails = ({ metadata, thumbnail }) => (
   <>
     <Head title={metadata.id} />
     <Header />
     <Container maxW="5xl">
-      <Heading>
-        {metadata.find(m => m.label['pt-br'] && m.label['pt-br'][0] === 'Title').value['pt-br'][0]}
-      </Heading>
+      <Heading>{metadata.find(m => m.label === 'Title').value}</Heading>
       <Text>
         <span>Indentifier: </span>
-        <span style={{ opacity: 0.6 }}>
-          {metadata.find(m => m.label.none[0] === 'Identifier').value.none[0]}
-        </span>
+        <span style={{ opacity: 0.6 }}>{metadata.find(m => m.label === 'Identifier').value}</span>
       </Text>
       <hr style={{ margin: '20px 0' }} />
       <Grid templateColumns="150px 1fr" columnGap="40px" mb="80px">
         <Box w="150px" h="150px" borderRadius="75px" overflow="hidden" pos="relative">
           <Image src={thumbnail} layout="fill" objectFit="contain"></Image>
         </Box>
-        <Text>
-          {
-            // eslint-disable-next-line prettier/prettier
-            metadata.find(m => m.label['pt-br'] && m.label['pt-br'][0] === 'Description').value['pt-br'][0]
-          }
-        </Text>
+        <Text>{metadata.find(m => m.label === 'Description').value}</Text>
       </Grid>
 
       <Grid templateColumns="480px 1fr" columnGap="50px">
@@ -41,22 +34,13 @@ const ImageDetails = ({ metadata, thumbnail }) => (
           <Heading size="sm">Properties</Heading>
           {metadata
             .filter(
-              m =>
-                (!m.label['pt-br'] || m.label['pt-br'][0] !== 'Description') &&
-                (!m.label['pt-br'] || m.label['pt-br'][0] !== 'Title') &&
-                m.label.none[0] !== 'Identifier'
+              m => m.label !== 'Title' && m.label !== 'Identifier' && m.label !== 'Description'
             )
             .map(m => (
-              <Flex
-                key={m.label.none ? m.label.none[0] : m.label['pt-br'][0]}
-                py={5}
-                borderBottom="1px solid rgba(0,0,0,0.1)"
-              >
-                <Text>{m.label.none ? m.label.none[0] : m.label['pt-br'][0]}</Text>
+              <Flex key={m.label} py={5} borderBottom="1px solid rgba(0,0,0,0.1)">
+                <Text>{m.label}</Text>
                 <Spacer></Spacer>
-                <Text align="right">
-                  {parse(m.value.none ? m.value.none[0] : m.value['pt-br'][0])}
-                </Text>
+                <Text align="right">{parse(m.value)}</Text>
               </Flex>
             ))}
         </Box>
@@ -79,9 +63,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // Get metadata from IIIF v3 manifest
 
-  const {
+  let {
     data: { metadata },
   } = await axios.get(`https://images.imaginerio.org/iiif/3/${params.id}/manifest`);
+  metadata = iiif(metadata);
 
   const thumbnail = `https://images.imaginerio.org/iiif-img/3/${params.id}/square/150,/0/default.jpg`;
 

@@ -15,6 +15,7 @@
     "axios": "^0.19.2",
     "framer-motion": "^2.9.5",
     "html-react-parser": "^0.14.2",
+    "lodash": "^4.17.20",
     "mapbox-gl": "^1.13.0",
     "next": "10.0.3",
     "next-google-fonts": "^1.2.1",
