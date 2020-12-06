@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import mirador from 'mirador';
 
 class Mirador extends Component {
@@ -12,5 +13,10 @@ class Mirador extends Component {
     return <div id={config.id} style={{ position: 'relative', width: '100%', height: '40vh' }} />;
   }
 }
+
+Mirador.propTypes = {
+  config: PropTypes.shape().isRequired,
+  plugins: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
 
 export default Mirador;

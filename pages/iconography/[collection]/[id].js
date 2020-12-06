@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -13,9 +14,9 @@ import Atlas from '../../../components/Atlas';
 import iiif from '../../../utils/iiif';
 import config from '../../../utils/config';
 
-const Mirador = dynamic(() => import("../../../components/Mirador"), { ssr: false });
+const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
 
-const ImageDetails = ({ metadata, thumbnail, collection, id }) => (
+const ImageDetails = ({ metadata, collection, id }) => (
   <>
     <Head title={id} />
     <Header />
@@ -29,7 +30,11 @@ const ImageDetails = ({ metadata, thumbnail, collection, id }) => (
       <hr style={{ margin: '20px 0' }} />
       <Grid templateColumns="150px 1fr" columnGap="40px" mb="80px">
         <Box w="150px" h="150px" borderRadius="75px" overflow="hidden" pos="relative">
-          <Image src={thumbnail} layout="fill" objectFit="contain"></Image>
+          <Image
+            src={`https://images.imaginerio.org/iiif-img/3/${id}/square/150,/0/default.jpg`}
+            layout="fill"
+            objectFit="contain"
+          />
         </Box>
         <Text>{metadata.find(m => m.label === 'Description').value}</Text>
       </Grid>
@@ -45,7 +50,7 @@ const ImageDetails = ({ metadata, thumbnail, collection, id }) => (
             .map(m => (
               <Flex key={m.label} py={5} borderBottom="1px solid rgba(0,0,0,0.1)">
                 <Text>{m.label}</Text>
-                <Spacer></Spacer>
+                <Spacer />
                 <Text align="right">{parse(m.value)}</Text>
               </Flex>
             ))}
@@ -56,10 +61,10 @@ const ImageDetails = ({ metadata, thumbnail, collection, id }) => (
         config={{
           id: 'mirador',
           window: {
-            allowClose: false
+            allowClose: false,
           },
           windows: [{ manifestId: `https://images.imaginerio.org/iiif/3/${id}/manifest` }],
-          language: 'pt-br'
+          language: 'pt-br',
         }}
       />
     </Container>
@@ -91,9 +96,13 @@ export async function getStaticProps({ params }) {
   } = await axios.get(`https://images.imaginerio.org/iiif/3/${params.id}/manifest`);
   metadata = iiif(metadata);
 
-  const thumbnail = `https://images.imaginerio.org/iiif-img/3/${params.id}/square/150,/0/default.jpg`;
-
-  return { props: { metadata, thumbnail, ...params } };
+  return { props: { metadata, ...params } };
 }
+
+ImageDetails.propTypes = {
+  metadata: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  collection: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+};
 
 export default ImageDetails;

@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NextHead from 'next/head';
 import GoogleFonts from 'next-google-fonts';
-import PropTypes from 'prop-types';
 
 const Head = ({ title }) => (
   <>
@@ -16,8 +16,8 @@ const Head = ({ title }) => (
   </>
 );
 
-Head.propTypes = {};
-
-Head.defaultProps = {};
+Head.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default Head;

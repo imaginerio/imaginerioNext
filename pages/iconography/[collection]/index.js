@@ -43,7 +43,7 @@ const Collection = ({ images, collection }) => (
               src={`https://images.imaginerio.org/iiif-img/3/${img.find(m => m.label === 'Identifier').value}/square/150,/0/default.jpg`}
               layout="fill"
               objectFit="contain"
-            ></Image>
+            />
           </Box>
         </Grid>
       ))}

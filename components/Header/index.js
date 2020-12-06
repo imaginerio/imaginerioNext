@@ -5,7 +5,7 @@ import { Container, Flex, Spacer, HStack } from '@chakra-ui/react';
 const Header = () => (
   <Container maxW="6xl">
     <Flex h="90px" align="middle">
-      <img src="/svg/rio-logo.svg" style={{ width: 150 }} />
+      <img src="/svg/rio-logo.svg" style={{ width: 150 }} alt="ImagineRio Logo" />
       <Spacer />
       <HStack spacing={30}>
         <Link href="/">Home</Link>

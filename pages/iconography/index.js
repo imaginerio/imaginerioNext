@@ -15,7 +15,7 @@ const Iconography = () => (
     <Container maxW="5xl">
       <Breadcrumbs />
       <Heading>Iconography</Heading>
-      <hr></hr>
+      <hr />
       <VStack>
         {config.collections.map(collection => (
           <Box key={collection}>
