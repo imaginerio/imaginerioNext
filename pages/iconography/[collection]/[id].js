@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import parse from 'html-react-parser';
 import { flatten } from 'lodash';
 import { Container, Grid, Box, Heading, Text, Flex, Spacer } from '@chakra-ui/react';
@@ -9,9 +10,10 @@ import Head from '../../../components/Head';
 import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import Atlas from '../../../components/Atlas';
-
 import iiif from '../../../utils/iiif';
 import config from '../../../utils/config';
+
+const Mirador = dynamic(() => import("../../../components/Mirador"), { ssr: false });
 
 const ImageDetails = ({ metadata, thumbnail, collection, id }) => (
   <>
@@ -49,6 +51,17 @@ const ImageDetails = ({ metadata, thumbnail, collection, id }) => (
             ))}
         </Box>
       </Grid>
+      <hr style={{ margin: '40px 0' }} />
+      <Mirador
+        config={{
+          id: 'mirador',
+          window: {
+            allowClose: false
+          },
+          windows: [{ manifestId: `https://images.imaginerio.org/iiif/3/${id}/manifest` }],
+          language: 'pt-br'
+        }}
+      />
     </Container>
   </>
 );
