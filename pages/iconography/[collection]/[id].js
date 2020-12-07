@@ -67,6 +67,12 @@ const ImageDetails = ({ metadata, collection, id }) => (
           language: 'pt-br',
         }}
       />
+      <hr style={{ margin: '40px 0' }} />
+      <iframe
+        title="Smapshot"
+        src={`https://smapshot-beta.heig-vd.ch/owner/imaginerio/original_image/${id}/embed`}
+        style={{ width: '100%', minHeight: 400, height: '40vh' }}
+      />
     </Container>
   </>
 );
