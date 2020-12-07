@@ -10,6 +10,7 @@ import { Container, Grid, Box, Heading, Text, Flex, Spacer } from '@chakra-ui/re
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
+import Footer from '../../../components/Footer';
 import Atlas from '../../../components/Atlas';
 import iiif from '../../../utils/iiif';
 import config from '../../../utils/config';
@@ -74,6 +75,7 @@ const ImageDetails = ({ metadata, collection, id }) => (
         style={{ width: '100%', minHeight: 400, height: '40vh', marginBottom: 80 }}
       />
     </Container>
+    <Footer />
   </>
 );
 

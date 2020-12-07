@@ -8,6 +8,7 @@ import { Container, Grid, Box, Heading, Text } from '@chakra-ui/react';
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
+import Footer from '../../../components/Footer';
 
 import iiif from '../../../utils/iiif';
 import config from '../../../utils/config';
@@ -49,6 +50,7 @@ const Collection = ({ images, collection }) => (
         </Grid>
       ))}
     </Container>
+    <Footer />
   </>
 );
 

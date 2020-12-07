@@ -5,6 +5,7 @@ import { Container, Grid, Box, Heading, Text, Button } from '@chakra-ui/react';
 
 import Head from '../components/Head';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Home = () => (
   <>
@@ -74,6 +75,7 @@ const Home = () => (
         </Grid>
       </Container>
     </section>
+    <Footer />
   </>
 );
 

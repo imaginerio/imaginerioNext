@@ -5,6 +5,7 @@ import { Container, Heading, Box, VStack } from '@chakra-ui/react';
 import Head from '../../components/Head';
 import Header from '../../components/Header';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import Footer from '../../components/Footer';
 
 import config from '../../utils/config';
 
@@ -26,6 +27,7 @@ const Iconography = () => (
         ))}
       </VStack>
     </Container>
+    <Footer />
   </>
 );
 
