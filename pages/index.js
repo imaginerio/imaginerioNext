@@ -1,207 +1,80 @@
 import React from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
-import axios from 'axios';
+import Image from 'next/image';
+import { Container, Grid, Box, Heading, Text, Button } from '@chakra-ui/react';
 
-export async function getStaticProps() {
-  // Get images from IIIF colleciton manifest
-  const {
-    data: { manifests },
-  } = await axios.get('https://images.imaginerio.org/iiif/2/collection/all');
+import Head from '../components/Head';
+import Header from '../components/Header';
 
-  const identifiers = manifests.map(manifest => `${manifest['@id'].match(/[^/]+(?=\/manifest)/)}`);
-
-  return { props: { identifiers } };
-}
-
-export default function Home({ identifiers }) {
-  return (
-    <div className="container">
-      <Head>
-        <title>IIIF imagineRio</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className="title">IIIF imagineRio</h1>
-
-        <div className="grid">
-          {identifiers.map(identifier => (
-            <Link href={`/image/${identifier}`}>
-              <a>
-                <h3>{identifier}</h3>
-              </a>
+const Home = () => (
+  <>
+    <Head title="imagineRio" />
+    <Header />
+    <section style={{ backgroundColor: '#F7F9FC' }}>
+      <Container maxW="5xl">
+        <Grid templateColumns="1fr 300px" columnGap="50px">
+          <Box display="flex" alignItems="center">
+            <Box>
+              <Heading size="sm">Map</Heading>
+              <Heading size="md">imagineRio</Heading>
+              <Text my={10}>
+                A searchable digital atlas that illustrates the social and urban evolution of Rio de
+                Janeiro, as it existed and as it was imagined. Lorem ipsum dolor sit amet,
+                consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                dolores et ea rebum. Stet clita kasd gubergren, no sea.
+              </Text>
+              <Link href="/map">
+                <Button bgColor="#3C558E" color="white" px={10}>
+                  View the map
+                </Button>
+              </Link>
+            </Box>
+          </Box>
+          <Box p="40px" bgColor="black" position="relative" width="660px" borderRadius="20px">
+            <Image src="/img/screenshot.png" width={660} height={430} />
+          </Box>
+        </Grid>
+      </Container>
+    </section>
+    <section>
+      <Container maxW="5xl">
+        <Grid templateColumns="1fr 1fr" columnGap="50px">
+          <Box>
+            <Heading size="sm">Iconography</Heading>
+            <Heading size="md">Views, maps, plans, aerials</Heading>
+            <Text my={10}>
+              Views, historical maps, and ground floor plans –from iconographic, cartographic, and
+              architectural archives– are located in both time and space while their visual and
+              spatial data are integrated across a number of databases and servers, including a
+              public repository of images, a geographic information system, an open-source
+              relational database, and a content delivery web system
+            </Text>
+            <Link href="/map">
+              <Button bgColor="#3C558E" color="white" px={10}>
+                Browse iconography
+              </Button>
             </Link>
-          ))}
-        </div>
-      </main>
+            <Box my={10}>
+              <Image src="/img/image-3.png" width={460} height={286} />
+            </Box>
+            <Box my={10}>
+              <Image src="/img/image.png" width={460} height={460} />
+            </Box>
+          </Box>
+          <Box>
+            <Image src="/img/image-1.png" width={460} height={460} />
+            <Box my={10}>
+              <Image src="/img/image-2.png" width={460} height={320} />
+            </Box>
+            <Box my={10}>
+              <Image src="/img/image-4.png" width={460} height={320} />
+            </Box>
+          </Box>
+        </Grid>
+      </Container>
+    </section>
+  </>
+);
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>
-        {`
-          .container {
-            min-height: 100vh;
-            padding: 0 0.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          }
-
-          main {
-            padding: 5rem 0;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          }
-
-          footer {
-            width: 100%;
-            height: 100px;
-            border-top: 1px solid #eaeaea;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          footer img {
-            margin-left: 0.5rem;
-          }
-
-          footer a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          a {
-            color: inherit;
-            text-decoration: none;
-            margin: 4px;
-            padding: 4px;
-            border-radius: 30px;
-            border: 1px solid grey;
-          }
-
-          h3 {
-            margin: 0;
-          }
-
-          .title a {
-            color: #0070f3;
-            text-decoration: none;
-          }
-
-          .title a:hover,
-          .title a:focus,
-          .title a:active {
-            text-decoration: underline;
-          }
-
-          .title {
-            margin: 0;
-            line-height: 1.15;
-            font-size: 4rem;
-          }
-
-          .title,
-          .description {
-            text-align: center;
-          }
-
-          .description {
-            line-height: 1.5;
-            font-size: 1.5rem;
-          }
-
-          code {
-            background: #fafafa;
-            border-radius: 5px;
-            padding: 0.75rem;
-            font-size: 1.1rem;
-            font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-              Bitstream Vera Sans Mono, Courier New, monospace;
-          }
-
-          .grid {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-
-            max-width: 800px;
-            margin-top: 3rem;
-          }
-
-          .card {
-            margin: 1rem;
-            flex-basis: 45%;
-            padding: 1.5rem;
-            text-align: left;
-            color: inherit;
-            text-decoration: none;
-            border: 1px solid #eaeaea;
-            border-radius: 10px;
-            transition: color 0.15s ease, border-color 0.15s ease;
-          }
-
-          .card:hover,
-          .card:focus,
-          .card:active {
-            color: #0070f3;
-            border-color: #0070f3;
-          }
-
-          .card h3 {
-            margin: 0 0 1rem 0;
-            font-size: 1.5rem;
-          }
-
-          .card p {
-            margin: 0;
-            font-size: 1.25rem;
-            line-height: 1.5;
-          }
-
-          .logo {
-            height: 1em;
-          }
-
-          @media (max-width: 600px) {
-            .grid {
-              width: 100%;
-              flex-direction: column;
-            }
-          }
-        `}
-      </style>
-
-      <style jsx global>
-        {`
-          html,
-          body {
-            padding: 0;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-              Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-          }
-
-          * {
-            box-sizing: border-box;
-          }
-        `}
-      </style>
-    </div>
-  );
-}
+export default Home;

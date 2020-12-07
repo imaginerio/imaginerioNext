@@ -7,6 +7,9 @@ export default extendTheme({
       a: {
         color: '#1580D1',
       },
+      section: {
+        padding: '50px 0',
+      },
     },
   },
   fonts: {
@@ -34,6 +37,13 @@ export default extendTheme({
       },
       defaultProps: {
         size: 'lg',
+      },
+    },
+    Button: {
+      baseStyle: {
+        bg: '#3C558E',
+        color: 'white',
+        px: 10,
       },
     },
   },
