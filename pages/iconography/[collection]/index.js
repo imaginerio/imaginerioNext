@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -65,17 +66,22 @@ export async function getStaticProps({ params }) {
       .then(({ data: { metadata } }) => iiif(metadata));
 
   const {
-    data: { manifests },
-  } = await axios.get(`https://images.imaginerio.org/iiif/2/collection/${params.collection}`);
+    data: { items },
+  } = await axios.get(`https://images.imaginerio.org/iiif/collection/${params.collection}`);
 
   const images = [];
-  await manifests.reduce(async (previousPromise, m) => {
+  await items.reduce(async (previousPromise, m) => {
     await previousPromise;
     // eslint-disable-next-line no-console
-    console.log('Loading ', m['@id'].match(/[^/]+(?=\/manifest)/)[0]);
-    return loadManifest(m['@id'].match(/[^/]+(?=\/manifest)/)[0]).then(i => images.push(i));
+    console.log('Loading ', m.id.match(/[^/]+(?=\/manifest)/)[0]);
+    return loadManifest(m.id.match(/[^/]+(?=\/manifest)/)[0]).then(i => images.push(i));
   }, Promise.resolve());
   return { props: { images, ...params } };
 }
+
+Collection.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  collection: PropTypes.string.isRequired,
+};
 
 export default Collection;

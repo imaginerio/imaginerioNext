@@ -71,7 +71,7 @@ const ImageDetails = ({ metadata, collection, id }) => (
       <iframe
         title="Smapshot"
         src={`https://smapshot-beta.heig-vd.ch/owner/imaginerio/original_image/${id}/embed`}
-        style={{ width: '100%', minHeight: 400, height: '40vh' }}
+        style={{ width: '100%', minHeight: 400, height: '40vh', marginBottom: 80 }}
       />
     </Container>
   </>
@@ -80,12 +80,12 @@ const ImageDetails = ({ metadata, collection, id }) => (
 export async function getStaticPaths() {
   const collectionRequests = config.collections.map(collection =>
     axios
-      .get(`https://images.imaginerio.org/iiif/2/collection/${collection}`)
-      .then(({ data: { manifests } }) =>
-        manifests.map(manifest => ({
+      .get(`https://images.imaginerio.org/iiif/collection/${collection}`)
+      .then(({ data: { items } }) =>
+        items.map(manifest => ({
           params: {
             collection,
-            id: manifest['@id'].match(/[^/]+(?=\/manifest)/)[0],
+            id: manifest.id.match(/[^/]+(?=\/manifest)/)[0],
           },
         }))
       )
