@@ -34,7 +34,7 @@ const Collection = ({ images, collection }) => (
               <Link
                 href={`/iconography/${collection}/${img.find(m => m.label === 'Identifier').value}`}
               >
-                {img.find(m => m.label === 'Title').value}
+                {img.find(m => m.label === 'Title').value || 'Image'}
               </Link>
             </Heading>
             <Text>{img.find(m => m.label === 'Description').value}</Text>
