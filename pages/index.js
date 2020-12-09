@@ -33,7 +33,7 @@ const Home = () => (
             </Box>
           </Box>
           <Box p="40px" bgColor="black" position="relative" width="660px" borderRadius="20px">
-            <Image src="/img/screenshot.png" width={660} height={430} />
+            <Image src="/Image/screenshot.png" width={660} height={430} />
           </Box>
         </Grid>
       </Container>
@@ -57,19 +57,19 @@ const Home = () => (
               </Button>
             </Link>
             <Box my={10}>
-              <img src="/img/image3.png" width={460} height={286} alt="imagineRio" />
+              <Image src="/img/image3.png" width={460} height={286} alt="imagineRio" />
             </Box>
             <Box my={10}>
-              <img src="/img/image.png" width={460} height={460} alt="imagineRio" />
+              <Image src="/img/image.png" width={460} height={460} alt="imagineRio" />
             </Box>
           </Box>
           <Box>
-            <img src="/img/image1.png" width={460} height={460} alt="imagineRio" />
+            <Image src="/img/image1.png" width={460} height={460} alt="imagineRio" />
             <Box my={10}>
-              <img src="/img/image2.png" width={460} height={320} alt="imagineRio" />
+              <Image src="/img/image2.png" width={460} height={320} alt="imagineRio" />
             </Box>
             <Box my={10}>
-              <img src="/img/image4.png" width={460} height={320} alt="imagineRio" />
+              <Image src="/img/image4.png" width={460} height={320} alt="imagineRio" />
             </Box>
           </Box>
         </Grid>
