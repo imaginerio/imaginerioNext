@@ -68,15 +68,15 @@ export async function getStaticProps({ params }) {
       .then(({ data: { metadata } }) => iiif(metadata));
 
   const {
-    data: { items },
-  } = await axios.get(`https://images.imaginerio.org/iiif/collection/${params.collection}`);
+    data: { manifests },
+  } = await axios.get(`https://images.imaginerio.org/iiif/2/collection/${params.collection}`);
 
   const images = [];
-  await items.reduce(async (previousPromise, m) => {
+  await manifests.reduce(async (previousPromise, m) => {
     await previousPromise;
     // eslint-disable-next-line no-console
-    console.log('Loading ', m.id.match(/[^/]+(?=\/manifest)/)[0]);
-    return loadManifest(m.id.match(/[^/]+(?=\/manifest)/)[0]).then(i => images.push(i));
+    console.log('Loading ', m['@id'].match(/[^/]+(?=\/manifest)/)[0]);
+    return loadManifest(m['@id'].match(/[^/]+(?=\/manifest)/)[0]).then(i => images.push(i));
   }, Promise.resolve());
   return { props: { images, ...params } };
 }
