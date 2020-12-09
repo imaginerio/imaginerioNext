@@ -57,19 +57,19 @@ const Home = () => (
               </Button>
             </Link>
             <Box my={10}>
-              <Image src="/img/image3.png" width={460} height={286} />
+              <img src="/img/image3.png" width={460} height={286} alt="imagineRio" />
             </Box>
             <Box my={10}>
-              <Image src="/img/image.png" width={460} height={460} />
+              <img src="/img/image.png" width={460} height={460} alt="imagineRio" />
             </Box>
           </Box>
           <Box>
-            <Image src="/img/image1.png" width={460} height={460} />
+            <img src="/img/image1.png" width={460} height={460} alt="imagineRio" />
             <Box my={10}>
-              <Image src="/img/image2.png" width={460} height={320} />
+              <img src="/img/image2.png" width={460} height={320} alt="imagineRio" />
             </Box>
             <Box my={10}>
-              <Image src="/img/image4.png" width={460} height={320} />
+              <img src="/img/image4.png" width={460} height={320} alt="imagineRio" />
             </Box>
           </Box>
         </Grid>
