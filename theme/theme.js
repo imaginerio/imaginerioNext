@@ -7,9 +7,6 @@ export default extendTheme({
       a: {
         color: '#1580D1',
       },
-      section: {
-        padding: '50px 0',
-      },
     },
   },
   fonts: {

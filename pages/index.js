@@ -11,7 +11,7 @@ const Home = () => (
   <>
     <Head title="imagineRio" />
     <Header />
-    <section style={{ backgroundColor: '#F7F9FC' }}>
+    <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
       <Container maxW="5xl">
         <Grid templateColumns="1fr 300px" columnGap="50px">
           <Box display="flex" alignItems="center">
@@ -38,7 +38,7 @@ const Home = () => (
         </Grid>
       </Container>
     </section>
-    <section>
+    <section style={{ padding: '50px 0' }}>
       <Container maxW="5xl">
         <Grid templateColumns="1fr 1fr" columnGap="50px">
           <Box>
