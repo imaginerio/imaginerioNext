@@ -51,25 +51,25 @@ const Home = () => (
               public repository of images, a geographic information system, an open-source
               relational database, and a content delivery web system
             </Text>
-            <Link href="/map">
+            <Link href="/iconography">
               <Button bgColor="#3C558E" color="white" px={10}>
                 Browse iconography
               </Button>
             </Link>
             <Box my={10}>
-              <Image src="/img/image-3.png" width={460} height={286} />
+              <Image src="/img/image3.png" width={460} height={286} />
             </Box>
             <Box my={10}>
               <Image src="/img/image.png" width={460} height={460} />
             </Box>
           </Box>
           <Box>
-            <Image src="/img/image-1.png" width={460} height={460} />
+            <Image src="/img/image1.png" width={460} height={460} />
             <Box my={10}>
-              <Image src="/img/image-2.png" width={460} height={320} />
+              <Image src="/img/image2.png" width={460} height={320} />
             </Box>
             <Box my={10}>
-              <Image src="/img/image-4.png" width={460} height={320} />
+              <Image src="/img/image4.png" width={460} height={320} />
             </Box>
           </Box>
         </Grid>
