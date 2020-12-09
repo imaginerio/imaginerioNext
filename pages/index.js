@@ -33,7 +33,7 @@ const Home = () => (
             </Box>
           </Box>
           <Box p="40px" bgColor="black" position="relative" width="660px" borderRadius="20px">
-            <Image src="/Image/screenshot.png" width={660} height={430} />
+            <Image src="/img/screenshot.png" width={660} height={430} />
           </Box>
         </Grid>
       </Container>
