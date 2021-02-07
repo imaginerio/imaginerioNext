@@ -9,7 +9,7 @@ const addRequiredKeys = (metadata, keys) => {
   return metadata;
 };
 
-export default manifest => {
+const iiif = manifest => {
   let metadata = [];
   manifest.forEach(m => {
     if (m.label && m.value) {
@@ -22,3 +22,11 @@ export default manifest => {
 
   return metadata;
 };
+
+const findByLabel = (collection, label) => {
+  const value = collection.find(m => m.label === label);
+  if (value) return value.value;
+  return null;
+};
+
+export { iiif, findByLabel };

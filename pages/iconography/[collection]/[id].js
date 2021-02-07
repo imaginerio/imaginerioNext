@@ -12,7 +12,7 @@ import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
 import Atlas from '../../../components/Atlas';
-import iiif from '../../../utils/iiif';
+import { iiif } from '../../../utils/iiif';
 import config from '../../../utils/config';
 
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
