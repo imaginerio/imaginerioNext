@@ -25,7 +25,8 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-map-gl": "^5.2.10"
+    "react-map-gl": "^5.2.10",
+    "react-window": "^1.8.6"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

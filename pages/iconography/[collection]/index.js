@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Link from 'next/link';
 import Image from 'next/image';
+import { VariableSizeList } from 'react-window';
 import { Container, Grid, Flex, Box, Heading, Text } from '@chakra-ui/react';
 
 import Head from '../../../components/Head';
@@ -12,58 +13,91 @@ import Footer from '../../../components/Footer';
 
 import { iiif, findByLabel } from '../../../utils/iiif';
 import config from '../../../utils/config';
+import useWindowDimensions from '../../../utils/useWindowDimensions';
 
-const Collection = ({ images, collection }) => (
-  <>
-    <Head title={collection} />
-    <Header />
-    <Container maxW="5xl">
-      <Breadcrumbs collection={collection} />
-      <Heading textTransform="capitalize">{collection}</Heading>
-      {images.map(img => {
-        const id = findByLabel(img, 'Identifier');
-        const dim = findByLabel(img, 'Dimensions');
-        let height = 150;
-        let width = Math.round((150 / dim[1]) * dim[0]);
-        if (width > 400) {
-          width = 400;
-          height = Math.round((400 / dim[0]) * dim[1]);
-        }
-        return (
+const Collection = ({ images, collection }) => {
+  const { height } = useWindowDimensions();
+  const Row = ({ index, style }) => {
+    if (index >= images.length) {
+      return (
+        <div style={style}>
+          <Footer />
+        </div>
+      );
+    }
+    const img = images[index];
+    const id = findByLabel(img, 'Identifier') || 'Image';
+    const title = findByLabel(img, 'Title');
+    const dim = findByLabel(img, 'Dimensions');
+    let imgHeight = 150;
+    let imgWidth = Math.round((150 / dim[1]) * dim[0]);
+    if (imgWidth > 400) {
+      imgWidth = 400;
+      imgHeight = Math.round((400 / dim[0]) * dim[1]);
+    }
+    return (
+      <div style={style}>
+        <Container maxW="5xl">
           <Grid
-            templateColumns={`1fr ${width}px`}
+            templateColumns={`1fr ${imgWidth}px`}
             columnGap="40px"
             key={id}
             pb="30px"
             mb="30px"
+            minH="150px"
             borderBottom="1px solid rgba(0,0,0,0.1)"
           >
             <Box>
               <Heading size="md">
                 <Link href={`/iconography/${collection}/${id}`}>
-                  {findByLabel(img, 'Title') || 'Image'}
+                  {title.length > 150
+                    ? `${title.substr(0, title.lastIndexOf(' ', 150))}...`
+                    : title}
                 </Link>
               </Heading>
               <Text>{findByLabel(img, 'Creator')}</Text>
               <Text>{findByLabel(img, 'Date (Circa)')}</Text>
             </Box>
             <Flex align="center">
-              <Box w={`${width}px`} h={`${height}px`}>
+              <Box w={`${imgWidth}px`} h={`${imgHeight}px`}>
                 <Image
-                  // eslint-disable-next-line prettier/prettier
                   src={`https://images.imaginerio.org/iiif-img/3/${id}/full/!300,150/0/default.jpg`}
-                  height={height}
-                  width={width}
+                  height={imgHeight}
+                  width={imgWidth}
                 />
               </Box>
             </Flex>
           </Grid>
-        );
-      })}
-    </Container>
-    <Footer />
-  </>
-);
+        </Container>
+      </div>
+    );
+  };
+
+  Row.propTypes = {
+    index: PropTypes.number.isRequired,
+    style: PropTypes.shape().isRequired,
+  };
+
+  return (
+    <>
+      <Head title={collection} />
+      <Header />
+      <Container maxW="5xl">
+        <Breadcrumbs collection={collection} />
+        <Heading textTransform="capitalize">{collection}</Heading>
+      </Container>
+      <VariableSizeList
+        itemCount={images.length + 1}
+        estimatedItemSize={210}
+        height={height - 192}
+        width="100%"
+        itemSize={index => (index < images.length ? 210 : 334)}
+      >
+        {Row}
+      </VariableSizeList>
+    </>
+  );
+};
 
 export async function getStaticPaths() {
   return {
