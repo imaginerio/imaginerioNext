@@ -16,7 +16,8 @@ import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
 
 const Collection = ({ images, collection }) => {
-  const { height } = useWindowDimensions();
+  let height = 800;
+  if (typeof window !== 'undefined') ({ height } = useWindowDimensions());
   const Row = ({ index, style }) => {
     if (index >= images.length) {
       return (
