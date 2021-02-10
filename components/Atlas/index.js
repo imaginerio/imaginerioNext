@@ -120,7 +120,7 @@ Atlas.propTypes = {
     pitch: PropTypes.number,
   }),
   year: PropTypes.number.isRequired,
-  activeBasemap: PropTypes.shape(),
+  activeBasemap: PropTypes.string,
   geojson: PropTypes.shape(),
   opacity: PropTypes.number,
 };
