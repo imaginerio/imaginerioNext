@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import Link from 'next/link';
 import Image from 'next/image';
 import { VariableSizeList } from 'react-window';
@@ -14,6 +15,8 @@ import Footer from '../../../components/Footer';
 import { iiif, findByLabel } from '../../../utils/iiif';
 import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
+
+axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay, retries: 5 });
 
 const Collection = ({ images, collection }) => {
   let height = 800;

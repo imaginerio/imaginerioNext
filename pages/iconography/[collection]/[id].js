@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import dynamic from 'next/dynamic';
 import parse from 'html-react-parser';
 import { flatten } from 'lodash';
@@ -15,6 +16,7 @@ import Atlas from '../../../components/Atlas';
 import { iiif, findByLabel } from '../../../utils/iiif';
 import config from '../../../utils/config';
 
+axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay, retries: 5 });
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
 
 const ImageDetails = ({ metadata, collection, activeBasemap, geojson, id, year }) => (
