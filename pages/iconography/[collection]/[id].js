@@ -17,7 +17,7 @@ import config from '../../../utils/config';
 
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
 
-const ImageDetails = ({ metadata, collection, id }) => (
+const ImageDetails = ({ metadata, collection, id, year }) => (
   <>
     <Head title={id} />
     <Header />
@@ -47,7 +47,7 @@ const ImageDetails = ({ metadata, collection, id }) => (
 
       <Grid templateColumns="480px 1fr" columnGap="50px">
         <Atlas
-          year={parseInt(findByLabel(metadata, 'Year').substr(0, 4), 10)}
+          year={year}
           geojson={findByLabel(metadata, 'Viewcone')}
           viewport={{ width: 480, height: 360 }}
         />
@@ -101,6 +101,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   // Get metadata from IIIF v3 manifest
+  let year = 1900;
   let {
     data: { metadata, seeAlso },
   } = await axios.get(`https://images.imaginerio.org/iiif/3/${params.id}/manifest`);
@@ -108,20 +109,24 @@ export async function getStaticProps({ params }) {
   seeAlso = seeAlso.find(s => s.id.match(/imaginerio\.org/));
   if (seeAlso) {
     const {
-      data: { 'schema:polygon': polygon, 'dcterms:temporal': year },
+      data: { 'schema:polygon': polygon, 'dcterms:temporal': years },
     } = await axios.get(seeAlso.id);
     if (polygon) {
       metadata.push({ label: 'Viewcone', value: parseWKT(polygon[0]['@value']) });
     }
-    if (year) {
-      metadata.push({ label: 'Year', value: year[0]['@value'] });
+    if (years) {
+      metadata.push({ label: 'Year', value: years[0]['@value'] });
+      year = parseInt(years[0]['@value'].replace(/.*(\d{4})/, '$1'), 10);
+    } else if (findByLabel(metadata, 'Date Created')) {
+      year = parseInt(findByLabel(metadata, 'Date Created').replace(/.*(\d{4})/, '$1'), 10);
     }
   }
 
-  return { props: { metadata, ...params } };
+  return { props: { metadata, year, ...params } };
 }
 
 ImageDetails.propTypes = {
+  year: PropTypes.number.isRequired,
   metadata: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   collection: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
