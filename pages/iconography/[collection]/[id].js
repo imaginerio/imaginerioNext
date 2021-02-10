@@ -62,6 +62,7 @@ const ImageDetails = ({ metadata, collection, id }) => (
         </Box>
       </Grid>
       <hr style={{ margin: '40px 0' }} />
+      <Heading size="md">3D Viewer</Heading>
       <iframe
         title="Smapshot"
         src={`https://smapshot-beta.heig-vd.ch/owner/imaginerio/original_image/${id}/embed`}
