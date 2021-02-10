@@ -4,6 +4,7 @@ import axios from 'axios';
 import dynamic from 'next/dynamic';
 import parse from 'html-react-parser';
 import { flatten } from 'lodash';
+import { parse as parseWKT } from 'wellknown';
 import { Container, Grid, Box, Heading, Text, Flex, Spacer } from '@chakra-ui/react';
 
 import Head from '../../../components/Head';
@@ -42,15 +43,23 @@ const ImageDetails = ({ metadata, collection, id }) => (
           language: 'pt-br',
         }}
       />
-      <Text my="80px">{metadata.find(m => m.label === 'Description').value}</Text>
+      <Text my="80px">{findByLabel(metadata, 'Description')}</Text>
 
       <Grid templateColumns="480px 1fr" columnGap="50px">
-        <Atlas year={1880} />
+        <Atlas
+          year={parseInt(findByLabel(metadata, 'Year').substr(0, 4), 10)}
+          geojson={findByLabel(metadata, 'Viewcone')}
+          viewport={{ width: 480, height: 360 }}
+        />
         <Box>
           <Heading size="sm">Properties</Heading>
           {metadata
             .filter(
-              m => m.label !== 'Title' && m.label !== 'Identifier' && m.label !== 'Description'
+              m =>
+                m.label !== 'Title' &&
+                m.label !== 'Identifier' &&
+                m.label !== 'Description' &&
+                m.label !== 'Viewcone'
             )
             .map(m => (
               <Flex key={m.label} py={5} borderBottom="1px solid rgba(0,0,0,0.1)">
@@ -92,11 +101,22 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   // Get metadata from IIIF v3 manifest
-
   let {
-    data: { metadata },
+    data: { metadata, seeAlso },
   } = await axios.get(`https://images.imaginerio.org/iiif/3/${params.id}/manifest`);
   metadata = iiif(metadata);
+  seeAlso = seeAlso.find(s => s.id.match(/imaginerio\.org/));
+  if (seeAlso) {
+    const {
+      data: { 'schema:polygon': polygon, 'dcterms:temporal': year },
+    } = await axios.get(seeAlso.id);
+    if (polygon) {
+      metadata.push({ label: 'Viewcone', value: parseWKT(polygon[0]['@value']) });
+    }
+    if (year) {
+      metadata.push({ label: 'Year', value: year[0]['@value'] });
+    }
+  }
 
   return { props: { metadata, ...params } };
 }
