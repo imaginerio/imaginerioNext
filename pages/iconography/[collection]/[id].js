@@ -17,7 +17,7 @@ import config from '../../../utils/config';
 
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
 
-const ImageDetails = ({ metadata, collection, id, year }) => (
+const ImageDetails = ({ metadata, collection, activeBasemap, geojson, id, year }) => (
   <>
     <Head title={id} />
     <Header />
@@ -48,18 +48,15 @@ const ImageDetails = ({ metadata, collection, id, year }) => (
       <Grid templateColumns="480px 1fr" columnGap="50px">
         <Atlas
           year={year}
-          geojson={findByLabel(metadata, 'Viewcone')}
+          geojson={geojson}
+          activeBasemap={activeBasemap}
           viewport={{ width: 480, height: 360 }}
         />
         <Box>
           <Heading size="sm">Properties</Heading>
           {metadata
             .filter(
-              m =>
-                m.label !== 'Title' &&
-                m.label !== 'Identifier' &&
-                m.label !== 'Description' &&
-                m.label !== 'Viewcone'
+              m => m.label !== 'Title' && m.label !== 'Identifier' && m.label !== 'Description'
             )
             .map(m => (
               <Flex key={m.label} py={5} borderBottom="1px solid rgba(0,0,0,0.1)">
@@ -102,6 +99,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // Get metadata from IIIF v3 manifest
   let year = 1900;
+  let geojson = null;
+  let activeBasemap = null;
+
   let {
     data: { metadata, seeAlso },
   } = await axios.get(`https://images.imaginerio.org/iiif/3/${params.id}/manifest`);
@@ -112,7 +112,7 @@ export async function getStaticProps({ params }) {
       data: { 'schema:polygon': polygon, 'dcterms:temporal': years },
     } = await axios.get(seeAlso.id);
     if (polygon) {
-      metadata.push({ label: 'Viewcone', value: parseWKT(polygon[0]['@value']) });
+      geojson = parseWKT(polygon[0]['@value']);
     }
     if (years) {
       metadata.push({ label: 'Year', value: years[0]['@value'] });
@@ -121,15 +121,28 @@ export async function getStaticProps({ params }) {
       year = parseInt(findByLabel(metadata, 'Date Created').replace(/.*(\d{4})/, '$1'), 10);
     }
   }
+  if (findByLabel(metadata, 'Identifier').match(/^SSID/)) {
+    activeBasemap = findByLabel(metadata, 'Identifier');
+    ({ data: geojson } = await axios.get(
+      `https://search.imaginerio.org/document/${activeBasemap}`
+    ));
+  }
 
-  return { props: { metadata, year, ...params } };
+  return { props: { metadata, year, geojson, activeBasemap, ...params } };
 }
 
 ImageDetails.propTypes = {
   year: PropTypes.number.isRequired,
+  geojson: PropTypes.shape(),
+  activeBasemap: PropTypes.string,
   metadata: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   collection: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+};
+
+ImageDetails.defaultProps = {
+  geojson: null,
+  activeBasemap: null,
 };
 
 export default ImageDetails;

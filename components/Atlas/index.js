@@ -89,7 +89,7 @@ const Atlas = ({ viewport, year, geojson, activeBasemap, opacity }) => {
           />
         </Source>
       )}
-      {geojson && (
+      {geojson && !activeBasemap && (
         <Source type="geojson" data={geojson}>
           <Layer id="selected-fill" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
           <Layer
@@ -128,7 +128,7 @@ Atlas.propTypes = {
 Atlas.defaultProps = {
   viewport: null,
   activeBasemap: null,
-  opacity: 1,
+  opacity: 0.75,
   geojson: null,
 };
 
