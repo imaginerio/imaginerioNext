@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import parse from 'html-react-parser';
 import { flatten } from 'lodash';
@@ -12,7 +11,7 @@ import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
 import Atlas from '../../../components/Atlas';
-import { iiif } from '../../../utils/iiif';
+import { iiif, findByLabel } from '../../../utils/iiif';
 import config from '../../../utils/config';
 
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
@@ -22,23 +21,28 @@ const ImageDetails = ({ metadata, collection, id }) => (
     <Head title={id} />
     <Header />
     <Container maxW="5xl">
-      <Breadcrumbs collection={collection} title={metadata.find(m => m.label === 'Title').value} />
+      <Breadcrumbs collection={collection} title={findByLabel(metadata, 'Title')} />
       <Heading>{metadata.find(m => m.label === 'Title').value}</Heading>
-      <Text>
+      <Text mb="40px">
         <span>Indentifier: </span>
-        <span style={{ opacity: 0.6 }}>{metadata.find(m => m.label === 'Identifier').value}</span>
+        <span style={{ opacity: 0.6 }}>{findByLabel(metadata, 'Identifier')}</span>
       </Text>
-      <hr style={{ margin: '20px 0' }} />
-      <Grid templateColumns="150px 1fr" columnGap="40px" mb="80px">
-        <Box w="150px" h="150px" borderRadius="75px" overflow="hidden" pos="relative">
-          <Image
-            src={`https://images.imaginerio.org/iiif-img/3/${id}/square/150,/0/default.jpg`}
-            layout="fill"
-            objectFit="contain"
-          />
-        </Box>
-        <Text>{metadata.find(m => m.label === 'Description').value}</Text>
-      </Grid>
+      <Mirador
+        config={{
+          id: 'mirador',
+          window: {
+            allowClose: false, // Configure if windows can be closed or not
+            allowFullscreen: true, // Configure to show a "fullscreen" button in the WindowTopBar
+            allowMaximize: false, // Configure if windows can be maximized or not
+          },
+          workspaceControlPanel: {
+            enabled: false,
+          },
+          windows: [{ manifestId: `https://images.imaginerio.org/iiif/3/${id}/manifest` }],
+          language: 'pt-br',
+        }}
+      />
+      <Text my="80px">{metadata.find(m => m.label === 'Description').value}</Text>
 
       <Grid templateColumns="480px 1fr" columnGap="50px">
         <Atlas year={1880} />
@@ -57,17 +61,6 @@ const ImageDetails = ({ metadata, collection, id }) => (
             ))}
         </Box>
       </Grid>
-      <hr style={{ margin: '40px 0' }} />
-      <Mirador
-        config={{
-          id: 'mirador',
-          window: {
-            allowClose: false,
-          },
-          windows: [{ manifestId: `https://images.imaginerio.org/iiif/3/${id}/manifest` }],
-          language: 'pt-br',
-        }}
-      />
       <hr style={{ margin: '40px 0' }} />
       <iframe
         title="Smapshot"
