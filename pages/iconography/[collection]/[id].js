@@ -74,7 +74,7 @@ const ImageDetails = ({ metadata, collection, activeBasemap, geojson, id, year }
       <iframe
         title="Smapshot"
         src={`https://smapshot-beta.heig-vd.ch/owner/imaginerio/original_image/${id}/embed`}
-        style={{ width: '100%', minHeight: 400, height: '40vh', marginBottom: 80 }}
+        style={{ width: '100%', minHeight: 500, height: '40vh', marginBottom: 80 }}
       />
     </Container>
     <Footer />
