@@ -17,7 +17,7 @@ import mapStyle from '../../../assets/style.json';
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
 
 const ImageDetails = ({ metadata, geojson, id, collection }) => {
-  const year = findByLabel(metadata, 'Date');
+  const year = parseInt(findByLabel(metadata, 'Date'), 10);
   const { latitude, longitude } = geojson.features[0].properties;
   return (
     <>
@@ -25,7 +25,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
       <Header />
       <Container maxW="5xl">
         <Breadcrumbs collection={collection} title={findByLabel(metadata, 'Title')} />
-        <Heading>{metadata.find(m => m.label === 'Title').value}</Heading>
+        <Heading>{findByLabel(metadata, 'Title') || 'Untitled'}</Heading>
         <Text mb="40px">
           <span>Indentifier: </span>
           <span style={{ opacity: 0.6 }}>{id}</span>
@@ -63,21 +63,30 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
               .filter(
                 m => m.label !== 'Title' && m.label !== 'Identifier' && m.label !== 'Description'
               )
-              .map(m => (
-                <Flex key={m.label} py={5} borderBottom="1px solid rgba(0,0,0,0.1)">
-                  <Text>{`${m.label}:`}</Text>
-                  <Spacer />
-                  <Text align="right">
-                    {m.link ? (
-                      <Link href={m.link} target="_blank">
-                        {m.value}
-                      </Link>
-                    ) : (
-                      m.value
-                    )}
-                  </Text>
-                </Flex>
-              ))}
+              .map(m => {
+                let { link, value } = m;
+                if (link && !Array.isArray(link)) link = [link];
+                if (value && !Array.isArray(value)) value = [value];
+                return (
+                  <Flex key={m.label} py={5} borderBottom="1px solid rgba(0,0,0,0.1)">
+                    <Text>{`${m.label}:`}</Text>
+                    <Spacer />
+                    <Text align="right">
+                      {value.map((v, i) => (
+                        <>
+                          {link ? (
+                            <Link href={link[i]} target="_blank">
+                              {v}
+                            </Link>
+                          ) : (
+                            v
+                          )}
+                        </>
+                      ))}
+                    </Text>
+                  </Flex>
+                );
+              })}
           </Box>
         </Grid>
         <hr style={{ margin: '40px 0' }} />
