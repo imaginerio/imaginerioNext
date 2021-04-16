@@ -73,7 +73,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
                     <Spacer />
                     <Text align="right">
                       {value.map((v, i) => (
-                        <>
+                        <React.Fragment key={v}>
                           {link[i] ? (
                             <Link href={link[i]} target="_blank">
                               {v || link[i]}
@@ -81,7 +81,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
                           ) : (
                             v
                           )}
-                        </>
+                        </React.Fragment>
                       ))}
                     </Text>
                   </Flex>
