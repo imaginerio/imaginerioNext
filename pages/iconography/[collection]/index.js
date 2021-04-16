@@ -31,16 +31,17 @@ const Collection = ({ images, collection }) => {
       index
     ];
     let imgHeight = 150;
-    let imgWidth = Math.round((150 / rawHeight) * rawWidth);
+    let imgWidth = 300;
+    if (rawWidth) imgWidth = Math.round((150 / rawHeight) * rawWidth);
     if (imgWidth > 400) {
       imgWidth = 400;
-      imgHeight = Math.round((400 / rawWidth) * rawHeight);
+      if (rawHeight) imgHeight = Math.round((400 / rawWidth) * rawHeight);
     }
     return (
       <div style={style}>
         <Container maxW="5xl">
           <Grid
-            templateColumns={`1fr ${imgWidth}px`}
+            templateColumns={`minmax(0, 1fr) ${imgWidth ? `${imgWidth}px` : '40%'}`}
             columnGap="40px"
             key={ssid}
             pb="30px"
@@ -48,28 +49,36 @@ const Collection = ({ images, collection }) => {
             minH="150px"
             borderBottom="1px solid rgba(0,0,0,0.1)"
           >
-            <Box>
-              <Heading size="md">
+            <Flex flexDirection="column" justifyContent="center">
+              <Heading size="md" mt={0} variant="oneline">
                 <Link href={`/iconography/${collection}/${ssid}`}>
                   {title.length > 150
                     ? `${title.substr(0, title.lastIndexOf(' ', 150))}...`
                     : title}
                 </Link>
               </Heading>
-              <Text>
-                <b>Creator: </b>
-                {creator}
-              </Text>
-              <Text>
-                <b>Date: </b>
-                {date}
-              </Text>
-              <Text>
-                <b>Source: </b>
-                <Link href={source.link}>{source.value}</Link>
-              </Text>
-            </Box>
-            <Flex align="center">
+              <Box>
+                {creator && (
+                  <Text>
+                    <b>Creator: </b>
+                    {creator}
+                  </Text>
+                )}
+                {date && (
+                  <Text>
+                    <b>Date: </b>
+                    {date}
+                  </Text>
+                )}
+                {source && (
+                  <Text variant="oneline">
+                    <b>Source: </b>
+                    <Link href={source.link}>{source.value}</Link>
+                  </Text>
+                )}
+              </Box>
+            </Flex>
+            <Flex align="center" justify="flex-end">
               <Box w={`${imgWidth}px`} h={`${imgHeight}px`}>
                 <Image
                   src={`https://images.imaginerio.org/iiif-img/3/${ssid}/full/!300,150/0/default.jpg`}
@@ -120,7 +129,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const {
     data: [{ Documents }],
-  } = await axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents?${params.collection}`);
+  } = await axios.get(
+    `${process.env.NEXT_PUBLIC_SEARCH_API}/documents?visual=${params.collection}`
+  );
   return { props: { images: Documents, ...params } };
 }
 
