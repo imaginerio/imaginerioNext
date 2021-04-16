@@ -65,8 +65,8 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
               )
               .map(m => {
                 let { link, value } = m;
-                if (link && !Array.isArray(link)) link = [link];
-                if (value && !Array.isArray(value)) value = [value];
+                if (!Array.isArray(link)) link = [link];
+                if (!Array.isArray(value)) value = [value];
                 return (
                   <Flex key={m.label} py={5} borderBottom="1px solid rgba(0,0,0,0.1)">
                     <Text>{`${m.label}:`}</Text>
@@ -74,9 +74,9 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
                     <Text align="right">
                       {value.map((v, i) => (
                         <>
-                          {link ? (
+                          {link[i] ? (
                             <Link href={link[i]} target="_blank">
-                              {v}
+                              {v || link[i]}
                             </Link>
                           ) : (
                             v

@@ -73,7 +73,7 @@ const Collection = ({ images, collection }) => {
                 {source && (
                   <Text variant="oneline">
                     <b>Source: </b>
-                    <Link href={source.link}>{source.value}</Link>
+                    <Link href={source.link}>{source.value || source.link}</Link>
                   </Text>
                 )}
               </Box>
