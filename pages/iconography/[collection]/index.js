@@ -1,26 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import axiosRetry from 'axios-retry';
-import Link from 'next/link';
 import Image from 'next/image';
-import { VariableSizeList } from 'react-window';
-import { Container, Grid, Flex, Box, Heading, Text } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
+import { Container, Grid, Flex, Box, Heading, Text, Link } from '@chakra-ui/react';
 
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
 
-import { iiif, findByLabel } from '../../../utils/iiif';
 import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
 
-axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay, retries: 5 });
+const VariableSizeList = dynamic(() => import('react-window').then(mod => mod.VariableSizeList), {
+  ssr: false,
+});
 
 const Collection = ({ images, collection }) => {
   let height = 800;
   if (typeof window !== 'undefined') ({ height } = useWindowDimensions());
+
   const Row = ({ index, style }) => {
     if (index >= images.length) {
       return (
@@ -29,43 +29,62 @@ const Collection = ({ images, collection }) => {
         </div>
       );
     }
-    const img = images[index];
-    const id = findByLabel(img, 'Identifier') || 'Image';
-    const title = findByLabel(img, 'Title');
-    const dim = findByLabel(img, 'Dimensions');
+
+    const { ssid, title, width: rawWidth, height: rawHeight, creator, date, source } = images[
+      index
+    ];
     let imgHeight = 150;
-    let imgWidth = Math.round((150 / dim[1]) * dim[0]);
+    let imgWidth = 300;
+    if (rawWidth) imgWidth = Math.round((150 / rawHeight) * rawWidth);
     if (imgWidth > 400) {
       imgWidth = 400;
-      imgHeight = Math.round((400 / dim[0]) * dim[1]);
+      if (rawHeight) imgHeight = Math.round((400 / rawWidth) * rawHeight);
     }
     return (
       <div style={style}>
         <Container maxW="5xl">
           <Grid
-            templateColumns={`1fr ${imgWidth}px`}
+            templateColumns={`minmax(0, 1fr) ${imgWidth ? `${imgWidth}px` : '40%'}`}
             columnGap="40px"
-            key={id}
+            key={ssid}
             pb="30px"
             mb="30px"
             minH="150px"
             borderBottom="1px solid rgba(0,0,0,0.1)"
           >
-            <Box>
-              <Heading size="md">
-                <Link href={`/iconography/${collection}/${id}`}>
+            <Flex flexDirection="column" justifyContent="center">
+              <Heading size="md" mt={0} variant="oneline">
+                <Link href={`/iconography/${collection}/${ssid}`}>
                   {title.length > 150
                     ? `${title.substr(0, title.lastIndexOf(' ', 150))}...`
                     : title}
                 </Link>
               </Heading>
-              <Text>{findByLabel(img, 'Creator')}</Text>
-              <Text>{findByLabel(img, 'Date (Circa)')}</Text>
-            </Box>
-            <Flex align="center">
+              <Box>
+                {creator && (
+                  <Text>
+                    <b>Creator: </b>
+                    {creator}
+                  </Text>
+                )}
+                {date && (
+                  <Text>
+                    <b>Date: </b>
+                    {date}
+                  </Text>
+                )}
+                {source && (
+                  <Text variant="oneline">
+                    <b>Source: </b>
+                    <Link href={source.link}>{source.value || source.link}</Link>
+                  </Text>
+                )}
+              </Box>
+            </Flex>
+            <Flex align="center" justify="flex-end">
               <Box w={`${imgWidth}px`} h={`${imgHeight}px`}>
                 <Image
-                  src={`https://images.imaginerio.org/iiif-img/3/${id}/full/!300,150/0/default.jpg`}
+                  src={`https://images.imaginerio.org/iiif-img/3/${ssid}/full/!300,150/0/default.jpg`}
                   height={imgHeight}
                   width={imgWidth}
                 />
@@ -111,26 +130,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const loadManifest = id =>
-    axios.get(`https://images.imaginerio.org/iiif/3/${id}/manifest`).then(({ data }) => {
-      const metadata = iiif(data.metadata);
-      const { width, height } = data.items[0];
-      metadata.push({ label: 'Dimensions', value: [width, height] });
-      return metadata;
-    });
-
   const {
-    data: { manifests },
-  } = await axios.get(`https://images.imaginerio.org/iiif/2/collection/${params.collection}`);
-
-  const images = [];
-  await manifests.reduce(async (previousPromise, m) => {
-    await previousPromise;
-    // eslint-disable-next-line no-console
-    console.log('Loading ', m['@id'].match(/[^/]+(?=\/manifest)/)[0]);
-    return loadManifest(m['@id'].match(/[^/]+(?=\/manifest)/)[0]).then(i => images.push(i));
-  }, Promise.resolve());
-  return { props: { images, ...params } };
+    data: [{ Documents }],
+  } = await axios.get(
+    `${process.env.NEXT_PUBLIC_SEARCH_API}/documents?visual=${params.collection}`
+  );
+  return { props: { images: Documents, ...params } };
 }
 
 Collection.propTypes = {

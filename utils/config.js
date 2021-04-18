@@ -1,3 +1,3 @@
 export default {
-  collections: ['maps', 'plans', 'views', 'aerials'],
+  collections: ['maps', 'plans', 'views'],
 };

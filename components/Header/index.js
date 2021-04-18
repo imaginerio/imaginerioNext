@@ -1,11 +1,10 @@
 import React from 'react';
-import Link from 'next/link';
-import { Container, Flex, Spacer, HStack } from '@chakra-ui/react';
+import { Container, Flex, Spacer, HStack, Link } from '@chakra-ui/react';
 
 const Header = () => (
   <Container maxW="6xl">
     <Flex h="90px" align="middle">
-      <Link href="/">
+      <Link href="/" display="inherit">
         <img
           src="/svg/rio-logo.svg"
           style={{ width: 150, cursor: 'pointer' }}

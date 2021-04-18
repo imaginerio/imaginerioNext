@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import axios from 'axios';
 import Image from 'next/image';
 import { sortBy } from 'lodash';
-import { Container, Heading, Box, Grid, Text } from '@chakra-ui/react';
+import { Container, Heading, Box, Grid, Text, Link } from '@chakra-ui/react';
 
 import Head from '../../components/Head';
 import Header from '../../components/Header';

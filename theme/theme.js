@@ -32,6 +32,13 @@ export default extendTheme({
           mt: 0,
         },
       },
+      variants: {
+        oneline: {
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+          overflow: 'hidden',
+        },
+      },
       defaultProps: {
         size: 'lg',
       },
@@ -41,6 +48,20 @@ export default extendTheme({
         bg: '#3C558E',
         color: 'white',
         px: 10,
+      },
+    },
+    Text: {
+      variants: {
+        oneline: {
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+          overflow: 'hidden',
+        },
+      },
+    },
+    Link: {
+      baseStyle: {
+        color: '#1580D1',
       },
     },
   },

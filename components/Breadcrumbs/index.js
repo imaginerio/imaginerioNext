@@ -1,7 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, Link } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 
 const Breadcrumbs = ({ collection, title }) => (
