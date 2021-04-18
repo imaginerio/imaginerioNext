@@ -59,6 +59,11 @@ export default extendTheme({
         },
       },
     },
+    Link: {
+      baseStyle: {
+        color: '#1580D1',
+      },
+    },
   },
   icons: {
     carat: {

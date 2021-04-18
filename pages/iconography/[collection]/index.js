@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Link from 'next/link';
 import Image from 'next/image';
-import { VariableSizeList } from 'react-window';
-import { Container, Grid, Flex, Box, Heading, Text } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
+import { Container, Grid, Flex, Box, Heading, Text, Link } from '@chakra-ui/react';
 
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
@@ -13,6 +12,10 @@ import Footer from '../../../components/Footer';
 
 import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
+
+const VariableSizeList = dynamic(() => import('react-window').then(mod => mod.VariableSizeList), {
+  ssr: false,
+});
 
 const Collection = ({ images, collection }) => {
   let height = 800;

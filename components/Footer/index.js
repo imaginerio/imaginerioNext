@@ -1,6 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
-import { Container, Grid, Box, Heading, Text } from '@chakra-ui/react';
+import { Container, Grid, Box, Heading, Text, Link } from '@chakra-ui/react';
 
 const Footer = () => (
   <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
