@@ -1,7 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { Container, Grid, Box, Heading, Text, Button } from '@chakra-ui/react';
+import { Container, Grid, Box, Heading, Text, Button, Link } from '@chakra-ui/react';
 
 import Head from '../components/Head';
 import Header from '../components/Header';

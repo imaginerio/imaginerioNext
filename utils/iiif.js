@@ -24,7 +24,7 @@ const iiif = manifest => {
 };
 
 const findByLabel = (collection, label) => {
-  const value = collection.find(m => m.label === label);
+  const value = collection.find(m => m.label.match(new RegExp(label, 'gi')));
   if (value) return value.value;
   return null;
 };
