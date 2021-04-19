@@ -11,7 +11,7 @@ import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
 import { findByLabel } from '../../../utils/iiif';
 import config from '../../../utils/config';
-import mapStyle from '../../../assets/style.json';
+import mapStyle from '../../../assets/style/style.json';
 
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
 
