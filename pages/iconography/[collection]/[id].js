@@ -80,6 +80,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
                           ) : (
                             v
                           )}
+                          <br />
                         </React.Fragment>
                       ))}
                     </Text>

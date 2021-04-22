@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Image from 'next/image';
@@ -9,6 +9,7 @@ import Head from '../../../components/Head';
 import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
+import ImageFilter from '../../../components/ImageFilter';
 
 import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
@@ -21,8 +22,10 @@ const Collection = ({ images, collection }) => {
   let height = 800;
   if (typeof window !== 'undefined') ({ height } = useWindowDimensions());
 
+  const [activeImages, setActiveImages] = useState(images);
+
   const Row = ({ index, style }) => {
-    if (index >= images.length) {
+    if (index >= activeImages.length) {
       return (
         <div style={style}>
           <Footer />
@@ -39,7 +42,7 @@ const Collection = ({ images, collection }) => {
       date,
       source,
       thumbnail,
-    } = images[index];
+    } = activeImages[index];
     let imgHeight = 150;
     let imgWidth = 300;
     if (rawWidth) imgWidth = Math.round((150 / rawHeight) * rawWidth);
@@ -112,12 +115,16 @@ const Collection = ({ images, collection }) => {
         <Breadcrumbs collection={collection} />
         <Heading textTransform="capitalize">{collection}</Heading>
       </Container>
+      <Container maxW="5xl" pb={5}>
+        <ImageFilter images={images} handler={setActiveImages} />
+        <Text>{`${activeImages.length} images found`}</Text>
+      </Container>
       <VariableSizeList
-        itemCount={images.length + 1}
+        itemCount={activeImages.length + 1}
         estimatedItemSize={210}
         height={height - 192}
         width="100%"
-        itemSize={index => (index < images.length ? 210 : 334)}
+        itemSize={index => (index < activeImages.length ? 210 : 334)}
       >
         {Row}
       </VariableSizeList>
