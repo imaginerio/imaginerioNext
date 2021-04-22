@@ -17,14 +17,15 @@ const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: fals
 
 const ImageDetails = ({ metadata, geojson, id, collection }) => {
   const year = parseInt(findByLabel(metadata, 'Date'), 10);
+  const title = findByLabel(metadata, 'Title') || 'Untitled';
   const { latitude, longitude } = geojson.features[0].properties;
   return (
     <>
-      <Head title={id} />
+      <Head title={title} />
       <Header />
       <Container maxW="5xl">
         <Breadcrumbs collection={collection} title={findByLabel(metadata, 'Title')} />
-        <Heading>{findByLabel(metadata, 'Title') || 'Untitled'}</Heading>
+        <Heading>{title}</Heading>
         <Text mb="40px">
           <span>Indentifier: </span>
           <span style={{ opacity: 0.6 }}>{id}</span>
