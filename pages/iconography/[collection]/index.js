@@ -30,9 +30,16 @@ const Collection = ({ images, collection }) => {
       );
     }
 
-    const { ssid, title, width: rawWidth, height: rawHeight, creator, date, source } = images[
-      index
-    ];
+    const {
+      ssid,
+      title,
+      width: rawWidth,
+      height: rawHeight,
+      creator,
+      date,
+      source,
+      thumbnail,
+    } = images[index];
     let imgHeight = 150;
     let imgWidth = 300;
     if (rawWidth) imgWidth = Math.round((150 / rawHeight) * rawWidth);
@@ -83,11 +90,7 @@ const Collection = ({ images, collection }) => {
             </Flex>
             <Flex align="center" justify="flex-end">
               <Box w={`${imgWidth}px`} h={`${imgHeight}px`}>
-                <Image
-                  src={`https://images.imaginerio.org/iiif-img/3/${ssid}/full/!300,150/0/default.jpg`}
-                  height={imgHeight}
-                  width={imgWidth}
-                />
+                <Image src={thumbnail} height={imgHeight} width={imgWidth} />
               </Box>
             </Flex>
           </Grid>
