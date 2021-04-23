@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import { Container, Heading, Text, Box } from '@chakra-ui/react';
+import { Container, Heading, Text, Box, Link } from '@chakra-ui/react';
 
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
@@ -55,13 +54,22 @@ const Collection = ({ images, collection }) => {
         </div>
       );
     }
-    const { title, thumbnail } = activeImages[index];
+    const { title, thumbnail, ssid } = activeImages[index];
     return (
       <div style={style}>
-        <Box w="300px" h="150px">
-          <Image src={thumbnail} layout="fill" />
-        </Box>
-        <Text>{title}</Text>
+        <Link href={`/iconography/${collection}/${ssid}`}>
+          <Box
+            w="260px"
+            h="150px"
+            backgroundImage={`url(${thumbnail})`}
+            backgroundSize="cover"
+            backgroundPosition="center"
+            mx="20px"
+          />
+          <Text mx="20px" w="260px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">
+            {title}
+          </Text>
+        </Link>
       </div>
     );
   };
@@ -70,6 +78,8 @@ const Collection = ({ images, collection }) => {
     index: PropTypes.number.isRequired,
     style: PropTypes.shape().isRequired,
   };
+
+  const columns = Math.floor(width / 300);
 
   return (
     <>
@@ -89,16 +99,20 @@ const Collection = ({ images, collection }) => {
         <Text>{`${activeImages.length} images found`}</Text>
       </Container>
       {largeRow ? (
-        <FixedSizeGrid
-          height={height - 360}
-          width={width}
-          columnWidth={300}
-          columnCount={3}
-          rowCount={Math.ceil(activeImages.length / 3)}
-          rowHeight={200}
-        >
-          {Grid}
-        </FixedSizeGrid>
+        <Container maxW="5xl">
+          <Box m="auto" width={300 * columns}>
+            <FixedSizeGrid
+              height={height - 360}
+              width={300 * columns}
+              columnWidth={300}
+              columnCount={columns}
+              rowCount={Math.ceil(activeImages.length / columns)}
+              rowHeight={210}
+            >
+              {Grid}
+            </FixedSizeGrid>
+          </Box>
+        </Container>
       ) : (
         // <VariableSizeList
         //   key="large"
