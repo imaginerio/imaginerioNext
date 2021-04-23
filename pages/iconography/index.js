@@ -10,8 +10,6 @@ import Header from '../../components/Header';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import Footer from '../../components/Footer';
 
-import config from '../../utils/config';
-
 const Iconography = ({ collections }) => (
   <>
     <Head title="Iconography" />
@@ -48,16 +46,16 @@ Iconography.propTypes = {
 };
 
 export async function getStaticProps() {
-  let collections = await Promise.all(
-    config.collections.map(c =>
-      axios.get(`https://images.imaginerio.org/iiif/2/collection/${c}`).then(({ data }) => ({
-        id: data.manifests[0]['@id'].match(/[^/]+(?=\/manifest)/)[0],
-        length: data.manifests.length,
-        label: data.label,
-        url: c,
+  let collections = await axios
+    .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents`)
+    .then(({ data }) =>
+      data.map(d => ({
+        id: d.Documents[0].ssid,
+        url: d.title.toLowerCase(),
+        label: d.title,
+        length: d.Documents.length,
       }))
-    )
-  );
+    );
 
   collections = sortBy(collections, c => c.length * -1);
 

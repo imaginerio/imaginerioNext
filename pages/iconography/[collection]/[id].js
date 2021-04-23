@@ -11,20 +11,21 @@ import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
 import { findByLabel } from '../../../utils/iiif';
 import config from '../../../utils/config';
-import mapStyle from '../../../assets/style.json';
+import mapStyle from '../../../assets/style/style.json';
 
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
 
 const ImageDetails = ({ metadata, geojson, id, collection }) => {
   const year = parseInt(findByLabel(metadata, 'Date'), 10);
+  const title = findByLabel(metadata, 'Title') || 'Untitled';
   const { latitude, longitude } = geojson.features[0].properties;
   return (
     <>
-      <Head title={id} />
+      <Head title={title} />
       <Header />
       <Container maxW="5xl">
         <Breadcrumbs collection={collection} title={findByLabel(metadata, 'Title')} />
-        <Heading>{findByLabel(metadata, 'Title') || 'Untitled'}</Heading>
+        <Heading>{title}</Heading>
         <Text mb="40px">
           <span>Indentifier: </span>
           <span style={{ opacity: 0.6 }}>{id}</span>
@@ -80,6 +81,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
                           ) : (
                             v
                           )}
+                          <br />
                         </React.Fragment>
                       ))}
                     </Text>

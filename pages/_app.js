@@ -2,7 +2,7 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 
-import 'mapbox-gl/dist/mapbox-gl.css';
+import '../components/Timeline/Timeline.css';
 
 import theme from '../theme/theme';
 
