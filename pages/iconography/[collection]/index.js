@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
-import { Container, Heading, Text } from '@chakra-ui/react';
+import Image from 'next/image';
+import { Container, Heading, Text, Box } from '@chakra-ui/react';
 
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
@@ -18,10 +19,14 @@ import useWindowDimensions from '../../../utils/useWindowDimensions';
 const VariableSizeList = dynamic(() => import('react-window').then(mod => mod.VariableSizeList), {
   ssr: false,
 });
+const FixedSizeGrid = dynamic(() => import('react-window').then(mod => mod.FixedSizeGrid), {
+  ssr: false,
+});
 
 const Collection = ({ images, collection }) => {
   let height = 800;
-  if (typeof window !== 'undefined') ({ height } = useWindowDimensions());
+  let width = 1000;
+  if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
 
   const [activeImages, setActiveImages] = useState(images);
   const [largeRow, setLargeRow] = useState(true);
@@ -39,6 +44,26 @@ const Collection = ({ images, collection }) => {
       return <ImageRow {...activeImages[index]} style={style} collection={collection} />;
     }
     return <ImageRowSmall {...activeImages[index]} style={style} collection={collection} />;
+  };
+
+  const Grid = ({ rowIndex, columnIndex, style }) => {
+    const index = rowIndex * 3 + columnIndex;
+    if (index >= activeImages.length) {
+      return (
+        <div style={style}>
+          <Footer />
+        </div>
+      );
+    }
+    const { title, thumbnail } = activeImages[index];
+    return (
+      <div style={style}>
+        <Box w="300px" h="150px">
+          <Image src={thumbnail} layout="fill" />
+        </Box>
+        <Text>{title}</Text>
+      </div>
+    );
   };
 
   Row.propTypes = {
@@ -64,17 +89,26 @@ const Collection = ({ images, collection }) => {
         <Text>{`${activeImages.length} images found`}</Text>
       </Container>
       {largeRow ? (
-        <VariableSizeList
-          key="large"
-          itemCount={activeImages.length + 1}
-          estimatedItemSize={210}
+        <FixedSizeGrid
           height={height - 360}
-          width="100%"
-          itemSize={index => (index < activeImages.length ? 210 : 334)}
+          width={width}
+          columnWidth={300}
+          columnCount={3}
+          rowCount={Math.ceil(activeImages.length / 3)}
+          rowHeight={200}
         >
-          {Row}
-        </VariableSizeList>
+          {Grid}
+        </FixedSizeGrid>
       ) : (
+        // <VariableSizeList
+        //   key="large"
+        //   itemCount={activeImages.length + 1}
+        //   estimatedItemSize={210}
+        //   height={height - 360}
+        //   width="100%"
+        //   itemSize={index => (index < activeImages.length ? 210 : 334)}
+        // >
+        // </VariableSizeList>
         <VariableSizeList
           key="small"
           itemCount={activeImages.length + 1}
