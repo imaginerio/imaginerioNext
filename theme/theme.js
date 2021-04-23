@@ -65,6 +65,9 @@ export default extendTheme({
       },
     },
     Text: {
+      baseStyle: {
+        mb: 0,
+      },
       variants: {
         oneline: {
           whiteSpace: 'nowrap',

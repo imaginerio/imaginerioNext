@@ -68,7 +68,7 @@ const Collection = ({ images, collection }) => {
           key="large"
           itemCount={activeImages.length + 1}
           estimatedItemSize={210}
-          height={height - 357}
+          height={height - 360}
           width="100%"
           itemSize={index => (index < activeImages.length ? 210 : 334)}
         >
@@ -79,7 +79,7 @@ const Collection = ({ images, collection }) => {
           key="small"
           itemCount={activeImages.length + 1}
           estimatedItemSize={90}
-          height={height - 357}
+          height={height - 360}
           width="100%"
           itemSize={index => (index < activeImages.length ? 90 : 334)}
         >
