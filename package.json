@@ -21,7 +21,6 @@
     "@imaginerio/diachronic-atlas": "^0.1.8",
     "axios": "^0.19.2",
     "framer-motion": "^2.9.5",
-    "fuse.js": "^6.4.6",
     "html-react-parser": "^0.14.2",
     "lodash": "^4.17.20",
     "mirador": "^3.0.0-rc.7",

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Fuse from 'fuse.js';
 import { orderBy } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -26,6 +25,21 @@ import {
 import Timeline from '../Timeline';
 import unaccent from '../../utils/unaccent';
 
+const textSearch = ({ item, search }) => {
+  const terms = search.split(' ').filter(t => t);
+  return terms.some(term => {
+    const regex = new RegExp(unaccent(term), 'gi');
+    if (item.title && item.title.match(regex)) return true;
+    if (item.creator && item.creator.match(regex)) return true;
+    if (item.depicts) {
+      if (Array.isArray(item.depicts.value)) {
+        if (item.depicts.value.some(d => d.match(regex))) return true;
+      } else if (item.depicts.value.match(regex)) return true;
+    }
+    return false;
+  });
+};
+
 const ImageFilter = ({ images, handler, size, sizeHandler }) => {
   const { min, max } = images.reduce(
     (memo, nextImage) => ({
@@ -40,13 +54,9 @@ const ImageFilter = ({ images, handler, size, sizeHandler }) => {
   const [sort, setSort] = useState(null);
   const [sortDirection, setSortDirection] = useState(true);
 
-  const fuse = new Fuse(images, {
-    keys: ['title', 'creator', 'depicts.value'],
-  });
-
   useEffect(() => {
     let items = images;
-    if (search) items = fuse.search(search).map(f => f.item);
+    if (search) items = items.filter(item => textSearch({ item, search }));
     items = items.filter(i => i.firstyear <= dates[1] && i.lastyear >= dates[0]);
     if (sort) {
       items = orderBy(
