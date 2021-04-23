@@ -9,6 +9,7 @@ import {
   faArrowDown,
   faList,
   faBars,
+  faGripHorizontal,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   Grid,
@@ -74,7 +75,7 @@ const ImageFilter = ({ images, handler, size, sizeHandler }) => {
   return (
     <>
       <Timeline min={min} max={max} handler={setDates} />
-      <Grid templateColumns="2fr 1fr 1fr" gap="20px" my={5}>
+      <Grid templateColumns="2fr 1fr 1fr" gap="50px" my={5}>
         <InputGroup>
           <Input
             value={search}
@@ -117,13 +118,18 @@ const ImageFilter = ({ images, handler, size, sizeHandler }) => {
         <ButtonGroup isAttached colorScheme="blackAlpha">
           <IconButton
             icon={<FontAwesomeIcon icon={faList} />}
-            variant={size ? null : 'outline'}
-            onClick={() => sizeHandler(true)}
+            variant={size === 'full' ? null : 'outline'}
+            onClick={() => sizeHandler('full')}
           />
           <IconButton
             icon={<FontAwesomeIcon icon={faBars} />}
-            variant={size ? 'outline' : null}
-            onClick={() => sizeHandler(false)}
+            variant={size === 'small' ? null : 'outline'}
+            onClick={() => sizeHandler('small')}
+          />
+          <IconButton
+            icon={<FontAwesomeIcon icon={faGripHorizontal} />}
+            variant={size === 'grid' ? null : 'outline'}
+            onClick={() => sizeHandler('grid')}
           />
         </ButtonGroup>
       </Grid>
@@ -134,7 +140,7 @@ const ImageFilter = ({ images, handler, size, sizeHandler }) => {
 ImageFilter.propTypes = {
   images: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   handler: PropTypes.func.isRequired,
-  size: PropTypes.bool.isRequired,
+  size: PropTypes.string.isRequired,
   sizeHandler: PropTypes.func.isRequired,
 };
 

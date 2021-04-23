@@ -28,7 +28,7 @@ const Collection = ({ images, collection }) => {
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
 
   const [activeImages, setActiveImages] = useState(images);
-  const [largeRow, setLargeRow] = useState(true);
+  const [size, setSize] = useState('full');
 
   const Row = ({ index, style }) => {
     if (index >= activeImages.length) {
@@ -39,10 +39,15 @@ const Collection = ({ images, collection }) => {
       );
     }
 
-    if (largeRow) {
+    if (size === 'full') {
       return <ImageRow {...activeImages[index]} style={style} collection={collection} />;
     }
     return <ImageRowSmall {...activeImages[index]} style={style} collection={collection} />;
+  };
+
+  Row.propTypes = {
+    index: PropTypes.number.isRequired,
+    style: PropTypes.shape().isRequired,
   };
 
   const Grid = ({ rowIndex, columnIndex, style }) => {
@@ -73,9 +78,9 @@ const Collection = ({ images, collection }) => {
       </div>
     );
   };
-
-  Row.propTypes = {
-    index: PropTypes.number.isRequired,
+  Grid.propTypes = {
+    rowIndex: PropTypes.number.isRequired,
+    columnIndex: PropTypes.number.isRequired,
     style: PropTypes.shape().isRequired,
   };
 
@@ -90,15 +95,34 @@ const Collection = ({ images, collection }) => {
         <Heading textTransform="capitalize">{collection}</Heading>
       </Container>
       <Container maxW="5xl" pb={5}>
-        <ImageFilter
-          images={images}
-          handler={setActiveImages}
-          sizeHandler={setLargeRow}
-          size={largeRow}
-        />
+        <ImageFilter images={images} handler={setActiveImages} sizeHandler={setSize} size={size} />
         <Text>{`${activeImages.length} images found`}</Text>
       </Container>
-      {largeRow ? (
+      {size === 'full' && (
+        <VariableSizeList
+          key="large"
+          itemCount={activeImages.length + 1}
+          estimatedItemSize={210}
+          height={height - 360}
+          width="100%"
+          itemSize={index => (index < activeImages.length ? 210 : 334)}
+        >
+          {Row}
+        </VariableSizeList>
+      )}
+      {size === 'small' && (
+        <VariableSizeList
+          key="small"
+          itemCount={activeImages.length + 1}
+          estimatedItemSize={90}
+          height={height - 360}
+          width="100%"
+          itemSize={index => (index < activeImages.length ? 90 : 334)}
+        >
+          {Row}
+        </VariableSizeList>
+      )}
+      {size === 'grid' && (
         <Container maxW="5xl">
           <Box m="auto" width={300 * columns}>
             <FixedSizeGrid
@@ -113,26 +137,6 @@ const Collection = ({ images, collection }) => {
             </FixedSizeGrid>
           </Box>
         </Container>
-      ) : (
-        // <VariableSizeList
-        //   key="large"
-        //   itemCount={activeImages.length + 1}
-        //   estimatedItemSize={210}
-        //   height={height - 360}
-        //   width="100%"
-        //   itemSize={index => (index < activeImages.length ? 210 : 334)}
-        // >
-        // </VariableSizeList>
-        <VariableSizeList
-          key="small"
-          itemCount={activeImages.length + 1}
-          estimatedItemSize={90}
-          height={height - 360}
-          width="100%"
-          itemSize={index => (index < activeImages.length ? 90 : 334)}
-        >
-          {Row}
-        </VariableSizeList>
       )}
     </>
   );
