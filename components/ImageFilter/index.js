@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import Fuse from 'fuse.js';
 import { orderBy } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faTimesCircle, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSearch,
+  faTimesCircle,
+  faArrowUp,
+  faArrowDown,
+  faList,
+  faBars,
+} from '@fortawesome/free-solid-svg-icons';
 import {
   Grid,
   Flex,
@@ -13,12 +20,13 @@ import {
   InputRightElement,
   Select,
   IconButton,
+  ButtonGroup,
 } from '@chakra-ui/react';
 
 import Timeline from '../Timeline';
 import unaccent from '../../utils/unaccent';
 
-const ImageFilter = ({ images, handler }) => {
+const ImageFilter = ({ images, handler, size, sizeHandler }) => {
   const { min, max } = images.reduce(
     (memo, nextImage) => ({
       min: Math.min(memo.min, nextImage.firstyear),
@@ -96,6 +104,18 @@ const ImageFilter = ({ images, handler }) => {
             onClick={() => setSortDirection(!sortDirection)}
           />
         </Flex>
+        <ButtonGroup isAttached colorScheme="blackAlpha">
+          <IconButton
+            icon={<FontAwesomeIcon icon={faList} />}
+            variant={size ? null : 'outline'}
+            onClick={() => sizeHandler(true)}
+          />
+          <IconButton
+            icon={<FontAwesomeIcon icon={faBars} />}
+            variant={size ? 'outline' : null}
+            onClick={() => sizeHandler(false)}
+          />
+        </ButtonGroup>
       </Grid>
     </>
   );
@@ -104,6 +124,8 @@ const ImageFilter = ({ images, handler }) => {
 ImageFilter.propTypes = {
   images: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   handler: PropTypes.func.isRequired,
+  size: PropTypes.bool.isRequired,
+  sizeHandler: PropTypes.func.isRequired,
 };
 
 export default ImageFilter;

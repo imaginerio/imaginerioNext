@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Container, Grid, Flex, Box, Heading, Text, Link } from '@chakra-ui/react';
+import { Container, Heading, Text } from '@chakra-ui/react';
 
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
 import ImageFilter from '../../../components/ImageFilter';
+import ImageRow from '../../../components/ImageRow';
+import ImageRowSmall from '../../../components/ImageRowSmall';
 
 import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
@@ -23,6 +24,7 @@ const Collection = ({ images, collection }) => {
   if (typeof window !== 'undefined') ({ height } = useWindowDimensions());
 
   const [activeImages, setActiveImages] = useState(images);
+  const [largeRow, setLargeRow] = useState(true);
 
   const Row = ({ index, style }) => {
     if (index >= activeImages.length) {
@@ -33,73 +35,10 @@ const Collection = ({ images, collection }) => {
       );
     }
 
-    const {
-      ssid,
-      title,
-      width: rawWidth,
-      height: rawHeight,
-      creator,
-      date,
-      source,
-      thumbnail,
-    } = activeImages[index];
-    let imgHeight = 150;
-    let imgWidth = 300;
-    if (rawWidth) imgWidth = Math.round((150 / rawHeight) * rawWidth);
-    if (imgWidth > 400) {
-      imgWidth = 400;
-      if (rawHeight) imgHeight = Math.round((400 / rawWidth) * rawHeight);
+    if (largeRow) {
+      return <ImageRow {...activeImages[index]} style={style} collection={collection} />;
     }
-    return (
-      <div style={style}>
-        <Container maxW="5xl">
-          <Grid
-            templateColumns={`minmax(0, 1fr) ${imgWidth ? `${imgWidth}px` : '40%'}`}
-            columnGap="40px"
-            key={ssid}
-            pb="30px"
-            mb="30px"
-            minH="150px"
-            borderBottom="1px solid rgba(0,0,0,0.1)"
-          >
-            <Flex flexDirection="column" justifyContent="center">
-              <Heading size="md" mt={0} variant="oneline">
-                <Link href={`/iconography/${collection}/${ssid}`}>
-                  {title.length > 150
-                    ? `${title.substr(0, title.lastIndexOf(' ', 150))}...`
-                    : title}
-                </Link>
-              </Heading>
-              <Box>
-                {creator && (
-                  <Text>
-                    <b>Creator: </b>
-                    {creator}
-                  </Text>
-                )}
-                {date && (
-                  <Text>
-                    <b>Date: </b>
-                    {date}
-                  </Text>
-                )}
-                {source && (
-                  <Text variant="oneline">
-                    <b>Source: </b>
-                    <Link href={source.link}>{source.value || source.link}</Link>
-                  </Text>
-                )}
-              </Box>
-            </Flex>
-            <Flex align="center" justify="flex-end">
-              <Box w={`${imgWidth}px`} h={`${imgHeight}px`}>
-                <Image src={thumbnail} height={imgHeight} width={imgWidth} />
-              </Box>
-            </Flex>
-          </Grid>
-        </Container>
-      </div>
-    );
+    return <ImageRowSmall {...activeImages[index]} style={style} collection={collection} />;
   };
 
   Row.propTypes = {
@@ -116,18 +55,37 @@ const Collection = ({ images, collection }) => {
         <Heading textTransform="capitalize">{collection}</Heading>
       </Container>
       <Container maxW="5xl" pb={5}>
-        <ImageFilter images={images} handler={setActiveImages} />
+        <ImageFilter
+          images={images}
+          handler={setActiveImages}
+          sizeHandler={setLargeRow}
+          size={largeRow}
+        />
         <Text>{`${activeImages.length} images found`}</Text>
       </Container>
-      <VariableSizeList
-        itemCount={activeImages.length + 1}
-        estimatedItemSize={210}
-        height={height - 192}
-        width="100%"
-        itemSize={index => (index < activeImages.length ? 210 : 334)}
-      >
-        {Row}
-      </VariableSizeList>
+      {largeRow ? (
+        <VariableSizeList
+          key="large"
+          itemCount={activeImages.length + 1}
+          estimatedItemSize={210}
+          height={height - 357}
+          width="100%"
+          itemSize={index => (index < activeImages.length ? 210 : 334)}
+        >
+          {Row}
+        </VariableSizeList>
+      ) : (
+        <VariableSizeList
+          key="small"
+          itemCount={activeImages.length + 1}
+          estimatedItemSize={90}
+          height={height - 357}
+          width="100%"
+          itemSize={index => (index < activeImages.length ? 90 : 334)}
+        >
+          {Row}
+        </VariableSizeList>
+      )}
     </>
   );
 };
