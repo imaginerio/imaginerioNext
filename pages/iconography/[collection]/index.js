@@ -27,6 +27,8 @@ const Collection = ({ images, collection }) => {
   let width = 1000;
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
 
+  const gridWidth = Math.min(340, (width - 40) / 3);
+
   const [activeImages, setActiveImages] = useState(images);
   const [size, setSize] = useState('full');
 
@@ -64,7 +66,7 @@ const Collection = ({ images, collection }) => {
       <div style={style}>
         <Link href={`/iconography/${collection}/${ssid}`}>
           <Box
-            w="260px"
+            w={`${gridWidth - 40}px`}
             h="150px"
             backgroundImage={`url(${thumbnail})`}
             backgroundSize="cover"
@@ -83,8 +85,6 @@ const Collection = ({ images, collection }) => {
     columnIndex: PropTypes.number.isRequired,
     style: PropTypes.shape().isRequired,
   };
-
-  const columns = Math.floor(width / 300);
 
   return (
     <>
@@ -124,13 +124,13 @@ const Collection = ({ images, collection }) => {
       )}
       {size === 'grid' && (
         <Container maxW="5xl">
-          <Box m="auto" width={300 * columns}>
+          <Box m="auto" width={gridWidth * 3}>
             <FixedSizeGrid
               height={height - 360}
-              width={300 * columns}
-              columnWidth={300}
-              columnCount={columns}
-              rowCount={Math.ceil(activeImages.length / columns)}
+              width={gridWidth * 3}
+              columnWidth={gridWidth}
+              columnCount={3}
+              rowCount={Math.ceil(activeImages.length / 3)}
               rowHeight={210}
             >
               {Grid}
