@@ -7,6 +7,20 @@ export default extendTheme({
       a: {
         color: '#1580D1',
       },
+      p: {
+        mb: 5,
+      },
+      h1: {
+        fontSize: '32px',
+        my: '20px',
+      },
+      h2: {
+        fontSize: '22px',
+        my: '20px',
+      },
+      'li > ul': {
+        pl: 5,
+      },
     },
   },
   fonts: {
