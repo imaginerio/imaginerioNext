@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Flex, Spacer, HStack, Link } from '@chakra-ui/react';
 
+import pages from '../../assets/config/pages';
+
 const Header = () => (
   <Container maxW="6xl">
     <Flex h="90px" align="middle">
@@ -14,10 +16,11 @@ const Header = () => (
       <Spacer />
       <HStack spacing={30}>
         <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
-        <Link href="/people">People</Link>
-        <Link href="/research">Research</Link>
-        <Link href="/press">Press</Link>
+        {Object.keys(pages).map(page => (
+          <Link key={page} href={`/${page}`} textTransform="capitalize">
+            {page}
+          </Link>
+        ))}
         <Link href="/iconography">Iconography</Link>
         <Link href="/map">Map</Link>
       </HStack>
