@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { range } from 'lodash';
 import ReactSlider from 'react-slider';
-import { Grid, Input, Box, Text } from '@chakra-ui/react';
+import { Grid, Input, Box, Text, Flex, Heading } from '@chakra-ui/react';
 
 const markGap = 20;
 
@@ -45,7 +45,12 @@ const Timeline = ({ min, max, handler }) => {
   useEffect(() => handler(sliderRange), [sliderRange]);
 
   return (
-    <Grid templateColumns="repeat(2, 50px) 1fr" columnGap={4}>
+    <Grid templateColumns="repeat(3, 60px) 1fr" columnGap={6}>
+      <Flex alignItems="center">
+        <Heading size="sm" m={0} fontSize={18} fontWeight="bold">
+          Years
+        </Heading>
+      </Flex>
       <TimeInput
         text="start"
         min={min}
