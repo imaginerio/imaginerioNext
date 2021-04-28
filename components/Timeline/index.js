@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { range } from 'lodash';
 import ReactSlider from 'react-slider';
-import { Grid, Input, Box, Text, Flex, Heading } from '@chakra-ui/react';
+import { Grid, Input, Text, Flex, Heading } from '@chakra-ui/react';
 
 const markGap = 20;
 
@@ -13,12 +13,12 @@ const calcMarks = ({ min, max }) => {
 };
 
 const TimeInput = ({ number, text, handler, min, max }) => (
-  <Box>
+  <Flex align="center">
     <Text
       textTransform="uppercase"
       fontSize={12}
       position="absolute"
-      mt="-9px"
+      mt="-39px"
       ml="6px"
       backgroundColor="white"
       zIndex={1}
@@ -36,7 +36,7 @@ const TimeInput = ({ number, text, handler, min, max }) => (
       value={number}
       onChange={({ target: { value } }) => handler(value)}
     />
-  </Box>
+  </Flex>
 );
 
 const Timeline = ({ min, max, handler }) => {
