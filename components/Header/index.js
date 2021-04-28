@@ -22,7 +22,7 @@ const Header = () => (
           </Link>
         ))}
         <Link href="/iconography">Iconography</Link>
-        <Link href="/map">Map</Link>
+        <Link href="/map">Cartography</Link>
       </HStack>
     </Flex>
   </Container>

@@ -9,6 +9,7 @@ import {
   faArrowDown,
   faList,
   faBars,
+  faGripHorizontal,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   Grid,
@@ -24,6 +25,12 @@ import {
 
 import Timeline from '../Timeline';
 import unaccent from '../../utils/unaccent';
+
+const viewButtons = [
+  { key: 'full', icon: faList },
+  { key: 'small', icon: faBars },
+  { key: 'grid', icon: faGripHorizontal },
+];
 
 const textSearch = ({ item, search }) => {
   const terms = search.split(' ').filter(t => t);
@@ -74,7 +81,7 @@ const ImageFilter = ({ images, handler, size, sizeHandler }) => {
   return (
     <>
       <Timeline min={min} max={max} handler={setDates} />
-      <Grid templateColumns="2fr 1fr 1fr" gap="20px" my={5}>
+      <Grid templateColumns="2fr 1fr 1fr" gap="50px" my={5}>
         <InputGroup>
           <Input
             value={search}
@@ -115,16 +122,14 @@ const ImageFilter = ({ images, handler, size, sizeHandler }) => {
           />
         </Flex>
         <ButtonGroup isAttached colorScheme="blackAlpha">
-          <IconButton
-            icon={<FontAwesomeIcon icon={faList} />}
-            variant={size ? null : 'outline'}
-            onClick={() => sizeHandler(true)}
-          />
-          <IconButton
-            icon={<FontAwesomeIcon icon={faBars} />}
-            variant={size ? 'outline' : null}
-            onClick={() => sizeHandler(false)}
-          />
+          {viewButtons.map(button => (
+            <IconButton
+              key={button.key}
+              icon={<FontAwesomeIcon icon={button.icon} />}
+              variant={size === button.key ? null : 'outline'}
+              onClick={() => sizeHandler(button.key)}
+            />
+          ))}
         </ButtonGroup>
       </Grid>
     </>
@@ -134,7 +139,7 @@ const ImageFilter = ({ images, handler, size, sizeHandler }) => {
 ImageFilter.propTypes = {
   images: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   handler: PropTypes.func.isRequired,
-  size: PropTypes.bool.isRequired,
+  size: PropTypes.string.isRequired,
   sizeHandler: PropTypes.func.isRequired,
 };
 
