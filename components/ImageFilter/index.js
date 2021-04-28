@@ -26,6 +26,12 @@ import {
 import Timeline from '../Timeline';
 import unaccent from '../../utils/unaccent';
 
+const viewButtons = [
+  { key: 'full', icon: faList },
+  { key: 'small', icon: faBars },
+  { key: 'grid', icon: faGripHorizontal },
+];
+
 const textSearch = ({ item, search }) => {
   const terms = search.split(' ').filter(t => t);
   return terms.some(term => {
@@ -116,21 +122,14 @@ const ImageFilter = ({ images, handler, size, sizeHandler }) => {
           />
         </Flex>
         <ButtonGroup isAttached colorScheme="blackAlpha">
-          <IconButton
-            icon={<FontAwesomeIcon icon={faList} />}
-            variant={size === 'full' ? null : 'outline'}
-            onClick={() => sizeHandler('full')}
-          />
-          <IconButton
-            icon={<FontAwesomeIcon icon={faBars} />}
-            variant={size === 'small' ? null : 'outline'}
-            onClick={() => sizeHandler('small')}
-          />
-          <IconButton
-            icon={<FontAwesomeIcon icon={faGripHorizontal} />}
-            variant={size === 'grid' ? null : 'outline'}
-            onClick={() => sizeHandler('grid')}
-          />
+          {viewButtons.map(button => (
+            <IconButton
+              key={button.key}
+              icon={<FontAwesomeIcon icon={button.icon} />}
+              variant={size === button.key ? null : 'outline'}
+              onClick={() => sizeHandler(button.key)}
+            />
+          ))}
         </ButtonGroup>
       </Grid>
     </>
