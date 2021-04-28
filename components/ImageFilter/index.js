@@ -34,31 +34,20 @@ const viewButtons = [
 const ImageFilter = () => {
   const { search, size, setSize } = useContext(ImageContext);
   const {
-    query,
-    setQuery,
-    sort,
-    setSort,
-    dates,
-    setDates,
-    sortDirection,
-    setSortDirection,
+    state: { query, dates, sort, direction },
+    dispatch,
   } = useContext(SearchContext);
 
-  useEffect(() => search({ query, sort, dates, sortDirection }), [
-    query,
-    sort,
-    dates,
-    sortDirection,
-  ]);
+  useEffect(() => search({ query, sort, dates, direction }), [query, sort, dates, direction]);
 
   return (
     <>
-      <Timeline min={1600} max={2020} handler={setDates} />
+      <Timeline min={1600} max={2020} />
       <Grid templateColumns="2fr 1fr 1fr" gap="50px" my={5}>
         <InputGroup>
           <Input
             value={query}
-            onChange={({ target: { value } }) => setQuery(value)}
+            onChange={({ target: { value } }) => dispatch({ type: 'QUERY', payload: value })}
             placeholder="Search images..."
           />
           <InputRightElement mr="45px">
@@ -66,7 +55,7 @@ const ImageFilter = () => {
               <FontAwesomeIcon
                 icon={faTimesCircle}
                 color="#666"
-                onClick={() => setQuery('')}
+                onClick={() => dispatch({ type: 'QUERY', payload: '' })}
                 style={{ cursor: 'pointer' }}
               />
             )}
@@ -80,7 +69,7 @@ const ImageFilter = () => {
             placeholder="Sort by..."
             borderRadius="4px 0 0 4px"
             colorScheme="blackAlpha"
-            onChange={({ target: { value } }) => setSort(value)}
+            onChange={({ target: { value } }) => dispatch({ type: 'SORT', payload: value })}
           >
             <option value="title">Title</option>
             <option value="date">Date</option>
@@ -90,8 +79,8 @@ const ImageFilter = () => {
             colorScheme="blackAlpha"
             variant="outline"
             borderRadius="0 4px 4px 0"
-            icon={<FontAwesomeIcon icon={sortDirection ? faArrowUp : faArrowDown} />}
-            onClick={() => setSortDirection(!sortDirection)}
+            icon={<FontAwesomeIcon icon={direction ? faArrowUp : faArrowDown} />}
+            onClick={() => dispatch({ type: 'DIRECTION' })}
           />
         </Flex>
         <ButtonGroup isAttached colorScheme="blackAlpha">

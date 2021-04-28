@@ -25,7 +25,7 @@ export const ImageContextProvider = ({ children }) => {
   const [activeImages, setActiveImages] = useState([]);
   const [size, setSize] = useState('full');
 
-  const search = ({ query, dates, sort, sortDirection }) => {
+  const search = ({ query, dates, sort, direction }) => {
     let items = allImages;
     if (query) items = items.filter(item => textSearch({ item, query }));
     items = items.filter(i => i.firstyear <= dates[1] && i.lastyear >= dates[0]);
@@ -36,7 +36,7 @@ export const ImageContextProvider = ({ children }) => {
           if (sort === 'date') return parseInt(i.firstyear, `0`);
           return unaccent(i[sort]).replace(/\W/gi, '');
         },
-        sortDirection ? 'asc' : 'desc'
+        direction ? 'asc' : 'desc'
       );
     }
     setActiveImages(items);
