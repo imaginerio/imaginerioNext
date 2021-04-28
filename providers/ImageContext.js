@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { orderBy } from 'lodash';
 import unaccent from '../utils/unaccent';
@@ -23,13 +23,9 @@ export const ImageContext = createContext();
 export const ImageContextProvider = ({ children }) => {
   const [allImages, setAllImages] = useState([]);
   const [activeImages, setActiveImages] = useState([]);
-  const [query, setQuery] = useState('');
-  const [dates, setDates] = useState([1600, 2020]);
-  const [sort, setSort] = useState(null);
-  const [sortDirection, setSortDirection] = useState(true);
   const [size, setSize] = useState('full');
 
-  useEffect(() => {
+  const search = ({ query, dates, sort, sortDirection }) => {
     let items = allImages;
     if (query) items = items.filter(item => textSearch({ item, query }));
     items = items.filter(i => i.firstyear <= dates[1] && i.lastyear >= dates[0]);
@@ -44,7 +40,7 @@ export const ImageContextProvider = ({ children }) => {
       );
     }
     setActiveImages(items);
-  }, [query, sort, dates, sortDirection, allImages]);
+  };
 
   return (
     <ImageContext.Provider
@@ -53,14 +49,7 @@ export const ImageContextProvider = ({ children }) => {
         setAllImages,
         activeImages,
         setActiveImages,
-        query,
-        setQuery,
-        dates,
-        setDates,
-        sort,
-        setSort,
-        sortDirection,
-        setSortDirection,
+        search,
         size,
         setSize,
       }}

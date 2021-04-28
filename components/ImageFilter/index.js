@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSearch,
@@ -22,6 +22,7 @@ import {
 } from '@chakra-ui/react';
 
 import { ImageContext } from '../../providers/ImageContext';
+import { SearchContext } from '../../providers/SearchContext';
 import Timeline from '../Timeline';
 
 const viewButtons = [
@@ -31,16 +32,24 @@ const viewButtons = [
 ];
 
 const ImageFilter = () => {
+  const { search, size, setSize } = useContext(ImageContext);
   const {
     query,
     setQuery,
+    sort,
     setSort,
+    dates,
     setDates,
     sortDirection,
     setSortDirection,
-    size,
-    setSize,
-  } = useContext(ImageContext);
+  } = useContext(SearchContext);
+
+  useEffect(() => search({ query, sort, dates, sortDirection }), [
+    query,
+    sort,
+    dates,
+    sortDirection,
+  ]);
 
   return (
     <>
