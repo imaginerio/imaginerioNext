@@ -16,6 +16,7 @@ import useWindowDimensions from '../../../utils/useWindowDimensions';
 const Collection = ({ images, collection }) => {
   let height = 800;
   let width = 1000;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
 
   const [activeImages, setActiveImages] = useState(images);

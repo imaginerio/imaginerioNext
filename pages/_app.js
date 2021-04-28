@@ -2,6 +2,8 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 
+import ImageContextProvider from '../providers/ImageContext';
+
 import '../components/Timeline/Timeline.css';
 
 import theme from '../theme/theme';
@@ -9,7 +11,9 @@ import theme from '../theme/theme';
 function App({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <ImageContextProvider>
+        <Component {...pageProps} />
+      </ImageContextProvider>
     </ChakraProvider>
   );
 }
