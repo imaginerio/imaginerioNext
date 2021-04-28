@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
-import { Container, Grid, Flex, Box, Heading, Text, Link } from '@chakra-ui/react';
+import { Container, Grid, Flex, Box } from '@chakra-ui/react';
+
+import { ImageMeta, ImageTitle } from './RowComponents';
 
 const calcImageSize = ({ rawWidth, rawHeight }) => {
   let imgHeight = 150;
@@ -15,41 +17,6 @@ const calcImageSize = ({ rawWidth, rawHeight }) => {
     imgWidth,
     imgHeight,
   };
-};
-
-const ImageMeta = ({ creator, date, source }) => (
-  <Box>
-    {creator && (
-      <Text>
-        <b>Creator: </b>
-        {creator}
-      </Text>
-    )}
-    {date && (
-      <Text>
-        <b>Date: </b>
-        {date}
-      </Text>
-    )}
-    {source && (
-      <Text variant="oneline">
-        <b>Source: </b>
-        <Link href={source.link}>{source.value || source.link}</Link>
-      </Text>
-    )}
-  </Box>
-);
-
-ImageMeta.propTypes = {
-  creator: PropTypes.string,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  source: PropTypes.shape(),
-};
-
-ImageMeta.defaultProps = {
-  creator: null,
-  date: null,
-  source: null,
 };
 
 const ImageRow = ({
@@ -78,11 +45,8 @@ const ImageRow = ({
           borderBottom="1px solid rgba(0,0,0,0.1)"
         >
           <Flex flexDirection="column" justifyContent="center">
-            <Heading size="md" mt={0} variant="oneline">
-              <Link href={`/iconography/${collection}/${ssid}`}>
-                {title.length > 150 ? `${title.substr(0, title.lastIndexOf(' ', 150))}...` : title}
-              </Link>
-            </Heading>
+            <ImageTitle collection={collection} ssid={ssid} title={title} />
+            <Box h={4} />
             <ImageMeta creator={creator} date={date} source={source} />
           </Flex>
           <Flex align="center" justify="flex-end">
@@ -98,13 +62,11 @@ const ImageRow = ({
 
 ImageRow.propTypes = {
   style: PropTypes.shape().isRequired,
-  collection: PropTypes.string.isRequired,
-  ssid: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
   width: PropTypes.number,
   height: PropTypes.number,
   thumbnail: PropTypes.string.isRequired,
   ...ImageMeta.propTypes,
+  ...ImageTitle.propTypes,
 };
 
 ImageRow.defaultProps = {
