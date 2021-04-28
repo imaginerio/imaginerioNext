@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Box, Heading, Text, Link } from '@chakra-ui/react';
+import { Container, Box, Text } from '@chakra-ui/react';
+
+import { ImageTitle } from './RowComponents';
 
 const ImageRowSmall = ({ style, collection, ssid, title, creator }) => (
   <div style={style}>
     <Container maxW="5xl" borderBottom="1px solid rgba(0,0,0,0.1)" pb={5} mb={5}>
-      <Heading size="md" m={0} variant="oneline">
-        <Link href={`/iconography/${collection}/${ssid}`}>
-          {title.length > 150 ? `${title.substr(0, title.lastIndexOf(' ', 150))}...` : title}
-        </Link>
-      </Heading>
+      <ImageTitle collection={collection} ssid={ssid} title={title} />
       <Box>
         {creator && (
           <Text>
@@ -24,10 +22,8 @@ const ImageRowSmall = ({ style, collection, ssid, title, creator }) => (
 
 ImageRowSmall.propTypes = {
   style: PropTypes.shape().isRequired,
-  collection: PropTypes.string.isRequired,
-  ssid: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
   creator: PropTypes.string,
+  ...ImageTitle.propTypes,
 };
 
 ImageRowSmall.defaultProps = {
