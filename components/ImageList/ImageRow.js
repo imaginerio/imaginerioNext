@@ -3,6 +3,55 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import { Container, Grid, Flex, Box, Heading, Text, Link } from '@chakra-ui/react';
 
+const calcImageSize = ({ rawWidth, rawHeight }) => {
+  let imgHeight = 150;
+  let imgWidth = 300;
+  if (rawWidth) imgWidth = Math.round((150 / rawHeight) * rawWidth);
+  if (imgWidth > 400) {
+    imgWidth = 400;
+    if (rawHeight) imgHeight = Math.round((400 / rawWidth) * rawHeight);
+  }
+  return {
+    imgWidth,
+    imgHeight,
+  };
+};
+
+const ImageMeta = ({ creator, date, source }) => (
+  <Box>
+    {creator && (
+      <Text>
+        <b>Creator: </b>
+        {creator}
+      </Text>
+    )}
+    {date && (
+      <Text>
+        <b>Date: </b>
+        {date}
+      </Text>
+    )}
+    {source && (
+      <Text variant="oneline">
+        <b>Source: </b>
+        <Link href={source.link}>{source.value || source.link}</Link>
+      </Text>
+    )}
+  </Box>
+);
+
+ImageMeta.propTypes = {
+  creator: PropTypes.string,
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  source: PropTypes.shape(),
+};
+
+ImageMeta.defaultProps = {
+  creator: null,
+  date: null,
+  source: null,
+};
+
 const ImageRow = ({
   style,
   collection,
@@ -15,13 +64,7 @@ const ImageRow = ({
   source,
   thumbnail,
 }) => {
-  let imgHeight = 150;
-  let imgWidth = 300;
-  if (rawWidth) imgWidth = Math.round((150 / rawHeight) * rawWidth);
-  if (imgWidth > 400) {
-    imgWidth = 400;
-    if (rawHeight) imgHeight = Math.round((400 / rawWidth) * rawHeight);
-  }
+  const { imgWidth, imgHeight } = calcImageSize({ rawWidth, rawHeight });
   return (
     <div style={style}>
       <Container maxW="5xl">
@@ -40,26 +83,7 @@ const ImageRow = ({
                 {title.length > 150 ? `${title.substr(0, title.lastIndexOf(' ', 150))}...` : title}
               </Link>
             </Heading>
-            <Box>
-              {creator && (
-                <Text>
-                  <b>Creator: </b>
-                  {creator}
-                </Text>
-              )}
-              {date && (
-                <Text>
-                  <b>Date: </b>
-                  {date}
-                </Text>
-              )}
-              {source && (
-                <Text variant="oneline">
-                  <b>Source: </b>
-                  <Link href={source.link}>{source.value || source.link}</Link>
-                </Text>
-              )}
-            </Box>
+            <ImageMeta creator={creator} date={date} source={source} />
           </Flex>
           <Flex align="center" justify="flex-end">
             <Box w={`${imgWidth}px`} h={`${imgHeight}px`}>
@@ -79,18 +103,14 @@ ImageRow.propTypes = {
   title: PropTypes.string.isRequired,
   width: PropTypes.number,
   height: PropTypes.number,
-  creator: PropTypes.string,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  source: PropTypes.shape(),
   thumbnail: PropTypes.string.isRequired,
+  ...ImageMeta.propTypes,
 };
 
 ImageRow.defaultProps = {
   width: null,
   height: null,
-  creator: null,
-  date: null,
-  source: null,
+  ...ImageMeta.defaultProps,
 };
 
 export default ImageRow;
