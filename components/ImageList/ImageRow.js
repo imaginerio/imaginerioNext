@@ -80,7 +80,7 @@ ImageRow.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   creator: PropTypes.string,
-  date: PropTypes.string,
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   source: PropTypes.shape(),
   thumbnail: PropTypes.string.isRequired,
 };

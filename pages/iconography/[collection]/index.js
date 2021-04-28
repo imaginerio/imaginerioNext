@@ -7,17 +7,12 @@ import { Container, Heading, Text, Box, Link } from '@chakra-ui/react';
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
-import Footer from '../../../components/Footer';
 import ImageFilter from '../../../components/ImageFilter';
-import ImageRow from '../../../components/ImageRow';
-import ImageRowSmall from '../../../components/ImageRowSmall';
+import ImageList from '../../../components/ImageList';
 
 import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
 
-const VariableSizeList = dynamic(() => import('react-window').then(mod => mod.VariableSizeList), {
-  ssr: false,
-});
 const FixedSizeGrid = dynamic(() => import('react-window').then(mod => mod.FixedSizeGrid), {
   ssr: false,
 });
@@ -33,35 +28,8 @@ const Collection = ({ images, collection }) => {
   const [activeImages, setActiveImages] = useState(images);
   const [size, setSize] = useState('full');
 
-  const Row = ({ index, style }) => {
-    if (index >= activeImages.length) {
-      return (
-        <div style={style}>
-          <Footer />
-        </div>
-      );
-    }
-
-    if (size === 'full') {
-      return <ImageRow {...activeImages[index]} style={style} collection={collection} />;
-    }
-    return <ImageRowSmall {...activeImages[index]} style={style} collection={collection} />;
-  };
-
-  Row.propTypes = {
-    index: PropTypes.number.isRequired,
-    style: PropTypes.shape().isRequired,
-  };
-
   const Grid = ({ rowIndex, columnIndex, style }) => {
     const index = rowIndex * 3 + columnIndex;
-    if (index >= activeImages.length) {
-      return (
-        <div style={style}>
-          <Footer />
-        </div>
-      );
-    }
     const { title, thumbnail, ssid } = activeImages[index];
     return (
       <div style={style}>
@@ -107,31 +75,7 @@ const Collection = ({ images, collection }) => {
         <ImageFilter images={images} handler={setActiveImages} sizeHandler={setSize} size={size} />
         <Text>{`${activeImages.length} images found`}</Text>
       </Container>
-      {size === 'full' && (
-        <VariableSizeList
-          key="large"
-          itemCount={activeImages.length + 1}
-          estimatedItemSize={210}
-          height={height - 360}
-          width="100%"
-          itemSize={index => (index < activeImages.length ? 210 : 334)}
-        >
-          {Row}
-        </VariableSizeList>
-      )}
-      {size === 'small' && (
-        <VariableSizeList
-          key="small"
-          itemCount={activeImages.length + 1}
-          estimatedItemSize={90}
-          height={height - 360}
-          width="100%"
-          itemSize={index => (index < activeImages.length ? 90 : 334)}
-        >
-          {Row}
-        </VariableSizeList>
-      )}
-      {size === 'grid' && (
+      {size === 'grid' ? (
         <Box m="auto" width={gridWidth * numColumns}>
           <FixedSizeGrid
             height={height - 360}
@@ -144,6 +88,13 @@ const Collection = ({ images, collection }) => {
             {Grid}
           </FixedSizeGrid>
         </Box>
+      ) : (
+        <ImageList
+          size={size}
+          activeImages={activeImages}
+          height={height}
+          collection={collection}
+        />
       )}
     </>
   );
