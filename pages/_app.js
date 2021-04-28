@@ -2,7 +2,7 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 
-import ImageContextProvider from '../providers/ImageContext';
+import { ImageContextProvider } from '../providers/ImageContext';
 
 import '../components/Timeline/Timeline.css';
 

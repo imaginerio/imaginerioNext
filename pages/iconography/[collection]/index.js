@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Container, Heading, Text } from '@chakra-ui/react';
@@ -10,6 +10,7 @@ import ImageFilter from '../../../components/ImageFilter';
 import ImageList from '../../../components/ImageList';
 import ImageGrid from '../../../components/ImageGrid';
 
+import { ImageContext } from '../../../providers/ImageContext';
 import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
 
@@ -18,9 +19,8 @@ const Collection = ({ images, collection }) => {
   let width = 1000;
   // eslint-disable-next-line react-hooks/rules-of-hooks
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
-
-  const [activeImages, setActiveImages] = useState(images);
-  const [size, setSize] = useState('full');
+  const { activeImages, setAllImages, size } = useContext(ImageContext);
+  useEffect(() => setAllImages(images), [images, setAllImages]);
 
   return (
     <>
@@ -31,7 +31,7 @@ const Collection = ({ images, collection }) => {
         <Heading textTransform="capitalize">{collection}</Heading>
       </Container>
       <Container maxW="5xl" pb={5}>
-        <ImageFilter images={images} handler={setActiveImages} sizeHandler={setSize} size={size} />
+        <ImageFilter />
         <Text>{`${activeImages.length} images found`}</Text>
       </Container>
       {size === 'grid' ? (

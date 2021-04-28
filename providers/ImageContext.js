@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { orderBy } from 'lodash';
 import unaccent from '../utils/unaccent';
 
@@ -16,9 +17,10 @@ const textSearch = ({ item, query }) => {
     return false;
   });
 };
-const ImageContext = createContext();
 
-const ImageContextProvider = ({ children }) => {
+export const ImageContext = createContext();
+
+export const ImageContextProvider = ({ children }) => {
   const [allImages, setAllImages] = useState([]);
   const [activeImages, setActiveImages] = useState([]);
   const [query, setQuery] = useState('');
@@ -27,7 +29,7 @@ const ImageContextProvider = ({ children }) => {
   const [sortDirection, setSortDirection] = useState(true);
   const [size, setSize] = useState('full');
 
-  const search = () => {
+  useEffect(() => {
     let items = allImages;
     if (query) items = items.filter(item => textSearch({ item, query }));
     items = items.filter(i => i.firstyear <= dates[1] && i.lastyear >= dates[0]);
@@ -42,7 +44,7 @@ const ImageContextProvider = ({ children }) => {
       );
     }
     setActiveImages(items);
-  };
+  }, [query, sort, dates, sortDirection, allImages]);
 
   return (
     <ImageContext.Provider
@@ -51,7 +53,6 @@ const ImageContextProvider = ({ children }) => {
         setAllImages,
         activeImages,
         setActiveImages,
-        search,
         query,
         setQuery,
         dates,
@@ -69,4 +70,6 @@ const ImageContextProvider = ({ children }) => {
   );
 };
 
-export default ImageContextProvider;
+ImageContextProvider.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+};

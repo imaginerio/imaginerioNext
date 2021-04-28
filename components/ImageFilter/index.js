@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { isEqual } from 'lodash';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSearch,
@@ -23,7 +21,7 @@ import {
   ButtonGroup,
 } from '@chakra-ui/react';
 
-import ImageContext from '../../providers/ImageContext';
+import { ImageContext } from '../../providers/ImageContext';
 import Timeline from '../Timeline';
 
 const viewButtons = [
@@ -100,13 +98,6 @@ const ImageFilter = () => {
       </Grid>
     </>
   );
-};
-
-ImageFilter.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  handler: PropTypes.func.isRequired,
-  size: PropTypes.string.isRequired,
-  sizeHandler: PropTypes.func.isRequired,
 };
 
 export default ImageFilter;
