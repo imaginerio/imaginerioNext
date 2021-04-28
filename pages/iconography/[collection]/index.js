@@ -27,7 +27,8 @@ const Collection = ({ images, collection }) => {
   let width = 1000;
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
 
-  const gridWidth = Math.min(340, (width - 40) / 3);
+  const numColumns = Math.floor(width / 340);
+  const gridWidth = (width - 40) / numColumns;
 
   const [activeImages, setActiveImages] = useState(images);
   const [size, setSize] = useState('full');
@@ -69,11 +70,19 @@ const Collection = ({ images, collection }) => {
             w={`${gridWidth - 40}px`}
             h="150px"
             backgroundImage={`url(${thumbnail})`}
-            backgroundSize="cover"
+            backgroundSize="contain"
+            backgroundRepeat="no-repeat"
             backgroundPosition="center"
             mx="20px"
           />
-          <Text mx="20px" w="260px" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">
+          <Text
+            mx="20px"
+            w={`${gridWidth - 40}px`}
+            overflow="hidden"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            textAlign="center"
+          >
             {title}
           </Text>
         </Link>
@@ -123,20 +132,18 @@ const Collection = ({ images, collection }) => {
         </VariableSizeList>
       )}
       {size === 'grid' && (
-        <Container maxW="5xl">
-          <Box m="auto" width={gridWidth * 3}>
-            <FixedSizeGrid
-              height={height - 360}
-              width={gridWidth * 3}
-              columnWidth={gridWidth}
-              columnCount={3}
-              rowCount={Math.ceil(activeImages.length / 3)}
-              rowHeight={210}
-            >
-              {Grid}
-            </FixedSizeGrid>
-          </Box>
-        </Container>
+        <Box m="auto" width={gridWidth * numColumns}>
+          <FixedSizeGrid
+            height={height - 360}
+            width={gridWidth * numColumns}
+            columnWidth={gridWidth}
+            columnCount={numColumns}
+            rowCount={Math.ceil(activeImages.length / numColumns)}
+            rowHeight={210}
+          >
+            {Grid}
+          </FixedSizeGrid>
+        </Box>
       )}
     </>
   );
