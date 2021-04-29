@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { range } from 'lodash';
 import ReactSlider from 'react-slider';
 import { Grid, Input, Text, Flex, Heading } from '@chakra-ui/react';
 
-import { SearchContext } from '../../providers/SearchContext';
+import { useImages } from '../../providers/ImageContext';
 
 const markGap = 20;
 
@@ -42,10 +42,10 @@ const TimeInput = ({ number, text, handler, min, max }) => (
 );
 
 const Timeline = ({ min, max }) => {
-  const { dispatch } = useContext(SearchContext);
+  const [, dispatch] = useImages();
   const [sliderRange, setSliderRange] = useState([min, max]);
 
-  useEffect(() => dispatch({ type: 'DATES', payload: sliderRange }), [sliderRange]);
+  useEffect(() => dispatch(['DATES', sliderRange]), [sliderRange]);
 
   return (
     <Grid templateColumns="repeat(3, 60px) 1fr" columnGap={6}>

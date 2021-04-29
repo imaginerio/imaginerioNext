@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSearch,
@@ -21,8 +21,7 @@ import {
   ButtonGroup,
 } from '@chakra-ui/react';
 
-import { ImageContext } from '../../providers/ImageContext';
-import { SearchContext } from '../../providers/SearchContext';
+import { useImages } from '../../providers/ImageContext';
 import Timeline from '../Timeline';
 
 const viewButtons = [
@@ -32,13 +31,16 @@ const viewButtons = [
 ];
 
 const ImageFilter = () => {
-  const { search, size, setSize } = useContext(ImageContext);
-  const {
-    state: { query, dates, sort, direction },
-    dispatch,
-  } = useContext(SearchContext);
+  const [{ query, size, direction }, dispatch] = useImages();
 
-  useEffect(() => search({ query, sort, dates, direction }), [query, sort, dates, direction]);
+  // REVIEW: you don't need to glue the two providers like this, have the two providers together in the same file and move the useEffect to be inside it.
+  // const { search, size, setSize } = useContext(ImageContext);
+  // const {
+  //   state: { query, dates, sort, direction },
+  //   dispatch,
+  // } = useContext(SearchContext);
+
+  // useEffect(() => search({ query, sort, dates, direction }), [query, sort, dates, direction]);
 
   return (
     <>
@@ -47,7 +49,7 @@ const ImageFilter = () => {
         <InputGroup>
           <Input
             value={query}
-            onChange={({ target: { value } }) => dispatch({ type: 'QUERY', payload: value })}
+            onChange={({ target: { value } }) => dispatch(['QUERY', value])}
             placeholder="Search images..."
           />
           <InputRightElement mr="45px">
@@ -55,7 +57,7 @@ const ImageFilter = () => {
               <FontAwesomeIcon
                 icon={faTimesCircle}
                 color="#666"
-                onClick={() => dispatch({ type: 'QUERY', payload: '' })}
+                onClick={() => dispatch(['QUERY', ''])}
                 style={{ cursor: 'pointer' }}
               />
             )}
@@ -69,7 +71,7 @@ const ImageFilter = () => {
             placeholder="Sort by..."
             borderRadius="4px 0 0 4px"
             colorScheme="blackAlpha"
-            onChange={({ target: { value } }) => dispatch({ type: 'SORT', payload: value })}
+            onChange={({ target: { value } }) => dispatch(['SORT', value])}
           >
             <option value="title">Title</option>
             <option value="date">Date</option>
@@ -80,7 +82,7 @@ const ImageFilter = () => {
             variant="outline"
             borderRadius="0 4px 4px 0"
             icon={<FontAwesomeIcon icon={direction ? faArrowUp : faArrowDown} />}
-            onClick={() => dispatch({ type: 'DIRECTION' })}
+            onClick={() => dispatch(['DIRECTION'])}
           />
         </Flex>
         <ButtonGroup isAttached colorScheme="blackAlpha">
@@ -89,7 +91,7 @@ const ImageFilter = () => {
               key={button.key}
               icon={<FontAwesomeIcon icon={button.icon} />}
               variant={size === button.key ? null : 'outline'}
-              onClick={() => setSize(button.key)}
+              onClick={() => dispatch(['SET_SIZE', button.key])}
             />
           ))}
         </ButtonGroup>

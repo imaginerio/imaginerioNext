@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Container, Heading, Text } from '@chakra-ui/react';
@@ -10,7 +10,7 @@ import ImageFilter from '../../../components/ImageFilter';
 import ImageList from '../../../components/ImageList';
 import ImageGrid from '../../../components/ImageGrid';
 
-import { ImageContext } from '../../../providers/ImageContext';
+import { useImages } from '../../../providers/ImageContext';
 import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
 
@@ -18,8 +18,9 @@ const Collection = ({ images, collection }) => {
   let height = 800;
   let width = 1000;
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
-  const { activeImages, setAllImages, size } = useContext(ImageContext);
-  useEffect(() => setAllImages(images), [images, setAllImages]);
+
+  const [{ activeImages, size }, dispatch] = useImages();
+  useEffect(() => dispatch(['SET_ALL_IMAGES', images]), []);
 
   return (
     <>
