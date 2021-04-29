@@ -1,5 +1,6 @@
 .___slider{
-  margin-top: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .___track{
@@ -20,8 +21,6 @@
   background-color: white;
   border: 1px solid #999;
   border-radius: 4px;
-  margin-top: -5px;
-  /* margin-left: -10px; */
 }
 
 .___thumb::after{

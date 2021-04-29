@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Container, Heading, Text } from '@chakra-ui/react';
@@ -10,6 +10,7 @@ import ImageFilter from '../../../components/ImageFilter';
 import ImageList from '../../../components/ImageList';
 import ImageGrid from '../../../components/ImageGrid';
 
+import { useImages } from '../../../providers/ImageContext';
 import config from '../../../utils/config';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
 
@@ -18,8 +19,8 @@ const Collection = ({ images, collection }) => {
   let width = 1000;
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
 
-  const [activeImages, setActiveImages] = useState(images);
-  const [size, setSize] = useState('full');
+  const [{ activeImages, size }, dispatch] = useImages();
+  useEffect(() => dispatch(['SET_ALL_IMAGES', images]), []);
 
   return (
     <>
@@ -30,7 +31,7 @@ const Collection = ({ images, collection }) => {
         <Heading textTransform="capitalize">{collection}</Heading>
       </Container>
       <Container maxW="5xl" pb={5}>
-        <ImageFilter images={images} handler={setActiveImages} sizeHandler={setSize} size={size} />
+        <ImageFilter />
         <Text>{`${activeImages.length} images found`}</Text>
       </Container>
       {size === 'grid' ? (
