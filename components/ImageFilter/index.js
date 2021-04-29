@@ -1,28 +1,17 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faSearch,
-  faTimesCircle,
   faArrowUp,
   faArrowDown,
   faList,
   faBars,
   faGripHorizontal,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  Grid,
-  Flex,
-  InputGroup,
-  Input,
-  InputRightAddon,
-  InputRightElement,
-  Select,
-  IconButton,
-  ButtonGroup,
-} from '@chakra-ui/react';
+import { Grid, Flex, Select, IconButton, ButtonGroup } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import Timeline from '../Timeline';
+import ImageSearch from '../ImageSearch';
 
 const viewButtons = [
   { key: 'full', icon: faList },
@@ -31,31 +20,12 @@ const viewButtons = [
 ];
 
 const ImageFilter = () => {
-  const [{ query, size, direction }, dispatch] = useImages();
+  const [{ size, direction }, dispatch] = useImages();
   return (
     <>
       <Timeline min={1600} max={2020} />
       <Grid templateColumns="2fr 1fr 1fr" gap="50px" my={5}>
-        <InputGroup>
-          <Input
-            value={query}
-            onChange={({ target: { value } }) => dispatch(['QUERY', value])}
-            placeholder="Search images..."
-          />
-          <InputRightElement mr="45px">
-            {query && (
-              <FontAwesomeIcon
-                icon={faTimesCircle}
-                color="#666"
-                onClick={() => dispatch(['QUERY', ''])}
-                style={{ cursor: 'pointer' }}
-              />
-            )}
-          </InputRightElement>
-          <InputRightAddon>
-            <FontAwesomeIcon icon={faSearch} />
-          </InputRightAddon>
-        </InputGroup>
+        <ImageSearch />
         <Flex>
           <Select
             placeholder="Sort by..."
