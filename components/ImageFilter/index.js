@@ -32,16 +32,6 @@ const viewButtons = [
 
 const ImageFilter = () => {
   const [{ query, size, direction }, dispatch] = useImages();
-
-  // REVIEW: you don't need to glue the two providers like this, have the two providers together in the same file and move the useEffect to be inside it.
-  // const { search, size, setSize } = useContext(ImageContext);
-  // const {
-  //   state: { query, dates, sort, direction },
-  //   dispatch,
-  // } = useContext(SearchContext);
-
-  // useEffect(() => search({ query, sort, dates, direction }), [query, sort, dates, direction]);
-
   return (
     <>
       <Timeline min={1600} max={2020} />

@@ -36,8 +36,6 @@ const search = ({ query, dates, sort, direction, allImages }) => {
   return items;
 };
 
-// REVIEW: If you merge SearchContext and ImageContext files but keep two different Contexts you
-// dont need the glue code between them.
 const StateContext = createContext();
 const DispatchContext = createContext();
 
@@ -50,10 +48,8 @@ const initialState = {
   direction: true,
   size: 'full',
 };
-// REVIEW: you can pass an array, and dispatch becomes less verbose:
-// dispatch(['ACTION_NAME', payload])
+
 function reducer(state, [type, payload]) {
-  // console.log(type, payload);
   switch (type) {
     case 'QUERY':
       return {
@@ -104,24 +100,17 @@ function ImageContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { query, sort, dates, direction, allImages } = state;
 
-  // REVIEW: You don't need to have useEffect outside of the provider as a glue code,
-  // it can be used here.
   useEffect(
     () => dispatch(['SET_ACTIVE_IMAGES', search({ query, sort, dates, direction, allImages })]),
     [query, sort, dates, direction, allImages]
   );
 
-  // REVIEW: two providers but the same file: one provides State and the other Dispatch
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
     </StateContext.Provider>
   );
 }
-
-// REVIEW: you dont need to export Context, you can straight up export the hook,
-// which is nice as you can cosume it just like a useReducer hook, for instance:
-// const [state, dispatch] = useImages() ===  const [state, dispatch] = useReducer()
 
 function useImages() {
   const dispatchContext = useContext(DispatchContext);
@@ -130,7 +119,6 @@ function useImages() {
   if (dispatchContext === undefined) {
     throw new Error('useImages must be used within a ImageContextProvider');
   }
-
   return [stateContext, dispatchContext];
 }
 
