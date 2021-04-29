@@ -7,13 +7,13 @@ const FixedSizeGrid = dynamic(() => import('react-window').then(mod => mod.Fixed
   ssr: false,
 });
 
-const ImageGrid = ({ width, height, activeImages, collection }) => {
+const ImageGrid = ({ width, height, activeImages }) => {
   const numColumns = Math.floor(width / 340);
   const gridWidth = (width - 40) / numColumns;
 
   const Grid = ({ rowIndex, columnIndex, style }) => {
     const index = rowIndex * 3 + columnIndex;
-    const { title, thumbnail, ssid } = activeImages[index];
+    const { title, thumbnail, ssid, collection } = activeImages[index];
     return (
       <div style={style}>
         <Link href={`/iconography/${collection}/${ssid}`}>
@@ -66,7 +66,6 @@ ImageGrid.propTypes = {
   activeImages: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
-  collection: PropTypes.string.isRequired,
 };
 
 export default ImageGrid;

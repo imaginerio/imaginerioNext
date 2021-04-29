@@ -81,6 +81,11 @@ export default extendTheme({
         color: '#1580D1',
       },
     },
+    Container: {
+      baseStyle: {
+        maxW: '5xl',
+      },
+    },
   },
   icons: {
     carat: {

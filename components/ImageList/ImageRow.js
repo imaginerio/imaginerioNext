@@ -34,7 +34,7 @@ const ImageRow = ({
   const { imgWidth, imgHeight } = calcImageSize({ rawWidth, rawHeight });
   return (
     <div style={style}>
-      <Container maxW="5xl">
+      <Container>
         <Grid
           templateColumns={`minmax(0, 1fr) ${imgWidth ? `${imgWidth}px` : '40%'}`}
           columnGap="40px"
