@@ -25,7 +25,6 @@
     "lodash": "^4.17.20",
     "mirador": "^3.0.0-rc.7",
     "next": "10.0.3",
-    "next-google-fonts": "^1.2.1",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",

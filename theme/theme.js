@@ -4,11 +4,17 @@ import { extendTheme } from '@chakra-ui/react';
 export default extendTheme({
   styles: {
     global: {
+      body: {
+        fontWeight: 300,
+      },
       a: {
         color: '#1580D1',
       },
       p: {
         mb: 5,
+      },
+      b: {
+        fontWeight: 500,
       },
       h1: {
         fontSize: '32px',
@@ -24,12 +30,13 @@ export default extendTheme({
     },
   },
   fonts: {
-    body: 'Roboto, sans-serif',
+    body: 'Barlow, sans-serif',
+    heading: 'Barlow, sans-serif',
   },
   components: {
     Heading: {
       baseStyle: {
-        fontWeight: 'normal',
+        fontWeight: 500,
         my: '20px',
       },
       sizes: {
@@ -79,6 +86,11 @@ export default extendTheme({
     Link: {
       baseStyle: {
         color: '#1580D1',
+      },
+    },
+    Container: {
+      baseStyle: {
+        maxW: '5xl',
       },
     },
   },

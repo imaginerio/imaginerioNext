@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Container, Grid, Flex, Box, Heading, Text, Link } from '@chakra-ui/react';
+import { Grid, Container, Flex, Box, Link } from '@chakra-ui/react';
 
 import Head from '../components/Head';
 import Timeline from '../components/Timeline';
 import GridResizable from '../components/GridResizable';
+import ImageSearch from '../components/ImageSearch';
+import ViewButtons from '../components/ViewButtons';
+import ImageViewer from '../components/ImageViewer';
+
+import { useImages } from '../providers/ImageContext';
+import useWindowDimensions from '../utils/useWindowDimensions';
 
 const Atlas = ({ images }) => {
-  const [dates, setDates] = useState([1600, 2020]);
+  let height = 800;
+  let width = 1000;
+  if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
+  height -= 170;
+
+  const [, dispatch] = useImages();
+  useEffect(() => dispatch(['SET_ALL_IMAGES', images]), []);
+
+  const [imageWidth, setImageWidth] = useState(500);
+
+  useEffect(() => {
+    if (imageWidth <= 400) {
+      dispatch(['SET_SIZE', 'grid']);
+    }
+  }, [imageWidth]);
+
   return (
     <>
       <Head title="Map" />
@@ -22,11 +43,26 @@ const Atlas = ({ images }) => {
             />
           </Flex>
         </Link>
-        <Timeline min={1600} max={2020} handler={setDates} />
+        <Timeline min={1600} max={2020} />
       </Grid>
       <Box h="calc(100vh - 90px)">
-        <GridResizable>
-          <Box backgroundColor="#FF0000" h="100%" w="100%" />
+        <GridResizable
+          initialWidth={imageWidth}
+          handler={setImageWidth}
+          minWidth={200}
+          maxWidth={width * 0.75}
+        >
+          <Box>
+            {imageWidth >= 400 && (
+              <Container>
+                <Grid templateColumns="1fr 125px" gap={5} mb={2}>
+                  <ImageSearch />
+                  <ViewButtons />
+                </Grid>
+              </Container>
+            )}
+            <ImageViewer height={height} width={imageWidth} />
+          </Box>
           <Box backgroundColor="#0000FF" h="100%" w="100%" />
         </GridResizable>
       </Box>
@@ -34,14 +70,17 @@ const Atlas = ({ images }) => {
   );
 };
 
-Atlas.propTypes = {};
-
-Atlas.defaultProps = {};
+Atlas.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
 
 export async function getStaticProps({ params }) {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents`);
   const images = data.reduce(
-    (memo, d) => [...memo, d.Documents.map(img => ({ ...img, type: d.title }))],
+    (memo, d) => [
+      ...memo,
+      ...d.Documents.map(img => ({ ...img, collection: d.title.toLowerCase() })),
+    ],
     []
   );
   return { props: { images, ...params } };

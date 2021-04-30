@@ -3,7 +3,7 @@ import { Container, Grid, Box, Heading, Text, Link } from '@chakra-ui/react';
 
 const Footer = () => (
   <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
-    <Container maxW="5xl">
+    <Container>
       <Grid templateColumns="1fr repeat(3, 150px)" columnGap="40px">
         <Box>
           <Heading size="md">imagineRio</Heading>

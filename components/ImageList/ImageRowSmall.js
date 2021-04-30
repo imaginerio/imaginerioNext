@@ -6,15 +6,20 @@ import { ImageTitle } from './RowComponents';
 
 const ImageRowSmall = ({ style, collection, ssid, title, creator }) => (
   <div style={style}>
-    <Container maxW="5xl" borderBottom="1px solid rgba(0,0,0,0.1)" pb={5} mb={5}>
+    <Container borderBottom="1px solid rgba(0,0,0,0.1)" pb={5} mb={5}>
       <ImageTitle collection={collection} ssid={ssid} title={title} />
       <Box>
-        {creator && (
-          <Text>
-            <b>Creator: </b>
-            {creator}
-          </Text>
-        )}
+        <Text variant="oneline">
+          <span>
+            {creator && (
+              <>
+                <b>Creator: </b>
+                {creator}
+              </>
+            )}
+            &nbsp;
+          </span>
+        </Text>
       </Box>
     </Container>
   </div>

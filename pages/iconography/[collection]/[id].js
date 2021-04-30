@@ -23,7 +23,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
     <>
       <Head title={title} />
       <Header />
-      <Container maxW="5xl">
+      <Container>
         <Breadcrumbs collection={collection} title={findByLabel(metadata, 'Title')} />
         <Heading>{title}</Heading>
         <Text mb="40px">

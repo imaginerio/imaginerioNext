@@ -9,14 +9,12 @@ const FixedSizeList = dynamic(() => import('react-window').then(mod => mod.Fixed
   ssr: false,
 });
 
-const ImageList = ({ size, activeImages, height, collection }) => {
-  const itemSize = size === 'full' ? 210 : 90;
+const ImageList = ({ size, activeImages, height, width }) => {
+  const itemSize = size === 'full' ? 160 : 90;
 
   const RowLayout = props =>
-    size === 'full' ? <ImageRow {...props} /> : <ImageRowSmall {...props} />;
-  const Row = ({ index, style }) => (
-    <RowLayout {...activeImages[index]} style={style} collection={collection} />
-  );
+    size === 'full' ? <ImageRow {...props} rowWidth={width} /> : <ImageRowSmall {...props} />;
+  const Row = ({ index, style }) => <RowLayout {...activeImages[index]} style={style} />;
   Row.propTypes = {
     index: PropTypes.number.isRequired,
     style: PropTypes.shape().isRequired,
@@ -27,7 +25,7 @@ const ImageList = ({ size, activeImages, height, collection }) => {
       key="large"
       itemCount={activeImages.length}
       itemSize={itemSize}
-      height={height - 360}
+      height={height}
       width="100%"
     >
       {Row}
@@ -39,7 +37,7 @@ ImageList.propTypes = {
   size: PropTypes.oneOf(['full', 'small']).isRequired,
   activeImages: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   height: PropTypes.number.isRequired,
-  collection: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default ImageList;
