@@ -4,10 +4,10 @@ import { Container, Box, Text } from '@chakra-ui/react';
 
 import { ImageTitle } from './RowComponents';
 
-const ImageRowSmall = ({ style, collection, ssid, title, creator }) => (
+const ImageRowSmall = ({ style, ssid, title, creator }) => (
   <div style={style}>
     <Container borderBottom="1px solid rgba(0,0,0,0.1)" pb={5} mb={5}>
-      <ImageTitle collection={collection} ssid={ssid} title={title} />
+      <ImageTitle ssid={ssid} title={title} />
       <Box>
         <Text variant="oneline">
           <span>

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Heading, Text, Link } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Box, Heading, Text } from '@chakra-ui/react';
 
 export const ImageMeta = ({ creator, date, source }) => (
   <Box>
@@ -37,14 +39,16 @@ ImageMeta.defaultProps = {
   source: null,
 };
 
-export const ImageTitle = ({ collection, ssid, title }) => (
-  <Heading size="md" m={0} variant="oneline">
-    <Link href={`/iconography/${collection}/${ssid}`}>{title}</Link>
-  </Heading>
-);
+export const ImageTitle = ({ ssid, title }) => {
+  const { asPath } = useRouter();
+  return (
+    <Heading size="md" m={0} variant="oneline">
+      <Link href={`${asPath}/${ssid}`}>{title}</Link>
+    </Heading>
+  );
+};
 
 ImageTitle.propTypes = {
-  collection: PropTypes.string.isRequired,
   ssid: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
