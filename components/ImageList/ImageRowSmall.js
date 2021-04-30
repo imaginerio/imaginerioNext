@@ -9,12 +9,17 @@ const ImageRowSmall = ({ style, collection, ssid, title, creator }) => (
     <Container borderBottom="1px solid rgba(0,0,0,0.1)" pb={5} mb={5}>
       <ImageTitle collection={collection} ssid={ssid} title={title} />
       <Box>
-        {creator && (
-          <Text>
-            <b>Creator: </b>
-            {creator}
-          </Text>
-        )}
+        <Text variant="oneline">
+          <span>
+            {creator && (
+              <>
+                <b>Creator: </b>
+                {creator}
+              </>
+            )}
+            &nbsp;
+          </span>
+        </Text>
       </Box>
     </Container>
   </div>
