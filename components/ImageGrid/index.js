@@ -18,7 +18,7 @@ const ImageGrid = ({ width, height, activeImages }) => {
     return (
       <div style={style}>
         <Tooltip label={title} hasArrow>
-          <Link href={`/iconography/${collection}/${ssid}`}>
+          <Link href={`/iconography/${collection}/${ssid}`} userSelect="none">
             <Box pos="relative" w={`${gridWidth - 40}px`} h="150px" mx="20px">
               <Image src={thumbnail} layout="fill" objectFit="contain" />
             </Box>

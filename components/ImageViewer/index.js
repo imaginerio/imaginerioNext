@@ -12,7 +12,7 @@ const ImageViewer = ({ width, height }) => {
 
   return (
     <>
-      <Container>
+      <Container mb={2}>
         <Text>{`${activeImages.length} images found`}</Text>
       </Container>
       {size === 'grid' ? (

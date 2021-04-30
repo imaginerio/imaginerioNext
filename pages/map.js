@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Grid, Flex, Box, Link } from '@chakra-ui/react';
+import { Grid, Container, Flex, Box, Link } from '@chakra-ui/react';
 
 import Head from '../components/Head';
 import Timeline from '../components/Timeline';
@@ -15,13 +15,20 @@ import useWindowDimensions from '../utils/useWindowDimensions';
 
 const Atlas = ({ images }) => {
   let height = 800;
-  if (typeof window !== 'undefined') ({ height } = useWindowDimensions());
-  height -= 155;
+  let width = 1000;
+  if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
+  height -= 170;
 
   const [, dispatch] = useImages();
   useEffect(() => dispatch(['SET_ALL_IMAGES', images]), []);
 
   const [imageWidth, setImageWidth] = useState(500);
+
+  useEffect(() => {
+    if (imageWidth <= 400) {
+      dispatch(['SET_SIZE', 'grid']);
+    }
+  }, [imageWidth]);
 
   return (
     <>
@@ -39,12 +46,21 @@ const Atlas = ({ images }) => {
         <Timeline min={1600} max={2020} />
       </Grid>
       <Box h="calc(100vh - 90px)">
-        <GridResizable initialWidth={imageWidth} handler={setImageWidth} minWidth={200}>
+        <GridResizable
+          initialWidth={imageWidth}
+          handler={setImageWidth}
+          minWidth={200}
+          maxWidth={width * 0.75}
+        >
           <Box>
-            <Grid templateColumns="1fr 125px" gap={5}>
-              <ImageSearch />
-              <ViewButtons />
-            </Grid>
+            {imageWidth >= 400 && (
+              <Container>
+                <Grid templateColumns="1fr 125px" gap={5} mb={2}>
+                  <ImageSearch />
+                  <ViewButtons />
+                </Grid>
+              </Container>
+            )}
             <ImageViewer height={height} width={imageWidth} />
           </Box>
           <Box backgroundColor="#0000FF" h="100%" w="100%" />

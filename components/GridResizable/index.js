@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Box } from '@chakra-ui/react';
 
-const GridResizable = ({ children, handler, initialWidth, minWidth }) => {
+const GridResizable = ({ children, handler, initialWidth, minWidth, maxWidth }) => {
   const [width, setWidth] = useState(initialWidth);
   const [dragging, setDragging] = useState(false);
   useEffect(() => handler(width), [width]);
@@ -14,7 +14,7 @@ const GridResizable = ({ children, handler, initialWidth, minWidth }) => {
         h="100%"
         onMouseUp={() => setDragging(false)}
         onMouseMove={({ clientX }) => {
-          if (dragging) setWidth(Math.max(minWidth, clientX));
+          if (dragging) setWidth(Math.max(minWidth, Math.min(maxWidth, clientX)));
         }}
       >
         {children}
@@ -49,6 +49,7 @@ GridResizable.propTypes = {
   handler: PropTypes.func,
   initialWidth: PropTypes.number,
   minWidth: PropTypes.number,
+  maxWidth: PropTypes.number,
 };
 
 GridResizable.defaultProps = {
@@ -56,6 +57,7 @@ GridResizable.defaultProps = {
   handler: () => {},
   initialWidth: 500,
   minWidth: -Infinity,
+  maxWidth: Infinity,
 };
 
 export default GridResizable;
