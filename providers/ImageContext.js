@@ -42,6 +42,7 @@ const DispatchContext = createContext();
 const initialState = {
   allImages: [],
   activeImages: [],
+  selectedImage: null,
   query: '',
   dates: [1600, 2020],
   sort: null,
@@ -85,6 +86,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         activeImages: payload,
+      };
+    case 'SET_SELECTED_IMAGE':
+      return {
+        ...state,
+        selectedImage: payload,
       };
     case 'SET_SIZE':
       return {
