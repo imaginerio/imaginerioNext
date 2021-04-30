@@ -49,7 +49,7 @@ const ImageGrid = ({ width, height, activeImages }) => {
   return (
     <Box m="auto" width={gridWidth * numColumns}>
       <FixedSizeGrid
-        height={height - 360}
+        height={height}
         width={gridWidth * numColumns}
         columnWidth={gridWidth}
         columnCount={numColumns}

@@ -25,7 +25,7 @@ const ImageList = ({ size, activeImages, height }) => {
       key="large"
       itemCount={activeImages.length}
       itemSize={itemSize}
-      height={height - 360}
+      height={height}
       width="100%"
     >
       {Row}

@@ -13,9 +13,15 @@ import ImageSort from '../../../components/ImageSort';
 import ImageViewer from '../../../components/ImageViewer';
 
 import { useImages } from '../../../providers/ImageContext';
+import useWindowDimensions from '../../../utils/useWindowDimensions';
 import config from '../../../utils/config';
 
 const Collection = ({ images, collection }) => {
+  let height = 800;
+  let width = 1000;
+  if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
+  height -= 360;
+
   const [, dispatch] = useImages();
   useEffect(() => dispatch(['SET_ALL_IMAGES', images]), []);
 
@@ -35,7 +41,7 @@ const Collection = ({ images, collection }) => {
           <ViewButtons />
         </Grid>
       </Container>
-      <ImageViewer />
+      <ImageViewer width={width} height={height} />
     </>
   );
 };

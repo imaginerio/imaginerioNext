@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Grid, Flex, Box, Link } from '@chakra-ui/react';
@@ -11,10 +11,17 @@ import ViewButtons from '../components/ViewButtons';
 import ImageViewer from '../components/ImageViewer';
 
 import { useImages } from '../providers/ImageContext';
+import useWindowDimensions from '../utils/useWindowDimensions';
 
 const Atlas = ({ images }) => {
+  let height = 800;
+  if (typeof window !== 'undefined') ({ height } = useWindowDimensions());
+  height -= 155;
+
   const [, dispatch] = useImages();
   useEffect(() => dispatch(['SET_ALL_IMAGES', images]), []);
+
+  const [imageWidth, setImageWidth] = useState(500);
 
   return (
     <>
@@ -32,13 +39,13 @@ const Atlas = ({ images }) => {
         <Timeline min={1600} max={2020} />
       </Grid>
       <Box h="calc(100vh - 90px)">
-        <GridResizable>
+        <GridResizable initialWidth={imageWidth} handler={setImageWidth}>
           <Box>
             <Grid templateColumns="1fr 125px" gap={5}>
               <ImageSearch />
               <ViewButtons />
             </Grid>
-            <ImageViewer />
+            <ImageViewer height={height} width={imageWidth} />
           </Box>
           <Box backgroundColor="#0000FF" h="100%" w="100%" />
         </GridResizable>

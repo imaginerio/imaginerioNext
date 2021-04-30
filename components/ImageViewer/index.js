@@ -1,17 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, Text } from '@chakra-ui/react';
 
 import ImageList from '../ImageList';
 import ImageGrid from '../ImageGrid';
 
 import { useImages } from '../../providers/ImageContext';
-import useWindowDimensions from '../../utils/useWindowDimensions';
 
-const ImageViewer = () => {
-  let height = 800;
-  let width = 1000;
-  if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
-
+const ImageViewer = ({ width, height }) => {
   const [{ activeImages, size }] = useImages();
 
   return (
@@ -28,8 +24,9 @@ const ImageViewer = () => {
   );
 };
 
-ImageViewer.propTypes = {};
-
-ImageViewer.defaultProps = {};
+ImageViewer.propTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+};
 
 export default ImageViewer;

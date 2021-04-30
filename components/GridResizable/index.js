@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Box } from '@chakra-ui/react';
 
-const GridResizable = ({ children }) => {
-  const [width, setWidth] = useState(500);
+const GridResizable = ({ children, handler, initialWidth }) => {
+  const [width, setWidth] = useState(initialWidth);
   const [dragging, setDragging] = useState(false);
+  useEffect(() => handler(width), [width]);
+
   return (
     <>
       <Grid
@@ -44,10 +46,14 @@ const GridResizable = ({ children }) => {
 
 GridResizable.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element),
+  handler: PropTypes.func,
+  initialWidth: PropTypes.number,
 };
 
 GridResizable.defaultProps = {
   children: null,
+  handler: () => {},
+  initialWidth: 500,
 };
 
 export default GridResizable;
