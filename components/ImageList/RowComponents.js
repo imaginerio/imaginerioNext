@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Heading, Link, Text } from '@chakra-ui/react';
+
+import { useImages } from '../../providers/ImageContext';
 
 export const ImageMeta = ({ creator, date, source }) => (
   <Box>
@@ -39,16 +40,36 @@ ImageMeta.defaultProps = {
   source: null,
 };
 
-export const ImageTitle = ({ ssid, title }) => {
-  const { asPath } = useRouter();
-  return (
-    <Heading size="md" m={0} variant="oneline">
-      <Link href={`${asPath}/${ssid}`}>{title}</Link>
-    </Heading>
-  );
-};
+export const ImageTitle = ({ ssid, title }) => (
+  <Heading size="md" m={0} variant="oneline">
+    <ImageLink ssid={ssid}>{title}</ImageLink>
+  </Heading>
+);
 
 ImageTitle.propTypes = {
   ssid: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+};
+
+export const ImageLink = ({ children, ssid }) => {
+  const { asPath } = useRouter();
+  const [{ useLinks, allImages }, dispatch] = useImages();
+  if (useLinks) return <Link href={`${asPath}/${ssid}`}>{children}</Link>;
+  return (
+    <Box
+      whiteSpace="nowrap"
+      textOverflow="ellipsis"
+      overflow="hidden"
+      color="#1580D1"
+      cursor="pointer"
+      onClick={() => dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)])}
+    >
+      {children}
+    </Box>
+  );
+};
+
+ImageLink.propTypes = {
+  ssid: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };

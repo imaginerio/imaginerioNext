@@ -1,6 +1,12 @@
 import React from 'react';
 import { extendTheme } from '@chakra-ui/react';
 
+const oneline = {
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+};
+
 export default extendTheme({
   styles: {
     global: {
@@ -54,11 +60,7 @@ export default extendTheme({
         },
       },
       variants: {
-        oneline: {
-          whiteSpace: 'nowrap',
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-        },
+        oneline,
       },
       defaultProps: {
         size: 'lg',
@@ -76,11 +78,7 @@ export default extendTheme({
         mb: 0,
       },
       variants: {
-        oneline: {
-          whiteSpace: 'nowrap',
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-        },
+        oneline,
       },
     },
     Link: {

@@ -48,6 +48,7 @@ const initialState = {
   sort: null,
   direction: true,
   size: 'full',
+  useLinks: true,
 };
 
 function reducer(state, [type, payload]) {
@@ -96,6 +97,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         size: payload,
+      };
+    case 'SET_USE_LINKS':
+      return {
+        ...state,
+        useLinks: payload,
       };
     default:
       return state;

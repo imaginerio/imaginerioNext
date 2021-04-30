@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Grid, Container, Flex, Box, Link } from '@chakra-ui/react';
 
-import Head from '../components/Head';
-import Timeline from '../components/Timeline';
-import GridResizable from '../components/GridResizable';
-import ImageSearch from '../components/ImageSearch';
-import ViewButtons from '../components/ViewButtons';
-import ImageViewer from '../components/ImageViewer';
+import Head from '../../components/Head';
+import Timeline from '../../components/Timeline';
+import GridResizable from '../../components/GridResizable';
+import ImageSearch from '../../components/ImageSearch';
+import ViewButtons from '../../components/ViewButtons';
+import ImageViewer from '../../components/ImageViewer';
 
-import { useImages } from '../providers/ImageContext';
-import useWindowDimensions from '../utils/useWindowDimensions';
+import { useImages } from '../../providers/ImageContext';
+import useWindowDimensions from '../../utils/useWindowDimensions';
 
 const Atlas = ({ images }) => {
   let height = 800;
@@ -19,8 +19,13 @@ const Atlas = ({ images }) => {
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
   height -= 170;
 
-  const [, dispatch] = useImages();
-  useEffect(() => dispatch(['SET_ALL_IMAGES', images]), []);
+  const [{ selectedImage }, dispatch] = useImages();
+  useEffect(() => {
+    dispatch(['SET_ALL_IMAGES', images]);
+    dispatch(['SET_USE_LINKS', false]);
+  }, []);
+
+  console.log(selectedImage);
 
   const [imageWidth, setImageWidth] = useState(500);
 
@@ -61,7 +66,7 @@ const Atlas = ({ images }) => {
                 </Grid>
               </Container>
             )}
-            <ImageViewer height={height} width={imageWidth} />
+            <ImageViewer height={height} width={imageWidth} noLink />
           </Box>
           <Box backgroundColor="#0000FF" h="100%" w="100%" />
         </GridResizable>
