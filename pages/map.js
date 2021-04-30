@@ -39,7 +39,7 @@ const Atlas = ({ images }) => {
         <Timeline min={1600} max={2020} />
       </Grid>
       <Box h="calc(100vh - 90px)">
-        <GridResizable initialWidth={imageWidth} handler={setImageWidth}>
+        <GridResizable initialWidth={imageWidth} handler={setImageWidth} minWidth={200}>
           <Box>
             <Grid templateColumns="1fr 125px" gap={5}>
               <ImageSearch />
