@@ -18,7 +18,7 @@ const ImageViewer = ({ width, height }) => {
       {size === 'grid' ? (
         <ImageGrid width={width} height={height} activeImages={activeImages} />
       ) : (
-        <ImageList size={size} activeImages={activeImages} height={height} />
+        <ImageList width={width} height={height} size={size} activeImages={activeImages} />
       )}
     </>
   );
