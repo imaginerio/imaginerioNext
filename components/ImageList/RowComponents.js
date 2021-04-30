@@ -7,13 +7,13 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 export const ImageMeta = ({ creator, date, source }) => (
   <Box>
     {creator && (
-      <Text>
+      <Text variant="oneline">
         <b>Creator: </b>
         {creator}
       </Text>
     )}
     {date && (
-      <Text>
+      <Text variant="oneline">
         <b>Date: </b>
         {date}
       </Text>
