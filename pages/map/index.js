@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import dynamic from 'next/dynamic';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { Grid, Container, Flex, Box, Link } from '@chakra-ui/react';
 
 import Head from '../../components/Head';
@@ -13,6 +16,8 @@ import ImageViewer from '../../components/ImageViewer';
 import { useImages } from '../../providers/ImageContext';
 import useWindowDimensions from '../../utils/useWindowDimensions';
 
+const Mirador = dynamic(() => import('../../components/Mirador'), { ssr: false });
+
 const Atlas = ({ images }) => {
   let height = 800;
   let width = 1000;
@@ -24,8 +29,6 @@ const Atlas = ({ images }) => {
     dispatch(['SET_ALL_IMAGES', images]);
     dispatch(['SET_USE_LINKS', false]);
   }, []);
-
-  console.log(selectedImage);
 
   const [imageWidth, setImageWidth] = useState(500);
 
@@ -57,17 +60,60 @@ const Atlas = ({ images }) => {
           minWidth={200}
           maxWidth={width * 0.75}
         >
-          <Box>
-            {imageWidth >= 400 && (
-              <Container>
-                <Grid templateColumns="1fr 125px" gap={5} mb={2}>
-                  <ImageSearch />
-                  <ViewButtons />
-                </Grid>
-              </Container>
-            )}
-            <ImageViewer height={height} width={imageWidth} noLink />
-          </Box>
+          {selectedImage ? (
+            <Box>
+              <Box
+                pos="absolute"
+                zIndex={9}
+                m="16px"
+                size="sm"
+                color="#666"
+                cursor="pointer"
+                _hover={{
+                  color: 'black',
+                }}
+                onClick={() => dispatch(['SET_SELECTED_IMAGE', null])}
+              >
+                <FontAwesomeIcon icon={faTimesCircle} width="20px" />
+              </Box>
+              <Mirador
+                config={{
+                  id: 'mirador',
+                  window: {
+                    allowClose: false, // Configure if windows can be closed or not
+                    allowFullscreen: true, // Configure to show a "fullscreen" button in the WindowTopBar
+                    allowMaximize: false, // Configure if windows can be maximized or not
+                    allowTopMenuButton: false,
+                  },
+                  workspace: {
+                    showZoomControls: true,
+                    allowNewWindows: false,
+                  },
+                  workspaceControlPanel: {
+                    enabled: false,
+                  },
+                  windows: [
+                    {
+                      manifestId: `https://images.imaginerio.org/iiif/3/${selectedImage.ssid}/manifest`,
+                    },
+                  ],
+                }}
+                style={{ position: 'relative', width: '100%', height: '100%' }}
+              />
+            </Box>
+          ) : (
+            <Box>
+              {imageWidth >= 400 && (
+                <Container>
+                  <Grid templateColumns="1fr 125px" gap={5} mb={2}>
+                    <ImageSearch />
+                    <ViewButtons />
+                  </Grid>
+                </Container>
+              )}
+              <ImageViewer height={height} width={imageWidth} noLink />
+            </Box>
+          )}
           <Box backgroundColor="#0000FF" h="100%" w="100%" />
         </GridResizable>
       </Box>

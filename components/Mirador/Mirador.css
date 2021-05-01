@@ -1,0 +1,18 @@
+.mosaic-root{
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+}
+
+.mosaic-tile{
+  margin: 0 !important;
+}
+
+.mirador-osd-info {
+  display: none;
+}
+
+nav .MuiToolbar-root{
+  padding-left: 40px;
+}

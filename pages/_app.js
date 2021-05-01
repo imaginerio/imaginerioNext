@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { ImageContextProvider } from '../providers/ImageContext';
 
 import '../components/Timeline/Timeline.css';
+import '../components/Mirador/Mirador.css';
 
 import theme from '../theme/theme';
 
