@@ -270,6 +270,151 @@
             }
         },
         {
+            "id": "canal",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Canals"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#6F6FF4",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    8
+                ]
+            }
+        },
+        {
+            "id": "aqueduct",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Aqueducts"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#6F6FF4",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    8
+                ],
+                "line-dasharray": [
+                    6,
+                    2
+                ]
+            }
+        },
+        {
+            "id": "water-pipe",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Water Pipes"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#6F6FF4",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    8
+                ],
+                "line-dasharray": [
+                    6,
+                    2,
+                    1,
+                    2
+                ]
+            }
+        },
+        {
+            "id": "sewage-pipe",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Sewage Pipes"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#9A8772",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    8
+                ],
+                "line-dasharray": [
+                    6,
+                    2,
+                    1,
+                    2
+                ]
+            }
+        },
+        {
+            "id": "ditch",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Ditches"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#6F6FF4",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    4
+                ],
+                "line-dasharray": [
+                    2,
+                    2
+                ]
+            }
+        },
+        {
             "id": "marsh",
             "type": "fill",
             "source": "composite",
