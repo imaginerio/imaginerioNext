@@ -12,6 +12,7 @@ import GridResizable from '../../components/GridResizable';
 import ImageSearch from '../../components/ImageSearch';
 import ViewButtons from '../../components/ViewButtons';
 import ImageViewer from '../../components/ImageViewer';
+import MapController from '../../components/MapController';
 
 import { useImages } from '../../providers/ImageContext';
 import useWindowDimensions from '../../utils/useWindowDimensions';
@@ -22,7 +23,7 @@ const Atlas = ({ images }) => {
   let height = 800;
   let width = 1000;
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
-  height -= 170;
+  height -= 90;
 
   const [{ selectedImage }, dispatch] = useImages();
   useEffect(() => {
@@ -111,10 +112,14 @@ const Atlas = ({ images }) => {
                   </Grid>
                 </Container>
               )}
-              <ImageViewer height={height} width={imageWidth} noLink />
+              <ImageViewer
+                height={imageWidth >= 400 ? height - 80 : height - 35}
+                width={imageWidth}
+                noLink
+              />
             </Box>
           )}
-          <Box backgroundColor="#0000FF" h="100%" w="100%" />
+          <MapController width={width - imageWidth} height={height} />
         </GridResizable>
       </Box>
     </>
