@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Heading, Text, Link } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { Box, Heading, Link, Text } from '@chakra-ui/react';
+
+import { useImages } from '../../providers/ImageContext';
 
 export const ImageMeta = ({ creator, date, source }) => (
   <Box>
     {creator && (
-      <Text>
+      <Text variant="oneline">
         <b>Creator: </b>
         {creator}
       </Text>
     )}
     {date && (
-      <Text>
+      <Text variant="oneline">
         <b>Date: </b>
         {date}
       </Text>
@@ -37,14 +40,36 @@ ImageMeta.defaultProps = {
   source: null,
 };
 
-export const ImageTitle = ({ collection, ssid, title }) => (
+export const ImageTitle = ({ ssid, title }) => (
   <Heading size="md" m={0} variant="oneline">
-    <Link href={`/iconography/${collection}/${ssid}`}>{title}</Link>
+    <ImageLink ssid={ssid}>{title}</ImageLink>
   </Heading>
 );
 
 ImageTitle.propTypes = {
-  collection: PropTypes.string.isRequired,
   ssid: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+};
+
+export const ImageLink = ({ children, ssid }) => {
+  const { asPath } = useRouter();
+  const [{ useLinks, allImages }, dispatch] = useImages();
+  if (useLinks) return <Link href={`${asPath}/${ssid}`}>{children}</Link>;
+  return (
+    <Box
+      whiteSpace="nowrap"
+      textOverflow="ellipsis"
+      overflow="hidden"
+      color="#1580D1"
+      cursor="pointer"
+      onClick={() => dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)])}
+    >
+      {children}
+    </Box>
+  );
+};
+
+ImageLink.propTypes = {
+  ssid: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };

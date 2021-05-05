@@ -23,7 +23,6 @@ const calcImageSize = ({ rawWidth, rawHeight, rowWidth }) => {
 const ImageRow = ({
   style,
   rowWidth,
-  collection,
   ssid,
   title,
   width: rawWidth,
@@ -48,7 +47,7 @@ const ImageRow = ({
           boxSizing="content-box"
         >
           <Flex flexDirection="column" justifyContent="center">
-            <ImageTitle collection={collection} ssid={ssid} title={title} />
+            <ImageTitle ssid={ssid} title={title} />
             <ImageMeta creator={creator} date={date} source={source} />
           </Flex>
           <Flex align="center" justify="flex-end">

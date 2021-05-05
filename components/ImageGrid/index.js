@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { Box, Link, Tooltip } from '@chakra-ui/react';
+import { Box, Tooltip } from '@chakra-ui/react';
+
+import { ImageLink } from '../ImageList/RowComponents';
 
 const FixedSizeGrid = dynamic(() => import('react-window').then(mod => mod.FixedSizeGrid), {
   ssr: false,
@@ -14,16 +16,16 @@ const ImageGrid = ({ width, height, activeImages }) => {
 
   const Grid = ({ rowIndex, columnIndex, style }) => {
     const index = rowIndex * 3 + columnIndex;
-    const { title, thumbnail, ssid, collection } = activeImages[index];
+    const { title, thumbnail, ssid } = activeImages[index];
     return (
       <div style={style}>
-        <Tooltip label={title} hasArrow>
-          <Link href={`/iconography/${collection}/${ssid}`} userSelect="none">
-            <Box pos="relative" w={`${gridWidth - 40}px`} h="150px" mx="20px">
+        <ImageLink ssid={ssid}>
+          <Tooltip label={title} hasArrow>
+            <Box pos="relative" w={`${gridWidth - 40}px`} h="150px" mx="20px" userSelect="none">
               <Image src={thumbnail} layout="fill" objectFit="contain" />
             </Box>
-          </Link>
-        </Tooltip>
+          </Tooltip>
+        </ImageLink>
       </div>
     );
   };

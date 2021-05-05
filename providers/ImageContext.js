@@ -42,11 +42,13 @@ const DispatchContext = createContext();
 const initialState = {
   allImages: [],
   activeImages: [],
+  selectedImage: null,
   query: '',
   dates: [1600, 2020],
   sort: null,
   direction: true,
   size: 'full',
+  useLinks: true,
 };
 
 function reducer(state, [type, payload]) {
@@ -86,10 +88,20 @@ function reducer(state, [type, payload]) {
         ...state,
         activeImages: payload,
       };
+    case 'SET_SELECTED_IMAGE':
+      return {
+        ...state,
+        selectedImage: payload,
+      };
     case 'SET_SIZE':
       return {
         ...state,
         size: payload,
+      };
+    case 'SET_USE_LINKS':
+      return {
+        ...state,
+        useLinks: payload,
       };
     default:
       return state;

@@ -18,7 +18,7 @@
             "id": "background",
             "type": "background",
             "layout": {},
-            "paint": {"background-color": "hsl(210, 90%, 90%)"}
+            "paint": {"background-color": "hsl(211, 88%, 90%)"}
         },
         {
             "id": "landpoly-fill",
@@ -27,7 +27,24 @@
             "source-layer": "landpoly",
             "layout": {},
             "paint": {
-                "fill-color": "hsl(40, 15%, 94%)"
+                "fill-color": "hsl(40, 15%, 94%)",
+                "fill-opacity": 0.25
+            }
+        },
+        {
+            "id": "vegetation",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Vegetation"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "#DFE6CF",
+                "fill-outline-color": "hsl(0, 0%, 75%)",
+                "fill-opacity": 0.25
             }
         },
         {
@@ -42,6 +59,38 @@
             "layout": {},
             "paint": {
                 "fill-color": "hsl(0, 0%, 86%)",
+                "fill-outline-color": "hsl(0, 0%, 75%)",
+                "fill-opacity": 0.25
+            }
+        },
+        {
+            "id": "farm",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Farm"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "#8EE09E",
+                "fill-outline-color": "hsl(0, 0%, 75%)",
+                "fill-opacity": 0.25
+            }
+        },
+        {
+            "id": "mill",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Mill"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "#E6D4BC",
                 "fill-outline-color": "hsl(0, 0%, 75%)",
                 "fill-opacity": 0.25
             }
@@ -86,7 +135,7 @@
             
             "layout": {},
             "paint": {
-                "line-color": "hsl(210, 91%, 75%)",
+                "line-color": "hsl(0, 0%, 65%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.3],
@@ -186,13 +235,45 @@
             "source-layer": "publicspacespoly",
             "filter": [
                 "all",
-                ["match", ["get", "type"], ["Soccer Fields"], true, false]
+                ["match", ["get", "type"], ["Soccer Fields", "Soccer Field"], true, false]
             ],
             "layout": {},
             "paint": {
                 "fill-color": "hsl(100, 45%, 82%)",
                 "fill-opacity": 0.5,
                 "fill-outline-color": "hsl(100, 56%, 65%)"
+            }
+        },
+        {
+            "id": "reservoir",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "utilitiespoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Reservoirs"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(211, 88%, 90%)",
+                "fill-opacity": 0.5,
+                "fill-outline-color": "hsl(210, 91%, 65%)"
+            }
+        },
+        {
+            "id": "fountain",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "utilitiespoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Fountains"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(211, 88%, 90%)",
+                "fill-opacity": 0.5,
+                "fill-outline-color": "hsl(210, 91%, 65%)"
             }
         },
         {
@@ -270,6 +351,176 @@
             }
         },
         {
+            "id": "brook",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "inlandwatersline",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Brooks"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#86bff9",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    4
+                ]
+            }
+        },
+        {
+            "id": "canal",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Canals"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#6F6FF4",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    8
+                ]
+            }
+        },
+        {
+            "id": "aqueduct",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Aqueducts"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#6F6FF4",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    8
+                ],
+                "line-dasharray": [
+                    6,
+                    2
+                ]
+            }
+        },
+        {
+            "id": "water-pipe",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Water Pipes"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#6F6FF4",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    8
+                ],
+                "line-dasharray": [
+                    6,
+                    2,
+                    1,
+                    2
+                ]
+            }
+        },
+        {
+            "id": "sewage-pipe",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Sewage Pipes"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#9A8772",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    8
+                ],
+                "line-dasharray": [
+                    6,
+                    2,
+                    1,
+                    2
+                ]
+            }
+        },
+        {
+            "id": "ditch",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiesline",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Ditches"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#6F6FF4",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    4
+                ],
+                "line-dasharray": [
+                    2,
+                    2
+                ]
+            }
+        },
+        {
             "id": "marsh",
             "type": "fill",
             "source": "composite",
@@ -308,7 +559,116 @@
             }
         },
         {
-            "id": "streets-case",
+            "id": "passage-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Passages"], true, false]
+            ],
+            "layout": {"line-cap": "butt"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 50%)",
+                "line-gap-width": [
+                    "interpolate",
+                    ["exponential", 1.3],
+                    ["zoom"],
+                    15,
+                    0,
+                    18,
+                    20
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    12,
+                    1,
+                    18,
+                    2
+                ],
+                "line-dasharray": [
+                    4,
+                    2
+                ],
+                "line-opacity": 0.5
+            }
+        },
+        {
+            "id": "slope-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Slopes"], true, false]
+            ],
+            "layout": {"line-cap": "butt"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 75%)",
+                "line-gap-width": [
+                    "interpolate",
+                    ["exponential", 1.3],
+                    ["zoom"],
+                    14,
+                    0,
+                    18,
+                    20
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    12,
+                    1,
+                    18,
+                    1
+                ],
+                "line-opacity": 0.5
+            }
+        },
+        {
+            "id": "alley-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Alleys"], true, false]
+            ],
+            "layout": {"line-cap": "butt"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 75%)",
+                "line-gap-width": [
+                    "interpolate",
+                    ["exponential", 1.3],
+                    ["zoom"],
+                    14,
+                    0,
+                    18,
+                    10
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    12,
+                    1,
+                    18,
+                    1
+                ],
+                "line-opacity": 0.5
+            }
+        },
+        {
+            "id": "street-case",
             "type": "line",
             "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
             "source": "composite",
@@ -318,7 +678,7 @@
                 "all",
                 ["match", ["get", "type"], ["Streets"], true, false]
             ],
-            "layout": {"line-cap": "round"},
+            "layout": {"line-cap": "butt"},
             "paint": {
                 "line-color": "hsl(0, 0%, 75%)",
                 "line-gap-width": [
@@ -352,7 +712,7 @@
                 "all",
                 ["match", ["get", "type"], ["Avenues"], true, false]
             ],
-            "layout": {"line-cap": "round"},
+            "layout": {"line-cap": "butt"},
             "paint": {
                 "line-color": "hsl(0, 0%, 75%)",
                 "line-gap-width": [
@@ -377,7 +737,7 @@
                 "all",
                 ["match", ["get", "type"], ["Expressways"], true, false]
             ],
-            "layout": {"line-cap": "round"},
+            "layout": {"line-cap": "butt"},
             "paint": {
                 "line-color": "hsl(0, 0%, 75%)",
                 "line-gap-width": [
@@ -393,7 +753,158 @@
             }
         },
         {
-            "id": "streets",
+            "id": "overpass-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Overpasses"], true, false]
+            ],
+            "layout": {"line-cap": "butt"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 50%)",
+                "line-gap-width": [
+                    "interpolate",
+                    ["exponential", 1.3],
+                    ["zoom"],
+                    14,
+                    0,
+                    18,
+                    20
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    12,
+                    1,
+                    18,
+                    2
+                ],
+                "line-dasharray": [
+                    4,
+                    2
+                ],
+                "line-opacity": 0.5
+            }
+        },
+        {
+            "id": "passage",
+            "type": "line",
+            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Passages"], true, false]
+            ],
+            "layout": {"line-cap": "butt"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 75%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    14,
+                    2,
+                    18,
+                    20
+                ],
+                "line-opacity": 0.5
+            }
+        },
+        {
+            "id": "trail",
+            "type": "line",
+            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Trails"], true, false]
+            ],
+            "layout": {"line-cap": "butt"},
+            "paint": {
+                "line-color": "#fff",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    14,
+                    2,
+                    18,
+                    6
+                ],
+                "line-dasharray": [
+                    2,
+                    1
+                ],
+                "line-opacity": 0.5
+            }
+        },
+        {
+            "id": "slope",
+            "type": "line",
+            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Slopes"], true, false]
+            ],
+            "layout": {"line-cap": "butt"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    14,
+                    2,
+                    18,
+                    20
+                ],
+                "line-dasharray": [
+                    2,
+                    1
+                ],
+                "line-opacity": 0.5
+            }
+        },
+        {
+            "id": "alley",
+            "type": "line",
+            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Alleys"], true, false]
+            ],
+            "layout": {"line-cap": "butt"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    14,
+                    2,
+                    18,
+                    10
+                ],
+                "line-opacity": 0.5
+            }
+        },
+        {
+            "id": "street",
             "type": "line",
             "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
@@ -403,7 +914,7 @@
                 "all",
                 ["match", ["get", "type"], ["Streets"], true, false]
             ],
-            "layout": {"line-cap": "round"},
+            "layout": {"line-cap": "butt"},
             "paint": {
                 "line-color": "hsl(0, 0%, 100%)",
                 "line-width": [
@@ -428,9 +939,9 @@
                 "all",
                 ["match", ["get", "type"], ["Avenues"], true, false]
             ],
-            "layout": {"line-cap": "round"},
+            "layout": {"line-cap": "butt"},
             "paint": {
-                "line-color": "hsl(263, 0%, 100%)",
+                "line-color": "hsl(0, 0%, 100%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -453,9 +964,9 @@
                 "all",
                 ["match", ["get", "type"], ["Expressways"], true, false]
             ],
-            "layout": {"line-cap": "round"},
+            "layout": {"line-cap": "butt"},
             "paint": {
-                "line-color": "hsl(263, 0%, 100%)",
+                "line-color": "hsl(0, 0%, 100%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -469,12 +980,37 @@
             }
         },
         {
-            "id": "buildingspoly",
+            "id": "overpass",
+            "type": "line",
+            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Overpasses"], true, false]
+            ],
+            "layout": {"line-cap": "butt"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    14,
+                    2,
+                    18,
+                    20
+                ],
+                "line-opacity": 0.5
+            }
+        },
+        {
+            "id": "buildings",
             "type": "fill",
             "source": "composite",
             "source-layer": "buildingspoly",
             "minzoom": 14,
-            
             "layout": {},
             "paint": {
                 "fill-opacity": 0.5,
@@ -483,7 +1019,189 @@
             }
         },
         {
-            "id": "streets-label",
+            "id": "favela-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "neighborhoodspoly",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Favelas"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-font": ["Lato Light"],
+                "text-size": 10,
+                "text-transform": "uppercase",
+                "text-letter-spacing": 0.2
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "neighborhood-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "neighborhoodspoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Neighborhoods"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-font": [
+                    "step",
+                    ["zoom"],
+                    ["literal", ["Lato Light"]],
+                    15,
+                    ["literal", ["Lato Regular"]]
+                ],
+                "text-size": 12,
+                "text-transform": "uppercase",
+                "text-letter-spacing": 0.2
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "parish-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "neighborhoodspoly",
+            "minzoom": 11,
+            "maxzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Parishes"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-font": ["Lato Regular"],
+                "text-size": 11,
+                "text-transform": "uppercase",
+                "text-letter-spacing": 0.5
+            },
+            "paint": {
+                "text-color": "#000",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "passage-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Passages"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "trail-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Trails"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "slope-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Slopes"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "alley-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Alleys"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "street-label",
             "type": "symbol",
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
@@ -513,6 +1231,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
+            "minzoom": 12,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Avenues"], true, false]
@@ -537,6 +1256,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
+            "minzoom": 12,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Expressways"], true, false]
@@ -546,13 +1266,38 @@
                 "symbol-placement": "line",
                 "text-font": ["Lato Regular"],
                 "text-letter-spacing": 0.05,
-                "text-size": 14
+                "text-size": 12
             },
             "paint": {
                 "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
                 "text-halo-width": 2,
                 "text-halo-blur": 2,
                 "text-color": "hsl(0, 0%, 0%)"
+            }
+        },
+        {
+            "id": "overpass-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Overpasses"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
             }
         }
     ],

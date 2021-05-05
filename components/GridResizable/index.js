@@ -29,6 +29,7 @@ const GridResizable = ({ children, handler, initialWidth, minWidth, maxWidth }) 
         backgroundColor="white"
         border="1px solid #999"
         borderRadius="4px"
+        zIndex={9}
         _after={{
           content: '"|"',
           width: '100%',
