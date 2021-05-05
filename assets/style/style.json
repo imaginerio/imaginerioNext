@@ -972,6 +972,88 @@
             }
         },
         {
+            "id": "favela-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "neighborhoodspoly",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Favelas"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-font": ["Lato Light"],
+                "text-size": 10,
+                "text-transform": "uppercase",
+                "text-letter-spacing": 0.2
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "neighborhood-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "neighborhoodspoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Neighborhoods"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-font": [
+                    "step",
+                    ["zoom"],
+                    ["literal", ["Lato Light"]],
+                    15,
+                    ["literal", ["Lato Regular"]]
+                ],
+                "text-size": 12,
+                "text-transform": "uppercase",
+                "text-letter-spacing": 0.2
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "parish-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "neighborhoodspoly",
+            "minzoom": 13,
+            "maxzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Parishes"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-font": ["Lato Regular"],
+                "text-size": 12,
+                "text-transform": "uppercase",
+                "text-letter-spacing": 0.5
+            },
+            "paint": {
+                "text-color": "#000",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
             "id": "streets-label",
             "type": "symbol",
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
