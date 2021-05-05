@@ -200,7 +200,7 @@
             "id": "reservoir",
             "type": "fill",
             "source": "composite",
-            "source-layer": "UtilitiesPoly",
+            "source-layer": "utilitiespoly",
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Reservoirs"], true, false]
@@ -216,7 +216,7 @@
             "id": "fountain",
             "type": "fill",
             "source": "composite",
-            "source-layer": "UtilitiesPoly",
+            "source-layer": "utilitiespoly",
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Fountains"], true, false]
