@@ -1080,7 +1080,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "neighborhoodspoly",
-            "minzoom": 13,
+            "minzoom": 11,
             "maxzoom": 15,
             "filter": [
                 "all",
@@ -1089,7 +1089,7 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "text-font": ["Lato Regular"],
-                "text-size": 12,
+                "text-size": 11,
                 "text-transform": "uppercase",
                 "text-letter-spacing": 0.5
             },
@@ -1101,7 +1101,107 @@
             }
         },
         {
-            "id": "streets-label",
+            "id": "passage-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Passages"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "trail-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Trails"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "slope-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Slopes"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "alley-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Alleys"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "street-label",
             "type": "symbol",
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
@@ -1131,6 +1231,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
+            "minzoom": 12,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Avenues"], true, false]
@@ -1155,6 +1256,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
+            "minzoom": 12,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Expressways"], true, false]
@@ -1164,13 +1266,38 @@
                 "symbol-placement": "line",
                 "text-font": ["Lato Regular"],
                 "text-letter-spacing": 0.05,
-                "text-size": 14
+                "text-size": 12
             },
             "paint": {
                 "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
                 "text-halo-width": 2,
                 "text-halo-blur": 2,
                 "text-color": "hsl(0, 0%, 0%)"
+            }
+        },
+        {
+            "id": "overpass-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
+            "source": "composite",
+            "source-layer": "roadsline",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Overpasses"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-font": ["Lato Light"],
+                "text-size": 12,
+                "text-letter-spacing": 0.05
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2
             }
         }
     ],
