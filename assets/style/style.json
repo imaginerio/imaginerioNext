@@ -32,6 +32,22 @@
             }
         },
         {
+            "id": "vegetation",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Vegetation"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "#DFE6CF",
+                "fill-outline-color": "hsl(0, 0%, 75%)",
+                "fill-opacity": 0.25
+            }
+        },
+        {
             "id": "built-domain",
             "type": "fill",
             "source": "composite",
@@ -43,6 +59,38 @@
             "layout": {},
             "paint": {
                 "fill-color": "hsl(0, 0%, 86%)",
+                "fill-outline-color": "hsl(0, 0%, 75%)",
+                "fill-opacity": 0.25
+            }
+        },
+        {
+            "id": "farm",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Farm"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "#8EE09E",
+                "fill-outline-color": "hsl(0, 0%, 75%)",
+                "fill-opacity": 0.25
+            }
+        },
+        {
+            "id": "mill",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Mill"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "#E6D4BC",
                 "fill-outline-color": "hsl(0, 0%, 75%)",
                 "fill-opacity": 0.25
             }
@@ -958,12 +1006,11 @@
             }
         },
         {
-            "id": "buildingspoly",
+            "id": "buildings",
             "type": "fill",
             "source": "composite",
             "source-layer": "buildingspoly",
             "minzoom": 14,
-            
             "layout": {},
             "paint": {
                 "fill-opacity": 0.5,
