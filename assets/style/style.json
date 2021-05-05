@@ -271,6 +271,31 @@
             }
         },
         {
+            "id": "brook",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "inlandwatersline",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Brooks"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#86bff9",
+                "line-opacity": 0.5,
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    4
+                ]
+            }
+        },
+        {
             "id": "canal",
             "type": "line",
             "source": "composite",
