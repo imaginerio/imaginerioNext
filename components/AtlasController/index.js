@@ -7,7 +7,7 @@ import mapStyle from '../../assets/style/style.json';
 import { useImages } from '../../providers/ImageContext';
 
 const AtlasController = ({ width, height }) => {
-  const [{ activeImages, dates }] = useImages();
+  const [{ activeImages, dates, selectedImage }] = useImages();
 
   const viewpoints = activeImages.filter(i => i.collection === 'views');
 
@@ -17,7 +17,9 @@ const AtlasController = ({ width, height }) => {
       mapStyle={mapStyle}
       viewport={{ longitude: -43.18, latitude: -22.9, zoom: 10 }}
       size={{ width, height }}
-      viewpoints={viewpoints}
+      viewpoints={!selectedImage && viewpoints}
+      activeBasemap={selectedImage && selectedImage.ssid}
+      rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
       circleMarkers
     />
   );
