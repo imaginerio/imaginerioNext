@@ -995,10 +995,7 @@
                 "text-letter-spacing": 0.2
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2
+                "text-color": "hsl(0, 0%, 0%)"
             }
         },
         {
@@ -1026,10 +1023,7 @@
                 "text-letter-spacing": 0.2
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2
+                "text-color": "hsl(0, 0%, 0%)"
             }
         },
         {
@@ -1052,10 +1046,7 @@
                 "text-letter-spacing": 0.5
             },
             "paint": {
-                "text-color": "#000",
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2
+                "text-color": "hsl(0, 0%, 0%)"
             }
         },
         {
@@ -1077,10 +1068,7 @@
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2
+                "text-color": "hsl(0, 0%, 0%)"
             }
         },
         {
@@ -1102,10 +1090,7 @@
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2
+                "text-color": "hsl(0, 0%, 0%)"
             }
         },
         {
@@ -1127,10 +1112,7 @@
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2
+                "text-color": "hsl(0, 0%, 0%)"
             }
         },
         {
@@ -1152,10 +1134,7 @@
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2
+                "text-color": "hsl(0, 0%, 0%)"
             }
         },
         {
@@ -1177,10 +1156,7 @@
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2
+                "text-color": "hsl(0, 0%, 0%)"
             }
         },
         {
@@ -1202,9 +1178,6 @@
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2,
                 "text-color": "hsl(0, 0%, 0%)"
             }
         },
@@ -1227,9 +1200,6 @@
                 "text-size": 12
             },
             "paint": {
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2,
                 "text-color": "hsl(0, 0%, 0%)"
             }
         },
@@ -1252,10 +1222,7 @@
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsla(0, 0%, 85%, 0.5)",
-                "text-halo-width": 2,
-                "text-halo-blur": 2
+                "text-color": "hsl(0, 0%, 0%)"
             }
         }
     ],
