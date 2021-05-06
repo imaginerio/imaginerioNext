@@ -12,7 +12,7 @@ import GridResizable from '../../components/GridResizable';
 import ImageSearch from '../../components/ImageSearch';
 import ViewButtons from '../../components/ViewButtons';
 import ImageViewer from '../../components/ImageViewer';
-import MapController from '../../components/MapController';
+import AtlasController from '../../components/AtlasController';
 
 import { useImages } from '../../providers/ImageContext';
 import useWindowDimensions from '../../utils/useWindowDimensions';
@@ -119,7 +119,7 @@ const Atlas = ({ images }) => {
               />
             </Box>
           )}
-          <MapController width={width - imageWidth} height={height} />
+          <AtlasController width={width - imageWidth} height={height} />
         </GridResizable>
       </Box>
     </>

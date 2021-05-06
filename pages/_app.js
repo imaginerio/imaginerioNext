@@ -10,7 +10,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import '../components/Timeline/Timeline.css';
 import '../components/Mirador/Mirador.css';
-import '../components/AtlasController/AtlasController.css';
 
 import theme from '../theme/theme';
 

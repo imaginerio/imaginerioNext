@@ -1,12 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Atlas from '@imaginerio/diachronic-atlas';
 
-import { useImages } from '../providers/ImageContext';
+import mapStyle from '../../assets/style/style.json';
 
-const AtlasController = () => <div />;
+import { useImages } from '../../providers/ImageContext';
 
-AtlasController.propTypes = {};
+const AtlasController = ({ width, height }) => {
+  const [{ activeImages, dates }] = useImages();
 
-AtlasController.defaultProps = {};
+  const viewpoints = activeImages.filter(i => i.collection === 'views');
+
+  return (
+    <Atlas
+      dates={dates}
+      mapStyle={mapStyle}
+      viewport={{ longitude: -43.18, latitude: -22.9, zoom: 10 }}
+      size={{ width, height }}
+      viewpoints={viewpoints}
+      circleMarkers
+    />
+  );
+};
+
+AtlasController.propTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+};
 
 export default AtlasController;
