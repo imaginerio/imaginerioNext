@@ -8,7 +8,7 @@ import mapStyle from '../../assets/style/style.json';
 import { useImages } from '../../providers/ImageContext';
 
 const AtlasController = ({ width, height }) => {
-  const [{ activeImages, dates, selectedImage }] = useImages();
+  const [{ activeImages, dates, selectedImage, allImages }, dispatch] = useImages();
   const viewpoints = activeImages.filter(i => i.collection === 'views');
 
   const [geojson, setGeojson] = useState(null);
@@ -32,6 +32,9 @@ const AtlasController = ({ width, height }) => {
       activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
       geojson={geojson}
       rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
+      basemapHandler={ssid =>
+        dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)])
+      }
       circleMarkers
     />
   );

@@ -977,10 +977,10 @@
   resolved "https://registry.yarnpkg.com/@iiif/vocabulary/-/vocabulary-1.0.19.tgz#c735577bdcbafcb988471391b9e39d772662de62"
   integrity sha512-5XjrB81bVcu80YcYz5Lxcvvio+PJljiZt3pNW8ACbL3OoL+8QoCJ/dwivdYEcoyEck2I8cEMgAZYEOuEZq+fgg==
 
-"@imaginerio/diachronic-atlas@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.2.4.tgz#54eb4064b237bde1896678c3a061b6f7d1e45f0e"
-  integrity sha512-lES2vRCs51qPuZk3xkiXleBLySv/EnGyXO4p650C7H9wuGMP1Lt2lgyJPqwlNULl/0u11GqFSa5Hs0m5wRibaA==
+"@imaginerio/diachronic-atlas@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.2.6.tgz#67fa8bbbb6e6684653cad4ebfed7fbb9cddf5e31"
+  integrity sha512-U0Gr6PNO0m1oJZ6YFri6z4IRUOlpmktvuG5yZWDzls0DM7g3Lr/fd3I7dGL7MNCnJyPoB7HryCJ2pPocjTV/vg==
   dependencies:
     "@turf/bbox" "^6.3.0"
     lodash "^4.17.21"
