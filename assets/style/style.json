@@ -990,12 +990,22 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "text-font": ["Lato Light"],
-                "text-size": 10,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    7,
+                    18,
+                    14
+                ],
                 "text-transform": "uppercase",
                 "text-letter-spacing": 0.2
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": 0.1
             }
         },
         {
@@ -1018,12 +1028,28 @@
                     15,
                     ["literal", ["Lato Regular"]]
                 ],
-                "text-size": 12,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    16
+                ],
                 "text-transform": "uppercase",
                 "text-letter-spacing": 0.2
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": [
+                    "step",
+                    ["zoom"],
+                    0.1,
+                    15,
+                    0
+                ]
             }
         },
         {
@@ -1041,9 +1067,17 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "text-font": ["Lato Regular"],
-                "text-size": 11,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    16
+                ],
                 "text-transform": "uppercase",
-                "text-letter-spacing": 0.5
+                "text-letter-spacing": 0.2
             },
             "paint": {
                 "text-color": "hsl(0, 0%, 0%)"
@@ -1055,7 +1089,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
-            "minzoom": 12,
+            "minzoom": 14,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Passages"], true, false]
@@ -1064,11 +1098,21 @@
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-font": ["Lato Light"],
-                "text-size": 12,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    16
+                ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": 0.1
             }
         },
         {
@@ -1077,7 +1121,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
-            "minzoom": 12,
+            "minzoom": 15,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Trails"], true, false]
@@ -1086,11 +1130,21 @@
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-font": ["Lato Light"],
-                "text-size": 12,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    14
+                ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": 0.1
             }
         },
         {
@@ -1099,7 +1153,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
-            "minzoom": 12,
+            "minzoom": 15,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Slopes"], true, false]
@@ -1108,11 +1162,21 @@
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-font": ["Lato Light"],
-                "text-size": 12,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    14
+                ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": 0.1
             }
         },
         {
@@ -1121,7 +1185,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
-            "minzoom": 12,
+            "minzoom": 14,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Alleys"], true, false]
@@ -1130,11 +1194,21 @@
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-font": ["Lato Light"],
-                "text-size": 12,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    14
+                ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": 0.1
             }
         },
         {
@@ -1152,11 +1226,21 @@
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-font": ["Lato Light"],
-                "text-size": 12,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    16
+                ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": 0.1
             }
         },
         {
@@ -1174,7 +1258,15 @@
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-font": ["Lato Regular"],
-                "text-size": 12,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    16
+                ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
@@ -1197,7 +1289,15 @@
                 "symbol-placement": "line",
                 "text-font": ["Lato Regular"],
                 "text-letter-spacing": 0.05,
-                "text-size": 12
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    16
+                ]
             },
             "paint": {
                 "text-color": "hsl(0, 0%, 0%)"
@@ -1209,7 +1309,7 @@
             "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
-            "minzoom": 12,
+            "minzoom": 14,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Overpasses"], true, false]
@@ -1218,11 +1318,21 @@
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-font": ["Lato Light"],
-                "text-size": 12,
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    9,
+                    18,
+                    16
+                ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": 0.1
             }
         }
     ],
