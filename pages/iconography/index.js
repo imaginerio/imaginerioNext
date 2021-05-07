@@ -14,7 +14,7 @@ const Iconography = ({ collections }) => (
   <>
     <Head title="Iconography" />
     <Header />
-    <Container maxW="5xl">
+    <Container>
       <Breadcrumbs />
       <Heading>Iconography</Heading>
       <Grid py={5} templateColumns="1fr 1fr" columnGap="40px" rowGap="20px">

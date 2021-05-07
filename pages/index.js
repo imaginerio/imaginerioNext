@@ -11,7 +11,7 @@ const Home = () => (
     <Head title="imagineRio" />
     <Header />
     <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
-      <Container maxW="5xl">
+      <Container>
         <Grid templateColumns="1fr 300px" columnGap="50px">
           <Box display="flex" alignItems="center">
             <Box>
@@ -38,7 +38,7 @@ const Home = () => (
       </Container>
     </section>
     <section style={{ padding: '50px 0' }}>
-      <Container maxW="5xl">
+      <Container>
         <Grid templateColumns="1fr 1fr" columnGap="50px">
           <Box>
             <Heading size="sm">Iconography</Heading>

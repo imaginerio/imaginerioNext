@@ -2,14 +2,25 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 
+import { config } from '@fortawesome/fontawesome-svg-core';
+import { ImageContextProvider } from '../providers/ImageContext';
+
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 import '../components/Timeline/Timeline.css';
+import '../components/Mirador/Mirador.css';
 
 import theme from '../theme/theme';
+
+config.autoAddCss = false;
 
 function App({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <ImageContextProvider>
+        <Component {...pageProps} />
+      </ImageContextProvider>
     </ChakraProvider>
   );
 }

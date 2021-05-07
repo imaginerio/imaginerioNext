@@ -23,7 +23,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
     <>
       <Head title={title} />
       <Header />
-      <Container maxW="5xl">
+      <Container>
         <Breadcrumbs collection={collection} title={findByLabel(metadata, 'Title')} />
         <Heading>{title}</Heading>
         <Text mb="40px">
@@ -37,6 +37,11 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
               allowClose: false, // Configure if windows can be closed or not
               allowFullscreen: true, // Configure to show a "fullscreen" button in the WindowTopBar
               allowMaximize: false, // Configure if windows can be maximized or not
+              allowTopMenuButton: false,
+            },
+            workspace: {
+              showZoomControls: true,
+              allowNewWindows: false,
             },
             workspaceControlPanel: {
               enabled: false,
@@ -44,6 +49,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
             windows: [{ manifestId: `https://images.imaginerio.org/iiif/3/${id}/manifest` }],
             language: 'pt-br',
           }}
+          style={{ position: 'relative', width: '100%', minHeight: 500, height: '40vh' }}
         />
         <Text my="80px">{findByLabel(metadata, 'Description')}</Text>
 

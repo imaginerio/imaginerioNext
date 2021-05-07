@@ -17,7 +17,7 @@ const About = ({ content }) => (
     <Head title="imagineRio" />
     <Header />
     <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
-      <Container maxW="5xl">
+      <Container>
         <ParsedContent content={content} />
       </Container>
     </section>

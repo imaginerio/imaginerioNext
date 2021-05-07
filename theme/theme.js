@@ -1,14 +1,26 @@
 import React from 'react';
 import { extendTheme } from '@chakra-ui/react';
 
+const oneline = {
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+};
+
 export default extendTheme({
   styles: {
     global: {
+      body: {
+        fontWeight: 300,
+      },
       a: {
         color: '#1580D1',
       },
       p: {
         mb: 5,
+      },
+      b: {
+        fontWeight: 500,
       },
       h1: {
         fontSize: '32px',
@@ -24,12 +36,13 @@ export default extendTheme({
     },
   },
   fonts: {
-    body: 'Roboto, sans-serif',
+    body: 'Barlow, sans-serif',
+    heading: 'Barlow, sans-serif',
   },
   components: {
     Heading: {
       baseStyle: {
-        fontWeight: 'normal',
+        fontWeight: 500,
         my: '20px',
       },
       sizes: {
@@ -47,11 +60,7 @@ export default extendTheme({
         },
       },
       variants: {
-        oneline: {
-          whiteSpace: 'nowrap',
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-        },
+        oneline,
       },
       defaultProps: {
         size: 'lg',
@@ -69,16 +78,17 @@ export default extendTheme({
         mb: 0,
       },
       variants: {
-        oneline: {
-          whiteSpace: 'nowrap',
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-        },
+        oneline,
       },
     },
     Link: {
       baseStyle: {
         color: '#1580D1',
+      },
+    },
+    Container: {
+      baseStyle: {
+        maxW: '5xl',
       },
     },
   },

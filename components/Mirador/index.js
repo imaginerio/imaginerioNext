@@ -9,23 +9,20 @@ class Mirador extends Component {
   }
 
   render() {
-    const { config } = this.props;
-    return (
-      <div
-        id={config.id}
-        style={{ position: 'relative', width: '100%', minHeight: 500, height: '40vh' }}
-      />
-    );
+    const { config, style } = this.props;
+    return <div id={config.id} style={style} />;
   }
 }
 
 Mirador.propTypes = {
   config: PropTypes.shape().isRequired,
   plugins: PropTypes.arrayOf(PropTypes.shape()),
+  style: PropTypes.shape(),
 };
 
 Mirador.defaultProps = {
   plugins: [],
+  style: null,
 };
 
 export default Mirador;
