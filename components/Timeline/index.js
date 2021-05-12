@@ -78,7 +78,7 @@ const Timeline = ({ min, max, triple }) => {
         handler={value => setSliderRange([sliderRange[0], value])}
       />
       <ReactSlider
-        className="___slider"
+        className={`___slider${triple && ' ___triple'}`}
         thumbClassName="___thumb"
         trackClassName="___track"
         value={sliderRange}

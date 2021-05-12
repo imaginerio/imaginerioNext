@@ -16,6 +16,7 @@
 }
 
 .___thumb{
+  margin-top: -5px;
   height: 40px;
   width: 20px;
   background-color: white;
@@ -32,13 +33,17 @@
   margin-top: 6px;
 }
 
-.___thumb-1{
+.___triple .___thumb{
+  margin-top: 0;
+}
+
+.___triple .___thumb-1{
   background-color: black;
   width: 5px;
   height: 30px;
 }
 
-.___thumb-1::after{
+.___triple .___thumb-1::after{
   display: none;
 }
 
