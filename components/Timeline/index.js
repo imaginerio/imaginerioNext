@@ -41,11 +41,20 @@ const TimeInput = ({ number, text, handler, min, max }) => (
   </Flex>
 );
 
-const Timeline = ({ min, max }) => {
+const Timeline = ({ min, max, triple }) => {
   const [, dispatch] = useImages();
-  const [sliderRange, setSliderRange] = useState([min, max]);
+  const [sliderRange, setSliderRange] = useState(
+    triple ? [min, Math.round((min + max) / 200) * 100, max] : [min, max]
+  );
 
-  useEffect(() => dispatch(['DATES', sliderRange]), [sliderRange]);
+  useEffect(() => {
+    let dates = sliderRange;
+    if (triple) {
+      dates = [sliderRange[0], sliderRange[2]];
+      dispatch(['YEAR', sliderRange[1]]);
+    }
+    dispatch(['DATES', dates]);
+  }, [sliderRange]);
 
   return (
     <Grid templateColumns="repeat(3, 60px) 1fr" columnGap={6}>
@@ -81,7 +90,7 @@ const Timeline = ({ min, max }) => {
             <span>{props.key % 100 === 0 ? props.key : ''}</span>
           </div>
         )}
-        defaultValue={[min, max]}
+        defaultValue={sliderRange}
         min={min}
         max={max}
         ariaLabel={['Lower thumb', 'Upper thumb']}
@@ -96,6 +105,11 @@ const Timeline = ({ min, max }) => {
 Timeline.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
+  triple: PropTypes.bool,
+};
+
+Timeline.defaultProps = {
+  triple: false,
 };
 
 export default Timeline;

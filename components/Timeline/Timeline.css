@@ -10,7 +10,7 @@
   border-radius: 4px;
 }
 
-.___track-1{
+.___track-1, .___track-2{
   background-color: #CDE1F5;
   border-color: #6CB2F5;
 }
@@ -30,6 +30,16 @@
   display: block;
   color: #999;
   margin-top: 6px;
+}
+
+.___thumb-1{
+  background-color: black;
+  width: 5px;
+  height: 30px;
+}
+
+.___thumb-1::after{
+  display: none;
 }
 
 .___mark{

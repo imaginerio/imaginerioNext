@@ -8,7 +8,7 @@ import mapStyle from '../../assets/style/style.json';
 import { useImages } from '../../providers/ImageContext';
 
 const AtlasController = ({ width, height }) => {
-  const [{ activeImages, dates, selectedImage, allImages }, dispatch] = useImages();
+  const [{ activeImages, year, selectedImage, allImages }, dispatch] = useImages();
   const viewpoints = activeImages.filter(i => i.collection === 'views');
 
   const [geojson, setGeojson] = useState(null);
@@ -24,7 +24,7 @@ const AtlasController = ({ width, height }) => {
 
   return (
     <Atlas
-      dates={dates}
+      year={year}
       mapStyle={mapStyle}
       viewport={{ longitude: -43.18, latitude: -22.9, zoom: 10 }}
       size={{ width, height }}
