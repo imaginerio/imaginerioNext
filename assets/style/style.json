@@ -26,78 +26,12 @@
             "paint": {"background-color": "hsl(211, 88%, 90%)"}
         },
         {
-            "id": "landpoly-fill",
+            "id": "land",
             "type": "fill",
             "source": "composite",
             "source-layer": "landpoly",
-            "layout": {},
             "paint": {
-                "fill-color": "hsl(40, 15%, 94%)",
-                "fill-opacity": 0.25
-            }
-        },
-        {
-            "id": "vegetation",
-            "type": "fill",
-            "source": "composite",
-            "source-layer": "groundcoverpoly",
-            "filter": [
-                "all",
-                ["match", ["get", "type"], ["Vegetation"], true, false]
-            ],
-            "layout": {},
-            "paint": {
-                "fill-color": "#DFE6CF",
-                "fill-outline-color": "hsl(0, 0%, 75%)",
-                "fill-opacity": 0.25
-            }
-        },
-        {
-            "id": "built-domain",
-            "type": "fill",
-            "source": "composite",
-            "source-layer": "groundcoverpoly",
-            "filter": [
-                "all",
-                ["match", ["get", "type"], ["Built Domain"], true, false]
-            ],
-            "layout": {},
-            "paint": {
-                "fill-color": "hsl(0, 0%, 86%)",
-                "fill-outline-color": "hsl(0, 0%, 75%)",
-                "fill-opacity": 0.25
-            }
-        },
-        {
-            "id": "farm",
-            "type": "fill",
-            "source": "composite",
-            "source-layer": "groundcoverpoly",
-            "filter": [
-                "all",
-                ["match", ["get", "type"], ["Farm"], true, false]
-            ],
-            "layout": {},
-            "paint": {
-                "fill-color": "#8EE09E",
-                "fill-outline-color": "hsl(0, 0%, 75%)",
-                "fill-opacity": 0.25
-            }
-        },
-        {
-            "id": "mill",
-            "type": "fill",
-            "source": "composite",
-            "source-layer": "groundcoverpoly",
-            "filter": [
-                "all",
-                ["match", ["get", "type"], ["Mill"], true, false]
-            ],
-            "layout": {},
-            "paint": {
-                "fill-color": "#E6D4BC",
-                "fill-outline-color": "hsl(0, 0%, 75%)",
-                "fill-opacity": 0.25
+                "fill-color": "hsl(40, 15%, 94%)"
             }
         },
         {
@@ -111,46 +45,93 @@
             ],
             "layout": {},
             "paint": {
-                "fill-color": "hsl(211, 88%, 90%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(210, 91%, 65%)"
+                "fill-color": "hsl(211, 88%, 90%)"
             }
         },
         {
-            "id": "pond",
+            "id": "marsh",
             "type": "fill",
             "source": "composite",
             "source-layer": "inlandwaterspoly",
             "filter": [
                 "all",
-                ["match", ["get", "type"], ["Ponds"], true, false]
+                [
+                    "match",
+                    ["get", "type"],
+                    ["Marshes", "Salty Marshes"],
+                    true,
+                    false
+                ]
             ],
-            "layout": {},
             "paint": {
-                "fill-color": "hsl(211, 88%, 90%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(210, 91%, 65%)"
+                "fill-color": "hsl(173, 60%, 65%)"
             }
         },
         {
-            "id": "landpoly-line",
-            "type": "line",
+            "id": "vegetation",
+            "type": "fill",
             "source": "composite",
-            "source-layer": "landpoly",
-            
-            "layout": {},
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Vegetation"], true, false]
+            ],
             "paint": {
-                "line-color": "hsl(0, 0%, 65%)",
-                "line-width": [
-                    "interpolate",
-                    ["exponential", 1.3],
-                    ["zoom"],
-                    10,
-                    0.5,
-                    18,
-                    1.5
-                ],
-                "line-opacity": 0.5
+                "fill-color": "hsl(78, 32%, 86%)"
+            }
+        },
+        {
+            "id": "built-domain",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Built Domain"], true, false]
+            ],
+            "paint": {
+                "fill-color": "hsl(0, 0%, 86%)"
+            }
+        },
+        {
+            "id": "farm",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Farm"], true, false]
+            ],
+            "paint": {
+                "fill-color": "hsl(132, 55%, 72%)",
+                "fill-opacity": 0.5
+            }
+        },
+        {
+            "id": "mill",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "groundcoverpoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Mill"], true, false]
+            ],
+            "paint": {
+                "fill-color": "hsl(34, 56%, 70%)",
+                "fill-opacity": 0.5
+            }
+        },
+        {
+            "id": "beach",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "publicspacespoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Beaches"], true, false]
+            ],
+            "paint": {
+                "fill-color": "hsl(43, 80%, 76%)"
             }
         },
         {
@@ -162,11 +143,8 @@
                 "all",
                 ["match", ["get", "type"], ["Squares"], true, false]
             ],
-            "layout": {},
             "paint": {
-                "fill-color": "hsl(62, 79%, 80%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(62, 69%, 46%)"
+                "fill-color": "hsl(62, 82%, 80%)"
             }
         },
         {
@@ -178,11 +156,8 @@
                 "all",
                 ["match", ["get", "type"], ["Plazas"], true, false]
             ],
-            "layout": {},
             "paint": {
-                "fill-color": "hsl(62, 79%, 80%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(62, 69%, 46%)"
+                "fill-color": "hsl(62, 82%, 80%)"
             }
         },
         {
@@ -194,27 +169,8 @@
                 "all",
                 ["match", ["get", "type"], ["Parks"], true, false]
             ],
-            "layout": {},
             "paint": {
-                "fill-color": "hsl(100, 45%, 82%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(100, 56%, 65%)"
-            }
-        },
-        {
-            "id": "garden",
-            "type": "fill",
-            "source": "composite",
-            "source-layer": "publicspacespoly",
-            "filter": [
-                "all",
-                ["match", ["get", "type"], ["Gardens"], true, false]
-            ],
-            "layout": {},
-            "paint": {
-                "fill-color": "hsl(100, 45%, 82%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(100, 56%, 65%)"
+                "fill-color": "hsl(100, 45%, 82%)"
             }
         },
         {
@@ -226,11 +182,21 @@
                 "all",
                 ["match", ["get", "type"], ["Cemeteries"], true, false]
             ],
-            "layout": {},
             "paint": {
-                "fill-color": "hsl(100, 45%, 82%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(100, 56%, 65%)"
+                "fill-color": "hsl(100, 45%, 82%)"
+            }
+        },
+        {
+            "id": "garden",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "publicspacespoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Gardens"], true, false]
+            ],
+            "paint": {
+                "fill-color": "hsl(100, 40%, 75%)"
             }
         },
         {
@@ -242,11 +208,8 @@
                 "all",
                 ["match", ["get", "type"], ["Soccer Fields", "Soccer Field"], true, false]
             ],
-            "layout": {},
             "paint": {
-                "fill-color": "hsl(100, 45%, 82%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(100, 56%, 65%)"
+                "fill-color": "hsl(100, 40%, 75%)"
             }
         },
         {
@@ -258,11 +221,21 @@
                 "all",
                 ["match", ["get", "type"], ["Reservoirs"], true, false]
             ],
-            "layout": {},
             "paint": {
-                "fill-color": "hsl(211, 88%, 90%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(210, 91%, 65%)"
+                "fill-color": "hsl(211, 88%, 90%)"
+            }
+        },
+        {
+            "id": "pond",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "inlandwaterspoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Ponds"], true, false]
+            ],
+            "paint": {
+                "fill-color": "hsl(211, 88%, 90%)"
             }
         },
         {
@@ -274,11 +247,114 @@
                 "all",
                 ["match", ["get", "type"], ["Fountains"], true, false]
             ],
-            "layout": {},
             "paint": {
-                "fill-color": "hsl(211, 88%, 90%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(210, 91%, 65%)"
+                "fill-color": "hsl(211, 88%, 90%)"
+            }
+        },
+        {
+            "id": "landpoly-line",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "landpoly",
+            "paint": {
+                "line-color": "hsl(210, 91%, 70%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    1.5
+                ]
+            }
+        },
+        {
+            "id": "lagoon-line",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "inlandwaterspoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Lagoons"], true, false]
+            ],  
+            "paint": {
+                "line-color": "hsl(210, 91%, 70%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    1.5
+                ]
+            }
+        },
+        {
+            "id": "pond-line",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "inlandwaterspoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Ponds"], true, false]
+            ],  
+            "paint": {
+                "line-color": "hsl(210, 91%, 70%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    1.5
+                ]
+            }
+        },
+        {
+            "id": "reservoir-line",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiespoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Reservoirs"], true, false]
+            ],  
+            "paint": {
+                "line-color": "hsl(210, 91%, 70%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    1.5
+                ]
+            }
+        },
+        {
+            "id": "fountain-line",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "utilitiespoly",
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Fountains"], true, false]
+            ],  
+            "paint": {
+                "line-color": "hsl(210, 91%, 70%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    0.5,
+                    18,
+                    1.5
+                ]
             }
         },
         {
@@ -290,10 +366,9 @@
                 "all",
                 ["match", ["get", "type"], ["Rivers"], true, false]
             ],
-            "layout": {"line-cap": "round"},
+            "layout": {"line-cap": "square"},
             "paint": {
-                "line-color": "#86bff9",
-                "line-opacity": 0.5,
+                "line-color": "hsl(210, 91%, 70%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -301,7 +376,7 @@
                     10,
                     0.5,
                     18,
-                    8
+                    6
                 ]
             }
         },
@@ -317,8 +392,7 @@
             ],
             "layout": {"line-cap": "round"},
             "paint": {
-                "line-color": "#86bff9",
-                "line-opacity": 0.5,
+                "line-color": "hsl(210, 91%, 70%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -342,8 +416,7 @@
             ],
             "layout": {"line-cap": "round"},
             "paint": {
-                "line-color": "#86bff9",
-                "line-opacity": 0.5,
+                "line-color": "hsl(210, 91%, 70%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -367,8 +440,7 @@
             ],
             "layout": {"line-cap": "round"},
             "paint": {
-                "line-color": "#86bff9",
-                "line-opacity": 0.5,
+                "line-color": "hsl(210, 91%, 70%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -392,8 +464,7 @@
             ],
             "layout": {"line-cap": "round"},
             "paint": {
-                "line-color": "#6F6FF4",
-                "line-opacity": 0.5,
+                "line-color": "hsl(240, 86%, 70%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -401,7 +472,7 @@
                     10,
                     0.5,
                     18,
-                    8
+                    6
                 ]
             }
         },
@@ -417,8 +488,7 @@
             ],
             "layout": {"line-cap": "round"},
             "paint": {
-                "line-color": "#6F6FF4",
-                "line-opacity": 0.5,
+                "line-color": "hsl(240, 86%, 70%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -426,7 +496,7 @@
                     10,
                     0.5,
                     18,
-                    8
+                    6
                 ],
                 "line-dasharray": [
                     6,
@@ -446,8 +516,7 @@
             ],
             "layout": {"line-cap": "round"},
             "paint": {
-                "line-color": "#6F6FF4",
-                "line-opacity": 0.5,
+                "line-color": "hsl(240, 86%, 70%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -455,7 +524,7 @@
                     10,
                     0.5,
                     18,
-                    8
+                    6
                 ],
                 "line-dasharray": [
                     6,
@@ -477,8 +546,7 @@
             ],
             "layout": {"line-cap": "round"},
             "paint": {
-                "line-color": "#9A8772",
-                "line-opacity": 0.5,
+                "line-color": "hsl(32, 17%, 53%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -486,7 +554,7 @@
                     10,
                     0.5,
                     18,
-                    8
+                    6
                 ],
                 "line-dasharray": [
                     6,
@@ -508,8 +576,7 @@
             ],
             "layout": {"line-cap": "round"},
             "paint": {
-                "line-color": "#6F6FF4",
-                "line-opacity": 0.5,
+                "line-color": "hsl(240, 86%, 70%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -526,47 +593,18 @@
             }
         },
         {
-            "id": "marsh",
-            "type": "fill",
-            "source": "composite",
-            "source-layer": "inlandwaterspoly",
-            "filter": [
-                "all",
-                [
-                    "match",
-                    ["get", "type"],
-                    ["Marshes", "Salty Marshes"],
-                    true,
-                    false
-                ]
-            ],
-            "layout": {},
+            "id": "hillshade",
+            "type": "raster",
+            "source": "imaginerio-hillshade",
             "paint": {
-                "fill-color": "hsl(173, 50%, 85%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(173, 50%, 65%)"
-            }
-        },
-        {
-            "id": "beach",
-            "type": "fill",
-            "source": "composite",
-            "source-layer": "publicspacespoly",
-            "filter": [
-                "all",
-                ["match", ["get", "type"], ["Beaches"], true, false]
-            ],
-            "layout": {},
-            "paint": {
-                "fill-color": "hsl(43, 76%, 80%)",
-                "fill-opacity": 0.5,
-                "fill-outline-color": "hsl(43, 76%, 55%)"
+                "raster-opacity": 0.1,
+                "raster-contrast": 0.8,
+                "raster-brightness-min": 0.5
             }
         },
         {
             "id": "passage-case",
             "type": "line",
-            "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -583,17 +621,17 @@
                     ["zoom"],
                     14,
                     0,
+                    14.1,
+                    1,
                     18,
                     20
                 ],
-                "line-width": 1,
-                "line-opacity": 0.5
+                "line-width": 1
             }
         },
         {
             "id": "slope-case",
             "type": "line",
-            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -610,17 +648,17 @@
                     ["zoom"],
                     14,
                     0,
+                    14.1,
+                    1,
                     18,
                     20
                 ],
-                "line-width": 1,
-                "line-opacity": 0.5
+                "line-width": 1
             }
         },
         {
             "id": "alley-case",
             "type": "line",
-            "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -637,6 +675,8 @@
                     ["zoom"],
                     14,
                     0,
+                    14.1,
+                    1,
                     18,
                     10
                 ],
@@ -647,7 +687,6 @@
         {
             "id": "street-case",
             "type": "line",
-            "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 12,
@@ -664,17 +703,17 @@
                     ["zoom"],
                     14,
                     0,
+                    14.1,
+                    1,
                     18,
                     20
                 ],
-                "line-width": 1,
-                "line-opacity": 0.5
+                "line-width": 1
             }
         },
         {
             "id": "avenue-case",
             "type": "line",
-            "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
             "source": "composite",
             "source-layer": "roadsline",
             "filter": [
@@ -693,14 +732,12 @@
                     18,
                     30
                 ],
-                "line-width": 1,
-                "line-opacity": 0.5
+                "line-width": 1
             }
         },
         {
             "id": "expressway-case",
             "type": "line",
-            "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
             "source": "composite",
             "source-layer": "roadsline",
             "filter": [
@@ -719,14 +756,12 @@
                     18,
                     40
                 ],
-                "line-width": 1,
-                "line-opacity": 0.5
+                "line-width": 1
             }
         },
         {
             "id": "overpass-case",
             "type": "line",
-            "metadata": {"mapbox:group": "95e4d2f4a1b50d00f989477d3476ebda"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -743,6 +778,8 @@
                     ["zoom"],
                     14,
                     0,
+                    14.1,
+                    1,
                     18,
                     20
                 ],
@@ -750,14 +787,12 @@
                 "line-dasharray": [
                     4,
                     2
-                ],
-                "line-opacity": 0.5
+                ]
             }
         },
         {
             "id": "passage",
             "type": "line",
-            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -776,14 +811,12 @@
                     2,
                     18,
                     20
-                ],
-                "line-opacity": 0.5
+                ]
             }
         },
         {
             "id": "trail",
             "type": "line",
-            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -793,7 +826,7 @@
             ],
             "layout": {"line-cap": "butt"},
             "paint": {
-                "line-color": "#fff",
+                "line-color": "hsl(0, 0%, 100%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -806,14 +839,12 @@
                 "line-dasharray": [
                     2,
                     1
-                ],
-                "line-opacity": 0.5
+                ]
             }
         },
         {
             "id": "slope",
             "type": "line",
-            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -836,14 +867,12 @@
                 "line-dasharray": [
                     2,
                     1
-                ],
-                "line-opacity": 0.5
+                ]
             }
         },
         {
             "id": "alley",
             "type": "line",
-            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -862,14 +891,12 @@
                     2,
                     18,
                     10
-                ],
-                "line-opacity": 0.5
+                ]
             }
         },
         {
             "id": "street",
             "type": "line",
-            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -888,14 +915,12 @@
                     2,
                     18,
                     20
-                ],
-                "line-opacity": 0.5
+                ]
             }
         },
         {
             "id": "avenue",
             "type": "line",
-            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
             "source-layer": "roadsline",
             "filter": [
@@ -913,14 +938,12 @@
                     0.5,
                     18,
                     30
-                ],
-                "line-opacity": 0.5
+                ]
             }
         },
         {
             "id": "expressway",
             "type": "line",
-            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
             "source-layer": "roadsline",
             "filter": [
@@ -938,14 +961,12 @@
                     0.5,
                     18,
                     40
-                ],
-                "line-opacity": 0.5
+                ]
             }
         },
         {
             "id": "overpass",
             "type": "line",
-            "metadata": {"mapbox:group": "b34da1965d4552a6dbe7a738b627f8e8"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -964,8 +985,7 @@
                     2,
                     18,
                     20
-                ],
-                "line-opacity": 0.5
+                ]
             }
         },
         {
@@ -974,17 +994,22 @@
             "source": "composite",
             "source-layer": "buildingspoly",
             "minzoom": 14,
-            "layout": {},
             "paint": {
-                "fill-opacity": 0.5,
-                "fill-color": "hsl(0, 0%, 80%)",
-                "fill-outline-color": "hsl(0, 0%, 70%)"
+                "fill-color": "hsl(0, 0%, 75%)",
+                "fill-outline-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 90%, 0)",
+                    16,
+                    "hsla(0, 0%, 90%, 1)"
+                ]
             }
         },
         {
             "id": "favela-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "neighborhoodspoly",
             "minzoom": 15,
@@ -1016,7 +1041,6 @@
         {
             "id": "neighborhood-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "neighborhoodspoly",
             "minzoom": 13,
@@ -1058,40 +1082,8 @@
             }
         },
         {
-            "id": "parish-label",
-            "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
-            "source": "composite",
-            "source-layer": "neighborhoodspoly",
-            "minzoom": 11,
-            "maxzoom": 15,
-            "filter": [
-                "all",
-                ["match", ["get", "type"], ["Parishes"], true, false]
-            ],
-            "layout": {
-                "text-field": ["to-string", ["get", "name"]],
-                "text-font": ["Lato Regular"],
-                "text-size": [
-                    "interpolate",
-                    ["linear"],
-                    ["zoom"],
-                    11,
-                    9,
-                    18,
-                    16
-                ],
-                "text-transform": "uppercase",
-                "text-letter-spacing": 0.2
-            },
-            "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
-            }
-        },
-        {
             "id": "passage-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -1123,7 +1115,6 @@
         {
             "id": "trail-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 15,
@@ -1155,7 +1146,6 @@
         {
             "id": "slope-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 15,
@@ -1187,7 +1177,6 @@
         {
             "id": "alley-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
@@ -1219,7 +1208,6 @@
         {
             "id": "street-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 12,
@@ -1251,7 +1239,6 @@
         {
             "id": "avenue-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 12,
@@ -1281,7 +1268,6 @@
         {
             "id": "expressway-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 12,
@@ -1311,7 +1297,6 @@
         {
             "id": "overpass-label",
             "type": "symbol",
-            "metadata": {"mapbox:group": "802f8c8fbf5e507900e80606c59562de"},
             "source": "composite",
             "source-layer": "roadsline",
             "minzoom": 14,
