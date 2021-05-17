@@ -9,6 +9,11 @@
         "composite": {
             "tiles": ["https://imaginerio-vector.s3.amazonaws.com/base/{z}/{x}/{y}"], 
             "type": "vector"
+        },
+        "imaginerio-hillshade": {
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1500/{z}/{x}/{y}.png"],
+            "scheme": "tms",
+            "type": "raster"
         }
     },
     "sprite": "",
