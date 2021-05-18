@@ -251,7 +251,7 @@
             }
         },
         {
-            "id": "landpoly-line",
+            "id": "land-line",
             "type": "line",
             "source": "composite",
             "source-layer": "landpoly",
