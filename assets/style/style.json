@@ -1001,16 +1001,16 @@
             "source-layer": "buildingspoly",
             "minzoom": 14,
             "paint": {
-                "fill-color": "hsl(0, 0%, 75%)",
-                "fill-outline-color": [
+                "fill-color": [
                     "interpolate",
                     ["linear"],
                     ["zoom"],
                     14,
-                    "hsla(0, 0%, 90%, 0)",
-                    16,
-                    "hsla(0, 0%, 90%, 1)"
-                ]
+                    "hsla(0, 0%, 65%, 1)",
+                    18,
+                    "hsla(0, 0%, 75%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 55%, 1)"
             }
         },
         {
