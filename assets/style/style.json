@@ -706,7 +706,15 @@
                     18,
                     20
                 ],
-                "line-width": 1
+                "line-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    0.5,
+                    14,
+                    1
+                ]
             }
         },
         {
