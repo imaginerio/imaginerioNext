@@ -22,7 +22,6 @@
         {
             "id": "background",
             "type": "background",
-            "layout": {},
             "paint": {"background-color": "hsl(211, 88%, 90%)"}
         },
         {
@@ -43,7 +42,6 @@
                 "all",
                 ["match", ["get", "type"], ["Lagoons"], true, false]
             ],
-            "layout": {},
             "paint": {
                 "fill-color": "hsl(211, 88%, 90%)"
             }
@@ -681,8 +679,7 @@
                     18,
                     10
                 ],
-                "line-width": 1,
-                "line-opacity": 0.5
+                "line-width": 1
             }
         },
         {
