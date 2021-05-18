@@ -11,7 +11,7 @@
             "type": "vector"
         },
         "imaginerio-hillshade": {
-            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1500/{z}/{x}/{y}.png"],
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/{year}/{z}/{x}/{y}.png"],
             "scheme": "tms",
             "type": "raster"
         }
