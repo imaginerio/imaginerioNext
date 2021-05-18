@@ -1056,13 +1056,7 @@
             ],
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
-                "text-font": [
-                    "step",
-                    ["zoom"],
-                    ["literal", ["Lato Light"]],
-                    15,
-                    ["literal", ["Lato Regular"]]
-                ],
+                "text-font": ["Lato Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
@@ -1076,15 +1070,7 @@
                 "text-letter-spacing": 0.2
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsl(0, 0%, 0%)",
-                "text-halo-width": [
-                    "step",
-                    ["zoom"],
-                    0.1,
-                    15,
-                    0
-                ]
+                "text-color": "hsl(0, 0%, 0%)"
             }
         },
         {
