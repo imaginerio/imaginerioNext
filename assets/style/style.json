@@ -1006,11 +1006,11 @@
                     ["linear"],
                     ["zoom"],
                     14,
-                    "hsla(0, 0%, 65%, 1)",
+                    "hsla(0, 0%, 70%, 1)",
                     18,
-                    "hsla(0, 0%, 75%, 0.5)"
+                    "hsla(0, 0%, 80%, 0.5)"
                 ],
-                "fill-outline-color": "hsla(0, 0%, 55%, 1)"
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
             }
         },
         {
