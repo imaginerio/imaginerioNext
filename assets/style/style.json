@@ -1025,23 +1025,23 @@
             ],
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
-                "text-font": ["Lato Light"],
+                "text-font": ["Lato Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
-                    7,
+                    15,
+                    10,
                     18,
-                    14
+                    12
                 ],
                 "text-transform": "uppercase",
                 "text-letter-spacing": 0.2
             },
             "paint": {
                 "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsl(0, 0%, 0%)",
-                "text-halo-width": 0.1
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         },
         {
@@ -1061,8 +1061,8 @@
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
-                    9,
+                    13,
+                    10,
                     18,
                     16
                 ],
@@ -1070,7 +1070,9 @@
                 "text-letter-spacing": 0.2
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         },
         {
@@ -1086,22 +1088,22 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
-                "text-font": ["Lato Light"],
+                "text-font": ["Lato Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
-                    9,
+                    14,
+                    8,
                     18,
-                    16
+                    14
                 ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
                 "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsl(0, 0%, 0%)",
-                "text-halo-width": 0.1
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         },
         {
@@ -1117,22 +1119,22 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
-                "text-font": ["Lato Light"],
+                "text-font": ["Lato Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
-                    9,
+                    15,
+                    8,
                     18,
-                    14
+                    12
                 ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
                 "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsl(0, 0%, 0%)",
-                "text-halo-width": 0.1
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         },
         {
@@ -1140,7 +1142,7 @@
             "type": "symbol",
             "source": "composite",
             "source-layer": "roadsline",
-            "minzoom": 15,
+            "minzoom": 14,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Slopes"], true, false]
@@ -1148,13 +1150,13 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
-                "text-font": ["Lato Light"],
+                "text-font": ["Lato Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
-                    9,
+                    14,
+                    8,
                     18,
                     14
                 ],
@@ -1162,8 +1164,8 @@
             },
             "paint": {
                 "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsl(0, 0%, 0%)",
-                "text-halo-width": 0.1
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         },
         {
@@ -1179,22 +1181,22 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
-                "text-font": ["Lato Light"],
+                "text-font": ["Lato Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
-                    9,
+                    14,
+                    8,
                     18,
-                    14
+                    12
                 ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
                 "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsl(0, 0%, 0%)",
-                "text-halo-width": 0.1
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         },
         {
@@ -1202,7 +1204,7 @@
             "type": "symbol",
             "source": "composite",
             "source-layer": "roadsline",
-            "minzoom": 12,
+            "minzoom": 13,
             "filter": [
                 "all",
                 ["match", ["get", "type"], ["Streets"], true, false]
@@ -1210,22 +1212,22 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
-                "text-font": ["Lato Light"],
+                "text-font": ["Lato Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
-                    9,
+                    13,
+                    8,
                     18,
-                    16
+                    14
                 ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
                 "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsl(0, 0%, 0%)",
-                "text-halo-width": 0.1
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         },
         {
@@ -1246,7 +1248,7 @@
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
+                    12,
                     9,
                     18,
                     16
@@ -1254,7 +1256,9 @@
                 "text-letter-spacing": 0.05
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         },
         {
@@ -1276,14 +1280,16 @@
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
+                    12,
                     9,
                     18,
                     16
                 ]
             },
             "paint": {
-                "text-color": "hsl(0, 0%, 0%)"
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         },
         {
@@ -1299,22 +1305,22 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
-                "text-font": ["Lato Light"],
+                "text-font": ["Lato Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    11,
-                    9,
+                    14,
+                    8,
                     18,
-                    16
+                    14
                 ],
                 "text-letter-spacing": 0.05
             },
             "paint": {
                 "text-color": "hsl(0, 0%, 0%)",
-                "text-halo-color": "hsl(0, 0%, 0%)",
-                "text-halo-width": 0.1
+                "text-halo-color": "hsla(0, 0%, 100%, 0.8)",
+                "text-halo-width": 1
             }
         }
     ],
