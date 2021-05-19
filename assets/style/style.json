@@ -648,7 +648,7 @@
             ],
             "layout": {"line-cap": "butt"},
             "paint": {
-                "line-color": "hsl(0, 0%, 60%)",
+                "line-color": "hsl(0, 0%, 50%)",
                 "line-gap-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -660,7 +660,14 @@
                     18,
                     20
                 ],
-                "line-width": 1
+                "line-width": 1,
+                "line-dasharray": [
+                    "step",
+                    ["zoom"],
+                    ["literal", [4, 2]],
+                    17,
+                    ["literal", [8, 4]]
+                ]
             }
         },
         {
@@ -826,8 +833,11 @@
                 ],
                 "line-width": 1,
                 "line-dasharray": [
-                    4,
-                    2
+                    "step",
+                    ["zoom"],
+                    ["literal", [4, 2]],
+                    17,
+                    ["literal", [8, 4]]
                 ]
             }
         },
@@ -843,7 +853,7 @@
             ],
             "layout": {"line-cap": "butt"},
             "paint": {
-                "line-color": "hsl(0, 0%, 75%)",
+                "line-color": "hsl(0, 0%, 85%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -867,7 +877,7 @@
             ],
             "layout": {"line-cap": "butt"},
             "paint": {
-                "line-color": "hsl(0, 0%, 100%)",
+                "line-color": "hsl(0, 0%, 80%)",
                 "line-width": [
                     "interpolate",
                     ["exponential", 1.6],
