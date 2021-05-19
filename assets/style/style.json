@@ -10,8 +10,43 @@
             "tiles": ["https://imaginerio-vector.s3.amazonaws.com/base/{z}/{x}/{y}"], 
             "type": "vector"
         },
-        "imaginerio-hillshade": {
-            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/{year}/{z}/{x}/{y}.png"],
+        "hillshade-1500": {
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1500/{z}/{x}/{y}.png"],
+            "scheme": "tms",
+            "type": "raster"
+        },
+        "hillshade-1880": {
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1880/{z}/{x}/{y}.png"],
+            "scheme": "tms",
+            "type": "raster"
+        },
+        "hillshade-1905": {
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1905/{z}/{x}/{y}.png"],
+            "scheme": "tms",
+            "type": "raster"
+        },
+        "hillshade-1910": {
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1910/{z}/{x}/{y}.png"],
+            "scheme": "tms",
+            "type": "raster"
+        },
+        "hillshade-1922": {
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1922/{z}/{x}/{y}.png"],
+            "scheme": "tms",
+            "type": "raster"
+        },
+        "hillshade-1923": {
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1923/{z}/{x}/{y}.png"],
+            "scheme": "tms",
+            "type": "raster"
+        },
+        "hillshade-1924": {
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1924/{z}/{x}/{y}.png"],
+            "scheme": "tms",
+            "type": "raster"
+        },
+        "hillshade-1960": {
+            "tiles": ["https://imaginerio-vector.s3.amazonaws.com/hillshade/1960/{z}/{x}/{y}.png"],
             "scheme": "tms",
             "type": "raster"
         }
@@ -594,7 +629,7 @@
         {
             "id": "hillshade",
             "type": "raster",
-            "source": "imaginerio-hillshade",
+            "source": "hillshade-1500",
             "paint": {
                 "raster-opacity": 0.1,
                 "raster-contrast": 0.8,
