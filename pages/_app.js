@@ -8,6 +8,7 @@ import { ImageContextProvider } from '../providers/ImageContext';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+import '../components/AtlasController/Atlas.css';
 import '../components/Timeline/Timeline.css';
 import '../components/Mirador/Mirador.css';
 
