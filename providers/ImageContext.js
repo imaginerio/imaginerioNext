@@ -45,6 +45,7 @@ const initialState = {
   selectedImage: null,
   query: '',
   dates: [1600, 2020],
+  year: 1900,
   sort: null,
   direction: true,
   size: 'full',
@@ -62,6 +63,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         dates: payload,
+      };
+    case 'YEAR':
+      return {
+        ...state,
+        year: payload,
       };
     case 'SORT':
       return {

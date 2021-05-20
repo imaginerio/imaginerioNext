@@ -22,7 +22,7 @@ const ImageGrid = ({ width, height, activeImages }) => {
         <ImageLink ssid={ssid}>
           <Tooltip label={title} hasArrow>
             <Box pos="relative" w={`${gridWidth - 40}px`} h="150px" mx="20px" userSelect="none">
-              <Image src={thumbnail} layout="fill" objectFit="contain" />
+              {thumbnail && <Image src={thumbnail} layout="fill" objectFit="contain" />}
             </Box>
           </Tooltip>
         </ImageLink>
