@@ -10,32 +10,61 @@
   border-radius: 4px;
 }
 
-.___track-1{
+.___track-1, .___triple .___track-2{
   background-color: #CDE1F5;
   border-color: #6CB2F5;
+  position: relative;
+  z-index: 1;
 }
 
 .___thumb{
-  height: 40px;
+  height: 20px;
   width: 20px;
+  margin-top: 5px;
   background-color: white;
   border: 1px solid #999;
-  border-radius: 4px;
+  border-radius: 50%;
+  z-index: 5;
+  transform: translate(-10px, 0);
+  cursor: pointer;
 }
 
 .___thumb::after{
   content: '|';
+  font-size: 12px;
   width: 100%;
   text-align: center;
   display: block;
   color: #999;
+  margin-top: -1px;
+}
+
+.___triple .___thumb{
+  margin-top: 0;
+}
+
+.___triple .___thumb-1{
+  margin-top: -5px;
+  height: 40px;
+  border-radius: 4px;
+  transform: translate(-10px, 0);
+}
+
+.___triple .___thumb-1::after{
   margin-top: 6px;
+  font-size: 16px;
+}
+
+.___thumb-1, .___triple .___thumb-2{
+  transform: translate(10px, 0);
 }
 
 .___mark{
   border-left:  1px solid #666;
   height: 5px;
   margin-top: 25px;
+  z-index: 2;
+  user-select: none;
 }
 
 .___mark span{

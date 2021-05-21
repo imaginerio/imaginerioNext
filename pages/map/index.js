@@ -42,7 +42,14 @@ const Atlas = ({ images }) => {
   return (
     <>
       <Head title="Map" />
-      <Grid h="90px" templateColumns="170px 1fr" p={4}>
+      <Grid
+        h="90px"
+        pos="relative"
+        templateColumns="170px 1fr"
+        p={4}
+        boxShadow="0 2px 3px rgba(0,0,0,0.15)"
+        zIndex={12}
+      >
         <Link href="/" display="inherit">
           <Flex alignItems="center" borderRight="1px solid #ccc" pr={5} mr={5}>
             <img
@@ -52,7 +59,7 @@ const Atlas = ({ images }) => {
             />
           </Flex>
         </Link>
-        <Timeline min={1600} max={2020} />
+        <Timeline min={1600} max={2020} triple />
       </Grid>
       <Box h="calc(100vh - 90px)">
         <GridResizable
@@ -61,64 +68,71 @@ const Atlas = ({ images }) => {
           minWidth={200}
           maxWidth={width * 0.75}
         >
-          {selectedImage ? (
-            <Box>
-              <Box
-                pos="absolute"
-                zIndex={9}
-                m="16px"
-                size="sm"
-                color="#666"
-                cursor="pointer"
-                _hover={{
-                  color: 'black',
-                }}
-                onClick={() => dispatch(['SET_SELECTED_IMAGE', null])}
-              >
-                <FontAwesomeIcon icon={faTimesCircle} width="20px" />
-              </Box>
-              <Mirador
-                config={{
-                  id: 'mirador',
-                  window: {
-                    allowClose: false, // Configure if windows can be closed or not
-                    allowFullscreen: true, // Configure to show a "fullscreen" button in the WindowTopBar
-                    allowMaximize: false, // Configure if windows can be maximized or not
-                    allowTopMenuButton: false,
-                  },
-                  workspace: {
-                    showZoomControls: true,
-                    allowNewWindows: false,
-                  },
-                  workspaceControlPanel: {
-                    enabled: false,
-                  },
-                  windows: [
-                    {
-                      manifestId: `https://images.imaginerio.org/iiif/3/${selectedImage.ssid}/manifest`,
+          <Box
+            zIndex={10}
+            boxShadow="2px 0 3px rgba(0,0,0,0.15)"
+            pos="relative"
+            backgroundColor="white"
+          >
+            {selectedImage ? (
+              <Box h="100%">
+                <Box
+                  pos="absolute"
+                  top="13px"
+                  left="15px"
+                  color="#666"
+                  cursor="pointer"
+                  zIndex={12}
+                  _hover={{
+                    color: 'black',
+                  }}
+                  onClick={() => dispatch(['SET_SELECTED_IMAGE', null])}
+                >
+                  <FontAwesomeIcon icon={faTimesCircle} width="20px" />
+                </Box>
+                <Mirador
+                  config={{
+                    id: 'mirador',
+                    window: {
+                      allowClose: false, // Configure if windows can be closed or not
+                      allowFullscreen: true, // Configure to show a "fullscreen" button in the WindowTopBar
+                      allowMaximize: false, // Configure if windows can be maximized or not
+                      allowTopMenuButton: false,
                     },
-                  ],
-                }}
-                style={{ position: 'relative', width: '100%', height: '100%' }}
-              />
-            </Box>
-          ) : (
-            <Box>
-              {imageWidth >= 400 && (
-                <Container>
-                  <Grid templateColumns="1fr 125px" gap={5} mb={2}>
-                    <ImageSearch />
-                    <ViewButtons />
-                  </Grid>
-                </Container>
-              )}
-              <ImageViewer
-                height={imageWidth >= 400 ? height - 80 : height - 35}
-                width={imageWidth}
-                noLink
-              />
-            </Box>
-          )}
+                    workspace: {
+                      showZoomControls: true,
+                      allowNewWindows: false,
+                    },
+                    workspaceControlPanel: {
+                      enabled: false,
+                    },
+                    windows: [
+                      {
+                        manifestId: `https://images.imaginerio.org/iiif/3/${selectedImage.ssid}/manifest`,
+                      },
+                    ],
+                  }}
+                  style={{ position: 'relative', width: '100%', height: '100%' }}
+                />
+              </Box>
+            ) : (
+              <Box pt="20px">
+                {imageWidth >= 400 && (
+                  <Container>
+                    <Grid templateColumns="1fr 125px" gap={5} mb={2}>
+                      <ImageSearch />
+                      <ViewButtons />
+                    </Grid>
+                  </Container>
+                )}
+                <ImageViewer
+                  height={imageWidth >= 400 ? height - 100 : height - 55}
+                  width={imageWidth}
+                  noLink
+                />
+              </Box>
+            )}
+          </Box>
           <AtlasController width={width - imageWidth} height={height} />
         </GridResizable>
       </Box>

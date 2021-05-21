@@ -52,7 +52,9 @@ const ImageRow = ({
           </Flex>
           <Flex align="center" justify="flex-end">
             <Box w={`${imgWidth}px`} h={`${imgHeight}px`}>
-              <Image src={thumbnail} height={imgHeight} width={imgWidth} layout="responsive" />
+              {thumbnail && (
+                <Image src={thumbnail} height={imgHeight} width={imgWidth} layout="responsive" />
+              )}
             </Box>
           </Flex>
         </Grid>
