@@ -75,13 +75,14 @@ const Atlas = ({ images }) => {
             backgroundColor="white"
           >
             {selectedImage ? (
-              <Box>
+              <Box h="100%">
                 <Box
                   pos="absolute"
-                  m="16px"
-                  size="sm"
+                  top="13px"
+                  left="15px"
                   color="#666"
                   cursor="pointer"
+                  zIndex={12}
                   _hover={{
                     color: 'black',
                   }}
