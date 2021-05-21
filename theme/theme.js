@@ -10,7 +10,7 @@ const oneline = {
 export default extendTheme({
   styles: {
     global: {
-      body: {
+      '*': {
         fontWeight: 300,
       },
       a: {
@@ -71,6 +71,7 @@ export default extendTheme({
         bg: '#3C558E',
         color: 'white',
         px: 10,
+        fontWeight: 300,
       },
     },
     Text: {
