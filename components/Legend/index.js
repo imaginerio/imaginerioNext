@@ -89,6 +89,10 @@ const Legend = () => {
                       lineHeight="18px"
                       alignItems="center"
                       borderRadius="4px"
+                      cursor="pointer"
+                      _hover={{
+                        backgroundColor: '#CCCCCC',
+                      }}
                     >
                       {type.type}
                       <Spacer px="10px" />
