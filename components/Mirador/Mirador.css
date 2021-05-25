@@ -17,3 +17,7 @@ nav .MuiToolbar-root{
   padding-left: 40px;
   border-top: 1px solid #ccc !important;
 }
+
+.mirador-canvas-nav{
+  height: 48px !important;
+}
