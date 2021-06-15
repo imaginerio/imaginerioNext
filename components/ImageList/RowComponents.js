@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { Box, Heading, Link, Text } from '@chakra-ui/react';
+import Link from 'next/link';
+import { Box, Heading, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 
@@ -52,9 +53,9 @@ ImageTitle.propTypes = {
 };
 
 export const ImageLink = ({ children, ssid }) => {
-  const { asPath } = useRouter();
+  const { asPath, locale } = useRouter();
   const [{ useLinks, allImages }, dispatch] = useImages();
-  if (useLinks) return <Link href={`${asPath}/${ssid}`}>{children}</Link>;
+  if (useLinks) return <Link href={`/${locale}${asPath}/${ssid}`}>{children}</Link>;
   return (
     <Box
       whiteSpace="nowrap"

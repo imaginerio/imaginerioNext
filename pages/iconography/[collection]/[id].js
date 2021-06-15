@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
-import { Container, Grid, Box, Heading, Text, Flex, Spacer, Link } from '@chakra-ui/react';
+import Link from 'next/link';
+import { Container, Grid, Box, Heading, Text, Flex, Spacer } from '@chakra-ui/react';
 import { Atlas } from '@imaginerio/diachronic-atlas';
 
 import Head from '../../../components/Head';

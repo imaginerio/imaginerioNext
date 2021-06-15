@@ -30,15 +30,25 @@ About.propTypes = {
 };
 
 export async function getStaticPaths() {
-  return { paths: Object.keys(pages).map(page => ({ params: { page } })), fallback: false };
+  return {
+    paths: Object.keys(pages).reduce(
+      (memo, lang) => [
+        ...memo,
+        ...Object.keys(pages[lang]).map(page => ({ params: { page }, locale: lang })),
+      ],
+      []
+    ),
+
+    fallback: false,
+  };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
   const {
     data: {
       post_stream: { posts },
     },
-  } = await axios.get(`${process.env.NEXT_PUBLIC_PAGE_URL}${pages[params.page]}.json`, {
+  } = await axios.get(`${process.env.NEXT_PUBLIC_PAGE_URL}${pages[locale][params.page]}.json`, {
     headers: {
       'Api-Key': process.env.NEXT_PUBLIC_PAGE_API,
       'Api-Username': 'system',
