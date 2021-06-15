@@ -15,6 +15,7 @@ import ImageViewer from '../../../components/ImageViewer';
 import { useImages } from '../../../providers/ImageContext';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
 import config from '../../../utils/config';
+import pages from '../../../assets/config/pages';
 
 const Collection = ({ images, collection }) => {
   let height = 800;
@@ -48,7 +49,13 @@ const Collection = ({ images, collection }) => {
 
 export async function getStaticPaths() {
   return {
-    paths: config.collections.map(collection => ({ params: { collection } })),
+    paths: Object.keys(pages).reduce(
+      (memo, lang) => [
+        ...memo,
+        ...config.collections.map(collection => ({ params: { collection }, locale: lang })),
+      ],
+      []
+    ),
     fallback: false,
   };
 }

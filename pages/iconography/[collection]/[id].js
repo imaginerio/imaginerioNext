@@ -13,6 +13,7 @@ import Footer from '../../../components/Footer';
 import { findByLabel } from '../../../utils/iiif';
 import config from '../../../utils/config';
 import mapStyle from '../../../assets/style/style.json';
+import pages from '../../../assets/config/pages';
 
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
 
@@ -118,12 +119,19 @@ export async function getStaticPaths() {
       .then(({ data }) => {
         paths = [
           ...paths,
-          ...data[0].Documents.map(d => ({
-            params: {
-              collection,
-              id: d.ssid,
-            },
-          })),
+          ...Object.keys(pages).reduce(
+            (memo, lang) => [
+              ...memo,
+              ...data[0].Documents.map(d => ({
+                params: {
+                  collection,
+                  id: d.ssid,
+                },
+                locale: lang,
+              })),
+            ],
+            []
+          ),
         ];
         return Promise.resolve();
       });
