@@ -16,17 +16,19 @@ const calcMarks = ({ min, max }) => {
 
 const TimeInput = ({ number, text, handler, min, max }) => (
   <Flex align="center">
-    <Text
-      textTransform="uppercase"
-      fontSize={12}
-      position="absolute"
-      mt="-39px"
-      ml="6px"
-      backgroundColor="white"
-      zIndex={1}
-    >
-      {text}
-    </Text>
+    {text && (
+      <Text
+        textTransform="uppercase"
+        fontSize={12}
+        position="absolute"
+        mt="-39px"
+        ml="6px"
+        backgroundColor="white"
+        zIndex={1}
+      >
+        {text}
+      </Text>
+    )}
     <Input
       p={1}
       type="number"
@@ -57,26 +59,37 @@ const Timeline = ({ min, max, triple }) => {
   }, [sliderRange]);
 
   return (
-    <Grid templateColumns="repeat(3, 60px) 1fr" columnGap={6}>
+    <Grid templateColumns={`${triple ? '35px 60px' : 'repeat(3, 60px)'} 1fr`} columnGap={6}>
       <Flex alignItems="center">
         <Heading size="sm" m={0} fontSize={18} fontWeight="bold">
-          Years
+          {triple ? 'Year:' : 'Years:'}
         </Heading>
       </Flex>
-      <TimeInput
-        text="start"
-        min={min}
-        max={sliderRange[1]}
-        number={sliderRange[0]}
-        handler={value => setSliderRange([value, sliderRange[1]])}
-      />
-      <TimeInput
-        text="end"
-        min={sliderRange[0]}
-        max={max}
-        number={sliderRange[1]}
-        handler={value => setSliderRange([sliderRange[0], value])}
-      />
+      {triple ? (
+        <TimeInput
+          min={sliderRange[0]}
+          max={sliderRange[2]}
+          number={sliderRange[1]}
+          handler={value => setSliderRange([sliderRange[0], value, sliderRange[2]])}
+        />
+      ) : (
+        <>
+          <TimeInput
+            text="start"
+            min={min}
+            max={sliderRange[1]}
+            number={sliderRange[0]}
+            handler={value => setSliderRange([value, sliderRange[1]])}
+          />
+          <TimeInput
+            text="end"
+            min={sliderRange[0]}
+            max={max}
+            number={sliderRange[1]}
+            handler={value => setSliderRange([sliderRange[0], value])}
+          />
+        </>
+      )}
       <ReactSlider
         className={`___slider${triple && ' ___triple'}`}
         thumbClassName="___thumb"
