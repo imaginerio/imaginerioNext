@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { range } from 'lodash';
+import { range, every, last } from 'lodash';
 import ReactSlider from 'react-slider';
 import { Grid, Input, Text, Flex, Heading } from '@chakra-ui/react';
 
@@ -14,7 +14,7 @@ const calcMarks = ({ min, max }) => {
   return range(roundedMin, max, markGap);
 };
 
-const TimeInput = ({ number, text, handler, min, max }) => (
+const TimeInput = ({ number, text, handler, inputError }) => (
   <Flex align="center">
     {text && (
       <Text
@@ -30,10 +30,9 @@ const TimeInput = ({ number, text, handler, min, max }) => (
       </Text>
     )}
     <Input
+      isInvalid={inputError}
       p={1}
       type="number"
-      min={min}
-      max={max}
       fontSize={13}
       textAlign="center"
       fontWeight="bold"
@@ -48,15 +47,30 @@ const Timeline = ({ min, max, triple }) => {
   const [sliderRange, setSliderRange] = useState(
     triple ? [min, Math.round((min + max) / 200) * 100, max] : [min, max]
   );
+  const [tempRange, setTempRange] = useState(sliderRange);
+  const [inputError, setInputError] = useState(false);
 
   useEffect(() => {
     let dates = sliderRange;
+    setTempRange(sliderRange);
+    setInputError(false);
     if (triple) {
       dates = [sliderRange[0], sliderRange[2]];
       dispatch(['YEAR', sliderRange[1]]);
     }
     dispatch(['DATES', dates]);
   }, [sliderRange]);
+
+  useEffect(() => {
+    if (
+      every(tempRange, t => t >= min && t <= max) &&
+      every(tempRange, (t, i) => last(tempRange) === t || t <= tempRange[i + 1])
+    ) {
+      setSliderRange(tempRange);
+    } else {
+      setInputError(true);
+    }
+  }, [tempRange]);
 
   return (
     <Grid templateColumns={`${triple ? '35px 60px' : 'repeat(3, 60px)'} 1fr`} columnGap={6}>
@@ -67,26 +81,23 @@ const Timeline = ({ min, max, triple }) => {
       </Flex>
       {triple ? (
         <TimeInput
-          min={sliderRange[0]}
-          max={sliderRange[2]}
-          number={sliderRange[1]}
-          handler={value => setSliderRange([sliderRange[0], value, sliderRange[2]])}
+          inputError={inputError}
+          number={tempRange[1]}
+          handler={value => setTempRange([sliderRange[0], parseInt(value, 10), sliderRange[2]])}
         />
       ) : (
         <>
           <TimeInput
+            inputError={inputError}
             text="start"
-            min={min}
-            max={sliderRange[1]}
-            number={sliderRange[0]}
-            handler={value => setSliderRange([value, sliderRange[1]])}
+            number={tempRange[0]}
+            handler={value => setTempRange([parseInt(value, 10), sliderRange[1]])}
           />
           <TimeInput
+            inputError={inputError}
             text="end"
-            min={sliderRange[0]}
-            max={max}
-            number={sliderRange[1]}
-            handler={value => setSliderRange([sliderRange[0], value])}
+            number={tempRange[1]}
+            handler={value => setTempRange([sliderRange[0], parseInt(value, 10)])}
           />
         </>
       )}
