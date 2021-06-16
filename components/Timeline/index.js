@@ -50,6 +50,10 @@ const Timeline = ({ min, max, triple }) => {
   const [tempRange, setTempRange] = useState(sliderRange);
   const [inputError, setInputError] = useState(false);
 
+  const tooltipText = triple
+    ? ['Image Start: ', '', 'Image End: ']
+    : ['Image Start: ', 'Image End: '];
+
   useEffect(() => {
     let dates = sliderRange;
     setTempRange(sliderRange);
@@ -112,6 +116,11 @@ const Timeline = ({ min, max, triple }) => {
         renderMark={props => (
           <div {...props}>
             <span>{props.key % 100 === 0 ? props.key : ''}</span>
+          </div>
+        )}
+        renderThumb={(props, { index, valueNow }) => (
+          <div {...props}>
+            <div className="___tooltip">{`${tooltipText[index]}${valueNow}`}</div>
           </div>
         )}
         defaultValue={sliderRange}
