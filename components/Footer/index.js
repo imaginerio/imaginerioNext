@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Container, Grid, Box, Heading, Text } from '@chakra-ui/react';
@@ -20,7 +21,7 @@ const ContactColumn = () => (
   </Box>
 );
 
-const NavigationColumn = locale => (
+const NavigationColumn = ({ locale }) => (
   <Box>
     <Heading size="md">Menu</Heading>
     <Text>
@@ -41,6 +42,14 @@ const NavigationColumn = locale => (
     </Text>
   </Box>
 );
+
+NavigationColumn.propTypes = {
+  locale: PropTypes.string,
+};
+
+NavigationColumn.defaultProps = {
+  locale: 'en',
+};
 
 const Footer = () => {
   const { locale } = useRouter();
