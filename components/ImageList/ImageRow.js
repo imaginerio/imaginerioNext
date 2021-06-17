@@ -5,8 +5,8 @@ import { Container, Grid, Flex, Box } from '@chakra-ui/react';
 
 import { ImageMeta, ImageTitle } from './RowComponents';
 
-const calcImageSize = ({ rawWidth, rawHeight, rowWidth }) => {
-  let imgHeight = 120;
+const calcImageSize = ({ rawWidth, rawHeight, rowWidth, rowHeight }) => {
+  let imgHeight = rowHeight;
   let imgWidth = 300;
   const maxWidth = Math.floor(rowWidth / 4);
   if (rawWidth) imgWidth = Math.round((120 / rawHeight) * rawWidth);
@@ -23,6 +23,7 @@ const calcImageSize = ({ rawWidth, rawHeight, rowWidth }) => {
 const ImageRow = ({
   style,
   rowWidth,
+  rowHeight,
   ssid,
   title,
   width: rawWidth,
@@ -31,19 +32,20 @@ const ImageRow = ({
   date,
   source,
   thumbnail,
+  probe,
 }) => {
-  const { imgWidth, imgHeight } = calcImageSize({ rawWidth, rawHeight, rowWidth });
+  const { imgWidth, imgHeight } = calcImageSize({ rawWidth, rawHeight, rowWidth, rowHeight });
   return (
     <div style={style}>
       <Container>
         <Grid
           templateColumns={`minmax(0, 1fr) ${imgWidth ? `${imgWidth}px` : '40%'}`}
-          columnGap="40px"
+          columnGap="20px"
           key={ssid}
-          pb="19px"
-          mb="20px"
-          h="120px"
-          borderBottom="1px solid rgba(0,0,0,0.1)"
+          pb={probe ? 0 : '19px'}
+          mb={probe ? 0 : '20px'}
+          h={`${rowHeight}px`}
+          borderBottom={probe ? 'none' : '1px solid rgba(0,0,0,0.1)'}
           boxSizing="content-box"
         >
           <Flex flexDirection="column" justifyContent="center">
@@ -66,16 +68,20 @@ const ImageRow = ({
 ImageRow.propTypes = {
   style: PropTypes.shape().isRequired,
   rowWidth: PropTypes.number.isRequired,
+  rowHeight: PropTypes.number,
   width: PropTypes.number,
   height: PropTypes.number,
   thumbnail: PropTypes.string.isRequired,
+  probe: PropTypes.bool,
   ...ImageMeta.propTypes,
   ...ImageTitle.propTypes,
 };
 
 ImageRow.defaultProps = {
+  rowHeight: 120,
   width: null,
   height: null,
+  probe: false,
   ...ImageMeta.defaultProps,
 };
 
