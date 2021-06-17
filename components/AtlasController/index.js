@@ -6,6 +6,7 @@ import { Atlas } from '@imaginerio/diachronic-atlas';
 import { Box } from '@chakra-ui/react';
 
 import Legend from '../Legend';
+import Probe from '../Probe';
 
 import mapStyle from '../../assets/style/style.json';
 
@@ -26,6 +27,8 @@ const AtlasController = ({ width, height }) => {
 
   const [geojson, setGeojson] = useState(null);
   const [hoverSSID, setHoverSSID] = useState(null);
+  const [probeImage, setProbeImage] = useState(null);
+  const [probePosition, setProbePosition] = useState(null);
 
   const { data: hover } = useSWR(hoverSSID, fetcher);
 
@@ -38,6 +41,14 @@ const AtlasController = ({ width, height }) => {
       setGeojson(null);
     }
   }, [selectedImage]);
+
+  useEffect(() => {
+    if (hoverSSID) {
+      setProbeImage(activeImages.find(i => i.ssid === hoverSSID));
+    } else {
+      setProbeImage(null);
+    }
+  }, [hoverSSID]);
 
   return (
     <Box>
@@ -56,14 +67,16 @@ const AtlasController = ({ width, height }) => {
         }
         circleMarkers
         hover={hover}
-        hoverHandler={feat => {
-          if (feat) {
-            setHoverSSID(feat.properties.ssid);
+        hoverHandler={e => {
+          if (e.features.length) {
+            setProbePosition(e.center);
+            setHoverSSID(e.features[0].properties.ssid);
           } else {
             setHoverSSID(null);
           }
         }}
       />
+      {probeImage && <Probe image={probeImage} pos={probePosition} />}
     </Box>
   );
 };
