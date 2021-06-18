@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import useSwr from 'swr';
 import { sortBy } from 'lodash';
@@ -13,7 +14,7 @@ import style from '../../assets/style/style.json';
 
 const fetcher = url => axios.get(url).then(({ data }) => data);
 
-const Legend = () => {
+const Legend = ({ highlightHandler }) => {
   const [{ year }] = useImages();
   const { data } = useSwr(`${process.env.NEXT_PUBLIC_SEARCH_API}/layers?year=${year}`, fetcher);
 
@@ -76,7 +77,11 @@ const Legend = () => {
                   {layer.title}
                 </Heading>
                 {layer.types.map(type => (
-                  <HStack key={type.type} alignItems="center">
+                  <HStack
+                    key={type.type}
+                    alignItems="center"
+                    onClick={() => highlightHandler({ layer: layer.name, type: type.type })}
+                  >
                     <Flex
                       w="200px"
                       minH="20px"
@@ -108,6 +113,10 @@ const Legend = () => {
       </Box>
     </>
   );
+};
+
+Legend.propTypes = {
+  highlightHandler: PropTypes.func.isRequired,
 };
 
 export default Legend;
