@@ -5,7 +5,12 @@ import useSwr from 'swr';
 import { sortBy } from 'lodash';
 import { getLegend } from '@imaginerio/diachronic-atlas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faAngleLeft, faBinoculars } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleRight,
+  faAngleLeft,
+  faBinoculars,
+  faTimesCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import { Box, Stack, HStack, Flex, Spacer, Text, Heading } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -14,7 +19,10 @@ import style from '../../assets/style/style.json';
 
 const fetcher = url => axios.get(url).then(({ data }) => data);
 
-const Legend = ({ highlightHandler }) => {
+const isHighlighted = ({ layer, type }, highlightedLayer) =>
+  highlightedLayer && layer === highlightedLayer.layer && type === highlightedLayer.type;
+
+const Legend = ({ highlightHandler, highlightedLayer }) => {
   const [{ year }] = useImages();
   const { data } = useSwr(`${process.env.NEXT_PUBLIC_SEARCH_API}/layers?year=${year}`, fetcher);
 
@@ -76,36 +84,46 @@ const Legend = ({ highlightHandler }) => {
                 <Heading size="md" mb={0} fontSize={16}>
                   {layer.title}
                 </Heading>
-                {layer.types.map(type => (
-                  <HStack
-                    key={type.type}
-                    alignItems="center"
-                    onClick={() => highlightHandler({ layer: layer.name, type: type.type })}
-                  >
-                    <Flex
-                      w="200px"
-                      minH="20px"
-                      px="10px"
-                      py="5px"
-                      backgroundColor="#F2F2F2"
-                      border="1px solid #DEDEDE"
-                      color="black"
-                      fontSize="15px"
-                      lineHeight="18px"
+                {layer.types.map(type => {
+                  const layerHighlighted = isHighlighted(
+                    { layer: layer.name, type: type.type },
+                    highlightedLayer
+                  );
+                  return (
+                    <HStack
+                      key={type.type}
                       alignItems="center"
-                      borderRadius="4px"
-                      cursor="pointer"
-                      _hover={{
-                        backgroundColor: '#CCCCCC',
-                      }}
+                      onClick={() =>
+                        highlightHandler(
+                          layerHighlighted ? null : { layer: layer.name, type: type.type }
+                        )
+                      }
                     >
-                      {type.type}
-                      <Spacer px="10px" />
-                      <FontAwesomeIcon icon={faBinoculars} />
-                    </Flex>
-                    <Box w="40px" h="20px" {...type.swatch} />
-                  </HStack>
-                ))}
+                      <Flex
+                        w="200px"
+                        minH="20px"
+                        px="10px"
+                        py="5px"
+                        backgroundColor={layerHighlighted ? '#666' : '#F2F2F2'}
+                        border="1px solid #DEDEDE"
+                        color={layerHighlighted ? 'white' : 'black'}
+                        fontSize="15px"
+                        lineHeight="18px"
+                        alignItems="center"
+                        borderRadius="4px"
+                        cursor="pointer"
+                        _hover={{
+                          backgroundColor: '#CCCCCC',
+                        }}
+                      >
+                        {type.type}
+                        <Spacer px="10px" />
+                        <FontAwesomeIcon icon={layerHighlighted ? faTimesCircle : faBinoculars} />
+                      </Flex>
+                      <Box w="40px" h="20px" {...type.swatch} />
+                    </HStack>
+                  );
+                })}
               </Stack>
             ))}
           </Box>
@@ -117,6 +135,11 @@ const Legend = ({ highlightHandler }) => {
 
 Legend.propTypes = {
   highlightHandler: PropTypes.func.isRequired,
+  highlightedLayer: PropTypes.shape(),
+};
+
+Legend.defaultProps = {
+  highlightedLayer: null,
 };
 
 export default Legend;

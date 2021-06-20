@@ -53,7 +53,7 @@ const AtlasController = ({ width, height }) => {
 
   return (
     <Box>
-      <Legend highlightHandler={setHighlightedLayer} />
+      <Legend highlightHandler={setHighlightedLayer} highlightedLayer={highlightedLayer} />
       <Atlas
         year={year}
         mapStyle={mapStyle}
