@@ -1091,6 +1091,374 @@
             }
         },
         {
+            "id": "buildings-civil",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Civil"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-civilp",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Civil (Protected)"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-culture",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Culture"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-culturep",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Culture (Protected)"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-education",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Education"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-educationp",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Education (Protected)"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-health",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Health"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-healthp",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Health (Protected)"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-infrastructure",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Infrastructure"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-infrastructurep",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Infrastructure (Protected)"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-military",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Military"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-militaryp",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Military (Protected)"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-religion",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Religion"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-religionp",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Religion (Protected)"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-transportation",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Transportation"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
+            "id": "buildings-transportationp",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "buildingspoly",
+            "minzoom": 14,
+            "filter": [
+                "all",
+                ["match", ["get", "type"], ["Transportation (Protected)"], true, false]
+            ],
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    "hsla(0, 0%, 70%, 1)",
+                    18,
+                    "hsla(0, 0%, 80%, 0.5)"
+                ],
+                "fill-outline-color": "hsla(0, 0%, 60%, 1)"
+            }
+        },
+        {
             "id": "favela-label",
             "type": "symbol",
             "source": "composite",
