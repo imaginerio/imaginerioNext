@@ -57,8 +57,9 @@ const AtlasController = ({ width, height }) => {
       <Atlas
         year={year}
         mapStyle={mapStyle}
-        viewport={{ longitude: -43.18, latitude: -22.9, zoom: 10 }}
-        size={{ width, height }}
+        viewport={{ longitude: -43.18, latitude: -22.9, zoom: 14.5 }}
+        width={width}
+        height={height}
         viewpoints={viewpoints}
         activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
         geojson={geojson}

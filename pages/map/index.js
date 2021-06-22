@@ -12,12 +12,12 @@ import GridResizable from '../../components/GridResizable';
 import ImageSearch from '../../components/ImageSearch';
 import ViewButtons from '../../components/ViewButtons';
 import ImageViewer from '../../components/ImageViewer';
-import AtlasController from '../../components/AtlasController';
 
 import { useImages } from '../../providers/ImageContext';
 import useWindowDimensions from '../../utils/useWindowDimensions';
 
 const Mirador = dynamic(() => import('../../components/Mirador'), { ssr: false });
+const AtlasController = dynamic(() => import('../../components/AtlasController'), { ssr: false });
 
 const Atlas = ({ images }) => {
   let height = 800;
