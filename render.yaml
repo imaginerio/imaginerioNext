@@ -1,0 +1,21 @@
+previewsEnabled: true
+services:
+  - type: web
+    name: imaginerio
+    region: oregon
+    env: node
+    plan: starter
+    healthCheckPath: /
+    buildCommand: yarn; yarn build
+    startCommand: yarn start
+    envVars:
+      - key: NEXT_PUBLIC_SEARCH_API
+        value: https://search.imaginerio.org
+      - key: NEXT_PUBLIC_RASTER_URL
+        value: https://imaginerio-rasters.s3.us-east-1.amazonaws.com
+      - key: NEXT_PUBLIC_PAGE_URL
+        value: https://forum.imaginerio.org/t/
+      - fromGroup: imaginerio
+databases:
+  - name: imaginerio
+  
