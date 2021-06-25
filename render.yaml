@@ -4,7 +4,7 @@ services:
     name: imaginerio
     region: oregon
     env: node
-    plan: starter
+    plan: "Starter Plus"
     healthCheckPath: /
     buildCommand: yarn; yarn build
     startCommand: yarn start
