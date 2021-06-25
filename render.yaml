@@ -16,6 +16,15 @@ services:
       - key: NEXT_PUBLIC_PAGE_URL
         value: https://forum.imaginerio.org/t/
       - fromGroup: imaginerio
+  - type: cron
+    name: vector-tile-generator
+    region: oregon
+    env: docker
+    schedule: "1 0 * * 6" 
+    repo: https://github.com/imaginerio/vector-tile-generator.git
+    envVars:
+      - key: AWS_BUCKET
+        value: s3://imaginerio-vector/base/{z}/{x}/{y}?timeout=10000
+      - fromGroup: tile-generator
 databases:
   - name: imaginerio
-  
