@@ -22,7 +22,7 @@ const fetcher = ssid => {
 };
 
 const AtlasController = ({ width, height }) => {
-  const [{ activeImages, year, selectedImage, allImages }, dispatch] = useImages();
+  const [{ activeImages, year, selectedImage, allImages, showViewPoints }, dispatch] = useImages();
   const viewpoints = activeImages.filter(i => i.collection === 'views');
 
   const [highlightedLayer, setHighlightedLayer] = useState(null);
@@ -60,7 +60,7 @@ const AtlasController = ({ width, height }) => {
         viewport={{ longitude: -43.18, latitude: -22.9, zoom: 14.5 }}
         width={width}
         height={height}
-        viewpoints={viewpoints}
+        viewpoints={showViewPoints ? viewpoints : null}
         activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
         geojson={geojson}
         rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}

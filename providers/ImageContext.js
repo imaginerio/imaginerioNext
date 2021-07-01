@@ -50,6 +50,7 @@ const initialState = {
   direction: true,
   size: 'full',
   useLinks: true,
+  showViewPoints: true,
 };
 
 function reducer(state, [type, payload]) {
@@ -108,6 +109,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         useLinks: payload,
+      };
+    case 'TOGGLE_VIEWPOINTS':
+      return {
+        ...state,
+        showViewPoints: !state.showViewPoints,
       };
     default:
       return state;

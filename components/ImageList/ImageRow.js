@@ -66,7 +66,7 @@ const ImageRow = ({
 };
 
 ImageRow.propTypes = {
-  style: PropTypes.shape().isRequired,
+  style: PropTypes.shape(),
   rowWidth: PropTypes.number.isRequired,
   rowHeight: PropTypes.number,
   width: PropTypes.number,
@@ -78,6 +78,7 @@ ImageRow.propTypes = {
 };
 
 ImageRow.defaultProps = {
+  style: {},
   rowHeight: 120,
   width: null,
   height: null,
