@@ -1,0 +1,3 @@
+[submodule "assets/style"]
+	path = assets/style
+	url = https://github.com/imaginerio/rio-cartography-style.git
