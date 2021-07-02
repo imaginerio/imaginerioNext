@@ -955,10 +955,10 @@
   resolved "https://registry.yarnpkg.com/@iiif/vocabulary/-/vocabulary-1.0.19.tgz#c735577bdcbafcb988471391b9e39d772662de62"
   integrity sha512-5XjrB81bVcu80YcYz5Lxcvvio+PJljiZt3pNW8ACbL3OoL+8QoCJ/dwivdYEcoyEck2I8cEMgAZYEOuEZq+fgg==
 
-"@imaginerio/diachronic-atlas@^0.5.15":
-  version "0.5.15"
-  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.5.15.tgz#09b75ccd1cf2feee54ff6728fe359388efa3a7b8"
-  integrity sha512-9J1ynoa5DqRXunghnaPvXbEVYLCl/y4lrRA2MUeZQFThm74mz3+P2ae6fcvWiQRsAol5Phpwgm43nrixc0YF1A==
+"@imaginerio/diachronic-atlas@^0.5.17":
+  version "0.5.17"
+  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.5.17.tgz#a57165384e7c6a2fc95ed6b77c4c43c04ff805f1"
+  integrity sha512-MkZRaZP4y+9qhQBBcN+EQ4IHenOtXDqPJR2s7KACI4HqrJDwCEKitp2rdzbkydgGNSLs3GQx5kJ/dEaniN9aDA==
   dependencies:
     "@turf/bbox" "^6.3.0"
     d3 "^6.7.0"
