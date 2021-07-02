@@ -21,6 +21,43 @@ const styleProps = {
   borderRadius: '0.375rem',
 };
 
+const sharedPropTypes = {
+  opacity: PropTypes.number.isRequired,
+  handler: PropTypes.func.isRequired,
+};
+
+const OpacitySlider = ({ opacity, handler, setIsOpen }) => (
+  <HStack {...styleProps} w={300} h="30px" px="10px">
+    <Text size="sm" fontSize={14} textTransform="uppercase">
+      Opacity:
+    </Text>
+    <Slider
+      aria-label="slider-ex-1"
+      min={0}
+      max={1}
+      step={0.1}
+      value={opacity}
+      onChange={handler}
+      mr={2}
+    >
+      <SliderTrack>
+        <SliderFilledTrack />
+      </SliderTrack>
+      <SliderThumb />
+    </Slider>
+    <FontAwesomeIcon
+      icon={faTimesCircle}
+      onClick={() => setIsOpen(false)}
+      style={{ marginRight: -3, cursor: 'pointer' }}
+    />
+  </HStack>
+);
+
+OpacitySlider.propTypes = {
+  ...sharedPropTypes,
+  setIsOpen: PropTypes.func.isRequired,
+};
+
 const OpacityControl = props => {
   const [isOpen, setIsOpen] = useState(false);
   const buttonStyleProps = omit(props, 'opacity', 'handler');
@@ -28,30 +65,7 @@ const OpacityControl = props => {
   return (
     <Box {...buttonStyleProps}>
       {isOpen ? (
-        <HStack {...styleProps} w={300} h="30px" px="10px">
-          <Text size="sm" fontSize={14} textTransform="uppercase">
-            Opacity:
-          </Text>
-          <Slider
-            aria-label="slider-ex-1"
-            min={0}
-            max={1}
-            step={0.1}
-            value={props.opacity}
-            onChange={props.handler}
-            mr={2}
-          >
-            <SliderTrack>
-              <SliderFilledTrack />
-            </SliderTrack>
-            <SliderThumb />
-          </Slider>
-          <FontAwesomeIcon
-            icon={faTimesCircle}
-            onClick={() => setIsOpen(false)}
-            style={{ marginRight: -3, cursor: 'pointer' }}
-          />
-        </HStack>
+        <OpacitySlider opacity={props.opacity} handler={props.handler} setIsOpen={setIsOpen} />
       ) : (
         <IconButton
           size="sm"
@@ -65,8 +79,7 @@ const OpacityControl = props => {
 };
 
 OpacityControl.propTypes = {
-  opacity: PropTypes.number.isRequired,
-  handler: PropTypes.func.isRequired,
+  ...sharedPropTypes,
 };
 
 export default OpacityControl;
