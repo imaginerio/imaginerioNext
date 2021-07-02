@@ -11,6 +11,7 @@ import Timeline from '../../components/Timeline';
 import GridResizable from '../../components/GridResizable';
 import ImageSearch from '../../components/ImageSearch';
 import ImageFilter from '../../components/ImageFilter';
+import ImageSort from '../../components/ImageSort';
 import ViewButtons from '../../components/ViewButtons';
 import ImageViewer from '../../components/ImageViewer';
 
@@ -131,6 +132,7 @@ const Atlas = ({ images }) => {
                   height={imageWidth >= 400 ? height - 100 : height - 55}
                   width={imageWidth}
                   noLink
+                  control={<ImageSort small collection />}
                 />
               </Box>
             )}
