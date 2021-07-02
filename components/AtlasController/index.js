@@ -7,6 +7,7 @@ import { Box } from '@chakra-ui/react';
 
 import Legend from '../Legend';
 import Probe from '../Probe';
+import OpacityControl from '../OpacityControl';
 
 import mapStyle from '../../assets/style/style.json';
 
@@ -30,6 +31,7 @@ const AtlasController = ({ width, height }) => {
   const [hoverSSID, setHoverSSID] = useState(null);
   const [probeImage, setProbeImage] = useState(null);
   const [probePosition, setProbePosition] = useState(null);
+  const [opacity, setOpacity] = useState(1);
 
   const { data: hover } = useSWR(hoverSSID, fetcher);
 
@@ -69,6 +71,7 @@ const AtlasController = ({ width, height }) => {
         }
         circleMarkers
         hover={hover}
+        opacity={opacity}
         highlightedLayer={highlightedLayer}
         hoverHandler={e => {
           if (e.features.length) {
@@ -78,6 +81,14 @@ const AtlasController = ({ width, height }) => {
             setHoverSSID(null);
           }
         }}
+      />
+      <OpacityControl
+        pos="absolute"
+        right="15px"
+        top="200px"
+        zIndex={99}
+        opacity={opacity}
+        handler={setOpacity}
       />
       {probeImage && <Probe image={probeImage} pos={probePosition} />}
     </Box>
