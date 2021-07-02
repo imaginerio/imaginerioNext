@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { range, every, last } from 'lodash';
+import { range, every, last, isEqual } from 'lodash';
 import ReactSlider from 'react-slider';
 import { Grid, Input, Text, Flex, Heading } from '@chakra-ui/react';
 
@@ -43,10 +43,8 @@ const TimeInput = ({ number, text, handler, inputError }) => (
 );
 
 const Timeline = ({ min, max, triple }) => {
-  const [, dispatch] = useImages();
-  const [sliderRange, setSliderRange] = useState(
-    triple ? [min, Math.round((min + max) / 200) * 100, max] : [min, max]
-  );
+  const [{ dates, year }, dispatch] = useImages();
+  const [sliderRange, setSliderRange] = useState(triple ? [dates[0], year, dates[1]] : dates);
   const [tempRange, setTempRange] = useState(sliderRange);
   const [inputError, setInputError] = useState(false);
 
@@ -55,14 +53,14 @@ const Timeline = ({ min, max, triple }) => {
     : ['Image Start: ', 'Image End: '];
 
   useEffect(() => {
-    let dates = sliderRange;
+    let newDates = sliderRange;
     setTempRange(sliderRange);
     setInputError(false);
     if (triple) {
-      dates = [sliderRange[0], sliderRange[2]];
+      newDates = [sliderRange[0], sliderRange[2]];
       dispatch(['YEAR', sliderRange[1]]);
     }
-    dispatch(['DATES', dates]);
+    dispatch(['DATES', newDates]);
   }, [sliderRange]);
 
   useEffect(() => {
@@ -75,6 +73,13 @@ const Timeline = ({ min, max, triple }) => {
       setInputError(true);
     }
   }, [tempRange]);
+
+  useEffect(() => {
+    const newDates = triple ? [dates[0], year, dates[1]] : dates;
+    if (!isEqual(newDates, sliderRange)) {
+      setSliderRange(newDates);
+    }
+  }, [triple, dates, year]);
 
   return (
     <Grid templateColumns={`${triple ? '35px 60px' : 'repeat(3, 60px)'} 1fr`} columnGap={6}>
@@ -123,7 +128,6 @@ const Timeline = ({ min, max, triple }) => {
             <div className="___tooltip">{`${tooltipText[index]}${valueNow}`}</div>
           </div>
         )}
-        defaultValue={sliderRange}
         min={min}
         max={max}
         ariaLabel={['Lower thumb', 'Upper thumb']}

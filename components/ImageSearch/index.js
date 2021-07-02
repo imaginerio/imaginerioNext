@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { InputGroup, Input, InputRightAddon, InputRightElement } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 
-const ImageSearch = () => {
+const ImageSearch = ({ hideIcon }) => {
   const [{ query }, dispatch] = useImages();
   return (
     <InputGroup>
@@ -24,15 +25,21 @@ const ImageSearch = () => {
           />
         )}
       </InputRightElement>
-      <InputRightAddon>
-        <FontAwesomeIcon icon={faSearch} />
-      </InputRightAddon>
+      {!hideIcon && (
+        <InputRightAddon>
+          <FontAwesomeIcon icon={faSearch} />
+        </InputRightAddon>
+      )}
     </InputGroup>
   );
 };
 
-ImageSearch.propTypes = {};
+ImageSearch.propTypes = {
+  hideIcon: PropTypes.bool,
+};
 
-ImageSearch.defaultProps = {};
+ImageSearch.defaultProps = {
+  hideIcon: false,
+};
 
 export default ImageSearch;

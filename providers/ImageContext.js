@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
-import { orderBy } from 'lodash';
+import { orderBy, countBy } from 'lodash';
 import unaccent from '../utils/unaccent';
 
 const textSearch = ({ item, query }) => {
@@ -18,10 +18,11 @@ const textSearch = ({ item, query }) => {
   });
 };
 
-const search = ({ query, dates, sort, direction, allImages }) => {
+const search = ({ query, dates, sort, direction, allImages, collection }) => {
   if (!allImages) return [];
   let items = allImages;
   if (query) items = items.filter(item => textSearch({ item, query }));
+  if (collection) items = items.filter(item => item.collection === collection);
   items = items.filter(i => i.firstyear <= dates[1] && i.lastyear >= dates[0]);
   if (sort) {
     items = orderBy(
@@ -51,6 +52,8 @@ const initialState = {
   size: 'full',
   useLinks: true,
   showViewPoints: true,
+  categories: {},
+  collection: null,
 };
 
 function reducer(state, [type, payload]) {
@@ -115,6 +118,16 @@ function reducer(state, [type, payload]) {
         ...state,
         showViewPoints: !state.showViewPoints,
       };
+    case 'SET_CATEGORIES':
+      return {
+        ...state,
+        categories: payload,
+      };
+    case 'SET_COLLECTION':
+      return {
+        ...state,
+        collection: payload,
+      };
     default:
       return state;
   }
@@ -122,11 +135,27 @@ function reducer(state, [type, payload]) {
 
 function ImageContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { query, sort, dates, direction, allImages } = state;
+  const { query, sort, dates, direction, allImages, activeImages, collection } = state;
 
   useEffect(
-    () => dispatch(['SET_ACTIVE_IMAGES', search({ query, sort, dates, direction, allImages })]),
-    [query, sort, dates, direction, allImages]
+    () =>
+      dispatch([
+        'SET_ACTIVE_IMAGES',
+        search({ query, sort, dates, direction, allImages, collection }),
+      ]),
+    [query, sort, dates, direction, allImages, collection]
+  );
+
+  useEffect(
+    () =>
+      dispatch([
+        'SET_CATEGORIES',
+        {
+          ...countBy(search({ query, sort, dates, direction, allImages }), 'collection'),
+          all: search({ query, sort, dates, direction, allImages }).length,
+        },
+      ]),
+    [activeImages]
   );
 
   return (
