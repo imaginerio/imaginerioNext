@@ -10,6 +10,8 @@ import Head from '../../components/Head';
 import Timeline from '../../components/Timeline';
 import GridResizable from '../../components/GridResizable';
 import ImageSearch from '../../components/ImageSearch';
+import ImageFilter from '../../components/ImageFilter';
+import ImageSort from '../../components/ImageSort';
 import ViewButtons from '../../components/ViewButtons';
 import ImageViewer from '../../components/ImageViewer';
 
@@ -119,8 +121,9 @@ const Atlas = ({ images }) => {
               <Box pt="20px">
                 {imageWidth >= 400 && (
                   <Container>
-                    <Grid templateColumns="1fr 125px" gap={5} mb={2}>
-                      <ImageSearch />
+                    <Grid templateColumns="1fr 40px 125px" gap={5} mb={2}>
+                      <ImageSearch hideIcon />
+                      <ImageFilter />
                       <ViewButtons />
                     </Grid>
                   </Container>
@@ -129,6 +132,7 @@ const Atlas = ({ images }) => {
                   height={imageWidth >= 400 ? height - 100 : height - 55}
                   width={imageWidth}
                   noLink
+                  control={<ImageSort small collection />}
                 />
               </Box>
             )}

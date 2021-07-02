@@ -11,7 +11,7 @@ import {
   faBinoculars,
   faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import { Box, Stack, HStack, Flex, Spacer, Text, Heading } from '@chakra-ui/react';
+import { Box, Stack, HStack, Flex, Spacer, Text, Heading, Switch } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 
@@ -23,7 +23,7 @@ const isHighlighted = ({ layer, type }, highlightedLayer) =>
   highlightedLayer && layer === highlightedLayer.layer && type === highlightedLayer.type;
 
 const Legend = ({ highlightHandler, highlightedLayer }) => {
-  const [{ year }] = useImages();
+  const [{ year, showViewPoints }, dispatch] = useImages();
   const { data } = useSwr(`${process.env.NEXT_PUBLIC_SEARCH_API}/layers?year=${year}`, fetcher);
 
   const [legend, setLegend] = useState(null);
@@ -72,13 +72,21 @@ const Legend = ({ highlightHandler, highlightedLayer }) => {
             pos="absolute"
             h="calc(100vh - 90px)"
             w="250px"
-            px="20px"
+            p="20px"
             pb="20px"
             zIndex={9}
             backgroundColor="white"
             overflow="auto"
             boxShadow="2px 0 3px rgba(0,0,0,0.15)"
           >
+            <Flex alignItems="center">
+              <Switch
+                mr={2}
+                isChecked={showViewPoints}
+                onChange={() => dispatch(['TOGGLE_VIEWPOINTS'])}
+              />
+              <Text>Show View Points</Text>
+            </Flex>
             {legend.map(layer => (
               <Stack key={layer.name}>
                 <Heading size="md" mb={0} fontSize={16}>

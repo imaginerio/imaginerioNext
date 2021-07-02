@@ -7,6 +7,7 @@ import { Box } from '@chakra-ui/react';
 
 import Legend from '../Legend';
 import Probe from '../Probe';
+import OpacityControl from '../OpacityControl';
 
 import mapStyle from '../../assets/style/style.json';
 
@@ -22,7 +23,7 @@ const fetcher = ssid => {
 };
 
 const AtlasController = ({ width, height }) => {
-  const [{ activeImages, year, selectedImage, allImages }, dispatch] = useImages();
+  const [{ activeImages, year, selectedImage, allImages, showViewPoints }, dispatch] = useImages();
   const viewpoints = activeImages.filter(i => i.collection === 'views');
 
   const [highlightedLayer, setHighlightedLayer] = useState(null);
@@ -30,6 +31,7 @@ const AtlasController = ({ width, height }) => {
   const [hoverSSID, setHoverSSID] = useState(null);
   const [probeImage, setProbeImage] = useState(null);
   const [probePosition, setProbePosition] = useState(null);
+  const [opacity, setOpacity] = useState(1);
 
   const { data: hover } = useSWR(hoverSSID, fetcher);
 
@@ -60,7 +62,7 @@ const AtlasController = ({ width, height }) => {
         viewport={{ longitude: -43.18, latitude: -22.9, zoom: 14.5 }}
         width={width}
         height={height}
-        viewpoints={viewpoints}
+        viewpoints={showViewPoints ? viewpoints : null}
         activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
         geojson={geojson}
         rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
@@ -69,6 +71,7 @@ const AtlasController = ({ width, height }) => {
         }
         circleMarkers
         hover={hover}
+        opacity={opacity}
         highlightedLayer={highlightedLayer}
         hoverHandler={e => {
           if (e.features.length) {
@@ -78,6 +81,14 @@ const AtlasController = ({ width, height }) => {
             setHoverSSID(null);
           }
         }}
+      />
+      <OpacityControl
+        pos="absolute"
+        right="15px"
+        top="200px"
+        zIndex={99}
+        opacity={opacity}
+        handler={setOpacity}
       />
       {probeImage && <Probe image={probeImage} pos={probePosition} />}
     </Box>
