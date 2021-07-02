@@ -35,7 +35,7 @@ const Collection = ({ images, collection }) => {
         <Heading textTransform="capitalize">{collection}</Heading>
       </Container>
       <Container>
-        <Timeline min={1600} max={2020} />
+        <Timeline min={1500} max={2020} />
         <Grid templateColumns="2fr 1fr 1fr" gap="50px" my={5}>
           <ImageSearch />
           <ImageSort />

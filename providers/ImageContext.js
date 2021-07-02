@@ -44,7 +44,7 @@ const initialState = {
   activeImages: [],
   selectedImage: null,
   query: '',
-  dates: [1600, 2020],
+  dates: [1500, 2020],
   year: 1900,
   sort: null,
   direction: true,
