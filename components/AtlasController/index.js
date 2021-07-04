@@ -8,6 +8,7 @@ import { Box } from '@chakra-ui/react';
 import Legend from '../Legend';
 import Probe from '../Probe';
 import OpacityControl from '../OpacityControl';
+import HeadingControl from '../HeadingControl';
 
 import mapStyle from '../../assets/style/style.json';
 
@@ -22,6 +23,13 @@ const fetcher = ssid => {
   return { data: null };
 };
 
+const buttonPosition = {
+  pos: 'absolute',
+  right: '15px',
+  top: '200px',
+  zIndex: 9,
+};
+
 const AtlasController = ({ width, height }) => {
   const [{ activeImages, year, selectedImage, allImages, showViewPoints }, dispatch] = useImages();
   const viewpoints = activeImages.filter(i => i.collection === 'views');
@@ -32,6 +40,7 @@ const AtlasController = ({ width, height }) => {
   const [probeImage, setProbeImage] = useState(null);
   const [probePosition, setProbePosition] = useState(null);
   const [opacity, setOpacity] = useState(1);
+  const [heading, setHeading] = useState(0);
 
   const { data: hover } = useSWR(hoverSSID, fetcher);
 
@@ -73,6 +82,7 @@ const AtlasController = ({ width, height }) => {
         hover={hover}
         opacity={opacity}
         highlightedLayer={highlightedLayer}
+        bearing={heading}
         hoverHandler={e => {
           if (e.features.length) {
             setProbePosition(e.center);
@@ -82,14 +92,17 @@ const AtlasController = ({ width, height }) => {
           }
         }}
       />
-      <OpacityControl
-        pos="absolute"
-        right="15px"
-        top="200px"
-        zIndex={99}
-        opacity={opacity}
-        handler={setOpacity}
-      />
+      {selectedImage && selectedImage.collection !== 'views' && (
+        <OpacityControl {...buttonPosition} opacity={opacity} handler={setOpacity} />
+      )}
+      {geojson && geojson.features[0].properties.heading && (
+        <HeadingControl
+          {...buttonPosition}
+          targetHeading={geojson.features[0].properties.heading}
+          heading={heading}
+          handler={setHeading}
+        />
+      )}
       {probeImage && <Probe image={probeImage} pos={probePosition} />}
     </Box>
   );
