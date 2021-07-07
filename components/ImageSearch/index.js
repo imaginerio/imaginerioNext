@@ -15,7 +15,7 @@ const ImageSearch = ({ hideIcon }) => {
         onChange={({ target: { value } }) => dispatch(['QUERY', value])}
         placeholder="Search images..."
       />
-      <InputRightElement mr="45px">
+      <InputRightElement mr={hideIcon ? 0 : '45px'}>
         {query && (
           <FontAwesomeIcon
             icon={faTimesCircle}
