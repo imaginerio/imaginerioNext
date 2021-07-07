@@ -9,6 +9,9 @@ const textSearch = ({ item, query }) => {
     const regex = new RegExp(unaccent(term), 'gi');
     if (item.title && item.title.match(regex)) return true;
     if (item.creator && item.creator.match(regex)) return true;
+    if (item.source && item.source.value.match(regex)) return true;
+    if (item.ssid && item.ssid.match(regex)) return true;
+    if (item.date && item.data.match(regex)) return true;
     if (item.depicts) {
       if (Array.isArray(item.depicts.value)) {
         if (item.depicts.value.some(d => d.match(regex))) return true;
