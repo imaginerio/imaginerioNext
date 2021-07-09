@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowDown } from '@fortawesome/fontawesome-pro-regular';
 import { Flex, Select, IconButton } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';

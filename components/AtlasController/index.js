@@ -31,10 +31,12 @@ const buttonPosition = {
 };
 
 const AtlasController = ({ width, height }) => {
-  const [{ activeImages, year, selectedImage, allImages, showViewPoints }, dispatch] = useImages();
+  const [
+    { activeImages, year, selectedImage, allImages, showViewPoints, highlightedLayer },
+    dispatch,
+  ] = useImages();
   const viewpoints = activeImages.filter(i => i.collection === 'views');
 
-  const [highlightedLayer, setHighlightedLayer] = useState(null);
   const [geojson, setGeojson] = useState(null);
   const [hoverSSID, setHoverSSID] = useState(null);
   const [probeImage, setProbeImage] = useState(null);
@@ -64,7 +66,7 @@ const AtlasController = ({ width, height }) => {
 
   return (
     <Box>
-      <Legend highlightHandler={setHighlightedLayer} highlightedLayer={highlightedLayer} />
+      <Legend />
       <Atlas
         year={year}
         mapStyle={mapStyle}

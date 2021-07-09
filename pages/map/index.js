@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle } from '@fortawesome/fontawesome-pro-regular';
 import { Grid, Container, Flex, Box, Link } from '@chakra-ui/react';
 
 import Head from '../../components/Head';

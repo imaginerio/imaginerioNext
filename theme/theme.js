@@ -84,6 +84,24 @@ export default extendTheme({
       },
       variants: {
         oneline,
+        result: {
+          display: 'flex',
+          w: '200px',
+          minH: '20px',
+          px: '10px',
+          py: '5px',
+          backgroundColor: '#F2F2F2',
+          border: '1px solid #DEDEDE',
+          color: 'black',
+          fontSize: '15px',
+          lineHeight: '18px',
+          alignItems: 'center',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          _hover: {
+            backgroundColor: '#CCCCCC',
+          },
+        },
       },
     },
     Link: {

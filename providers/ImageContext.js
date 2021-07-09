@@ -57,6 +57,7 @@ const initialState = {
   showViewPoints: true,
   categories: {},
   collection: null,
+  highlightedLayer: null,
 };
 
 function reducer(state, [type, payload]) {
@@ -130,6 +131,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         collection: payload,
+      };
+    case 'SET_HIGHLIGHTED_LAYER':
+      return {
+        ...state,
+        highlightedLayer: payload,
       };
     default:
       return state;
