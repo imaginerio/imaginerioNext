@@ -13,7 +13,7 @@ const styleProps = {
 };
 
 const HeadingControl = props => {
-  const buttonStyleProps = omit(props, 'heading', 'handler');
+  const buttonStyleProps = omit(props, 'targetHeading', 'heading', 'handler');
   const { heading, targetHeading, handler } = props;
 
   return (

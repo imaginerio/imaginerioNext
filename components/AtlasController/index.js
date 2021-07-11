@@ -32,12 +32,22 @@ const buttonPosition = {
 
 const AtlasController = ({ width, height }) => {
   const [
-    { activeImages, year, selectedImage, allImages, showViewPoints, highlightedLayer },
+    {
+      activeImages,
+      year,
+      selectedImage,
+      allImages,
+      showViewPoints,
+      highlightedLayer,
+      highlightedFeature,
+    },
     dispatch,
   ] = useImages();
   const viewpoints = activeImages.filter(i => i.collection === 'views');
 
-  const [geojson, setGeojson] = useState(null);
+  const [geojson, setGeojson] = useState([]);
+  const [viewCone, setViewCone] = useState(null);
+  const [featureJson, setFeatureJson] = useState(null);
   const [hoverSSID, setHoverSSID] = useState(null);
   const [probeImage, setProbeImage] = useState(null);
   const [probePosition, setProbePosition] = useState(null);
@@ -50,11 +60,52 @@ const AtlasController = ({ width, height }) => {
     if (selectedImage) {
       axios
         .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/document/${selectedImage.ssid}`)
-        .then(({ data }) => setGeojson(data));
+        .then(({ data }) =>
+          setViewCone({
+            id: selectedImage.ssid,
+            data,
+            type: 'fill',
+            paint: { 'fill-color': 'rgba(0,0,0,0.25)' },
+          })
+        );
     } else {
-      setGeojson(null);
+      setViewCone(null);
     }
   }, [selectedImage]);
+
+  useEffect(() => {
+    console.log(highlightedFeature);
+    if (highlightedFeature) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/feature/${highlightedFeature}?year=${year}`)
+        .then(({ data }) => {
+          let type;
+          switch (data.geometry.type) {
+            case 'Point':
+              type = 'circle';
+              break;
+            case 'LineString' || 'MultiLineString':
+              type = 'line';
+              break;
+            case 'Polygon' || 'MultiPolygon':
+              type = 'fill';
+              break;
+            default:
+              type = 'fill';
+          }
+          return setFeatureJson({ id: highlightedFeature, data, type, paint: {} });
+        });
+    } else {
+      setViewCone(null);
+    }
+  }, [highlightedFeature]);
+
+  useEffect(() => {
+    const geo = [];
+    if (viewCone) geo.push(viewCone);
+    if (featureJson) geo.push(featureJson);
+    setGeojson(geo);
+  }, [viewCone]);
 
   useEffect(() => {
     if (hoverSSID) {
@@ -97,10 +148,10 @@ const AtlasController = ({ width, height }) => {
       {selectedImage && selectedImage.collection !== 'views' && (
         <OpacityControl {...buttonPosition} opacity={opacity} handler={setOpacity} />
       )}
-      {geojson && geojson.features[0].properties.heading && (
+      {viewCone && viewCone.data.features[0].properties.heading && (
         <HeadingControl
           {...buttonPosition}
-          targetHeading={geojson.features[0].properties.heading}
+          targetHeading={viewCone.data.features[0].properties.heading}
           heading={heading}
           handler={setHeading}
         />

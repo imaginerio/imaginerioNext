@@ -58,6 +58,7 @@ const initialState = {
   categories: {},
   collection: null,
   highlightedLayer: null,
+  highlightedFeature: null,
 };
 
 function reducer(state, [type, payload]) {
@@ -136,6 +137,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         highlightedLayer: payload,
+      };
+    case 'SET_HIGHLIGHTED_FEATURE':
+      return {
+        ...state,
+        highlightedFeature: payload,
       };
     default:
       return state;
