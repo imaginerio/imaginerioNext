@@ -74,26 +74,29 @@ const AtlasController = ({ width, height }) => {
   }, [selectedImage]);
 
   useEffect(() => {
-    console.log(highlightedFeature);
     if (highlightedFeature) {
       axios
         .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/feature/${highlightedFeature}?year=${year}`)
         .then(({ data }) => {
           let type;
+          const paint = {};
           switch (data.geometry.type) {
             case 'Point':
               type = 'circle';
               break;
-            case 'LineString' || 'MultiLineString':
+            case 'LineString':
+            case 'MultiLineString':
               type = 'line';
+              paint['line-width'] = 2;
               break;
-            case 'Polygon' || 'MultiPolygon':
+            case 'Polygon':
+            case 'MultiPolygon':
               type = 'fill';
               break;
             default:
               type = 'fill';
           }
-          return setFeatureJson({ id: highlightedFeature, data, type, paint: {} });
+          return setFeatureJson({ id: highlightedFeature, data, type, paint });
         });
     } else {
       setViewCone(null);
@@ -105,7 +108,7 @@ const AtlasController = ({ width, height }) => {
     if (viewCone) geo.push(viewCone);
     if (featureJson) geo.push(featureJson);
     setGeojson(geo);
-  }, [viewCone]);
+  }, [viewCone, featureJson]);
 
   useEffect(() => {
     if (hoverSSID) {
