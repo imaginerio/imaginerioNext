@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/fontawesome-pro-solid';
+import { faFilter } from '@fortawesome/pro-solid-svg-icons';
 import {
   Stack,
   Box,

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBinoculars, faTimesCircle } from '@fortawesome/fontawesome-pro-solid';
+import { faBinoculars, faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
 import { Stack, Heading, Text, Spacer } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';

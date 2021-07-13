@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCompass } from '@fortawesome/fontawesome-pro-regular';
+import { faCompass } from '@fortawesome/pro-regular-svg-icons';
 import { Box, IconButton } from '@chakra-ui/react';
 
 const styleProps = {

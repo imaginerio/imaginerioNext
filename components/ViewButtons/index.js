@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList, faBars } from '@fortawesome/fontawesome-pro-regular';
-import { faTh } from '@fortawesome/fontawesome-pro-solid';
+import { faList, faBars } from '@fortawesome/pro-regular-svg-icons';
+import { faTh } from '@fortawesome/pro-solid-svg-icons';
 import { IconButton, ButtonGroup } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';

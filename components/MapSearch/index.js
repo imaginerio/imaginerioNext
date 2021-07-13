@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/fontawesome-pro-light';
-import { faSearch } from '@fortawesome/fontawesome-pro-regular';
-import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/pro-light-svg-icons';
+import { faSearch, faVectorSquare } from '@fortawesome/pro-regular-svg-icons';
 
 import {
   InputGroup,

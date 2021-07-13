@@ -4,7 +4,7 @@ import useSwr from 'swr';
 import { sortBy } from 'lodash';
 import { getLegend } from '@imaginerio/diachronic-atlas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBinoculars, faTimesCircle } from '@fortawesome/fontawesome-pro-solid';
+import { faBinoculars, faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
 import { Box, Stack, HStack, Flex, Spacer, Heading, Text, Spinner } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';

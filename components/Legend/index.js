@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faAngleLeft } from '@fortawesome/fontawesome-pro-regular';
+import { faAngleRight, faAngleLeft } from '@fortawesome/pro-regular-svg-icons';
 import { Box, Flex, Spacer, Text, Switch } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';

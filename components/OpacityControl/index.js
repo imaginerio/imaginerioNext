@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLayerGroup, faTimesCircle } from '@fortawesome/fontawesome-pro-regular';
+import { faLayerGroup, faTimesCircle } from '@fortawesome/pro-regular-svg-icons';
 import {
   Box,
   HStack,

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/fontawesome-pro-regular';
-import { faTimesCircle } from '@fortawesome/fontawesome-pro-solid';
+import { faSearch } from '@fortawesome/pro-regular-svg-icons';
+import { faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
 import { InputGroup, Input, InputRightAddon, InputRightElement } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
