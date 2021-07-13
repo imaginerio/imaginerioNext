@@ -58,9 +58,16 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
         <Grid templateColumns="480px 1fr" columnGap="50px">
           <Atlas
             year={year}
-            geojson={geojson}
+            geojson={[
+              {
+                id,
+                data: geojson,
+                paint: { 'fill-color': 'rgba(0,0,0,0.25)' },
+              },
+            ]}
             activeBasemap={collection === 'views' ? null : id}
-            size={{ width: 480, height: 360 }}
+            width={480}
+            height={360}
             mapStyle={mapStyle}
             viewport={{ latitude, longitude }}
             rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
