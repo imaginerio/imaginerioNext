@@ -21,6 +21,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
   const year = parseInt(findByLabel(metadata, 'Date'), 10);
   const title = findByLabel(metadata, 'Title') || 'Untitled';
   const { latitude, longitude } = geojson.features[0].properties;
+  const smapshot = findByLabel(metadata, 'Smapshot');
   return (
     <>
       <Head title={title} />
@@ -69,7 +70,11 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
             width={480}
             height={360}
             mapStyle={mapStyle}
-            viewport={{ latitude, longitude }}
+            viewport={{
+              latitude,
+              longitude,
+              zoom: 15,
+            }}
             rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
           />
           <Box>
@@ -105,13 +110,17 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
               })}
           </Box>
         </Grid>
-        <hr style={{ margin: '40px 0' }} />
-        <Heading size="md">3D Viewer</Heading>
-        <iframe
-          title="Smapshot"
-          src={`https://smapshot-beta.heig-vd.ch/owner/imaginerio/original_image/${id}/embed`}
-          style={{ width: '100%', minHeight: 500, height: '40vh', marginBottom: 80 }}
-        />
+        {smapshot && (
+          <>
+            <hr style={{ margin: '40px 0' }} />
+            <Heading size="md">3D Viewer</Heading>
+            <iframe
+              title="Smapshot"
+              src={`https://smapshot-beta.heig-vd.ch/owner/imaginerio/original_image/${id}/embed`}
+              style={{ width: '100%', minHeight: 500, height: '40vh', marginBottom: 80 }}
+            />
+          </>
+        )}
       </Container>
       <Footer />
     </>
