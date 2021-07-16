@@ -55,7 +55,13 @@ const ImageRow = ({
           <Flex align="center" justify="flex-end">
             <Box w={`${imgWidth}px`} h={`${imgHeight}px`}>
               {thumbnail && (
-                <Image src={thumbnail} height={imgHeight} width={imgWidth} layout="responsive" />
+                <Image
+                  src={thumbnail}
+                  height={imgHeight}
+                  width={imgWidth}
+                  layout="responsive"
+                  key={ssid}
+                />
               )}
             </Box>
           </Flex>

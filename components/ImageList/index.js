@@ -14,7 +14,10 @@ const ImageList = ({ size, activeImages, height, width }) => {
 
   const RowLayout = props =>
     size === 'full' ? <ImageRow {...props} rowWidth={width} /> : <ImageRowSmall {...props} />;
-  const Row = ({ index, style }) => <RowLayout {...activeImages[index]} style={style} />;
+
+  const Row = ({ index, style }) => (
+    <RowLayout {...activeImages[index]} style={style} key={activeImages[index].ssid} />
+  );
   Row.propTypes = {
     index: PropTypes.number.isRequired,
     style: PropTypes.shape().isRequired,
