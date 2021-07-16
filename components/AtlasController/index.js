@@ -43,10 +43,10 @@ const AtlasController = ({ width, height }) => {
     },
     dispatch,
   ] = useImages();
-  const viewpoints = activeImages.filter(i => i.collection === 'views');
 
   const [geojson, setGeojson] = useState([]);
   const [viewCone, setViewCone] = useState(null);
+  const [viewpoints, setViewpoints] = useState(activeImages.filter(i => i.collection === 'views'));
   const [featureJson, setFeatureJson] = useState(null);
   const [hoverSSID, setHoverSSID] = useState(null);
   const [probeImage, setProbeImage] = useState(null);
@@ -104,6 +104,13 @@ const AtlasController = ({ width, height }) => {
   }, [highlightedFeature]);
 
   useEffect(() => {
+    const newViewpoints = activeImages.filter(i => i.collection === 'views');
+    if (newViewpoints.length !== viewpoints.length) {
+      setViewpoints(newViewpoints);
+    }
+  }, [activeImages]);
+
+  useEffect(() => {
     const geo = [];
     if (viewCone) geo.push(viewCone);
     if (featureJson) geo.push(featureJson);
@@ -127,15 +134,15 @@ const AtlasController = ({ width, height }) => {
         viewport={{ longitude: -43.18, latitude: -22.9, zoom: 14.5 }}
         width={width}
         height={height}
-        viewpoints={showViewPoints ? viewpoints : null}
-        activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
-        geojson={geojson}
+        // viewpoints={showViewPoints ? viewpoints : null}
+        // activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
+        // geojson={geojson}
         rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
         basemapHandler={ssid =>
           dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)])
         }
         circleMarkers
-        hover={hover}
+        // hover={hover}
         opacity={opacity}
         highlightedLayer={highlightedLayer}
         bearing={heading}

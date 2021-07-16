@@ -99,6 +99,7 @@ function reducer(state, [type, payload]) {
         allImages: payload,
       };
     case 'SET_ACTIVE_IMAGES':
+      console.log('set');
       return {
         ...state,
         activeImages: payload,
