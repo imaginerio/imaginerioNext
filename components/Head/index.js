@@ -12,6 +12,12 @@ const Head = ({ title }) => (
       href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500&display=swap"
       rel="stylesheet"
     />
+    <script
+      async
+      defer
+      data-website-id="6cee94a9-7318-4916-b4e7-4b61d2771dec"
+      src="https://umami.axismaps.com/umami.js"
+    />
     <title>{title}</title>
   </NextHead>
 );
