@@ -40,6 +40,7 @@ const AtlasController = ({ width, height }) => {
       showViewPoints,
       highlightedLayer,
       highlightedFeature,
+      yearDragging,
     },
     dispatch,
   ] = useImages();
@@ -134,7 +135,7 @@ const AtlasController = ({ width, height }) => {
         viewport={{ longitude: -43.18, latitude: -22.9, zoom: 14.5 }}
         width={width}
         height={height}
-        viewpoints={showViewPoints ? viewpoints : null}
+        viewpoints={showViewPoints && !yearDragging ? viewpoints : null}
         activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
         geojson={geojson}
         rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}

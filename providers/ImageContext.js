@@ -59,6 +59,7 @@ const initialState = {
   collection: null,
   highlightedLayer: null,
   highlightedFeature: null,
+  yearDragging: false,
 };
 
 function reducer(state, [type, payload]) {
@@ -99,7 +100,6 @@ function reducer(state, [type, payload]) {
         allImages: payload,
       };
     case 'SET_ACTIVE_IMAGES':
-      console.log('set');
       return {
         ...state,
         activeImages: payload,
@@ -143,6 +143,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         highlightedFeature: payload,
+      };
+    case 'SET_YEAR_DRAGGING':
+      return {
+        ...state,
+        yearDragging: payload,
       };
     default:
       return state;

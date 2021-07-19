@@ -91,4 +91,4 @@ ImageController.propTypes = {
 
 ImageController.defaultProps = {};
 
-export default React.memo(ImageController);
+export default ImageController;

@@ -87,4 +87,4 @@ export async function getStaticProps({ params }) {
   return { props: { images, ...params } };
 }
 
-export default React.memo(Atlas);
+export default Atlas;
