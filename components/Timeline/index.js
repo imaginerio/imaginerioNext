@@ -6,6 +6,7 @@ import ReactSlider from 'react-slider';
 import { Grid, Input, Text, Flex, Heading } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
+import useDebouncedEffect from '../../utils/useDebouncedEffect';
 
 const markGap = 20;
 
@@ -56,12 +57,15 @@ const Timeline = ({ min, max, triple }) => {
     let newDates = sliderRange;
     setTempRange(sliderRange);
     setInputError(false);
+    dispatch(['SET_YEAR_DRAGGING', true]);
     if (triple) {
       newDates = [sliderRange[0], sliderRange[2]];
       dispatch(['YEAR', sliderRange[1]]);
     }
     dispatch(['DATES', newDates]);
   }, [sliderRange]);
+
+  useDebouncedEffect(() => dispatch(['SET_YEAR_DRAGGING', false]), [sliderRange], 1000);
 
   useEffect(() => {
     if (

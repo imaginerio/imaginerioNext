@@ -9,7 +9,7 @@ const Mirador = props => {
     mirador.viewer(config, plugins);
   });
 
-  return <div id={config.id} style={style} />;
+  return <div key={config.id} id={config.id} style={style} />;
 };
 
 Mirador.propTypes = {
