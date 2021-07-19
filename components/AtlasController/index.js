@@ -100,7 +100,7 @@ const AtlasController = ({ width, height }) => {
           return setFeatureJson({ id: highlightedFeature, data, type, paint });
         });
     } else {
-      setViewCone(null);
+      setFeatureJson(null);
     }
   }, [highlightedFeature]);
 
