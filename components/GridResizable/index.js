@@ -61,4 +61,4 @@ GridResizable.defaultProps = {
   maxWidth: Infinity,
 };
 
-export default GridResizable;
+export default React.memo(GridResizable);

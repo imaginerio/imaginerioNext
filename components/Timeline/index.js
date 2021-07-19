@@ -58,14 +58,9 @@ const Timeline = ({ min, max, triple }) => {
     setInputError(false);
     if (triple) {
       newDates = [sliderRange[0], sliderRange[2]];
-      if (sliderRange[1] !== year) {
-        dispatch(['YEAR', sliderRange[1]]);
-      }
+      dispatch(['YEAR', sliderRange[1]]);
     }
-    if (!isEqual(newDates, dates)) {
-      console.log(newDates, dates);
-      dispatch(['DATES', newDates]);
-    }
+    dispatch(['DATES', newDates]);
   }, [sliderRange]);
 
   useEffect(() => {

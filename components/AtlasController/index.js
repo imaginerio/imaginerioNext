@@ -134,15 +134,15 @@ const AtlasController = ({ width, height }) => {
         viewport={{ longitude: -43.18, latitude: -22.9, zoom: 14.5 }}
         width={width}
         height={height}
-        // viewpoints={showViewPoints ? viewpoints : null}
-        // activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
-        // geojson={geojson}
+        viewpoints={showViewPoints ? viewpoints : null}
+        activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
+        geojson={geojson}
         rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
         basemapHandler={ssid =>
           dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)])
         }
         circleMarkers
-        // hover={hover}
+        hover={hover}
         opacity={opacity}
         highlightedLayer={highlightedLayer}
         bearing={heading}
