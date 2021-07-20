@@ -25,7 +25,7 @@ const pages = {
       title: 'Terms and Conditions',
     },
     privacy: {
-      url: 'pt-imaginerio-privacy/6',
+      url: 'en-imaginerio-privacy/123',
       title: 'Privacy Policy',
     },
     providers: {
@@ -55,7 +55,7 @@ const pages = {
       menu: true,
     },
     terms: {
-      url: 'en-imaginerio-terms/4',
+      url: 'pt-imagenerio-terms/5',
       title: 'Terms and Conditions',
     },
     privacy: {
@@ -63,7 +63,7 @@ const pages = {
       title: 'Privacy Policy',
     },
     providers: {
-      url: 'en-imaginerio-providers/117',
+      url: 'pt-imaginerio-providers/124',
       title: 'Providers',
     },
   },
