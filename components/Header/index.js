@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Container, Flex, Spacer, HStack } from '@chakra-ui/react';
 
 import pages from '../../assets/config/pages';
+import translations from '../../assets/config/translations';
 
 const Header = () => {
   const { locale } = useRouter();
@@ -19,7 +20,7 @@ const Header = () => {
         </Link>
         <Spacer />
         <HStack spacing={30}>
-          <Link href="/">Home</Link>
+          <Link href="/">{translations.home[locale]}</Link>
           {Object.keys(pages[locale])
             .filter(p => pages[locale][p].menu)
             .map(page => (
@@ -27,8 +28,8 @@ const Header = () => {
                 {pages[locale][page].title}
               </Link>
             ))}
-          <Link href={`/${locale}/iconography`}>Iconography</Link>
-          <Link href={`/${locale}/map`}>Map</Link>
+          <Link href={`/${locale}/iconography`}>{translations.iconography[locale]}</Link>
+          <Link href={`/${locale}/map`}>{translations.map[locale]}</Link>
         </HStack>
       </Flex>
     </Container>
