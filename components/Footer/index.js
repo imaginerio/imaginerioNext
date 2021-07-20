@@ -4,16 +4,19 @@ import { useRouter } from 'next/router';
 import { Container, Grid, Box, Heading, Text } from '@chakra-ui/react';
 
 import pages from '../../assets/config/pages';
+import translations from '../../assets/config/translations';
 
 const ContactColumn = () => (
   <Box>
     <Heading size="md">imagineRio</Heading>
     <Text>
-      1234 Street Address
+      Spatial Studies Lab
       <br />
-      Houston, TX
+      Rice University
       <br />
-      12345
+      Baker Hall 264, 6100 Main St
+      <br />
+      Houston, TX 77005
       <br />
       United States
     </Text>
@@ -26,7 +29,7 @@ const NavigationColumn = () => {
     <Box>
       <Heading size="md">Menu</Heading>
       <Text>
-        <Link href="/">Home</Link>
+        <Link href="/">{translations.home[locale]}</Link>
       </Text>
       {Object.keys(pages[locale]).map(page => (
         <Text key={page}>
@@ -36,44 +39,55 @@ const NavigationColumn = () => {
         </Text>
       ))}
       <Text>
-        <Link href={`/${locale}/iconography`}>Iconography</Link>
+        <Link href={`/${locale}/iconography`}>{translations.iconography[locale]}</Link>
       </Text>
       <Text>
-        <Link href={`/${locale}/map`}>Map</Link>
+        <Link href={`/${locale}/map`}>{translations.map[locale]}</Link>
       </Text>
     </Box>
   );
 };
 
-const Footer = () => (
-  <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
-    <Container>
-      <Grid templateColumns="1fr repeat(4, 150px)" columnGap="40px">
-        <ContactColumn />
-        <Box>
-          <Heading size="md">Language</Heading>
-          <Text>
-            <Link href="/en">English</Link>
-          </Text>
-          <Text>
-            <Link href="/pt">Português</Link>
-          </Text>
-        </Box>
-        <NavigationColumn />
-        <Box>
-          <Heading size="md">Social Media</Heading>
-          <Text>Facebook</Text>
-          <Text>Twitter</Text>
-          <Text>Instagram</Text>
-        </Box>
-        <Box>
-          <Heading size="md">Contact</Heading>
-          <Text>Email</Text>
-          <Text>Phone</Text>
-        </Box>
-      </Grid>
-    </Container>
-  </section>
-);
+const Footer = () => {
+  const { locale } = useRouter();
+  return (
+    <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
+      <Container>
+        <Grid templateColumns="1fr repeat(4, 150px)" columnGap="40px">
+          <ContactColumn />
+          <Box>
+            <Heading size="md">{translations.language[locale]}</Heading>
+            <Text>
+              <Link href="/en">English</Link>
+            </Text>
+            <Text>
+              <Link href="/pt">Português</Link>
+            </Text>
+          </Box>
+          <NavigationColumn />
+          <Box>
+            <Heading size="md">Legal</Heading>
+            <Text>Facebook</Text>
+            <Text>Twitter</Text>
+            <Text>Instagram</Text>
+          </Box>
+          <Box>
+            <Heading size="md">{translations.contact[locale]}</Heading>
+            <Text>
+              <Link href="mailto:imaginerio@rice.edu" textTransform="none">
+                imaginerio@rice.edu
+              </Link>
+            </Text>
+            <Text>
+              <Link href="https://forum.imaginerio.org" target="_blank">
+                {translations.forum[locale]}
+              </Link>
+            </Text>
+          </Box>
+        </Grid>
+      </Container>
+    </section>
+  );
+};
 
 export default Footer;

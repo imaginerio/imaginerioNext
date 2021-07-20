@@ -71,6 +71,18 @@ const translation = {
     en: 'Browse iconography',
     pt: 'Explore a iconografia',
   },
+  language: {
+    en: 'Language',
+    pt: 'Idioma',
+  },
+  contact: {
+    en: 'Contact',
+    pt: 'Contato',
+  },
+  forum: {
+    en: 'Forum',
+    pt: 'Fórum',
+  },
 };
 
 export default translation;

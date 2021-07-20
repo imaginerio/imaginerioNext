@@ -15,7 +15,6 @@ export default extendTheme({
       },
       a: {
         color: '#1580D1',
-        textTransform: 'capitalize',
         _hover: {
           textDecoration: 'underline',
         },

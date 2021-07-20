@@ -21,8 +21,8 @@ const Header = () => {
         <HStack spacing={30}>
           <Link href="/">Home</Link>
           {Object.keys(pages[locale]).map(page => (
-            <Link key={page} href={`${page}`} style={{ textTransform: 'capitalize' }}>
-              {page}
+            <Link key={page} href={`${page}`}>
+              <span style={{ textTransform: 'capitalize' }}>{page}</span>
             </Link>
           ))}
           <Link href={`/${locale}/iconography`}>Iconography</Link>
