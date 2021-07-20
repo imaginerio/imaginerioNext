@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Container, Grid, Box, Heading, Text } from '@chakra-ui/react';
+import { Container, Grid, Box, Heading, Text, HStack, Image } from '@chakra-ui/react';
 
 import pages from '../../assets/config/pages';
 import translations from '../../assets/config/translations';
@@ -89,6 +89,17 @@ const Footer = () => {
             </Text>
           </Box>
         </Grid>
+        <HStack borderTop="1px solid #eee" mt={5}>
+          <a href="https://spatialstudieslab.rice.edu/" target="_blank" rel="noreferrer">
+            <Image src="/img/logos/rice.png" h="45px" mr={5} />
+          </a>
+          <a href="https://www.axismaps.com" target="_blank" rel="noreferrer">
+            <Image src="/img/logos/axis.png" h="80px" mr={5} />
+          </a>
+          <a href="https://ims.com.br" target="_blank" rel="noreferrer">
+            <Image src="/img/logos/ims.png" h="80px" mr={5} />
+          </a>
+        </HStack>
       </Container>
     </section>
   );
