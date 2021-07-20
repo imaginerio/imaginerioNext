@@ -31,11 +31,13 @@ const NavigationColumn = () => {
       <Text>
         <Link href="/">{translations.home[locale]}</Link>
       </Text>
-      {Object.keys(pages[locale]).map(page => (
-        <Text key={page}>
-          <Link href={`${page}`}>{pages[locale][page].title}</Link>
-        </Text>
-      ))}
+      {Object.keys(pages[locale])
+        .filter(p => pages[locale][p].menu)
+        .map(page => (
+          <Text key={page}>
+            <Link href={`${page}`}>{pages[locale][page].title}</Link>
+          </Text>
+        ))}
       <Text>
         <Link href={`/${locale}/iconography`}>{translations.iconography[locale]}</Link>
       </Text>
@@ -51,8 +53,9 @@ const Footer = () => {
   return (
     <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
       <Container>
-        <Grid templateColumns="1fr repeat(4, 130px)" columnGap="10px" fontSize={14}>
+        <Grid templateColumns="1fr repeat(4, 140px)" columnGap="5px" fontSize={14}>
           <ContactColumn />
+          <NavigationColumn />
           <Box>
             <Heading size="md">{translations.language[locale]}</Heading>
             <Text>
@@ -62,12 +65,15 @@ const Footer = () => {
               <Link href="/pt">Português</Link>
             </Text>
           </Box>
-          <NavigationColumn />
           <Box>
             <Heading size="md">Legal</Heading>
-            <Text>Facebook</Text>
-            <Text>Twitter</Text>
-            <Text>Instagram</Text>
+            {Object.keys(pages[locale])
+              .filter(p => !pages[locale][p].menu)
+              .map(page => (
+                <Text key={page}>
+                  <Link href={`${page}`}>{pages[locale][page].title}</Link>
+                </Text>
+              ))}
           </Box>
           <Box>
             <Heading size="md">{translations.contact[locale]}</Heading>
