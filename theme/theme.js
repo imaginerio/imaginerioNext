@@ -15,6 +15,7 @@ export default extendTheme({
       },
       a: {
         color: '#1580D1',
+        cursor: 'pointer',
         _hover: {
           textDecoration: 'underline',
         },

@@ -33,9 +33,7 @@ const NavigationColumn = () => {
       </Text>
       {Object.keys(pages[locale]).map(page => (
         <Text key={page}>
-          <Link href={`${page}`} style={{ textTransform: 'capitalize' }}>
-            {page}
-          </Link>
+          <Link href={`${page}`}>{pages[locale][page].title}</Link>
         </Text>
       ))}
       <Text>
@@ -53,7 +51,7 @@ const Footer = () => {
   return (
     <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
       <Container>
-        <Grid templateColumns="1fr repeat(4, 150px)" columnGap="40px">
+        <Grid templateColumns="1fr repeat(4, 130px)" columnGap="10px" fontSize={14}>
           <ContactColumn />
           <Box>
             <Heading size="md">{translations.language[locale]}</Heading>

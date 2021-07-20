@@ -12,9 +12,9 @@ import Footer from '../components/Footer';
 
 const ParsedContent = ({ content }) => parse(content);
 
-const About = ({ content }) => (
+const About = ({ content, title }) => (
   <>
-    <Head title="imagineRio" />
+    <Head title={`imagineRio - ${title}`} />
     <Header />
     <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
       <Container>
@@ -27,6 +27,7 @@ const About = ({ content }) => (
 
 About.propTypes = {
   content: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export async function getStaticPaths() {
@@ -48,13 +49,15 @@ export async function getStaticProps({ params, locale }) {
     data: {
       post_stream: { posts },
     },
-  } = await axios.get(`${process.env.NEXT_PUBLIC_PAGE_URL}${pages[locale][params.page]}.json`, {
+  } = await axios.get(`${process.env.NEXT_PUBLIC_PAGE_URL}${pages[locale][params.page].url}.json`, {
     headers: {
       'Api-Key': process.env.NEXT_PUBLIC_PAGE_API,
       'Api-Username': 'system',
     },
   });
-  return { props: { content: posts[0].cooked, ...params } };
+  return {
+    props: { content: posts[0].cooked, title: pages[locale][params.page].title, ...params },
+  };
 }
 
 export default About;
