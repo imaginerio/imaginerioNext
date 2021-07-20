@@ -22,7 +22,7 @@ const pages = {
     },
     terms: {
       url: 'en-imaginerio-terms/4',
-      title: 'Terms and Conditions',
+      title: 'Terms of Use',
     },
     privacy: {
       url: 'en-imaginerio-privacy/123',
@@ -56,15 +56,15 @@ const pages = {
     },
     terms: {
       url: 'pt-imagenerio-terms/5',
-      title: 'Terms and Conditions',
+      title: 'Termos de Uso',
     },
     privacy: {
       url: 'pt-imaginerio-privacy/6',
-      title: 'Privacy Policy',
+      title: 'Política de Privacidade',
     },
     providers: {
       url: 'pt-imaginerio-providers/124',
-      title: 'Providers',
+      title: 'Provedores',
     },
   },
 };
