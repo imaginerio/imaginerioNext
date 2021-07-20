@@ -108,6 +108,18 @@ export default extendTheme({
       baseStyle: {
         color: '#1580D1',
       },
+      variants: {
+        header: {
+          fontSize: '15px',
+          color: 'black',
+          textDecorationThickness: '3px',
+          textUnderlineOffset: '5px',
+          _hover: {
+            textDecorationThickness: '3px',
+            textUnderlineOffset: '5px',
+          },
+        },
+      },
     },
     Container: {
       baseStyle: {
