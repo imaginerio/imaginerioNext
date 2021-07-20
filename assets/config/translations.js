@@ -83,6 +83,10 @@ const translation = {
     en: 'Forum',
     pt: 'Fórum',
   },
+  description: {
+    en: 'A searchable digital atlas that illustrates the social and urban evolution of Rio de Janeiro, as it existed and as it was imagined.',
+    pt: 'Um atlas digital pesquisável que ilustra a evolução social e urbana do Rio de Janeiro ao longo de toda a sua história, como ela existiu e como foi imaginada.',
+  },
 };
 
 export default translation;
