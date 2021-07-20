@@ -22,10 +22,10 @@ const pages = {
     },
     terms: {
       url: 'en-imaginerio-terms/4',
-      title: 'Terms and Conditions',
+      title: 'Terms of Use',
     },
     privacy: {
-      url: 'pt-imaginerio-privacy/6',
+      url: 'en-imaginerio-privacy/123',
       title: 'Privacy Policy',
     },
     providers: {
@@ -55,16 +55,16 @@ const pages = {
       menu: true,
     },
     terms: {
-      url: 'en-imaginerio-terms/4',
-      title: 'Terms and Conditions',
+      url: 'pt-imagenerio-terms/5',
+      title: 'Termos de Uso',
     },
     privacy: {
       url: 'pt-imaginerio-privacy/6',
-      title: 'Privacy Policy',
+      title: 'Política de Privacidade',
     },
     providers: {
-      url: 'en-imaginerio-providers/117',
-      title: 'Providers',
+      url: 'pt-imaginerio-providers/124',
+      title: 'Provedores',
     },
   },
 };
