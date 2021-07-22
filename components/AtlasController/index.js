@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import useSWR from 'swr';
+import { flatten } from 'lodash';
 import { Atlas } from '@imaginerio/diachronic-atlas';
 import { Box } from '@chakra-ui/react';
 
@@ -41,6 +42,7 @@ const AtlasController = ({ width, height }) => {
       highlightedLayer,
       highlightedFeature,
       yearDragging,
+      drawSearch,
     },
     dispatch,
   ] = useImages();
@@ -54,6 +56,7 @@ const AtlasController = ({ width, height }) => {
   const [probePosition, setProbePosition] = useState(null);
   const [opacity, setOpacity] = useState(1);
   const [heading, setHeading] = useState(0);
+  const [searchCoords, setSearchCoords] = useState(null);
 
   const { data: hover } = useSWR(hoverSSID, fetcher);
 
@@ -126,6 +129,19 @@ const AtlasController = ({ width, height }) => {
     }
   }, [hoverSSID]);
 
+  useEffect(() => {
+    if (searchCoords) {
+      axios
+        .get(
+          // eslint-disable-next-line prettier/prettier
+          `${process.env.NEXT_PUBLIC_SEARCH_API}/probe/${flatten(searchCoords).join(',')}?year=${year}`
+        )
+        .then(({ data }) => {
+          console.log(data);
+        });
+    }
+  }, [searchCoords]);
+
   return (
     <Box>
       <Legend />
@@ -147,6 +163,8 @@ const AtlasController = ({ width, height }) => {
         opacity={opacity}
         highlightedLayer={highlightedLayer}
         bearing={heading}
+        isDrawing={drawSearch}
+        drawBoxHandler={setSearchCoords}
         hoverHandler={e => {
           if (e.features.length) {
             setProbePosition(e.center);

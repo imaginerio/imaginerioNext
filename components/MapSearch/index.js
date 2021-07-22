@@ -13,6 +13,7 @@ import {
   Flex,
   Spinner,
   Heading,
+  IconButton,
 } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -21,7 +22,7 @@ import useDebouncedEffect from '../../utils/useDebouncedEffect';
 import SearchResults from './SearchResults';
 
 const MapSearch = ({ handler }) => {
-  const [{ year }] = useImages();
+  const [{ year, drawSearch }, dispatch] = useImages();
   const [string, setString] = useState('');
   const [searchResults, setSearchResults] = useState(null);
   const [searchActive, setSearchActive] = useState(false);
@@ -70,7 +71,14 @@ const MapSearch = ({ handler }) => {
             _focus={{ border: 'none' }}
           />
         </InputGroup>
-        <FontAwesomeIcon icon={faVectorSquare} />
+        <IconButton
+          variant={drawSearch ? null : 'outline'}
+          colorScheme="blackAlpha"
+          color="black"
+          border="none"
+          icon={<FontAwesomeIcon icon={faVectorSquare} />}
+          onClick={() => dispatch(['SET_DRAW_SEARCH', !drawSearch])}
+        />
       </HStack>
       {searchActive && !searchResults && (
         <Flex alignItems="center" justifyContent="center" mt={100}>

@@ -60,6 +60,7 @@ const initialState = {
   highlightedLayer: null,
   highlightedFeature: null,
   yearDragging: false,
+  drawSearch: false,
 };
 
 function reducer(state, [type, payload]) {
@@ -148,6 +149,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         yearDragging: payload,
+      };
+    case 'SET_DRAW_SEARCH':
+      return {
+        ...state,
+        drawSearch: payload,
       };
     default:
       return state;
