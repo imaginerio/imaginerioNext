@@ -83,7 +83,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
             />
             <Button
               as="a"
-              href={`/map?image=${id}`}
+              href={`/map#${id}`}
               colorScheme="blue"
               rightIcon={<FontAwesomeIcon icon={faExternalLink} />}
             >
