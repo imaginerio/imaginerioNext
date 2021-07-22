@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/pro-regular-svg-icons';
+import { faExternalLink } from '@fortawesome/pro-solid-svg-icons';
 import { Grid, Container, Box } from '@chakra-ui/react';
 
 import ImageSearch from '../ImageSearch';
@@ -38,12 +40,28 @@ const ImageController = ({ imageWidth, height }) => {
               >
                 <FontAwesomeIcon icon={faTimesCircle} width="20px" />
               </Box>
+              <Box
+                float="right"
+                pos="absolute"
+                top="13px"
+                right="15px"
+                color="#666"
+                cursor="pointer"
+                zIndex={12}
+                _hover={{
+                  color: 'black',
+                }}
+              >
+                <Link href={`/iconography/${selectedImage.collection}/${selectedImage.ssid}`}>
+                  <FontAwesomeIcon icon={faExternalLink} width="20px" />
+                </Link>
+              </Box>
               <Mirador
                 config={{
                   id: 'mirador',
                   window: {
                     allowClose: false, // Configure if windows can be closed or not
-                    allowFullscreen: true, // Configure to show a "fullscreen" button in the WindowTopBar
+                    allowFullscreen: false, // Configure to show a "fullscreen" button in the WindowTopBar
                     allowMaximize: false, // Configure if windows can be maximized or not
                     allowTopMenuButton: false,
                   },

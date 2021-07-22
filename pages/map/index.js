@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { Grid, Flex, Box, Link } from '@chakra-ui/react';
 
 import Head from '../../components/Head';
@@ -20,7 +21,18 @@ const Atlas = ({ images }) => {
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
   height -= 90;
 
-  const [, dispatch] = useImages();
+  const [{ allImages }, dispatch] = useImages();
+
+  const { query } = useRouter();
+  useEffect(() => {
+    if (query.image) {
+      const newImage = allImages.find(image => image.ssid === query.image);
+      if (newImage) {
+        dispatch(['SET_SELECTED_IMAGE', newImage]);
+      }
+    }
+  }, [query.image]);
+
   useEffect(() => {
     dispatch(['SET_ALL_IMAGES', images]);
     dispatch(['SET_USE_LINKS', false]);
