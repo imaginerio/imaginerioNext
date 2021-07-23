@@ -56,7 +56,6 @@ const AtlasController = ({ width, height }) => {
   const [probePosition, setProbePosition] = useState(null);
   const [opacity, setOpacity] = useState(1);
   const [heading, setHeading] = useState(0);
-  const [searchCoords, setSearchCoords] = useState(null);
 
   const { data: hover } = useSWR(hoverSSID, fetcher);
 
@@ -129,19 +128,6 @@ const AtlasController = ({ width, height }) => {
     }
   }, [hoverSSID]);
 
-  useEffect(() => {
-    if (searchCoords) {
-      axios
-        .get(
-          // eslint-disable-next-line prettier/prettier
-          `${process.env.NEXT_PUBLIC_SEARCH_API}/probe/${flatten(searchCoords).join(',')}?year=${year}`
-        )
-        .then(({ data }) => {
-          console.log(data);
-        });
-    }
-  }, [searchCoords]);
-
   return (
     <Box>
       <Legend />
@@ -164,7 +150,7 @@ const AtlasController = ({ width, height }) => {
         highlightedLayer={highlightedLayer}
         bearing={heading}
         isDrawing={drawSearch}
-        drawBoxHandler={setSearchCoords}
+        drawBoxHandler={e => dispatch(['SET_DRAW_SEARCH_COORDS', flatten(e)])}
         hoverHandler={e => {
           if (e.features.length) {
             setProbePosition(e.center);

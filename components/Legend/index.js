@@ -9,7 +9,7 @@ import LegendSwatches from './LegendSwatches';
 import MapSearch from '../MapSearch';
 
 const Legend = () => {
-  const [{ year, showViewPoints }, dispatch] = useImages();
+  const [{ year, showViewPoints, drawSearch }, dispatch] = useImages();
   const [legendOpen, setLegendOpen] = useState(false);
   const [searchResultsActive, setSearchResultsActive] = useState(false);
 
@@ -48,7 +48,7 @@ const Legend = () => {
             boxShadow="2px 0 3px rgba(0,0,0,0.15)"
           >
             <MapSearch handler={setSearchResultsActive} />
-            {!searchResultsActive && (
+            {!searchResultsActive && !drawSearch && (
               <>
                 <Flex alignItems="center" mt={2}>
                   <Switch

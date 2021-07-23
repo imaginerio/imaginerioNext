@@ -22,10 +22,11 @@ import useDebouncedEffect from '../../utils/useDebouncedEffect';
 import SearchResults from './SearchResults';
 
 const MapSearch = ({ handler }) => {
-  const [{ year, drawSearch }, dispatch] = useImages();
+  const [{ year, drawSearch, drawSearchCoords }, dispatch] = useImages();
   const [string, setString] = useState('');
   const [searchResults, setSearchResults] = useState(null);
   const [searchActive, setSearchActive] = useState(false);
+  const [drawToggle, setDrawToggle] = useState(drawSearch);
 
   useDebouncedEffect(
     () => {
@@ -39,10 +40,30 @@ const MapSearch = ({ handler }) => {
     [string],
     500
   );
+
+  useEffect(() => {
+    if (drawSearchCoords) {
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_SEARCH_API}/probe/${drawSearchCoords.join(',')}?year=${year}`
+        )
+        .then(({ data }) => setSearchResults(data));
+    }
+  }, [drawSearchCoords]);
+
   useEffect(() => {
     setSearchActive(Boolean(string));
     setSearchResults(null);
+    dispatch(['SET_DRAW_SEARCH', false]);
   }, [string]);
+
+  useEffect(() => {
+    dispatch(['SET_DRAW_SEARCH', drawToggle]);
+    if (!drawToggle) {
+      setSearchResults(null);
+    }
+  }, [drawToggle]);
+
   useEffect(() => handler(searchActive), [searchActive]);
 
   return (
@@ -77,7 +98,7 @@ const MapSearch = ({ handler }) => {
           color="black"
           border="none"
           icon={<FontAwesomeIcon icon={faVectorSquare} />}
-          onClick={() => dispatch(['SET_DRAW_SEARCH', !drawSearch])}
+          onClick={() => setDrawToggle(!drawToggle)}
         />
       </HStack>
       {searchActive && !searchResults && (
@@ -89,6 +110,16 @@ const MapSearch = ({ handler }) => {
       {searchActive && searchResults && searchResults.length === 0 && (
         <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
           {`No results found for "${string}" in ${year}. Please try your search again.`}
+        </Heading>
+      )}
+      {drawSearch && !searchResults && (
+        <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
+          Click and drag on the map to draw a search area to identify features.
+        </Heading>
+      )}
+      {drawSearch && searchResults && searchResults.length === 0 && (
+        <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
+          {`No results found for in ${year}. Please try your search again.`}
         </Heading>
       )}
     </>

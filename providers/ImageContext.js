@@ -61,6 +61,7 @@ const initialState = {
   highlightedFeature: null,
   yearDragging: false,
   drawSearch: false,
+  drawSearchCoords: null,
 };
 
 function reducer(state, [type, payload]) {
@@ -154,6 +155,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         drawSearch: payload,
+      };
+    case 'SET_DRAW_SEARCH_COORDS':
+      return {
+        ...state,
+        drawSearchCoords: payload,
       };
     default:
       return state;
