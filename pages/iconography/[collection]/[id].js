@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Container, Grid, Box, Heading, Text, Flex, Spacer } from '@chakra-ui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExternalLink } from '@fortawesome/pro-light-svg-icons';
+import { Container, Grid, Box, Heading, Text, Flex, Spacer, Button, Stack } from '@chakra-ui/react';
 import { Atlas } from '@imaginerio/diachronic-atlas';
 
 import Head from '../../../components/Head';
@@ -22,6 +24,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
   const title = findByLabel(metadata, 'Title') || 'Untitled';
   const { latitude, longitude } = geojson.features[0].properties;
   const smapshot = findByLabel(metadata, 'Smapshot');
+
   return (
     <>
       <Head title={title} />
@@ -57,31 +60,45 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
         <Text my="80px">{findByLabel(metadata, 'Description')}</Text>
 
         <Grid templateColumns="480px 1fr" columnGap="50px">
-          <Atlas
-            year={year}
-            geojson={[
-              {
-                id,
-                data: geojson,
-                paint: { 'fill-color': 'rgba(0,0,0,0.25)' },
-              },
-            ]}
-            activeBasemap={collection === 'views' ? null : id}
-            width={480}
-            height={360}
-            mapStyle={mapStyle}
-            viewport={{
-              latitude,
-              longitude,
-              zoom: 15,
-            }}
-            rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
-          />
+          <Stack>
+            <Atlas
+              year={year}
+              geojson={[
+                {
+                  id,
+                  data: geojson,
+                  paint: { 'fill-color': 'rgba(0,0,0,0.25)' },
+                },
+              ]}
+              activeBasemap={collection === 'views' ? null : id}
+              width={480}
+              height={360}
+              mapStyle={mapStyle}
+              viewport={{
+                latitude,
+                longitude,
+                zoom: 15,
+              }}
+              rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
+            />
+            <Button
+              as="a"
+              href={`/map#${id}`}
+              colorScheme="blue"
+              rightIcon={<FontAwesomeIcon icon={faExternalLink} />}
+            >
+              View image in map
+            </Button>
+          </Stack>
           <Box>
             <Heading size="sm">Properties</Heading>
             {metadata
               .filter(
-                m => m.label !== 'Title' && m.label !== 'Identifier' && m.label !== 'Description'
+                m =>
+                  m.label !== 'Title' &&
+                  m.label !== 'Identifier' &&
+                  m.label !== 'Description' &&
+                  m.label !== 'Smapshot'
               )
               .map(m => {
                 let { link, value } = m;

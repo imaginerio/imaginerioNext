@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import useSWR from 'swr';
+import { useRouter } from 'next/router';
 import { Atlas } from '@imaginerio/diachronic-atlas';
 import { Box } from '@chakra-ui/react';
 
@@ -45,6 +46,17 @@ const AtlasController = ({ width, height }) => {
     dispatch,
   ] = useImages();
 
+  const router = useRouter();
+  useEffect(() => {
+    const hash = router.asPath.split('#')[1];
+    if (hash) {
+      const newImage = allImages.find(image => image.ssid === hash);
+      if (newImage) {
+        dispatch(['SET_SELECTED_IMAGE', newImage]);
+      }
+    }
+  }, []);
+
   const [geojson, setGeojson] = useState([]);
   const [viewCone, setViewCone] = useState(null);
   const [viewpoints, setViewpoints] = useState(activeImages.filter(i => i.collection === 'views'));
@@ -69,8 +81,10 @@ const AtlasController = ({ width, height }) => {
             paint: { 'fill-color': 'rgba(0,0,0,0.25)' },
           })
         );
+      router.replace(`${router.basePath}#${selectedImage.ssid}`);
     } else {
       setViewCone(null);
+      router.replace(router.basePath);
     }
   }, [selectedImage]);
 

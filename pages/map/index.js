@@ -21,6 +21,7 @@ const Atlas = ({ images }) => {
   height -= 90;
 
   const [, dispatch] = useImages();
+
   useEffect(() => {
     dispatch(['SET_ALL_IMAGES', images]);
     dispatch(['SET_USE_LINKS', false]);
