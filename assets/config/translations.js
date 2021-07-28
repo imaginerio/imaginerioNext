@@ -7,6 +7,10 @@ const translation = {
     en: 'Iconography',
     pt: 'Iconografia',
   },
+  year: {
+    en: 'Year',
+    pt: 'Ano',
+  },
   map: {
     en: 'Map',
     pt: 'Mapa',
@@ -86,6 +90,30 @@ const translation = {
   description: {
     en: 'A searchable digital atlas that illustrates the social and urban evolution of Rio de Janeiro, as it existed and as it was imagined.',
     pt: 'Um atlas digital pesquisável que ilustra a evolução social e urbana do Rio de Janeiro ao longo de toda a sua história, como ela existiu e como foi imaginada.',
+  },
+  noResults: {
+    en: 'No results found for',
+    pt: 'Nenhum resultado encontrado para',
+  },
+  tryAgain: {
+    en: 'Please try your search again',
+    pt: 'Por favor, tente sua busca novamente',
+  },
+  searchPlace: {
+    en: 'Search by location',
+    pt: 'Pesquisar por localização',
+  },
+  searchName: {
+    en: 'Search by name',
+    pt: 'Pesquisar por nome',
+  },
+  mapContents: {
+    en: 'Map Contents',
+    pt: 'Conteúdo do Mapa',
+  },
+  showViews: {
+    en: 'Show view points',
+    pt: 'Mostrar pontos de vista',
   },
 };
 

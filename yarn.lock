@@ -984,12 +984,13 @@
   resolved "https://registry.yarnpkg.com/@iiif/vocabulary/-/vocabulary-1.0.19.tgz#c735577bdcbafcb988471391b9e39d772662de62"
   integrity sha512-5XjrB81bVcu80YcYz5Lxcvvio+PJljiZt3pNW8ACbL3OoL+8QoCJ/dwivdYEcoyEck2I8cEMgAZYEOuEZq+fgg==
 
-"@imaginerio/diachronic-atlas@^0.7.6":
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.7.6.tgz#7c0c4ab352e9b3dba32b4731f4c5c202c98ab221"
-  integrity sha512-RzxHoLOsCU8kMVagHp03CFKPObD0tUZ6tcYnylGfHgL1tQ5p9rCggtn8cFFXzdZBLdchRs73IlMc/HFMlnwN4g==
+"@imaginerio/diachronic-atlas@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.8.1.tgz#b0686c35b7de977e7ed135877f6dd58c393dd185"
+  integrity sha512-DK+NKHReynhw9C9eCJAF6Gvg5yalFaSxQChqATYJiX760ei6bbDnvwOWs6oy2yZzufnOyrUQ7P5r8vbALng/Mw==
   dependencies:
     "@turf/bbox" "^6.3.0"
+    "@turf/bbox-polygon" "^6.5.0"
     d3 "^6.7.0"
     lodash "^4.17.21"
     react-map-gl "5"
@@ -1307,6 +1308,13 @@
   dependencies:
     object-assign "^4.1.1"
 
+"@turf/bbox-polygon@^6.5.0":
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/@turf/bbox-polygon/-/bbox-polygon-6.5.0.tgz#f18128b012eedfa860a521d8f2b3779cc0801032"
+  integrity sha512-+/r0NyL1lOG3zKZmmf6L8ommU07HliP4dgYToMoTxqzsWzyLjaj/OzgQ8rBmv703WJX+aS6yCmLuIhYqyufyuw==
+  dependencies:
+    "@turf/helpers" "^6.5.0"
+
 "@turf/bbox@^6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-6.3.0.tgz#0e1a9b59f32d6a2a40c806f54cbaa73575bead25"
@@ -1319,6 +1327,11 @@
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.3.0.tgz#87f90f806c3f8ad6385ef8d2041d3662bf3c9fb1"
   integrity sha512-kr6KuD4Z0GZ30tblTEvi90rvvVNlKieXuMC8CTzE/rVQb0/f/Cb29zCXxTD7giQTEQY/P2nRW23wEqqyNHulCg==
+
+"@turf/helpers@^6.5.0":
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.5.0.tgz#f79af094bd6b8ce7ed2bd3e089a8493ee6cae82e"
+  integrity sha512-VbI1dV5bLFzohYYdgqwikdMVpe7pJ9X3E+dlr425wa2/sMJqYDhTO++ec38/pcPvPE6oD9WEEeU3Xu3gza+VPw==
 
 "@turf/meta@^6.3.0":
   version "6.3.0"

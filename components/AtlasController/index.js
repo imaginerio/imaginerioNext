@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import { flatten } from 'lodash';
 import { Atlas } from '@imaginerio/diachronic-atlas';
 import { Box } from '@chakra-ui/react';
 
@@ -42,6 +43,7 @@ const AtlasController = ({ width, height }) => {
       highlightedLayer,
       highlightedFeature,
       yearDragging,
+      drawSearch,
     },
     dispatch,
   ] = useImages();
@@ -161,6 +163,8 @@ const AtlasController = ({ width, height }) => {
         opacity={opacity}
         highlightedLayer={highlightedLayer}
         bearing={heading}
+        isDrawing={drawSearch}
+        drawBoxHandler={e => dispatch(['SET_DRAW_SEARCH_COORDS', flatten(e)])}
         hoverHandler={e => {
           if (e.features.length) {
             setProbePosition(e.center);
