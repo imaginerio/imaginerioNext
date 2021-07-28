@@ -33,7 +33,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
         <Breadcrumbs collection={collection} title={findByLabel(metadata, 'Title')} />
         <Heading>{title}</Heading>
         <Text mb="40px">
-          <span>Indentifier: </span>
+          <span>Identifier: </span>
           <span style={{ opacity: 0.6 }}>{id}</span>
         </Text>
         <Mirador
