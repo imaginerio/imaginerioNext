@@ -74,7 +74,7 @@ const ImageController = ({ imageWidth, height }) => {
                   },
                   windows: [
                     {
-                      manifestId: `https://images.imaginerio.org/iiif/3/${selectedImage.ssid}/manifest`,
+                      manifestId: `${process.env.NEXT_PUBLIC_IIIF}${selectedImage.ssid}/manifest`,
                     },
                   ],
                 }}
