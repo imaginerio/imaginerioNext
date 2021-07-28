@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/pro-light-svg-icons';
 import { faSearch, faVectorSquare } from '@fortawesome/pro-regular-svg-icons';
-
 import {
   InputGroup,
   Input,
@@ -14,14 +14,17 @@ import {
   Spinner,
   Heading,
   IconButton,
+  Tooltip,
 } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import useDebouncedEffect from '../../utils/useDebouncedEffect';
 
 import SearchResults from './SearchResults';
+import translations from '../../assets/config/translations';
 
 const MapSearch = ({ handler }) => {
+  const { locale } = useRouter();
   const [{ year, drawSearch, drawSearchCoords }, dispatch] = useImages();
   const [string, setString] = useState('');
   const [searchResults, setSearchResults] = useState(null);
@@ -85,21 +88,23 @@ const MapSearch = ({ handler }) => {
             )}
           </InputLeftElement>
           <Input
-            placeholder="Search map..."
+            placeholder={translations.searchName[locale]}
             value={string}
             onChange={e => setString(e.target.value)}
             border="none"
             _focus={{ border: 'none' }}
           />
         </InputGroup>
-        <IconButton
-          variant={drawSearch ? null : 'outline'}
-          colorScheme="blackAlpha"
-          color="black"
-          border="none"
-          icon={<FontAwesomeIcon icon={faVectorSquare} />}
-          onClick={() => setDrawToggle(!drawToggle)}
-        />
+        <Tooltip hasArrow label={translations.searchPlace[locale]}>
+          <IconButton
+            variant={drawSearch ? null : 'outline'}
+            colorScheme="blackAlpha"
+            color="black"
+            border="none"
+            icon={<FontAwesomeIcon icon={faVectorSquare} />}
+            onClick={() => setDrawToggle(!drawToggle)}
+          />
+        </Tooltip>
       </HStack>
       {searchActive && !searchResults && (
         <Flex alignItems="center" justifyContent="center" mt={100}>
@@ -109,7 +114,7 @@ const MapSearch = ({ handler }) => {
       {searchResults && searchResults.length > 0 && <SearchResults results={searchResults} />}
       {searchActive && searchResults && searchResults.length === 0 && (
         <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
-          {`No results found for "${string}" in ${year}. Please try your search again.`}
+          {`${translations.noResults[locale]} "${string}" ${year}. ${translations.tryAgain[locale]}.`}
         </Heading>
       )}
       {drawSearch && !searchResults && (
@@ -119,7 +124,7 @@ const MapSearch = ({ handler }) => {
       )}
       {drawSearch && searchResults && searchResults.length === 0 && (
         <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
-          {`No results found for in ${year}. Please try your search again.`}
+          {`${translations.noResults[locale]} ${year}. ${translations.tryAgain[locale]}.`}
         </Heading>
       )}
     </>

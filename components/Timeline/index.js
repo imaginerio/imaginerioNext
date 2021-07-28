@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { range, every, last, isEqual } from 'lodash';
 import ReactSlider from 'react-slider';
@@ -7,6 +8,7 @@ import { Grid, Input, Text, Flex, Heading } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import useDebouncedEffect from '../../utils/useDebouncedEffect';
+import translations from '../../assets/config/translations';
 
 const markGap = 20;
 
@@ -44,6 +46,7 @@ const TimeInput = ({ number, text, handler, inputError }) => (
 );
 
 const Timeline = ({ min, max, triple }) => {
+  const { locale } = useRouter();
   const [{ dates, year }, dispatch] = useImages();
   const [sliderRange, setSliderRange] = useState(triple ? [dates[0], year, dates[1]] : dates);
   const [tempRange, setTempRange] = useState(sliderRange);
@@ -89,7 +92,7 @@ const Timeline = ({ min, max, triple }) => {
     <Grid templateColumns={`${triple ? '35px 60px' : 'repeat(3, 60px)'} 1fr`} columnGap={6}>
       <Flex alignItems="center">
         <Heading size="sm" m={0} fontSize={18} fontWeight="bold">
-          {triple ? 'Year:' : 'Years:'}
+          {triple ? `${translations.year[locale]}:` : `${translations.year[locale]}s:`}
         </Heading>
       </Flex>
       {triple ? (
