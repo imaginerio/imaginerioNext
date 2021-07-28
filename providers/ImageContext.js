@@ -168,7 +168,8 @@ function reducer(state, [type, payload]) {
 
 function ImageContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { query, sort, dates, direction, allImages, activeImages, collection } = state;
+  const { query, sort, dates, direction, allImages, activeImages, collection, selectedImage } =
+    state;
 
   useEffect(
     () =>
@@ -190,6 +191,12 @@ function ImageContextProvider({ children }) {
       ]),
     [activeImages]
   );
+
+  useEffect(() => {
+    if (selectedImage && selectedImage.firstyear) {
+      dispatch(['YEAR', selectedImage.firstyear]);
+    }
+  }, [selectedImage]);
 
   return (
     <StateContext.Provider value={state}>
