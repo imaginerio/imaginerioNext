@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <Container maxW="6xl">
       <Flex h="90px" align="middle">
-        <Link href="/" display="inherit">
+        <Link href={`/${locale}`} display="inherit">
           <img
             src="/svg/rio-logo.svg"
             style={{ width: 150, cursor: 'pointer' }}
@@ -19,7 +19,11 @@ const Header = () => {
         </Link>
         <Spacer />
         <HStack spacing={30}>
-          <Link variant="header" href="/" textDecoration={asPath === '/' ? 'underline' : 'none'}>
+          <Link
+            variant="header"
+            href={`/${locale}`}
+            textDecoration={asPath === '/' ? 'underline' : 'none'}
+          >
             {translations.home[locale]}
           </Link>
           {Object.keys(pages[locale])
@@ -28,7 +32,7 @@ const Header = () => {
               <Link
                 variant="header"
                 key={page}
-                href={page}
+                href={`/${locale}/${page}`}
                 textDecoration={asPath.match(page) ? 'underline' : 'none'}
               >
                 {pages[locale][page].title}

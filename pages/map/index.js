@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { Grid, Flex, Box, Link } from '@chakra-ui/react';
 
 import Head from '../../components/Head';
@@ -20,6 +21,7 @@ const Atlas = ({ images }) => {
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
   height -= 90;
 
+  const { locale } = useRouter();
   const [, dispatch] = useImages();
 
   useEffect(() => {
@@ -46,7 +48,7 @@ const Atlas = ({ images }) => {
         boxShadow="0 2px 3px rgba(0,0,0,0.15)"
         zIndex={12}
       >
-        <Link href="/" display="inherit">
+        <Link href={`/${locale}`} display="inherit">
           <Flex alignItems="center" borderRight="1px solid #ccc" pr={5} mr={5}>
             <img
               src="/svg/rio-logo.svg"
