@@ -203,7 +203,7 @@ const AtlasController = ({ width, height }) => {
         onClick={() => setSearchMove(!searchMove)}
         cursor="pointer"
       >
-        <Checkbox isChecked={searchMove} />
+        <Checkbox isChecked={searchMove} pointerEvents="none" />
         <Text>Search as map moves</Text>
       </HStack>
       {selectedImage && selectedImage.collection !== 'views' && (
