@@ -15,8 +15,12 @@ const ImageGrid = ({ width, height, activeImages }) => {
   const gridWidth = (width - 40) / numColumns;
 
   const Grid = ({ rowIndex, columnIndex, style }) => {
-    const index = rowIndex * 3 + columnIndex;
+    const index = rowIndex * numColumns + columnIndex;
     const image = activeImages[index];
+    if (!image) {
+      return null;
+    }
+
     return (
       <div style={style}>
         <ImageLink ssid={image.ssid}>
