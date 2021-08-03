@@ -16,13 +16,13 @@ const ImageGrid = ({ width, height, activeImages }) => {
 
   const Grid = ({ rowIndex, columnIndex, style }) => {
     const index = rowIndex * 3 + columnIndex;
-    const { title, thumbnail, ssid } = activeImages[index];
+    const image = activeImages[index];
     return (
       <div style={style}>
-        <ImageLink ssid={ssid}>
-          <Tooltip label={title} hasArrow>
+        <ImageLink ssid={image.ssid}>
+          <Tooltip label={image.title || 'Untitled'} hasArrow>
             <Box pos="relative" w={`${gridWidth - 40}px`} h="150px" mx="20px" userSelect="none">
-              {thumbnail && <Image src={thumbnail} layout="fill" objectFit="contain" />}
+              {image.thumbnail && <Image src={image.thumbnail} layout="fill" objectFit="contain" />}
             </Box>
           </Tooltip>
         </ImageLink>
