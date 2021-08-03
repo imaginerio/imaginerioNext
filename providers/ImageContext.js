@@ -60,7 +60,7 @@ const initialState = {
   highlightedLayer: null,
   highlightedFeature: null,
   yearDragging: false,
-  drawSearch: false,
+  drawSearch: null,
   drawSearchCoords: null,
 };
 
