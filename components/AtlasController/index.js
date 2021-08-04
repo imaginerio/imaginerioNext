@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { flatten } from 'lodash';
 import { Atlas } from '@imaginerio/diachronic-atlas';
-import { Box } from '@chakra-ui/react';
+import { Box, HStack, Checkbox, Text } from '@chakra-ui/react';
 
 import Legend from '../Legend';
 import Probe from '../Probe';
@@ -15,6 +15,7 @@ import HeadingControl from '../HeadingControl';
 import mapStyle from '../../assets/style/style.json';
 
 import { useImages } from '../../providers/ImageContext';
+import useDebouncedEffect from '../../utils/useDebouncedEffect';
 
 const fetcher = ssid => {
   if (ssid) {
@@ -44,6 +45,7 @@ const AtlasController = ({ width, height }) => {
       highlightedFeature,
       yearDragging,
       drawSearch,
+      mapBounds,
     },
     dispatch,
   ] = useImages();
@@ -68,6 +70,8 @@ const AtlasController = ({ width, height }) => {
   const [probePosition, setProbePosition] = useState(null);
   const [opacity, setOpacity] = useState(1);
   const [heading, setHeading] = useState(0);
+  const [searchMove, setSearchMove] = useState(false);
+  const [mapBBox, setMapBBox] = useState(null);
 
   const { data: hover } = useSWR(hoverSSID, fetcher);
 
@@ -142,6 +146,18 @@ const AtlasController = ({ width, height }) => {
     }
   }, [hoverSSID]);
 
+  useDebouncedEffect(
+    () => {
+      if (searchMove) {
+        dispatch(['SET_MAP_BOUNDS', mapBBox]);
+      } else if (mapBounds) {
+        dispatch(['SET_MAP_BOUNDS', null]);
+      }
+    },
+    [searchMove, mapBBox],
+    500
+  );
+
   return (
     <Box>
       <Legend />
@@ -173,7 +189,23 @@ const AtlasController = ({ width, height }) => {
             setHoverSSID(null);
           }
         }}
+        bboxHandler={setMapBBox}
       />
+      <HStack
+        pos="absolute"
+        top="105px"
+        right="55px"
+        zIndex={9}
+        bgColor="white"
+        p={2}
+        borderRadius={4}
+        boxShadow="sm"
+        onClick={() => setSearchMove(!searchMove)}
+        cursor="pointer"
+      >
+        <Checkbox isChecked={searchMove} pointerEvents="none" />
+        <Text>Search as map moves</Text>
+      </HStack>
       {selectedImage && selectedImage.collection !== 'views' && (
         <OpacityControl {...buttonPosition} opacity={opacity} handler={setOpacity} />
       )}
