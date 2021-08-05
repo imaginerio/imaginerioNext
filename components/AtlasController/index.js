@@ -179,8 +179,11 @@ const AtlasController = ({ width, height }) => {
         opacity={opacity}
         highlightedLayer={highlightedLayer}
         bearing={heading}
-        isDrawing={drawSearch}
+        isDrawing={drawSearch === 'box'}
         drawBoxHandler={e => dispatch(['SET_DRAW_SEARCH_COORDS', flatten(e)])}
+        clickHandler={e => {
+          if (drawSearch === 'click') dispatch(['SET_DRAW_SEARCH_COORDS', e]);
+        }}
         hoverHandler={e => {
           if (e.features.length) {
             setProbePosition(e.center);
