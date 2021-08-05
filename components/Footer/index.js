@@ -1,7 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Container, Grid, Box, Heading, Text, HStack, Image } from '@chakra-ui/react';
+import { Container, Grid, Box, Heading, Text, HStack, Image, Link } from '@chakra-ui/react';
 
 import pages from '../../assets/config/pages';
 import translations from '../../assets/config/translations';
