@@ -36,7 +36,7 @@ const MapSearch = ({ handler }) => {
       if (string.length > 2) {
         return axios
           .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/search?text=${string}&year=${year}`)
-          .then(({ data }) => setSearchResults(data));
+          .then(({ data }) => setSearchResults({ features: data, views: [] }));
       }
       return Promise.resolve(null);
     },
@@ -46,11 +46,13 @@ const MapSearch = ({ handler }) => {
 
   useEffect(() => {
     if (drawSearchCoords) {
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SEARCH_API}/probe/${drawSearchCoords.join(',')}?year=${year}`
-        )
-        .then(({ data }) => setSearchResults(data));
+      // eslint-disable-next-line prettier/prettier
+      axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/probe/features/${drawSearchCoords.join(',')}?year=${year}`)
+        .then(({ data: features }) =>
+          // eslint-disable-next-line prettier/prettier
+          axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/probe/views/${drawSearchCoords.join(',')}?year=${year}`)
+            .then(({ data: views }) => setSearchResults({ features, views }))
+        );
     }
   }, [drawSearchCoords]);
 
@@ -111,22 +113,30 @@ const MapSearch = ({ handler }) => {
           <Spinner size="xl" />
         </Flex>
       )}
-      {searchResults && searchResults.length > 0 && <SearchResults results={searchResults} />}
-      {searchActive && searchResults && searchResults.length === 0 && (
-        <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
-          {`${translations.noResults[locale]} "${string}" ${year}. ${translations.tryAgain[locale]}.`}
-        </Heading>
+      {searchResults && (searchResults.features.length || searchResults.views.length) && (
+        <SearchResults results={searchResults} />
       )}
+      {searchActive &&
+        searchResults &&
+        searchResults.features.length === 0 &&
+        searchResults.views.length === 0 && (
+          <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
+            {`${translations.noResults[locale]} "${string}" ${year}. ${translations.tryAgain[locale]}.`}
+          </Heading>
+        )}
       {drawSearch && !searchResults && (
         <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
           Click and drag on the map to draw a search area to identify features.
         </Heading>
       )}
-      {drawSearch && searchResults && searchResults.length === 0 && (
-        <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
-          {`${translations.noResults[locale]} ${year}. ${translations.tryAgain[locale]}.`}
-        </Heading>
-      )}
+      {drawSearch &&
+        searchResults &&
+        searchResults.features.length === 0 &&
+        searchResults.views.length === 0 && (
+          <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
+            {`${translations.noResults[locale]} ${year}. ${translations.tryAgain[locale]}.`}
+          </Heading>
+        )}
     </>
   );
 };
