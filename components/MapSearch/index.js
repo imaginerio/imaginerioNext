@@ -4,17 +4,18 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/pro-light-svg-icons';
-import { faSearch, faVectorSquare } from '@fortawesome/pro-regular-svg-icons';
+import { faSearch, faVectorSquare, faBullseyePointer } from '@fortawesome/pro-regular-svg-icons';
 import {
   InputGroup,
   Input,
   InputLeftElement,
+  Stack,
   HStack,
   Flex,
   Spinner,
   Heading,
   IconButton,
-  Tooltip,
+  Button,
 } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -30,6 +31,7 @@ const MapSearch = ({ handler }) => {
   const [searchResults, setSearchResults] = useState(null);
   const [searchActive, setSearchActive] = useState(false);
   const [drawToggle, setDrawToggle] = useState(drawSearch);
+  const [clickSearch, setClickSearch] = useState(true);
 
   useDebouncedEffect(
     () => {
@@ -59,15 +61,19 @@ const MapSearch = ({ handler }) => {
   useEffect(() => {
     setSearchActive(Boolean(string));
     setSearchResults(null);
-    dispatch(['SET_DRAW_SEARCH', false]);
+    if (string) {
+      setDrawToggle(false);
+    }
   }, [string]);
 
   useEffect(() => {
-    dispatch(['SET_DRAW_SEARCH', drawToggle]);
-    if (!drawToggle) {
-      setSearchResults(null);
+    const searchType = clickSearch ? 'click' : 'box';
+    dispatch(['SET_DRAW_SEARCH', drawToggle ? searchType : null]);
+    setSearchResults(null);
+    if (drawToggle) {
+      setString('');
     }
-  }, [drawToggle]);
+  }, [drawToggle, clickSearch]);
 
   useEffect(() => handler(searchActive), [searchActive]);
 
@@ -97,24 +103,55 @@ const MapSearch = ({ handler }) => {
             _focus={{ border: 'none' }}
           />
         </InputGroup>
-        <Tooltip hasArrow label={translations.searchPlace[locale]}>
-          <IconButton
-            variant={drawSearch ? null : 'outline'}
-            colorScheme="blackAlpha"
-            color="black"
-            border="none"
-            icon={<FontAwesomeIcon icon={faVectorSquare} />}
-            onClick={() => setDrawToggle(!drawToggle)}
-          />
-        </Tooltip>
+        <IconButton
+          variant={drawSearch ? null : 'outline'}
+          colorScheme="blackAlpha"
+          color="black"
+          border="none"
+          icon={<FontAwesomeIcon icon={faBullseyePointer} />}
+          onClick={() => setDrawToggle(!drawToggle)}
+        />
       </HStack>
       {searchActive && !searchResults && (
         <Flex alignItems="center" justifyContent="center" mt={100}>
           <Spinner size="xl" />
         </Flex>
       )}
-      {searchResults && (searchResults.features.length || searchResults.views.length) && (
-        <SearchResults results={searchResults} />
+      {searchActive && searchResults && searchResults.length === 0 && (
+        <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
+          {`${translations.noResults[locale]} "${string}" ${year}. ${translations.tryAgain[locale]}.`}
+        </Heading>
+      )}
+      {drawSearch && (
+        <>
+          <Stack mt={2}>
+            <Button
+              size="sm"
+              color="black"
+              leftIcon={<FontAwesomeIcon icon={faBullseyePointer} />}
+              isActive={clickSearch}
+              onClick={() => setClickSearch(true)}
+            >
+              Search by click
+            </Button>
+            <Button
+              size="sm"
+              color="black"
+              leftIcon={<FontAwesomeIcon icon={faVectorSquare} />}
+              isActive={!clickSearch}
+              onClick={() => setClickSearch(false)}
+            >
+              Search by box
+            </Button>
+          </Stack>
+          {!searchResults && (
+            <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
+              {`Click${
+                clickSearch ? '' : ' and drag'
+              } on the map to draw a search area to identify features.`}
+            </Heading>
+          )}
+        </>
       )}
       {searchActive &&
         searchResults &&
@@ -126,7 +163,7 @@ const MapSearch = ({ handler }) => {
         )}
       {drawSearch && !searchResults && (
         <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
-          Click and drag on the map to draw a search area to identify features.
+          {`${translations.noResults[locale]} ${year}. ${translations.tryAgain[locale]}.`}
         </Heading>
       )}
       {drawSearch &&
@@ -137,6 +174,9 @@ const MapSearch = ({ handler }) => {
             {`${translations.noResults[locale]} ${year}. ${translations.tryAgain[locale]}.`}
           </Heading>
         )}
+      {searchResults && (searchResults.features.length || searchResults.views.length) && (
+        <SearchResults results={searchResults} />
+      )}
     </>
   );
 };

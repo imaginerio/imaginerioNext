@@ -21,11 +21,21 @@ const textSearch = ({ item, query }) => {
   });
 };
 
-const search = ({ query, dates, sort, direction, allImages, collection }) => {
+const search = ({ query, dates, sort, direction, allImages, collection, mapBounds }) => {
   if (!allImages) return [];
   let items = allImages;
   if (query) items = items.filter(item => textSearch({ item, query }));
   if (collection) items = items.filter(item => item.collection === collection);
+  if (mapBounds)
+    items = items.filter(({ longitude, latitude }) => {
+      const [[minLongitude, minLatitude], [maxLongitude, maxLatitude]] = mapBounds;
+      return (
+        longitude > minLongitude &&
+        longitude < maxLongitude &&
+        latitude > minLatitude &&
+        latitude < maxLatitude
+      );
+    });
   items = items.filter(i => i.firstyear <= dates[1] && i.lastyear >= dates[0]);
   if (sort) {
     items = orderBy(
@@ -60,8 +70,9 @@ const initialState = {
   highlightedLayer: null,
   highlightedFeature: null,
   yearDragging: false,
-  drawSearch: false,
+  drawSearch: null,
   drawSearchCoords: null,
+  mapBounds: null,
 };
 
 function reducer(state, [type, payload]) {
@@ -161,6 +172,11 @@ function reducer(state, [type, payload]) {
         ...state,
         drawSearchCoords: payload,
       };
+    case 'SET_MAP_BOUNDS':
+      return {
+        ...state,
+        mapBounds: payload,
+      };
     default:
       return state;
   }
@@ -168,16 +184,25 @@ function reducer(state, [type, payload]) {
 
 function ImageContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { query, sort, dates, direction, allImages, activeImages, collection, selectedImage } =
-    state;
+  const {
+    query,
+    sort,
+    dates,
+    direction,
+    allImages,
+    activeImages,
+    collection,
+    selectedImage,
+    mapBounds,
+  } = state;
 
   useEffect(
     () =>
       dispatch([
         'SET_ACTIVE_IMAGES',
-        search({ query, sort, dates, direction, allImages, collection }),
+        search({ query, sort, dates, direction, allImages, collection, mapBounds }),
       ]),
-    [query, sort, dates, direction, allImages, collection]
+    [query, sort, dates, direction, allImages, collection, mapBounds]
   );
 
   useEffect(
