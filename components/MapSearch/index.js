@@ -144,7 +144,9 @@ const MapSearch = ({ handler }) => {
           </Stack>
           {!searchResults && (
             <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
-              Click and drag on the map to draw a search area to identify features.
+              {`Click${
+                clickSearch ? '' : ' and drag'
+              } on the map to draw a search area to identify features.`}
             </Heading>
           )}
         </>
