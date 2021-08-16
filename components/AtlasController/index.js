@@ -184,6 +184,7 @@ const AtlasController = ({ width, height }) => {
         clickHandler={e => {
           if (drawSearch === 'click') dispatch(['SET_DRAW_SEARCH_COORDS', e]);
         }}
+        maxZoom={18}
         hoverHandler={e => {
           if (e.features.length) {
             setProbePosition(e.center);
