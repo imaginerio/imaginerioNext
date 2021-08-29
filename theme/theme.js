@@ -110,7 +110,8 @@ export default extendTheme({
       },
       variants: {
         header: {
-          fontSize: '15px',
+          fontSize: ['20px', '15px'],
+          my: [2, 0],
           color: 'black',
           textDecorationThickness: '3px',
           textUnderlineOffset: '5px',

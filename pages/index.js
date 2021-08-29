@@ -20,9 +20,9 @@ const Home = ({ content: { map, iconography } }) => {
     <>
       <Head title="imagineRio" />
       <Header />
-      <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
+      <Box as="section" backgroundColor="#F7F9FC" py={[5, 50]}>
         <Container>
-          <Grid templateColumns="1fr 300px" columnGap="50px">
+          <Grid templateColumns={['1fr', '1fr 300px']} columnGap="50px">
             <Box display="flex" alignItems="center">
               <Box>
                 <Heading size="sm">{translations.map[locale]}</Heading>
@@ -37,15 +37,22 @@ const Home = ({ content: { map, iconography } }) => {
                 </Link>
               </Box>
             </Box>
-            <Box p="40px" bgColor="black" position="relative" width="660px" borderRadius="20px">
+            <Box
+              p="40px"
+              bgColor="black"
+              position="relative"
+              width="660px"
+              borderRadius="20px"
+              display={['none', 'block']}
+            >
               <Image src="/img/screenshot.png" width={660} height={430} />
             </Box>
           </Grid>
         </Container>
-      </section>
-      <section style={{ padding: '50px 0' }}>
+      </Box>
+      <Box as="section" py={[5, 50]}>
         <Container>
-          <Grid templateColumns="1fr 1fr" columnGap="50px">
+          <Grid templateColumns={['1fr', '1fr 1fr']} columnGap="50px">
             <Box>
               <Heading size="sm">{translations.iconography[locale]}</Heading>
               <Heading size="md">
@@ -61,25 +68,25 @@ const Home = ({ content: { map, iconography } }) => {
                   {translations.browseIconografy[locale]}
                 </Button>
               </Link>
-              <Box my={10}>
+              <Box my={[5, 10]}>
                 <Image src="/img/image3.png" width={460} height={286} alt="imagineRio" />
               </Box>
-              <Box my={10}>
+              <Box my={[5, 10]}>
                 <Image src="/img/image.png" width={460} height={460} alt="imagineRio" />
               </Box>
             </Box>
             <Box>
               <Image src="/img/image1.png" width={460} height={460} alt="imagineRio" />
-              <Box my={10}>
+              <Box my={[5, 10]}>
                 <Image src="/img/image2.png" width={460} height={320} alt="imagineRio" />
               </Box>
-              <Box my={10}>
+              <Box my={[5, 10]}>
                 <Image src="/img/image4.png" width={460} height={320} alt="imagineRio" />
               </Box>
             </Box>
           </Grid>
         </Container>
-      </section>
+      </Box>
       <Footer />
     </>
   );
