@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import parse from 'html-react-parser';
-import { Container } from '@chakra-ui/react';
+import { Container, Box } from '@chakra-ui/react';
 
 import pages from '../assets/config/pages';
 
@@ -16,11 +16,11 @@ const About = ({ content, title }) => (
   <>
     <Head title={`imagineRio - ${title}`} />
     <Header />
-    <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
+    <Box as="section" backgroundColor="#F7F9FC" py={[2, 50]}>
       <Container>
         <ParsedContent content={content} />
       </Container>
-    </section>
+    </Box>
     <Footer />
   </>
 );

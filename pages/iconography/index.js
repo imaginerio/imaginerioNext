@@ -21,7 +21,7 @@ const Iconography = ({ collections }) => {
       <Container>
         <Breadcrumbs />
         <Heading>Iconography</Heading>
-        <Grid py={5} templateColumns="1fr 1fr" columnGap="40px" rowGap="20px">
+        <Grid py={5} templateColumns={['1fr', '1fr 1fr']} columnGap="40px" rowGap="20px">
           {collections.map(collection => (
             <Link key={collection.url} href={`${locale}/iconography/${collection.url}`}>
               <Box shadow="md" width="100%" px={5} pb={5} cursor="pointer">

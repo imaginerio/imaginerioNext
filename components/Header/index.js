@@ -73,12 +73,13 @@ const Header = () => {
         <HStack spacing={30} display={['none', 'block']}>
           <HeaderLinks />
         </HStack>
-        <Menu display={['block', 'none']}>
+        <Menu>
           <MenuButton
             as={IconButton}
             icon={<HamburgerIcon />}
             variant="outline"
             colorScheme="blackAlpha"
+            display={['block', 'none']}
           />
           <MenuList>
             <Stack mx={5}>

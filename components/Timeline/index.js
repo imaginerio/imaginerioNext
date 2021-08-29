@@ -18,7 +18,7 @@ const calcMarks = ({ min, max }) => {
 };
 
 const TimeInput = ({ number, text, handler, inputError }) => (
-  <Flex align="center">
+  <Flex align="center" display={['none', 'block']}>
     {text && (
       <Text
         textTransform="uppercase"
@@ -89,8 +89,11 @@ const Timeline = ({ min, max, triple }) => {
   }, [triple, dates, year]);
 
   return (
-    <Grid templateColumns={`${triple ? '35px 60px' : 'repeat(3, 60px)'} 1fr`} columnGap={6}>
-      <Flex alignItems="center">
+    <Grid
+      templateColumns={['1fr', `${triple ? '35px 60px' : 'repeat(3, 60px)'} 1fr`]}
+      columnGap={6}
+    >
+      <Flex alignItems="center" display={['none', 'block']}>
         <Heading size="sm" m={0} fontSize={18} fontWeight="bold">
           {triple ? `${translations.year[locale]}:` : `${translations.year[locale]}s:`}
         </Heading>

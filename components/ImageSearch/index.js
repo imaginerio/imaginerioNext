@@ -10,7 +10,7 @@ import { useImages } from '../../providers/ImageContext';
 const ImageSearch = ({ hideIcon }) => {
   const [{ query }, dispatch] = useImages();
   return (
-    <InputGroup>
+    <InputGroup gridColumn={['1 / 3', '1']}>
       <Input
         value={query}
         onChange={({ target: { value } }) => dispatch(['QUERY', value])}

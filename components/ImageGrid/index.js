@@ -11,7 +11,7 @@ const FixedSizeGrid = dynamic(() => import('react-window').then(mod => mod.Fixed
 });
 
 const ImageGrid = ({ width, height, activeImages }) => {
-  const numColumns = Math.floor(width / 200);
+  const numColumns = Math.floor(width / 185);
   const gridWidth = (width - 40) / numColumns;
 
   const Grid = ({ rowIndex, columnIndex, style }) => {

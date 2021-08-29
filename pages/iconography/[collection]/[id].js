@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLink } from '@fortawesome/pro-light-svg-icons';
 import { Container, Grid, Box, Heading, Text, Flex, Spacer, Button, Stack } from '@chakra-ui/react';
-import { Atlas } from '@imaginerio/diachronic-atlas';
 
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
@@ -14,16 +13,23 @@ import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
 import { findByLabel } from '../../../utils/iiif';
 import config from '../../../utils/config';
-import mapStyle from '../../../assets/style/style.json';
 import pages from '../../../assets/config/pages';
+import useWindowDimensions from '../../../utils/useWindowDimensions';
 
 const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
+const Atlas = dynamic(() => import('../../../components/AtlasController/AtlasSingle'), {
+  ssr: false,
+});
 
 const ImageDetails = ({ metadata, geojson, id, collection }) => {
-  const year = parseInt(findByLabel(metadata, 'Date'), 10);
+  let year = parseInt(findByLabel(metadata, 'Date'), 10);
+  if (!year) year = parseInt(findByLabel(metadata, 'Temporal Coverage'), 10);
   const title = findByLabel(metadata, 'Title') || 'Untitled';
   const { latitude, longitude } = geojson.features[0].properties;
   const smapshot = findByLabel(metadata, 'Smapshot');
+
+  let width = 480;
+  if (typeof window !== 'undefined') width = Math.min(width, useWindowDimensions().width - 32);
 
   return (
     <>
@@ -59,8 +65,8 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
         />
         <Text my="80px">{findByLabel(metadata, 'Description')}</Text>
 
-        <Grid templateColumns="480px 1fr" columnGap="50px">
-          <Stack>
+        <Grid templateColumns={['1fr', '480px 1fr']} columnGap="50px" mb={10}>
+          <Stack mb={10}>
             <Atlas
               year={year}
               geojson={[
@@ -71,15 +77,13 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
                 },
               ]}
               activeBasemap={collection === 'views' ? null : id}
-              width={480}
+              width={width}
               height={360}
-              mapStyle={mapStyle}
               viewport={{
                 latitude,
                 longitude,
                 zoom: 15,
               }}
-              rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
             />
             <Button
               as="a"
@@ -91,7 +95,9 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
             </Button>
           </Stack>
           <Box>
-            <Heading size="sm">Properties</Heading>
+            <Heading size="sm" display={['none', 'block']}>
+              Properties
+            </Heading>
             {metadata
               .filter(
                 m =>
