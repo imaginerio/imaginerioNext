@@ -168,6 +168,13 @@ export async function getStaticPaths() {
                 },
                 locale: lang,
               })),
+              ...data[0].Documents.map(d => ({
+                params: {
+                  collection: 'all',
+                  id: d.ssid,
+                },
+                locale: lang,
+              })),
             ],
             []
           ),
