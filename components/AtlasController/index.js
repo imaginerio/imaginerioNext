@@ -173,7 +173,7 @@ const AtlasController = ({ width, height, mobile }) => {
         rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
         basemapHandler={ssid => {
           if (mobile) {
-            window.open(`/iconography/all/${ssid}`);
+            window.open(`/iconography/views/${ssid}`);
           } else {
             dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)]);
           }
@@ -190,7 +190,7 @@ const AtlasController = ({ width, height, mobile }) => {
         }}
         maxZoom={18}
         hoverHandler={e => {
-          if (e.features.length) {
+          if (e.features.length && !mobile) {
             setProbePosition(e.center);
             setHoverSSID(e.features[0].properties.ssid);
           } else {
