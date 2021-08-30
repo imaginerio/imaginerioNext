@@ -11,6 +11,7 @@ const ImageSort = ({ small, collection }) => {
   return (
     <Flex>
       <Select
+        h={['40px', 'auto']}
         size={small ? 'xs' : 'lg'}
         placeholder="Sort by..."
         borderRadius="4px 0 0 4px"
@@ -24,6 +25,7 @@ const ImageSort = ({ small, collection }) => {
         {collection && <option value="collection">Collection</option>}
       </Select>
       <IconButton
+        h={['40px', 'auto']}
         size={small ? 'xs' : 'lg'}
         colorScheme="blackAlpha"
         variant="outline"

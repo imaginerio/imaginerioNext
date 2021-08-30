@@ -33,7 +33,7 @@ const buttonPosition = {
   zIndex: 9,
 };
 
-const AtlasController = ({ width, height }) => {
+const AtlasController = ({ width, height, mobile }) => {
   const [
     {
       activeImages,
@@ -171,9 +171,13 @@ const AtlasController = ({ width, height }) => {
         activeBasemap={selectedImage && selectedImage.collection !== 'views' && selectedImage.ssid}
         geojson={geojson}
         rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
-        basemapHandler={ssid =>
-          dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)])
-        }
+        basemapHandler={ssid => {
+          if (mobile) {
+            window.open(`/iconography/views/${ssid}`);
+          } else {
+            dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)]);
+          }
+        }}
         circleMarkers
         hover={hover}
         opacity={opacity}
@@ -186,7 +190,7 @@ const AtlasController = ({ width, height }) => {
         }}
         maxZoom={18}
         hoverHandler={e => {
-          if (e.features.length) {
+          if (e.features.length && !mobile) {
             setProbePosition(e.center);
             setHoverSSID(e.features[0].properties.ssid);
           } else {
@@ -195,21 +199,23 @@ const AtlasController = ({ width, height }) => {
         }}
         bboxHandler={setMapBBox}
       />
-      <HStack
-        pos="absolute"
-        top="105px"
-        right="55px"
-        zIndex={9}
-        bgColor="white"
-        p={2}
-        borderRadius={4}
-        boxShadow="sm"
-        onClick={() => setSearchMove(!searchMove)}
-        cursor="pointer"
-      >
-        <Checkbox isChecked={searchMove} pointerEvents="none" />
-        <Text>Search as map moves</Text>
-      </HStack>
+      {!mobile && (
+        <HStack
+          pos="absolute"
+          top="105px"
+          right="55px"
+          zIndex={9}
+          bgColor="white"
+          p={2}
+          borderRadius={4}
+          boxShadow="sm"
+          onClick={() => setSearchMove(!searchMove)}
+          cursor="pointer"
+        >
+          <Checkbox isChecked={searchMove} pointerEvents="none" />
+          <Text>Search as map moves</Text>
+        </HStack>
+      )}
       {selectedImage && selectedImage.collection !== 'views' && (
         <OpacityControl {...buttonPosition} opacity={opacity} handler={setOpacity} />
       )}
@@ -229,6 +235,11 @@ const AtlasController = ({ width, height }) => {
 AtlasController.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
+  mobile: PropTypes.bool,
+};
+
+AtlasController.defaultProps = {
+  mobile: false,
 };
 
 export default AtlasController;

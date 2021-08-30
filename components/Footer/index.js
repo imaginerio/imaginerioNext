@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Container, Grid, Box, Heading, Text, HStack, Image, Link } from '@chakra-ui/react';
+import { Container, Grid, Box, Heading, Text, Stack, Image, Link } from '@chakra-ui/react';
 
 import pages from '../../assets/config/pages';
 import translations from '../../assets/config/translations';
@@ -50,9 +50,13 @@ const NavigationColumn = () => {
 const Footer = () => {
   const { locale } = useRouter();
   return (
-    <section style={{ backgroundColor: '#F7F9FC', padding: '50px 0' }}>
+    <Box as="section" backgroundColor="#F7F9FC" py={[5, 50]}>
       <Container>
-        <Grid templateColumns="1fr repeat(4, 140px)" columnGap="5px" fontSize={14}>
+        <Grid
+          templateColumns={['1fr 1fr', '1fr repeat(4, 140px)']}
+          columnGap={['15px', '5px']}
+          fontSize={14}
+        >
           <ContactColumn />
           <NavigationColumn />
           <Box>
@@ -88,7 +92,13 @@ const Footer = () => {
             </Text>
           </Box>
         </Grid>
-        <HStack borderTop="1px solid #eee" mt={5}>
+        <Stack
+          direction={['column', 'row']}
+          borderTop="1px solid #eee"
+          mt={[10, 5]}
+          pt={[10, 5]}
+          alignItems={['none', 'center']}
+        >
           <a href="https://spatialstudieslab.rice.edu/" target="_blank" rel="noreferrer">
             <Image src="/img/logos/rice.png" h="45px" mr={5} />
           </a>
@@ -98,9 +108,9 @@ const Footer = () => {
           <a href="https://ims.com.br" target="_blank" rel="noreferrer">
             <Image src="/img/logos/ims.png" h="80px" mr={5} />
           </a>
-        </HStack>
+        </Stack>
       </Container>
-    </section>
+    </Box>
   );
 };
 

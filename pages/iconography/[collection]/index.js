@@ -36,7 +36,12 @@ const Collection = ({ images, collection }) => {
       </Container>
       <Container>
         <Timeline min={1500} max={2020} />
-        <Grid templateColumns="2fr 1fr 1fr" gap="50px" my={5}>
+        <Grid
+          templateColumns={['1fr 120px', '2fr 1fr 1fr']}
+          gap={['5px', '50px']}
+          mb={5}
+          mt={['50px', 5]}
+        >
           <ImageSearch />
           <ImageSort />
           <ViewButtons />
