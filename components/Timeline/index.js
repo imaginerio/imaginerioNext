@@ -90,8 +90,9 @@ const Timeline = ({ min, max, triple }) => {
 
   return (
     <Grid
-      templateColumns={['1fr', `${triple ? '35px 60px' : 'repeat(3, 60px)'} 1fr`]}
+      templateColumns={['1fr', `${triple ? '55px 60px' : 'repeat(3, 60px)'} 1fr`]}
       columnGap={6}
+      alignItems="center"
     >
       <Flex alignItems="center" display={['none', 'block']}>
         <Heading size="sm" m={0} fontSize={18} fontWeight="bold">

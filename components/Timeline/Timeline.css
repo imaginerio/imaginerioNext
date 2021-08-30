@@ -1,6 +1,6 @@
 .___slider{
-  display: flex;
-  align-items: center;
+  position: relative;
+  top: -15px;
 }
 
 .___track{
@@ -39,12 +39,9 @@
   margin-top: -1px;
 }
 
-.___triple .___thumb{
-  margin-top: 0;
-}
-
 .___triple .___thumb-1{
   height: 40px;
+  margin-top: -5px;
   border-radius: 4px;
   transform: translate(-10px, 0);
 }
