@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 
 function getWindowDimensions() {
-  const { clientWidth, clientHeight, outerWidth, outerHeight } = window;
-  const width = Math.min(clientWidth || Infinity, outerWidth || Infinity);
-  const height = Math.min(clientHeight || Infinity, outerHeight || Infinity);
+  const width =
+    window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  const height =
+    window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
   return {
     width,
     height,
