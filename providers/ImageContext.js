@@ -42,7 +42,7 @@ const search = ({ query, dates, sort, direction, allImages, collection, mapBound
       items,
       i => {
         if (sort === 'date') return parseInt(i.firstyear, `0`);
-        return unaccent(i[sort]).replace(/\W/gi, '');
+        return unaccent(i[sort])?.replace(/\W/gi, '');
       },
       direction ? 'asc' : 'desc'
     );
