@@ -6,7 +6,7 @@ import unaccent from '../utils/unaccent';
 const textSearch = ({ item, query }) => {
   const terms = query.split(' ').filter(t => t);
   return terms.every(term => {
-    const regex = new RegExp(unaccent(term), 'gi');
+    const regex = new RegExp(unaccent(term).replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
     if (item.title && unaccent(item.title).match(regex)) return true;
     if (item.creator && unaccent(item.creator).match(regex)) return true;
     if (item.source && unaccent(item.source.value).match(regex)) return true;
