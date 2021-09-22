@@ -58,7 +58,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
             workspaceControlPanel: {
               enabled: false,
             },
-            windows: [{ manifestId: `https://images.imaginerio.org/iiif/3/${id}/manifest` }],
+            windows: [{ manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${id}.json` }],
             language: 'pt-br',
           }}
           style={{ position: 'relative', width: '100%', minHeight: 500, height: '40vh' }}
@@ -187,9 +187,17 @@ export async function getStaticProps({ params }) {
   const { data: geojson } = await axios.get(
     `${process.env.NEXT_PUBLIC_SEARCH_API}/document/${params.id}`
   );
-  const { data: metadata } = await axios.get(
+  let { data: metadata } = await axios.get(
     `${process.env.NEXT_PUBLIC_SEARCH_API}/metadata/${params.id}`
   );
+
+  const attributes = process.env.NEXT_PUBLIC_ATTR_ORDER.split(',');
+  metadata = metadata
+    .filter(m => attributes.includes(m.label.toLowerCase()))
+    .sort(
+      (a, b) =>
+        attributes.indexOf(a.label.toLowerCase()) - attributes.indexOf(b.label.toLowerCase())
+    );
 
   return { props: { metadata, geojson, ...params } };
 }
