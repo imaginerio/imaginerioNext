@@ -11,12 +11,13 @@ const ImageSort = ({ small, collection }) => {
   return (
     <Flex>
       <Select
-        h={['40px', 'auto']}
+        h={['40px', '']}
         size={small ? 'xs' : 'lg'}
         placeholder="Sort by..."
         borderRadius="4px 0 0 4px"
         colorScheme="blackAlpha"
         borderStyle={small ? 'none' : 'solid'}
+        borderColor={small ? 'transparent' : 'blackAlpha.500'}
         onChange={({ target: { value } }) => dispatch(['SORT', value])}
       >
         <option value="title">Title</option>
@@ -26,6 +27,7 @@ const ImageSort = ({ small, collection }) => {
       </Select>
       <IconButton
         h={['40px', 'auto']}
+        ml="-1px"
         size={small ? 'xs' : 'lg'}
         colorScheme="blackAlpha"
         variant="outline"

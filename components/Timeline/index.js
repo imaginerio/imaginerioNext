@@ -90,7 +90,7 @@ const Timeline = ({ min, max, triple }) => {
 
   return (
     <Grid
-      templateColumns={['1fr', `${triple ? '55px 60px' : 'repeat(3, 60px)'} 1fr`]}
+      templateColumns={['1fr', `${triple ? '55px 60px' : '65px repeat(2, 60px)'} 1fr`]}
       columnGap={6}
       alignItems="center"
     >
@@ -122,7 +122,7 @@ const Timeline = ({ min, max, triple }) => {
         </>
       )}
       <ReactSlider
-        className={`___slider${triple && ' ___triple'}`}
+        className={`___slider${triple ? ' ___triple' : ''}`}
         thumbClassName="___thumb"
         trackClassName="___track"
         value={sliderRange}
