@@ -4,13 +4,13 @@ import mirador from 'mirador';
 
 class Mirador extends Component {
   componentDidMount() {
-    const { config, plugins, style } = this.props;
+    const { config, plugins } = this.props;
     mirador.viewer(config, plugins);
   }
 
   render() {
-    const { config } = this.props;
-    return <div id={config.id} />;
+    const { config, style } = this.props;
+    return <div id={config.id} style={style} />;
   }
 }
 
@@ -22,7 +22,7 @@ Mirador.propTypes = {
 
 Mirador.defaultProps = {
   plugins: [],
-  style: null,
+  style: {},
 };
 
 export default Mirador;
