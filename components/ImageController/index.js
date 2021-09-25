@@ -44,7 +44,7 @@ const ImageController = ({ imageWidth, height }) => {
                 float="right"
                 pos="absolute"
                 top="13px"
-                right="15px"
+                right="50px"
                 color="#666"
                 cursor="pointer"
                 zIndex={12}
@@ -61,7 +61,7 @@ const ImageController = ({ imageWidth, height }) => {
                   id: 'mirador',
                   window: {
                     allowClose: false, // Configure if windows can be closed or not
-                    allowFullscreen: false, // Configure to show a "fullscreen" button in the WindowTopBar
+                    allowFullscreen: true, // Configure to show a "fullscreen" button in the WindowTopBar
                     allowMaximize: false, // Configure if windows can be maximized or not
                     allowTopMenuButton: false,
                   },
@@ -74,7 +74,7 @@ const ImageController = ({ imageWidth, height }) => {
                   },
                   windows: [
                     {
-                      manifestId: `${process.env.NEXT_PUBLIC_IIIF}${selectedImage.ssid}/manifest`,
+                      manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${selectedImage.ssid}/manifest`,
                     },
                   ],
                 }}
