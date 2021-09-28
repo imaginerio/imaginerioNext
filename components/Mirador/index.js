@@ -1,11 +1,28 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import mirador from 'mirador';
 
-class Mirador extends Component {
+class Mirador extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.miradorInstance = null;
+  }
+
   componentDidMount() {
     const { config, plugins } = this.props;
-    mirador.viewer(config, plugins);
+    this.miradorInstance = mirador.viewer(config, plugins);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { manifestId } = this.props.config.windows[0];
+    if (manifestId !== prevProps.config.windows[0].manifestId) {
+      this.miradorInstance.store.dispatch(
+        mirador.actions.updateWindow(
+          Object.keys(this.miradorInstance.store.getState().windows)[0],
+          { manifestId }
+        )
+      );
+    }
   }
 
   render() {
