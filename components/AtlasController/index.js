@@ -11,6 +11,7 @@ import Legend from '../Legend';
 import Probe from '../Probe';
 import OpacityControl from '../OpacityControl';
 import HeadingControl from '../HeadingControl';
+import ViewControl from '../ViewControl';
 
 import mapStyle from '../../assets/style/style.json';
 
@@ -29,7 +30,7 @@ const fetcher = ssid => {
 const buttonPosition = {
   pos: 'absolute',
   right: '15px',
-  top: '200px',
+  top: '240px',
   zIndex: 9,
 };
 
@@ -216,6 +217,12 @@ const AtlasController = ({ width, height, mobile }) => {
           <Text>Search as map moves</Text>
         </HStack>
       )}
+      <ViewControl
+        {...buttonPosition}
+        handler={() => dispatch(['TOGGLE_VIEWPOINTS'])}
+        show={showViewPoints}
+        top="200px"
+      />
       {selectedImage && selectedImage.collection !== 'views' && (
         <OpacityControl {...buttonPosition} opacity={opacity} handler={setOpacity} />
       )}

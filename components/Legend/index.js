@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/pro-regular-svg-icons';
-import { Box, Flex, Spacer, Text, Switch } from '@chakra-ui/react';
+import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 
@@ -12,7 +12,7 @@ import translations from '../../assets/config/translations';
 
 const Legend = () => {
   const { locale } = useRouter();
-  const [{ year, showViewPoints, drawSearch }, dispatch] = useImages();
+  const [{ year, drawSearch }] = useImages();
   const [legendOpen, setLegendOpen] = useState(false);
   const [searchResultsActive, setSearchResultsActive] = useState(false);
 
@@ -51,19 +51,7 @@ const Legend = () => {
             boxShadow="2px 0 3px rgba(0,0,0,0.15)"
           >
             <MapSearch handler={setSearchResultsActive} />
-            {!searchResultsActive && !drawSearch && (
-              <>
-                <Flex alignItems="center" mt={2}>
-                  <Switch
-                    mr={2}
-                    isChecked={showViewPoints}
-                    onChange={() => dispatch(['TOGGLE_VIEWPOINTS'])}
-                  />
-                  <Text>{translations.showViews[locale]}</Text>
-                </Flex>
-                <LegendSwatches />
-              </>
-            )}
+            {!searchResultsActive && !drawSearch && <LegendSwatches />}
           </Box>
         )}
       </Box>
