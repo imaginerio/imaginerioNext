@@ -28,13 +28,13 @@ const NavigationColumn = () => {
     <Box>
       <Heading size="md">Menu</Heading>
       <Text>
-        <Link href="/">{translations.home[locale]}</Link>
+        <Link href={`/${locale}`}>{translations.home[locale]}</Link>
       </Text>
       {Object.keys(pages[locale])
         .filter(p => pages[locale][p].menu)
         .map(page => (
           <Text key={page}>
-            <Link href={`${page}`}>{pages[locale][page].title}</Link>
+            <Link href={`/${locale}/${page}`}>{pages[locale][page].title}</Link>
           </Text>
         ))}
       <Text>
@@ -74,7 +74,7 @@ const Footer = () => {
               .filter(p => !pages[locale][p].menu)
               .map(page => (
                 <Text key={page}>
-                  <Link href={`${page}`}>{pages[locale][page].title}</Link>
+                  <Link href={`/${locale}/${page}`}>{pages[locale][page].title}</Link>
                 </Text>
               ))}
           </Box>
