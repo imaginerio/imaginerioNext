@@ -22,9 +22,11 @@ const Atlas = dynamic(() => import('../../../components/AtlasController/AtlasSin
 });
 
 const ImageDetails = ({ metadata, geojson, id, collection }) => {
+  const { properties } = geojson.features[0];
   let year = parseInt(findByLabel(metadata, 'Date'), 10);
   if (!year) year = parseInt(findByLabel(metadata, 'Temporal Coverage'), 10);
-  const title = findByLabel(metadata, 'Title') || 'Untitled';
+  if (!year) year = properties.firstyear;
+  const title = findByLabel(metadata, 'Title') || properties.title || 'Untitled';
   const { latitude, longitude } = geojson.features[0].properties;
   const smapshot = findByLabel(metadata, 'Smapshot');
 
