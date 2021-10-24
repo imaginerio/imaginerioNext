@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['images.imaginerio.org'],
+    domains: ['images2.imaginerio.org', 'images.imaginerio.org'],
   },
   i18n: {
     locales: ['en', 'pt'],

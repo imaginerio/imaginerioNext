@@ -3899,6 +3899,16 @@ intersection-observer@^0.10.0:
   resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.10.0.tgz#4d11d63c1ff67e21e62987be24d55218da1a1a69"
   integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
 
+intro.js-react@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/intro.js-react/-/intro.js-react-0.5.0.tgz#d4e67a4f6e4726bee803222ff09d6deacb4598c8"
+  integrity sha512-tr9uhoy/aRgcdZxpqYC/TPSVlJ/Gt9Kx4mpI7clCdFa7c3SG8reJugIa1U5XnWlDLRNMc+e8egb8Jf186yvc1A==
+
+intro.js@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/intro.js/-/intro.js-4.2.2.tgz#9077549cc6ef697e78d18d1c05003b7471281e1a"
+  integrity sha512-Zgz2e8syCuttJ2vJlDOWCSWPUJBr7AOJkU5Ti3zcvXho+y//q0ixwoT+PkPLJWI7AX35IdgRcxAEWUrOAJYiNQ==
+
 invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"

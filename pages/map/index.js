@@ -14,6 +14,7 @@ import { useImages } from '../../providers/ImageContext';
 import useWindowDimensions from '../../utils/useWindowDimensions';
 
 const AtlasController = dynamic(() => import('../../components/AtlasController'), { ssr: false });
+const Intro = dynamic(() => import('../../components/Intro'), { ssr: false });
 
 const Atlas = ({ images }) => {
   let height = 800;
@@ -39,6 +40,7 @@ const Atlas = ({ images }) => {
 
   return (
     <>
+      <Intro />
       <Head title="Map" />
       <Grid
         h="90px"
