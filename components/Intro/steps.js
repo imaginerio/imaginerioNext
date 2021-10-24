@@ -20,6 +20,14 @@ const steps = [
     element: '.intro___images___search',
     intro: 'Search and filter images',
   },
+  {
+    element: '.intro___atlas .mapboxgl-map',
+    intro: 'The atlas section displays the map of the selected year',
+  },
+  {
+    element: '.intro___atlas___legend',
+    intro: 'Click the legend button to view the legend',
+  },
 ];
 
 export default steps;

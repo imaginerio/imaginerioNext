@@ -32,6 +32,7 @@ const Legend = () => {
         alignItems="center"
         onClick={() => setLegendOpen(!legendOpen)}
         cursor="pointer"
+        className="intro___atlas___legend"
       >
         <Text>{`${translations.mapContents[locale]} ${year}`}</Text>
         <Spacer />

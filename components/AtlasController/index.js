@@ -160,7 +160,7 @@ const AtlasController = ({ width, height, mobile }) => {
   );
 
   return (
-    <Box>
+    <Box classname="intro___atlas">
       <Legend />
       <Atlas
         year={year}
