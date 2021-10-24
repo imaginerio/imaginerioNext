@@ -21,7 +21,13 @@ const ImageController = ({ imageWidth, height }) => {
   const [{ selectedImage }, dispatch] = useImages();
 
   return (
-    <Box zIndex={10} boxShadow="2px 0 3px rgba(0,0,0,0.15)" pos="relative" backgroundColor="white">
+    <Box
+      zIndex={10}
+      boxShadow="2px 0 3px rgba(0,0,0,0.15)"
+      pos="relative"
+      backgroundColor="white"
+      className="intro___images"
+    >
       {selectedImage ? (
         <Box h="100%">
           <Box
@@ -83,7 +89,12 @@ const ImageController = ({ imageWidth, height }) => {
         <Box pt="20px">
           {imageWidth >= 400 && (
             <Container>
-              <Grid templateColumns="1fr 40px 125px" gap={5} mb={2}>
+              <Grid
+                templateColumns="1fr 40px 125px"
+                gap={5}
+                mb={2}
+                className="intro___images___search"
+              >
                 <ImageSearch hideIcon />
                 <ImageFilter />
                 <ViewButtons />
