@@ -12,6 +12,7 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
+  Tooltip,
 } from '@chakra-ui/react';
 
 const styleProps = {
@@ -67,12 +68,14 @@ const OpacityControl = props => {
       {isOpen ? (
         <OpacitySlider opacity={props.opacity} handler={props.handler} setIsOpen={setIsOpen} />
       ) : (
-        <IconButton
-          size="sm"
-          {...styleProps}
-          icon={<FontAwesomeIcon icon={faLayerGroup} color="black" />}
-          onClick={() => setIsOpen(true)}
-        />
+        <Tooltip label="Adjust overlay opacity" placement="left" hasArrow>
+          <IconButton
+            size="sm"
+            {...styleProps}
+            icon={<FontAwesomeIcon icon={faLayerGroup} color="black" />}
+            onClick={() => setIsOpen(true)}
+          />
+        </Tooltip>
       )}
     </Box>
   );
