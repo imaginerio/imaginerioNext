@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/pro-solid-svg-icons';
-import { Box, IconButton } from '@chakra-ui/react';
+import { Box, IconButton, Tooltip } from '@chakra-ui/react';
 
 const styleProps = {
   boxShadow: 'md',
@@ -18,12 +18,14 @@ const ViewControl = props => {
 
   return (
     <Box {...buttonStyleProps}>
-      <IconButton
-        size="sm"
-        {...styleProps}
-        icon={<FontAwesomeIcon icon={show ? faEye : faEyeSlash} color="black" />}
-        onClick={handler}
-      />
+      <Tooltip label={show ? 'Hide view points' : 'Show view points'} placement="left" hasArrow>
+        <IconButton
+          size="sm"
+          {...styleProps}
+          icon={<FontAwesomeIcon icon={show ? faEye : faEyeSlash} color="black" />}
+          onClick={handler}
+        />
+      </Tooltip>
     </Box>
   );
 };
