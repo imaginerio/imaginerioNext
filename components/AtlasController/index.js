@@ -136,7 +136,7 @@ const AtlasController = ({ width, height, mobile }) => {
 
   useEffect(() => {
     const geo = [];
-    if (viewCone) geo.push(viewCone);
+    if (viewCone && selectedImage.collection === 'views') geo.push(viewCone);
     if (featureJson) geo.push(featureJson);
     setGeojson(geo);
   }, [viewCone, featureJson]);
