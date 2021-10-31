@@ -99,7 +99,7 @@ export default extendTheme({
           borderRadius: '4px',
           cursor: 'pointer',
           _hover: {
-            backgroundColor: '#CCCCCC',
+            backgroundColor: '#DEDEDE',
           },
         },
       },
