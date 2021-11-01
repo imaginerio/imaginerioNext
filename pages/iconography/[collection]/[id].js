@@ -60,7 +60,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
             workspaceControlPanel: {
               enabled: false,
             },
-            windows: [{ manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${id}/manifest` }],
+            windows: [{ manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${id}/manifest.json` }],
             language: 'pt-br',
           }}
           style={{ position: 'relative', width: '100%', minHeight: 500, height: '40vh' }}

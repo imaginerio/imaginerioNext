@@ -72,7 +72,7 @@ const ImageController = ({ imageWidth, height }) => {
               },
               windows: [
                 {
-                  manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${selectedImage.ssid}/manifest`,
+                  manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${selectedImage.ssid}/manifest.json`,
                 },
               ],
             }}
