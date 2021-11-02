@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { sortBy } from 'lodash';
-import { Container, Heading, Box, Grid, Text } from '@chakra-ui/react';
+import { Container, Heading, Box, Grid, Text, Center } from '@chakra-ui/react';
 
 import Head from '../../components/Head';
 import Header from '../../components/Header';
@@ -25,13 +25,13 @@ const Iconography = ({ collections }) => {
           {collections.map(collection => (
             <Link key={collection.url} href={`${locale}/iconography/${collection.url}`}>
               <Box shadow="md" width="100%" px={5} pb={5} cursor="pointer">
-                <Box mx={-5}>
+                <Center mx={-5}>
                   <Image
-                    src={`https://images.imaginerio.org/iiif-img/3/${collection.id}/square/500,500/0/default.jpg`}
-                    height={500}
-                    width={500}
+                    src={collection.thumbnail.url}
+                    height={collection.thumbnail.height}
+                    width={collection.thumbnail.width}
                   />
-                </Box>
+                </Center>
                 <Heading size="lg" textTransform="capitalize">
                   {collection.label}
                 </Heading>
@@ -54,12 +54,23 @@ export async function getStaticProps() {
   let collections = await axios
     .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents`)
     .then(({ data }) =>
-      data.map(d => ({
-        id: d.Documents[0].ssid,
-        url: d.title.toLowerCase(),
-        label: d.title,
-        length: d.Documents.length,
-      }))
+      Promise.all(
+        data.map(d =>
+          axios
+            .get(`${process.env.NEXT_PUBLIC_IIIF}/collection/${d.title.toLowerCase()}.json`)
+            .then(({ data: { thumbnail } }) => ({
+              id: d.Documents[0].ssid,
+              url: d.title.toLowerCase(),
+              label: d.title,
+              length: d.Documents.length,
+              thumbnail: {
+                url: thumbnail[0].id,
+                width: thumbnail[0].set_width,
+                height: thumbnail[0].set_height,
+              },
+            }))
+        )
+      )
     );
 
   collections = sortBy(collections, c => c.length * -1);

@@ -60,7 +60,7 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
             workspaceControlPanel: {
               enabled: false,
             },
-            windows: [{ manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${id}/manifest` }],
+            windows: [{ manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${id}/manifest.json` }],
             language: 'pt-br',
           }}
           style={{ position: 'relative', width: '100%', minHeight: 500, height: '40vh' }}
@@ -185,21 +185,25 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
+  const lang = locale === 'pt' ? 'pt-BR' : 'en';
   const { data: geojson } = await axios.get(
     `${process.env.NEXT_PUBLIC_SEARCH_API}/document/${params.id}`
   );
   let { data: metadata } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SEARCH_API}/metadata/${params.id}`
+    `${process.env.NEXT_PUBLIC_SEARCH_API}/metadata/${params.id}?lang=${lang}`
   );
 
   const attributes = process.env.NEXT_PUBLIC_ATTR_ORDER.split(',');
   metadata = metadata
-    .filter(m => attributes.includes(m.label.toLowerCase()))
-    .sort(
-      (a, b) =>
-        attributes.indexOf(a.label.toLowerCase()) - attributes.indexOf(b.label.toLowerCase())
-    );
+    .filter(({ label }) => label.toLowerCase() !== 'height' && label.toLowerCase() !== 'width')
+    .sort((a, b) => {
+      let aIndex = attributes.indexOf(a.label.toLowerCase());
+      let bIndex = attributes.indexOf(b.label.toLowerCase());
+      if (aIndex === -1) aIndex = Infinity;
+      if (bIndex === -1) bIndex = Infinity;
+      return aIndex - bIndex;
+    });
 
   return { props: { metadata, geojson, ...params } };
 }
