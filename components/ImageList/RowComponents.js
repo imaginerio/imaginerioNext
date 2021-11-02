@@ -8,13 +8,16 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import { useImages } from '../../providers/ImageContext';
 
 export const ImageMeta = ({ creator, date, source }) => {
-  const links = [];
-  if (isArray(source.link)) {
-    source.link.forEach((link, i) => {
-      links.push({ link: source.link[i], name: source.value[i] });
-    });
-  } else {
-    links.push({ link: source.link, name: source.value });
+  let links;
+  if (source && source.link) {
+    links = [];
+    if (isArray(source.link)) {
+      source.link.forEach((link, i) => {
+        links.push({ link: source.link[i], name: source.value[i] });
+      });
+    } else {
+      links.push({ link: source.link, name: source.value });
+    }
   }
 
   return (
