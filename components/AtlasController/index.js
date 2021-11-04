@@ -100,9 +100,11 @@ const AtlasController = ({ width, height, mobile }) => {
       axios
         .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/feature/${highlightedFeature}?year=${year}`)
         .then(({ data }) => {
+          let geometry = data.geometry.type;
+          if (geometry === 'GeometryCollection') geometry = data.geometry.geometries[0].type;
           let type;
           const paint = {};
-          switch (data.geometry.type) {
+          switch (geometry) {
             case 'Point':
               type = 'circle';
               break;
@@ -134,7 +136,7 @@ const AtlasController = ({ width, height, mobile }) => {
 
   useEffect(() => {
     const geo = [];
-    if (viewCone) geo.push(viewCone);
+    if (viewCone && selectedImage.collection === 'views') geo.push(viewCone);
     if (featureJson) geo.push(featureJson);
     setGeojson(geo);
   }, [viewCone, featureJson]);

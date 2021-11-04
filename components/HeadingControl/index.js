@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompass } from '@fortawesome/pro-regular-svg-icons';
-import { Box, IconButton } from '@chakra-ui/react';
+import { Box, IconButton, Tooltip } from '@chakra-ui/react';
 
 const styleProps = {
   boxShadow: 'md',
@@ -18,12 +18,14 @@ const HeadingControl = props => {
 
   return (
     <Box {...buttonStyleProps}>
-      <IconButton
-        size="sm"
-        {...styleProps}
-        icon={<FontAwesomeIcon icon={faCompass} color="black" />}
-        onClick={() => handler(heading ? 0 : targetHeading)}
-      />
+      <Tooltip label="Orient map to view" placement="left" hasArrow>
+        <IconButton
+          size="sm"
+          {...styleProps}
+          icon={<FontAwesomeIcon icon={faCompass} color="black" />}
+          onClick={() => handler(heading ? 0 : targetHeading)}
+        />
+      </Tooltip>
     </Box>
   );
 };

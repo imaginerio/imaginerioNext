@@ -39,7 +39,7 @@ const Atlas = ({ images }) => {
   }, [imageWidth]);
 
   return (
-    <>
+    <Box w="100vw" h="100vh" overflow="hidden">
       <Intro />
       <Head title="Map" />
       <Grid
@@ -83,7 +83,7 @@ const Atlas = ({ images }) => {
           <AtlasController width={width} height={height} mobile />
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 

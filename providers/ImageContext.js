@@ -25,7 +25,8 @@ const search = ({ query, dates, sort, direction, allImages, collection, mapBound
   if (!allImages) return [];
   let items = allImages;
   if (query) items = items.filter(item => textSearch({ item, query }));
-  if (collection) items = items.filter(item => item.collection === collection);
+  if (collection && collection !== 'all')
+    items = items.filter(item => item.collection === collection);
   if (mapBounds)
     items = items.filter(({ longitude, latitude }) => {
       const [[minLongitude, minLatitude], [maxLongitude, maxLatitude]] = mapBounds;

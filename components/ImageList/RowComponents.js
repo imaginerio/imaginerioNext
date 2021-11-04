@@ -1,33 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isArray } from 'lodash';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Box, Heading, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 
-export const ImageMeta = ({ creator, date, source }) => (
-  <Box>
-    {creator && (
-      <Text variant="oneline">
-        <b>Creator: </b>
-        {creator}
-      </Text>
-    )}
-    {date && (
-      <Text variant="oneline">
-        <b>Date: </b>
-        {date}
-      </Text>
-    )}
-    {source && (
-      <Text variant="oneline">
-        <b>Source: </b>
-        <Link href={source.link}>{source.value || source.link}</Link>
-      </Text>
-    )}
-  </Box>
-);
+export const ImageMeta = ({ creator, date, source }) => {
+  let links;
+  if (source && source.link) {
+    links = [];
+    if (isArray(source.link)) {
+      source.link.forEach((link, i) => {
+        links.push({ link: source.link[i], name: source.value[i] });
+      });
+    } else {
+      links.push({ link: source.link, name: source.value });
+    }
+  }
+
+  return (
+    <Box>
+      {creator && (
+        <Text variant="oneline">
+          <b>Creator: </b>
+          {creator}
+        </Text>
+      )}
+      {date && (
+        <Text variant="oneline">
+          <b>Date: </b>
+          {date}
+        </Text>
+      )}
+      {source && (
+        <Text variant="oneline">
+          <b>Source: </b>
+          {links.map(({ link, name }) => (
+            <Text as="span" key={name} mr={3}>
+              <Link href={link} target="_blank">
+                {name || link}
+              </Link>
+            </Text>
+          ))}
+        </Text>
+      )}
+    </Box>
+  );
+};
 
 ImageMeta.propTypes = {
   creator: PropTypes.string,

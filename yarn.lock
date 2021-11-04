@@ -825,6 +825,13 @@
   dependencies:
     "@emotion/memoize" "^0.7.4"
 
+"@emotion/is-prop-valid@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-1.1.0.tgz#29ef6be1e946fb4739f9707def860f316f668cde"
+  integrity sha512-9RkilvXAufQHsSsjQ3PIzSns+pxuX4EW8EbGeSPjZMHuMx6z/MOzb9LpqNieQX4F3mre3NWS2+X3JNRHTQztUQ==
+  dependencies:
+    "@emotion/memoize" "^0.7.4"
+
 "@emotion/memoize@0.7.4":
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.4.tgz#19bf0f5af19149111c40d98bb0cf82119f5d9eeb"
@@ -984,10 +991,10 @@
   resolved "https://registry.yarnpkg.com/@iiif/vocabulary/-/vocabulary-1.0.19.tgz#c735577bdcbafcb988471391b9e39d772662de62"
   integrity sha512-5XjrB81bVcu80YcYz5Lxcvvio+PJljiZt3pNW8ACbL3OoL+8QoCJ/dwivdYEcoyEck2I8cEMgAZYEOuEZq+fgg==
 
-"@imaginerio/diachronic-atlas@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.9.1.tgz#6a9f39555f835b4c573473b09fe0e87ec6080cef"
-  integrity sha512-is/4KtnNqeOjqZcZmdC+8OV6AK8U7bC7suGHaXoiaHVrEavNC4AlF9cKrYG9oVw/L1Kwzt0YjLzHfUJAomyLRA==
+"@imaginerio/diachronic-atlas@^0.9.5":
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.9.5.tgz#4da31bad128623cb1921dcb067d33b0238f163b5"
+  integrity sha512-iPrSPRGER2gXh1jbc19nDloY1q11BjqLGdpNK5UlztbJwywtT02ljsjzp9Fi2QqGcqYetjPStOE5MuMq+7VpJA==
   dependencies:
     "@turf/bbox" "^6.3.0"
     "@turf/bbox-polygon" "^6.5.0"
