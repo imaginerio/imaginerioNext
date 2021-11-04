@@ -17,7 +17,7 @@ const ParsedContent = ({ content }) => parse(content);
 const Home = ({ content: { map, iconography } }) => {
   const { locale } = useRouter();
   return (
-    <>
+    <Box overflowX="hidden">
       <Head title="imagineRio" />
       <Header />
       <Box as="section" backgroundColor="#F7F9FC" py={[5, 50]}>
@@ -88,7 +88,7 @@ const Home = ({ content: { map, iconography } }) => {
         </Container>
       </Box>
       <Footer />
-    </>
+    </Box>
   );
 };
 
