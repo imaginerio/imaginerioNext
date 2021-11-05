@@ -90,13 +90,13 @@ const Timeline = ({ min, max, triple }) => {
 
   return (
     <Grid
-      templateColumns={['1fr', `${triple ? '55px 60px' : '65px repeat(2, 60px)'} 1fr`]}
+      templateColumns={['1fr', `${triple ? '45px 60px' : '65px repeat(2, 60px)'} 1fr`]}
       columnGap={6}
       alignItems="center"
       className="intro___timeline"
     >
       <Flex alignItems="center" display={['none', 'block']}>
-        <Heading size="sm" m={0} fontSize={18} fontWeight="bold">
+        <Heading size="md" m={0} fontSize={18} fontWeight="bold">
           {triple ? `${translations.year[locale]}:` : `${translations.year[locale]}s:`}
         </Heading>
       </Flex>
