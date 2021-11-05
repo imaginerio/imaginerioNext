@@ -77,7 +77,9 @@ const Atlas = ({ images }) => {
             maxWidth={width * 0.75}
           >
             <ImageController imageWidth={imageWidth} height={height} />
-            <AtlasController width={width - imageWidth} height={height} />
+            <Box w={width - imageWidth} h={height} overflow="hidden" className="intro___atlas">
+              <AtlasController width={width - imageWidth} height={height} />
+            </Box>
           </GridResizable>
         ) : (
           <AtlasController width={width} height={height} mobile />

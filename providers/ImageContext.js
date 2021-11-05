@@ -74,6 +74,7 @@ const initialState = {
   drawSearch: null,
   drawSearchCoords: null,
   mapBounds: null,
+  showIntro: false,
 };
 
 function reducer(state, [type, payload]) {
@@ -177,6 +178,11 @@ function reducer(state, [type, payload]) {
       return {
         ...state,
         mapBounds: payload,
+      };
+    case 'SET_SHOW_INTRO':
+      return {
+        ...state,
+        showIntro: payload,
       };
     default:
       return state;
