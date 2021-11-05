@@ -12,7 +12,7 @@ import translations from '../../assets/config/translations';
 
 const Legend = () => {
   const { locale } = useRouter();
-  const [{ year, drawSearch }] = useImages();
+  const [{ year, drawSearch, highlightedFeature }] = useImages();
   const [legendOpen, setLegendOpen] = useState(false);
   const [searchResultsActive, setSearchResultsActive] = useState(false);
 
@@ -44,15 +44,14 @@ const Legend = () => {
             pos="absolute"
             h="calc(100vh - 90px)"
             w="250px"
-            p="20px"
-            pb="20px"
             zIndex={9}
             backgroundColor="white"
-            overflow="auto"
             boxShadow="2px 0 3px rgba(0,0,0,0.15)"
           >
-            <MapSearch handler={setSearchResultsActive} />
-            {!searchResultsActive && !drawSearch && <LegendSwatches />}
+            <Box h={`calc(100vh - ${highlightedFeature ? 155 : 90}px)`} overflow="auto" p="20px">
+              <MapSearch handler={setSearchResultsActive} />
+              {!searchResultsActive && !drawSearch && <LegendSwatches />}
+            </Box>
           </Box>
         )}
       </Box>
