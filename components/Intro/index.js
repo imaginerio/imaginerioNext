@@ -29,6 +29,9 @@ const Intro = () => {
           enabled
           steps={steps}
           initialStep={0}
+          options={{
+            doneLabel: 'Done',
+          }}
           onExit={stepIndex => {
             dispatch(['SET_SHOW_INTRO', false]);
             if (stepIndex === steps.length - 1) {
