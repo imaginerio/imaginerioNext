@@ -28,6 +28,7 @@ const Atlas = ({ images }) => {
   useEffect(() => {
     dispatch(['SET_ALL_IMAGES', images]);
     dispatch(['SET_USE_LINKS', false]);
+    document.querySelector('body').classList.add('no-scroll');
   }, []);
 
   const [imageWidth, setImageWidth] = useState(500);
@@ -39,7 +40,7 @@ const Atlas = ({ images }) => {
   }, [imageWidth]);
 
   return (
-    <Box w="100vw" h="100vh" overflow="hidden">
+    <>
       <Intro />
       <Head title="Map" />
       <Grid
@@ -85,7 +86,7 @@ const Atlas = ({ images }) => {
           <AtlasController width={width} height={height} mobile />
         )}
       </Box>
-    </Box>
+    </>
   );
 };
 

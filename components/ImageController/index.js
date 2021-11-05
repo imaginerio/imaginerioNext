@@ -102,7 +102,7 @@ const ImageController = ({ imageWidth, height }) => {
             </Container>
           )}
           <ImageViewer
-            height={imageWidth >= 400 ? height - 100 : height - 55}
+            height={imageWidth >= 400 ? height - 120 : height - 75}
             width={imageWidth}
             noLink
             control={<ImageSort small collection />}
