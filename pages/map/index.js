@@ -14,6 +14,7 @@ import { useImages } from '../../providers/ImageContext';
 import useWindowDimensions from '../../utils/useWindowDimensions';
 
 const AtlasController = dynamic(() => import('../../components/AtlasController'), { ssr: false });
+const Intro = dynamic(() => import('../../components/Intro'), { ssr: false });
 
 const Atlas = ({ images }) => {
   let height = 800;
@@ -27,6 +28,7 @@ const Atlas = ({ images }) => {
   useEffect(() => {
     dispatch(['SET_ALL_IMAGES', images]);
     dispatch(['SET_USE_LINKS', false]);
+    document.querySelector('body').classList.add('no-scroll');
   }, []);
 
   const [imageWidth, setImageWidth] = useState(500);
@@ -38,7 +40,8 @@ const Atlas = ({ images }) => {
   }, [imageWidth]);
 
   return (
-    <Box w="100vw" h="100vh" overflow="hidden">
+    <>
+      <Intro />
       <Head title="Map" />
       <Grid
         h="90px"
@@ -75,13 +78,15 @@ const Atlas = ({ images }) => {
             maxWidth={width * 0.75}
           >
             <ImageController imageWidth={imageWidth} height={height} />
-            <AtlasController width={width - imageWidth} height={height} />
+            <Box w={width - imageWidth} h={height} overflow="hidden" className="intro___atlas">
+              <AtlasController width={width - imageWidth} height={height} />
+            </Box>
           </GridResizable>
         ) : (
           <AtlasController width={width} height={height} mobile />
         )}
       </Box>
-    </Box>
+    </>
   );
 };
 

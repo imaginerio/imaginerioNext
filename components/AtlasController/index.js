@@ -181,6 +181,7 @@ const AtlasController = ({ width, height, mobile }) => {
             dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)]);
           }
         }}
+        loadHandler={() => dispatch(['SET_SHOW_INTRO', true])}
         circleMarkers
         hover={hover}
         opacity={opacity}

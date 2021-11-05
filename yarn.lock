@@ -991,10 +991,10 @@
   resolved "https://registry.yarnpkg.com/@iiif/vocabulary/-/vocabulary-1.0.19.tgz#c735577bdcbafcb988471391b9e39d772662de62"
   integrity sha512-5XjrB81bVcu80YcYz5Lxcvvio+PJljiZt3pNW8ACbL3OoL+8QoCJ/dwivdYEcoyEck2I8cEMgAZYEOuEZq+fgg==
 
-"@imaginerio/diachronic-atlas@^0.9.5":
-  version "0.9.5"
-  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.9.5.tgz#4da31bad128623cb1921dcb067d33b0238f163b5"
-  integrity sha512-iPrSPRGER2gXh1jbc19nDloY1q11BjqLGdpNK5UlztbJwywtT02ljsjzp9Fi2QqGcqYetjPStOE5MuMq+7VpJA==
+"@imaginerio/diachronic-atlas@^0.9.6":
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/@imaginerio/diachronic-atlas/-/diachronic-atlas-0.9.6.tgz#c923c6d38de0f6c6e6b707b7fedce3bdb4469175"
+  integrity sha512-RL7abZUFHEFkmqu7wXNtbD2Do089BguThS9bNBe2dx2lRJvCz96drHXt41HrnTY7cyBAIXhdLj1M7TNwTmmG+A==
   dependencies:
     "@turf/bbox" "^6.3.0"
     "@turf/bbox-polygon" "^6.5.0"
@@ -2179,6 +2179,11 @@ convert-source-map@1.7.0, convert-source-map@^1.5.0, convert-source-map@^1.7.0:
   integrity sha512-4FJkXzKXEDB1snCFZlLP4gpC3JILicCpGbzG9f9G7tGqGCzETQ2hWPrcinA9oU4wtf2biUaEH5065UnMeR33oA==
   dependencies:
     safe-buffer "~5.1.1"
+
+cookie-cutter@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/cookie-cutter/-/cookie-cutter-0.2.0.tgz#5988f598b68c060a00ec8524ad6e6aa193e72244"
+  integrity sha1-WYj1mLaMBgoA7IUkrW5qoZPnIkQ=
 
 copy-to-clipboard@3.3.1, copy-to-clipboard@^3:
   version "3.3.1"
@@ -3905,6 +3910,16 @@ intersection-observer@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.10.0.tgz#4d11d63c1ff67e21e62987be24d55218da1a1a69"
   integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
+
+intro.js-react@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/intro.js-react/-/intro.js-react-0.5.0.tgz#d4e67a4f6e4726bee803222ff09d6deacb4598c8"
+  integrity sha512-tr9uhoy/aRgcdZxpqYC/TPSVlJ/Gt9Kx4mpI7clCdFa7c3SG8reJugIa1U5XnWlDLRNMc+e8egb8Jf186yvc1A==
+
+intro.js@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/intro.js/-/intro.js-4.2.2.tgz#9077549cc6ef697e78d18d1c05003b7471281e1a"
+  integrity sha512-Zgz2e8syCuttJ2vJlDOWCSWPUJBr7AOJkU5Ti3zcvXho+y//q0ixwoT+PkPLJWI7AX35IdgRcxAEWUrOAJYiNQ==
 
 invariant@^2.2.4:
   version "2.2.4"
