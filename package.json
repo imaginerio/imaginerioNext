@@ -24,6 +24,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@imaginerio/diachronic-atlas": "^0.9.6",
     "axios": "^0.19.2",
+    "cookie-cutter": "^0.2.0",
     "framer-motion": "^2.9.5",
     "html-react-parser": "^0.14.2",
     "intro.js": "^4.2.2",
