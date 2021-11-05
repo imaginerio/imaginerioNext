@@ -75,6 +75,7 @@ const initialState = {
   drawSearchCoords: null,
   mapBounds: null,
   showIntro: false,
+  lastImagePos: 0,
 };
 
 function reducer(state, [type, payload]) {
@@ -184,6 +185,11 @@ function reducer(state, [type, payload]) {
         ...state,
         showIntro: payload,
       };
+    case 'SET_LAST_IMAGE_POS':
+      return {
+        ...state,
+        lastImagePos: payload,
+      };
     default:
       return state;
   }
@@ -225,8 +231,11 @@ function ImageContextProvider({ children }) {
   );
 
   useEffect(() => {
-    if (selectedImage && selectedImage.firstyear) {
-      dispatch(['YEAR', selectedImage.firstyear]);
+    if (selectedImage) {
+      dispatch(['SET_LAST_IMAGE_POS', activeImages.indexOf(selectedImage)]);
+      if (selectedImage.firstyear) {
+        dispatch(['YEAR', selectedImage.firstyear]);
+      }
     }
   }, [selectedImage]);
 
