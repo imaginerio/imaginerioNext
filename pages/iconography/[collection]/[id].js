@@ -5,7 +5,18 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLink } from '@fortawesome/pro-light-svg-icons';
-import { Container, Grid, Box, Heading, Text, Flex, Spacer, Button, Stack } from '@chakra-ui/react';
+import {
+  Container,
+  Grid,
+  Box,
+  Heading,
+  Text,
+  Flex,
+  Spacer,
+  Button,
+  Stack,
+  HStack,
+} from '@chakra-ui/react';
 
 import Head from '../../../components/Head';
 import Header from '../../../components/Header';
@@ -23,10 +34,18 @@ const Atlas = dynamic(() => import('../../../components/AtlasController/AtlasSin
 
 const ImageDetails = ({ metadata, geojson, id, collection }) => {
   const { properties } = geojson.features[0];
-  let year = parseInt(findByLabel(metadata, 'Date'), 10);
+  const date = findByLabel(metadata, 'Date') || findByLabel(metadata, 'Data');
+  let year = parseInt(date, 10);
   if (!year) year = parseInt(findByLabel(metadata, 'Temporal Coverage'), 10);
   if (!year) year = properties.firstyear;
-  const title = findByLabel(metadata, 'Title') || properties.title || 'Untitled';
+  const title =
+    findByLabel(metadata, 'Title') ||
+    findByLabel(metadata, 'Título') ||
+    properties.title ||
+    'Untitled';
+
+  const creator = findByLabel(metadata, 'Creator') || findByLabel(metadata, 'Autor');
+
   const { latitude, longitude } = geojson.features[0].properties;
   const smapshot = findByLabel(metadata, 'Smapshot');
 
@@ -40,10 +59,16 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
       <Container>
         <Breadcrumbs collection={collection} title={findByLabel(metadata, 'Title')} />
         <Heading>{title}</Heading>
-        <Text mb="40px">
-          <span>Identifier: </span>
-          <span style={{ opacity: 0.6 }}>{id}</span>
-        </Text>
+        <HStack mb="40px" spacing={8}>
+          <Text>
+            <span>Creator: </span>
+            <span style={{ opacity: 0.6 }}>{creator}</span>
+          </Text>
+          <Text>
+            <span>Date: </span>
+            <span style={{ opacity: 0.6 }}>{date}</span>
+          </Text>
+        </HStack>
         <Mirador
           config={{
             id: 'mirador',
@@ -65,7 +90,9 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
           }}
           style={{ position: 'relative', width: '100%', minHeight: 500, height: '40vh' }}
         />
-        <Text my="80px">{findByLabel(metadata, 'Description')}</Text>
+        <Text my="80px">
+          {findByLabel(metadata, 'Description') || findByLabel(metadata, 'Descrição')}
+        </Text>
 
         <Grid templateColumns={['1fr', '480px 1fr']} columnGap="50px" mb={10}>
           <Stack mb={10}>
@@ -100,12 +127,13 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
             <Heading size="sm" display={['none', 'block']}>
               Properties
             </Heading>
-            {metadata
+            {[{ label: 'Identifier', value: id }, ...metadata]
               .filter(
                 m =>
                   m.label !== 'Title' &&
-                  m.label !== 'Identifier' &&
                   m.label !== 'Description' &&
+                  m.label !== 'Título' &&
+                  m.label !== 'Descrição' &&
                   m.label !== 'Smapshot'
               )
               .map(m => {

@@ -34,8 +34,14 @@ export default extendTheme({
         fontSize: '22px',
         my: '20px',
       },
+      li: {
+        mb: 3,
+      },
       'li > ul': {
         pl: 5,
+      },
+      'li > p': {
+        mb: 3,
       },
     },
   },

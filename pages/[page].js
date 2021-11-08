@@ -17,7 +17,7 @@ const About = ({ content, title }) => (
     <Head title={`imagineRio - ${title}`} />
     <Header />
     <Box as="section" backgroundColor="#F7F9FC" py={[2, 50]}>
-      <Container>
+      <Container maxW="6xl" px={12}>
         <ParsedContent content={content} />
       </Container>
     </Box>
