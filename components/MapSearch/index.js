@@ -5,7 +5,9 @@ import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/pro-light-svg-icons';
 import { faSearch, faVectorSquare, faBullseyePointer } from '@fortawesome/pro-regular-svg-icons';
+import { faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
 import {
+  Box,
   InputGroup,
   Input,
   InputLeftElement,
@@ -26,7 +28,8 @@ import translations from '../../assets/config/translations';
 
 const MapSearch = ({ handler }) => {
   const { locale } = useRouter();
-  const [{ year, drawSearch, drawSearchCoords }, dispatch] = useImages();
+  const [{ year, drawSearch, drawSearchCoords, highlightedFeature }, dispatch] = useImages();
+
   const [string, setString] = useState('');
   const [searchResults, setSearchResults] = useState(null);
   const [searchActive, setSearchActive] = useState(false);
@@ -112,6 +115,30 @@ const MapSearch = ({ handler }) => {
           onClick={() => setDrawToggle(!drawToggle)}
         />
       </HStack>
+      {highlightedFeature && (
+        <Box
+          w="250px"
+          pos="fixed"
+          bottom="0"
+          py={4}
+          px="20px"
+          mx="-20px"
+          bg="white"
+          boxShadow="0px -1px 5px 1px #ccc"
+        >
+          <Button
+            isFullWidth
+            variant="outline"
+            borderColor="#ccc"
+            bg="white"
+            size="sm"
+            leftIcon={<FontAwesomeIcon icon={faTimesCircle} />}
+            onClick={() => dispatch(['SET_HIGHLIGHTED_FEATURE', null])}
+          >
+            Clear highlighted feature
+          </Button>
+        </Box>
+      )}
       {searchActive && !searchResults && (
         <Flex alignItems="center" justifyContent="center" mt={100}>
           <Spinner size="xl" />
