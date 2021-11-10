@@ -111,6 +111,10 @@ FilterMenu.propTypes = {
 const ImageFilter = () => {
   const buttonRef = useRef(null);
   const [isOpen, setIsOpen] = useState();
+  const [{ collection }] = useImages();
+  const isActive = collection && collection !== 'all';
+
+  useEffect(() => setIsOpen(false), [collection]);
 
   return (
     <>
@@ -119,6 +123,9 @@ const ImageFilter = () => {
         variant="outline"
         colorScheme="blackAlpha"
         icon={<FontAwesomeIcon icon={faFilter} />}
+        bg={isActive ? '#6CB2F5' : 'transparent'}
+        borderColor={isActive ? '#6CB2F5' : '#E2E8F0'}
+        color={isActive ? 'white' : 'gray.500'}
         onClick={() => setIsOpen(!isOpen)}
       />
       {isOpen && <FilterMenu xPos={buttonRef.current.getBoundingClientRect().left} />}

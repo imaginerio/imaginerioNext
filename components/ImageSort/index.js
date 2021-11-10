@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowDown } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowUp, faArrowDown } from '@fortawesome/pro-solid-svg-icons';
 import { Flex, Select, IconButton } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -17,7 +17,7 @@ const ImageSort = ({ small, collection }) => {
         borderRadius="4px 0 0 4px"
         colorScheme="blackAlpha"
         borderStyle={small ? 'none' : 'solid'}
-        borderColor={small ? 'transparent' : 'blackAlpha.500'}
+        borderColor={small ? 'transparent' : '#E2E8F0'}
         onChange={({ target: { value } }) => dispatch(['SORT', value])}
       >
         <option value="title">Title</option>
@@ -33,6 +33,7 @@ const ImageSort = ({ small, collection }) => {
         variant="outline"
         borderRadius="0 4px 4px 0"
         borderStyle={small ? 'none' : 'solid'}
+        borderColor={small ? 'transparent' : '#E2E8F0'}
         icon={<FontAwesomeIcon icon={direction ? faArrowUp : faArrowDown} />}
         onClick={() => dispatch(['DIRECTION'])}
       />

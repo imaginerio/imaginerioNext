@@ -1,7 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/pro-regular-svg-icons';
-import { faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
+import { faSearch, faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
 import { InputGroup, Input, InputRightElement, InputLeftElement } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
