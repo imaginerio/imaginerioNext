@@ -85,7 +85,10 @@ const AtlasController = ({ width, height, mobile }) => {
             id: selectedImage.ssid,
             data,
             type: 'fill',
-            paint: { 'fill-color': 'rgba(0,0,0,0.25)' },
+            paint: {
+              'fill-color':
+                selectedImage.collection === 'views' ? 'rgba(0,0,0,0.25)' : 'rgba(0,0,0,0)',
+            },
           })
         );
       router.replace(`${router.basePath}#${selectedImage.ssid}`);
@@ -136,7 +139,7 @@ const AtlasController = ({ width, height, mobile }) => {
 
   useEffect(() => {
     const geo = [];
-    if (viewCone && selectedImage.collection === 'views') geo.push(viewCone);
+    if (viewCone) geo.push(viewCone);
     if (featureJson) geo.push(featureJson);
     setGeojson(geo);
   }, [viewCone, featureJson]);
