@@ -95,7 +95,7 @@ const ImageController = ({ imageWidth, height }) => {
                 mb={2}
                 className="intro___images___search"
               >
-                <ImageSearch hideIcon />
+                <ImageSearch />
                 <ImageFilter />
                 <ViewButtons />
               </Grid>

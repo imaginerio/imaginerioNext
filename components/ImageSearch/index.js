@@ -1,22 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/pro-regular-svg-icons';
 import { faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
-import { InputGroup, Input, InputRightAddon, InputRightElement } from '@chakra-ui/react';
+import { InputGroup, Input, InputRightElement, InputLeftElement } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 
-const ImageSearch = ({ hideIcon }) => {
+const ImageSearch = () => {
   const [{ query }, dispatch] = useImages();
   return (
     <InputGroup gridColumn={['1 / 3', '1']}>
+      <InputLeftElement>
+        <FontAwesomeIcon icon={faSearch} />
+      </InputLeftElement>
       <Input
         value={query}
         onChange={({ target: { value } }) => dispatch(['QUERY', value])}
         placeholder="Search images..."
       />
-      <InputRightElement mr={hideIcon ? 0 : '45px'}>
+      <InputRightElement>
         {query && (
           <FontAwesomeIcon
             icon={faTimesCircle}
@@ -26,21 +28,8 @@ const ImageSearch = ({ hideIcon }) => {
           />
         )}
       </InputRightElement>
-      {!hideIcon && (
-        <InputRightAddon>
-          <FontAwesomeIcon icon={faSearch} />
-        </InputRightAddon>
-      )}
     </InputGroup>
   );
-};
-
-ImageSearch.propTypes = {
-  hideIcon: PropTypes.bool,
-};
-
-ImageSearch.defaultProps = {
-  hideIcon: false,
 };
 
 export default ImageSearch;
