@@ -9,9 +9,13 @@ const textSearch = ({ item, query }) => {
     const regex = new RegExp(unaccent(term).replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
     if (item.title && unaccent(item.title).match(regex)) return true;
     if (item.creator && unaccent(item.creator).match(regex)) return true;
-    if (item.source && unaccent(item.source.value).match(regex)) return true;
     if (item.ssid && item.ssid.match(regex)) return true;
     if (item.date && item.date.toString().match(regex)) return true;
+    if (item.source) {
+      if (Array.isArray(item.source.value)) {
+        if (item.source.value.some(d => unaccent(d).match(regex))) return true;
+      } else if (unaccent(item.source.value).match(regex)) return true;
+    }
     if (item.depicts) {
       if (Array.isArray(item.depicts.value)) {
         if (item.depicts.value.some(d => unaccent(d).match(regex))) return true;
