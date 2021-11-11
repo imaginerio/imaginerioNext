@@ -145,7 +145,7 @@ const Timeline = ({ min, max, triple }) => {
         ariaLabel={['Lower thumb', 'Upper thumb']}
         ariaValuetext={state => `Thumb value ${state.valueNow}`}
         pearling
-        minDistance={10}
+        minDistance={0}
       />
     </Grid>
   );
