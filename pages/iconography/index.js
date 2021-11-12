@@ -21,18 +21,18 @@ const Iconography = ({ collections }) => {
       <Container>
         <Breadcrumbs />
         <Heading>Iconography</Heading>
-        <Grid py={5} templateColumns={['1fr', '1fr 1fr']} columnGap="40px" rowGap="20px">
+        <Grid pt={5} pb={24} templateColumns={['1fr', '1fr 1fr']} columnGap="40px" rowGap="20px">
           {collections.map(collection => (
             <Link key={collection.url} href={`${locale}/iconography/${collection.url}`}>
-              <Box shadow="md" width="100%" px={5} pb={5} cursor="pointer">
-                <Center mx={-5}>
-                  <Image
-                    src={collection.thumbnail.url}
-                    height={collection.thumbnail.height}
-                    width={collection.thumbnail.width}
-                  />
+              <Box shadow="md" width="100%" px={5} pb={5} cursor="pointer" role="group">
+                <Center mx={-5} w="calc(100% + 2.5rem)" h="250px" pos="relative">
+                  <Image src={collection.thumbnail.url} layout="fill" />
                 </Center>
-                <Heading size="lg" textTransform="capitalize">
+                <Heading
+                  size="lg"
+                  textTransform="capitalize"
+                  _groupHover={{ textDecoration: 'underline' }}
+                >
                   {collection.label}
                 </Heading>
                 <Text>{`${collection.length} items`}</Text>
