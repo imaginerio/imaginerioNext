@@ -49,7 +49,7 @@ const Home = ({ content: { map, iconography } }) => {
               borderRadius="15px"
               alignSelf="center"
             >
-              <video autoPlay controls>
+              <video autoPlay="autoplay" controls muted>
                 <source src="/video/imaginerio_demo_en.webm" type="video/webm" />
               </video>
             </Box>
