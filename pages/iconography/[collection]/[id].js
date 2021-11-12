@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,6 +34,7 @@ const Atlas = dynamic(() => import('../../../components/AtlasController/AtlasSin
 });
 
 const ImageDetails = ({ metadata, geojson, id, collection }) => {
+  const { locale } = useRouter();
   const { properties } = geojson.features[0];
   const date = findByLabel(metadata, 'Date') || findByLabel(metadata, 'Data');
   let year = parseInt(date, 10);
@@ -86,7 +88,11 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
               enabled: false,
             },
             windows: [{ manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${id}/manifest.json` }],
-            language: 'pt-br',
+            language: locale === 'pt' ? 'pt-br' : 'en',
+            availableLanguages: {
+              'pt-br': 'Português',
+              en: 'English',
+            },
           }}
           style={{ position: 'relative', width: '100%', minHeight: 500, height: '40vh' }}
         />

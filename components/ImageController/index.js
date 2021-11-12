@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,6 +19,7 @@ import { useImages } from '../../providers/ImageContext';
 const Mirador = dynamic(() => import('../Mirador'), { ssr: false });
 
 const ImageController = ({ imageWidth, height }) => {
+  const { locale } = useRouter();
   const [{ selectedImage }, dispatch] = useImages();
 
   return (
@@ -81,6 +83,11 @@ const ImageController = ({ imageWidth, height }) => {
                   manifestId: `${process.env.NEXT_PUBLIC_IIIF}/${selectedImage.ssid}/manifest.json`,
                 },
               ],
+              language: locale === 'pt' ? 'pt-br' : 'en',
+              availableLanguages: {
+                'pt-br': 'Português',
+                en: 'English',
+              },
             }}
             style={{ position: 'relative', width: '100%', height: '100%' }}
           />
