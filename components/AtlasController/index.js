@@ -119,6 +119,7 @@ const AtlasController = ({ width, height, mobile }) => {
             case 'Polygon':
             case 'MultiPolygon':
               type = 'fill';
+              paint['fill-color'] = 'rgba(0,0,0,0.5)';
               break;
             default:
               type = 'fill';
