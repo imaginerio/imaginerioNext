@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import propTypes from 'prop-types';
 import Image from 'next/image';
@@ -21,8 +22,12 @@ const Home = ({ content: { map, iconography } }) => {
       <Head title="imagineRio" />
       <Header />
       <Box as="section" backgroundColor="#F7F9FC" py={[5, 50]}>
-        <Container>
-          <Grid templateColumns={['1fr', '1fr 300px']} columnGap="50px">
+        <Container maxW="100vw">
+          <Grid
+            pl="calc(50vw - 512px)"
+            templateColumns={['1fr', null, 'min(360px, 35%) 1fr']}
+            gap="60px"
+          >
             <Box display="flex" alignItems="center">
               <Box>
                 <Heading size="sm">{translations.map[locale]}</Heading>
@@ -36,14 +41,17 @@ const Home = ({ content: { map, iconography } }) => {
               </Box>
             </Box>
             <Box
-              p="40px"
+              maxW={960}
+              minW={480}
+              p="15px"
               bgColor="black"
               position="relative"
-              width="660px"
-              borderRadius="20px"
-              display={['none', 'block']}
+              borderRadius="15px"
+              alignSelf="center"
             >
-              <Image src="/img/screenshot.png" width={660} height={430} />
+              <video autoPlay="autoplay" controls muted>
+                <source src="/video/imaginerio_demo_en.webm" type="video/webm" />
+              </video>
             </Box>
           </Grid>
         </Container>

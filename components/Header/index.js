@@ -70,7 +70,7 @@ const Header = () => {
           />
         </Link>
         <Spacer />
-        <HStack spacing={30} display={['none', 'block']}>
+        <HStack spacing={30} display={['none', null, 'block']}>
           <HeaderLinks />
         </HStack>
         <Menu>
@@ -79,7 +79,7 @@ const Header = () => {
             icon={<HamburgerIcon />}
             variant="outline"
             colorScheme="blackAlpha"
-            display={['block', 'none']}
+            display={['block', null, 'none']}
           />
           <MenuList>
             <Stack mx={5}>
