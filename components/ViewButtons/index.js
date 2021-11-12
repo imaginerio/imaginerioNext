@@ -20,7 +20,10 @@ const ViewButtons = () => {
         <IconButton
           key={button.key}
           icon={<FontAwesomeIcon icon={button.icon} />}
-          variant={size === button.key ? null : 'outline'}
+          variant="outline"
+          bg={size === button.key ? '#6CB2F5' : 'transparent'}
+          borderColor={size === button.key ? '#6CB2F5' : '#E2E8F0'}
+          color={size === button.key ? 'white' : 'gray.500'}
           onClick={() => dispatch(['SET_SIZE', button.key])}
         />
       ))}
