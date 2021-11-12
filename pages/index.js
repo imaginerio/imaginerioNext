@@ -31,9 +31,7 @@ const Home = ({ content: { map, iconography } }) => {
                   <ParsedContent content={map} />
                 </Text>
                 <Link href="/map">
-                  <Button bgColor="#3C558E" color="white" px={10}>
-                    {translations.viewMap[locale]}
-                  </Button>
+                  <Button variant="homepage">{translations.viewMap[locale]}</Button>
                 </Link>
               </Box>
             </Box>
@@ -64,9 +62,7 @@ const Home = ({ content: { map, iconography } }) => {
                 <ParsedContent content={iconography} />
               </Text>
               <Link href="/iconography">
-                <Button bgColor="#3C558E" color="white" px={10}>
-                  {translations.browseIconografy[locale]}
-                </Button>
+                <Button variant="homepage">{translations.browseIconografy[locale]}</Button>
               </Link>
               <Box my={[5, 10]}>
                 <Image src="/img/image3.png" width={460} height={286} alt="imagineRio" />

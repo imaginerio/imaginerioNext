@@ -83,6 +83,17 @@ export default extendTheme({
         px: 10,
         fontWeight: 300,
       },
+      variants: {
+        homepage: {
+          bgColor: '#3C558E',
+          color: 'white',
+          px: 10,
+          _hover: {
+            bgColor: 'blue.500',
+            textDecoration: 'none',
+          },
+        },
+      },
     },
     Text: {
       baseStyle: {
