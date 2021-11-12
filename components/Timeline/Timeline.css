@@ -8,6 +8,7 @@
   height: 30px ;
   border: 1px solid #dedede;
   border-radius: 4px;
+  margin-right: 20px;
 }
 
 .___track-1, .___triple .___track-2{
@@ -51,10 +52,6 @@
   font-size: 16px;
 }
 
-.___thumb-1, .___triple .___thumb-2{
-  transform: translate(10px, 0);
-}
-
 .___thumb .___tooltip{
   position: absolute;
   white-space: nowrap;
@@ -70,8 +67,17 @@
   display: block;
 }
 
+.___triple .___thumb-0 .___tooltip{
+  left: 45px;
+  text-align: left;
+}
+
 .___triple .___thumb-1 .___tooltip{
   margin-top: -20px;
+}
+
+.___triple .___thumb-2 .___tooltip{
+  right: 0px;
 }
 
 .___mark{

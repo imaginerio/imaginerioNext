@@ -96,7 +96,7 @@ const Timeline = ({ min, max, triple }) => {
       className="intro___timeline"
     >
       <Flex alignItems="center" display={['none', 'block']}>
-        <Heading size="md" m={0} fontSize={18} fontWeight="bold">
+        <Heading size="md" m={0} fontSize={18} fontWeight="bold" whiteSpace="nowrap">
           {triple ? `${translations.year[locale]}:` : `${translations.year[locale]}s:`}
         </Heading>
       </Flex>
@@ -145,7 +145,7 @@ const Timeline = ({ min, max, triple }) => {
         ariaLabel={['Lower thumb', 'Upper thumb']}
         ariaValuetext={state => `Thumb value ${state.valueNow}`}
         pearling
-        minDistance={10}
+        minDistance={0}
       />
     </Grid>
   );
