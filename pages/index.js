@@ -50,7 +50,7 @@ const Home = ({ content: { map, iconography } }) => {
               alignSelf="center"
             >
               <video autoPlay="autoplay" controls muted>
-                <source src="/video/imaginerio_demo_en.webm" type="video/webm" />
+                <source src={`/video/imaginerio-demo-${locale}.webm`} type="video/webm" />
               </video>
             </Box>
           </Grid>
