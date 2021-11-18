@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { sortBy } from 'lodash';
-import { Container, Heading, Box, Grid, Text, Center } from '@chakra-ui/react';
+import { Container, Heading, Box, Grid, Text } from '@chakra-ui/react';
 
 import Head from '../../components/Head';
 import Header from '../../components/Header';
@@ -25,9 +24,14 @@ const Iconography = ({ collections }) => {
           {collections.map(collection => (
             <Link key={collection.url} href={`${locale}/iconography/${collection.url}`}>
               <Box shadow="md" width="100%" px={5} pb={5} cursor="pointer" role="group">
-                <Center mx={-5} w="calc(100% + 2.5rem)" h="250px" pos="relative">
-                  <Image src={collection.thumbnail.url} layout="fill" />
-                </Center>
+                <Box
+                  mx={-5}
+                  w="calc(100% + 2.5rem)"
+                  h="250px"
+                  bgImage={`url(${collection.thumbnail.url})`}
+                  bgSize="cover"
+                  bgPosition="center"
+                />
                 <Heading
                   size="lg"
                   textTransform="capitalize"
