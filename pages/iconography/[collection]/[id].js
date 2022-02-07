@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -53,6 +53,8 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
 
   let width = 480;
   if (typeof window !== 'undefined') width = Math.min(width, useWindowDimensions().width - 32);
+
+  useEffect(() => document.querySelector('body').classList.remove('no-scroll'), []);
 
   return (
     <>
