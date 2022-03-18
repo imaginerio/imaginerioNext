@@ -1,29 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/pro-solid-svg-icons';
 import { Flex, Select, IconButton } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
+import translation from '../../assets/config/translations';
 
 const ImageSort = ({ small, collection }) => {
+  const { locale } = useRouter();
   const [{ direction }, dispatch] = useImages();
+
   return (
     <Flex>
       <Select
         h={['40px', '']}
         size={small ? 'xs' : 'lg'}
-        placeholder="Sort by..."
+        placeholder={translation.sortBy[locale]}
         borderRadius="4px 0 0 4px"
         colorScheme="blackAlpha"
         borderStyle={small ? 'none' : 'solid'}
         borderColor={small ? 'transparent' : '#E2E8F0'}
         onChange={({ target: { value } }) => dispatch(['SORT', value])}
       >
-        <option value="title">Title</option>
-        <option value="date">Date</option>
-        <option value="creator">Creator</option>
-        {collection && <option value="collection">Collection</option>}
+        <option value="title">{translation.title[locale]}</option>
+        <option value="date">{translation.date[locale]}</option>
+        <option value="creator">{translation.creator[locale]}</option>
+        {collection && <option value="collection">{translation.collection[locale]}</option>}
       </Select>
       <IconButton
         h={['40px', 'auto']}
