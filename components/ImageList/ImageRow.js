@@ -53,8 +53,8 @@ const ImageRow = ({
             <ImageMeta creator={creator} date={date} source={source} />
           </Flex>
           <Flex align="center" justify="flex-end">
-            <ImageLink w={`${imgWidth}px`} h={`${imgHeight}px`} cursor="pointer" ssid={ssid}>
-              {thumbnail && (
+            {thumbnail && (
+              <ImageLink w={`${imgWidth}px`} h={`${imgHeight}px`} cursor="pointer" ssid={ssid}>
                 <Image
                   src={thumbnail}
                   height={imgHeight}
@@ -62,8 +62,8 @@ const ImageRow = ({
                   layout="responsive"
                   ssid={ssid}
                 />
-              )}
-            </ImageLink>
+              </ImageLink>
+            )}
           </Flex>
         </Grid>
       </Container>
