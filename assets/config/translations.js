@@ -47,6 +47,10 @@ const translation = {
     en: 'Creator',
     pt: 'Criador',
   },
+  collection: {
+    en: 'Collection',
+    pt: 'Coleção',
+  },
   start: {
     en: 'Start',
     pt: 'Início',
@@ -138,6 +142,42 @@ const translation = {
   gridView: {
     en: 'Gallery view',
     pt: 'Galeria',
+  },
+  searchMoves: {
+    en: 'Search images in this area',
+    pt: 'Pesquisar imagens nesta região',
+  },
+  imagesFound: {
+    en: 'images found',
+    pt: 'imagens encontradas',
+  },
+  searchImages: {
+    en: 'Search images',
+    pt: 'Buscar imagens',
+  },
+  sortBy: {
+    en: 'Sort by',
+    pt: 'Ordenar por',
+  },
+  imageStart: {
+    en: 'Image Start',
+    pt: 'Imagens desde',
+  },
+  imageEnd: {
+    en: 'Image End',
+    pt: 'Imagens até',
+  },
+  showViewPoints: {
+    en: 'Show view points',
+    pt: 'Mostrar imagens',
+  },
+  hideViewPoints: {
+    en: 'Hide view points',
+    pt: 'Ocultar imagens',
+  },
+  adjustOpacity: {
+    en: 'Adjust overlay opacity',
+    pt: 'Ajustar transparência',
   },
 };
 

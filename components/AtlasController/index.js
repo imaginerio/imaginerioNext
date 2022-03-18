@@ -17,6 +17,7 @@ import mapStyle from '../../assets/style/style.json';
 
 import { useImages } from '../../providers/ImageContext';
 import useDebouncedEffect from '../../utils/useDebouncedEffect';
+import translation from '../../assets/config/translations';
 
 const fetcher = ssid => {
   if (ssid) {
@@ -221,7 +222,7 @@ const AtlasController = ({ width, height, mobile }) => {
           cursor="pointer"
         >
           <Checkbox isChecked={searchMove} pointerEvents="none" />
-          <Text>Search as map moves</Text>
+          <Text>{translation.searchMoves[router.locale]}</Text>
         </HStack>
       )}
       <ViewControl

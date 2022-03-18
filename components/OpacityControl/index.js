@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import { omit } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLayerGroup, faTimesCircle } from '@fortawesome/pro-regular-svg-icons';
@@ -14,6 +15,8 @@ import {
   SliderThumb,
   Tooltip,
 } from '@chakra-ui/react';
+
+import translation from '../../assets/config/translations';
 
 const styleProps = {
   boxShadow: 'md',
@@ -60,6 +63,7 @@ OpacitySlider.propTypes = {
 };
 
 const OpacityControl = props => {
+  const { locale } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const buttonStyleProps = omit(props, 'opacity', 'handler');
 
@@ -68,7 +72,7 @@ const OpacityControl = props => {
       {isOpen ? (
         <OpacitySlider opacity={props.opacity} handler={props.handler} setIsOpen={setIsOpen} />
       ) : (
-        <Tooltip label="Adjust overlay opacity" placement="left" hasArrow>
+        <Tooltip label={translation.adjustOpacity[locale]} placement="left" hasArrow>
           <IconButton
             size="sm"
             {...styleProps}

@@ -1,12 +1,16 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
 import { InputGroup, Input, InputRightElement, InputLeftElement } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
+import translation from '../../assets/config/translations';
 
 const ImageSearch = () => {
+  const { locale } = useRouter();
   const [{ query }, dispatch] = useImages();
+
   return (
     <InputGroup gridColumn={['1 / 3', '1']}>
       <InputLeftElement>
@@ -15,7 +19,7 @@ const ImageSearch = () => {
       <Input
         value={query}
         onChange={({ target: { value } }) => dispatch(['QUERY', value])}
-        placeholder="Search images..."
+        placeholder={`${translation.searchImages[locale]}...`}
       />
       <InputRightElement>
         {query && (

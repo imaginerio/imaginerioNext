@@ -53,8 +53,8 @@ const Timeline = ({ min, max, triple }) => {
   const [inputError, setInputError] = useState(false);
 
   const tooltipText = triple
-    ? ['Image Start: ', '', 'Image End: ']
-    : ['Image Start: ', 'Image End: '];
+    ? [`${translations.imageStart[locale]}: `, '', `${translations.imageEnd[locale]}: `]
+    : [`${translations.imageStart[locale]}: `, `${translations.imageEnd[locale]}: `];
 
   useEffect(() => {
     let newDates = sliderRange;
