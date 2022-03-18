@@ -176,7 +176,9 @@ const MapSearch = ({ handler }) => {
           </Stack>
           {!searchResults && (
             <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
-              {translations.searchInstructions[locale]}
+              {clickSearch
+                ? translations.searchClickInstructions[locale]
+                : translations.searchBoxInstructions[locale]}
             </Heading>
           )}
         </>

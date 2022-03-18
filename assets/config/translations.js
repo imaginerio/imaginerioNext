@@ -199,9 +199,13 @@ const translation = {
     en: 'Adjust overlay opacity',
     pt: 'Ajustar transparência',
   },
-  searchInstructions: {
-    en: 'Click on the map to draw a search area to identify features',
-    pt: 'Clique no mapa para desenhar uma região para identificar feições',
+  searchClickInstructions: {
+    en: 'Click on the map to identify features',
+    pt: 'Clique no mapa para identificar feições',
+  },
+  searchBoxInstructions: {
+    en: 'Click and drag on the map to identify features',
+    pt: 'Clique e arraste no mapa para identificar feições',
   },
   searchClick: {
     en: 'Search by click',
