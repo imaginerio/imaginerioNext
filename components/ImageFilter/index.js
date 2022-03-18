@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/pro-solid-svg-icons';
 import {
@@ -12,9 +13,11 @@ import {
   RadioGroup,
   HStack,
   Input,
+  Tooltip,
 } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
+import translation from '../../assets/config/translations';
 
 const CollectionFilter = () => {
   const [{ categories, collection }, dispatch] = useImages();
@@ -109,6 +112,7 @@ FilterMenu.propTypes = {
 };
 
 const ImageFilter = () => {
+  const { locale } = useRouter();
   const buttonRef = useRef(null);
   const [isOpen, setIsOpen] = useState();
   const [{ collection }] = useImages();
@@ -118,16 +122,18 @@ const ImageFilter = () => {
 
   return (
     <>
-      <IconButton
-        ref={buttonRef}
-        variant="outline"
-        colorScheme="blackAlpha"
-        icon={<FontAwesomeIcon icon={faFilter} />}
-        bg={isActive ? '#6CB2F5' : 'transparent'}
-        borderColor={isActive ? '#6CB2F5' : '#E2E8F0'}
-        color={isActive ? 'white' : 'gray.500'}
-        onClick={() => setIsOpen(!isOpen)}
-      />
+      <Tooltip label={translation.filters[locale]}>
+        <IconButton
+          ref={buttonRef}
+          variant="outline"
+          colorScheme="blackAlpha"
+          icon={<FontAwesomeIcon icon={faFilter} />}
+          bg={isActive ? '#6CB2F5' : 'transparent'}
+          borderColor={isActive ? '#6CB2F5' : '#E2E8F0'}
+          color={isActive ? 'white' : 'gray.500'}
+          onClick={() => setIsOpen(!isOpen)}
+        />
+      </Tooltip>
       {isOpen && <FilterMenu xPos={buttonRef.current.getBoundingClientRect().left} />}
     </>
   );

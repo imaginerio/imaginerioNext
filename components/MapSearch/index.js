@@ -18,6 +18,7 @@ import {
   Heading,
   IconButton,
   Button,
+  Tooltip,
 } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -106,14 +107,16 @@ const MapSearch = ({ handler }) => {
             _focus={{ border: 'none' }}
           />
         </InputGroup>
-        <IconButton
-          variant={drawSearch ? null : 'outline'}
-          colorScheme="blackAlpha"
-          color="black"
-          border="none"
-          icon={<FontAwesomeIcon icon={faBullseyePointer} />}
-          onClick={() => setDrawToggle(!drawToggle)}
-        />
+        <Tooltip label={translations.searchMap[locale]}>
+          <IconButton
+            variant={drawSearch ? null : 'outline'}
+            colorScheme="blackAlpha"
+            color="black"
+            border="none"
+            icon={<FontAwesomeIcon icon={faBullseyePointer} />}
+            onClick={() => setDrawToggle(!drawToggle)}
+          />
+        </Tooltip>
       </HStack>
       {highlightedFeature && (
         <Box
