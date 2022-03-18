@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isArray } from 'lodash';
@@ -64,7 +65,15 @@ ImageMeta.defaultProps = {
 
 export const ImageTitle = ({ ssid, title }) => (
   <Heading size="md" m={0} variant="oneline">
-    <ImageLink ssid={ssid}>{title}</ImageLink>
+    <ImageLink
+      ssid={ssid}
+      whiteSpace="nowrap"
+      textOverflow="ellipsis"
+      overflow="hidden"
+      color="#1580D1"
+    >
+      {title}
+    </ImageLink>
   </Heading>
 );
 
@@ -73,16 +82,18 @@ ImageTitle.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export const ImageLink = ({ children, ssid }) => {
+export const ImageLink = ({ children, ssid, ...rest }) => {
   const { asPath, locale } = useRouter();
   const [{ useLinks, allImages }, dispatch] = useImages();
-  if (useLinks) return <Link href={`/${locale}${asPath}/${ssid}`}>{children}</Link>;
+  if (useLinks)
+    return (
+      <Link href={`/${locale}${asPath}/${ssid}`}>
+        <a style={{ width: '100%', height: '100%' }}>{children}</a>
+      </Link>
+    );
   return (
     <Box
-      whiteSpace="nowrap"
-      textOverflow="ellipsis"
-      overflow="hidden"
-      color="#1580D1"
+      {...rest}
       cursor="pointer"
       onClick={() => dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)])}
     >
