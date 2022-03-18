@@ -23,15 +23,16 @@ const LegendSwatches = () => {
   useEffect(() => {
     if (data) {
       setLegend(
-        sortBy(
-          data
-            .filter(layer => layer.types.filter(t => t).length)
-            .map(layer => ({
+        data.map(f => ({
+          ...f,
+          layers: sortBy(
+            f.layers.map(layer => ({
               ...layer,
               types: layer.types.map(type => getLegend({ layer, type, style })),
             })),
-          'title'
-        )
+            'title'
+          ),
+        }))
       );
     }
   }, [data]);
@@ -45,42 +46,62 @@ const LegendSwatches = () => {
 
   return (
     <>
-      {legend.map(layer => (
-        <Stack key={layer.name}>
-          <Heading size="md" mb={0} fontSize={16}>
-            {layer.title}
+      {legend.map((folder, i) => (
+        <Box key={folder.name}>
+          <Heading
+            as="h2"
+            size="md"
+            mt={i > 0 ? 10 : 'auto'}
+            mb={-3}
+            mx={-3}
+            bg="#ccc"
+            px={3}
+            py={1}
+            sx={{
+              position: 'sticky',
+              top: -5,
+            }}
+          >
+            {folder.name}
           </Heading>
-          {layer.types.map(type => {
-            const layerHighlighted = isHighlighted(
-              { layer: layer.name, type: type.type },
-              highlightedLayer
-            );
-            return (
-              <HStack
-                key={type.type}
-                alignItems="center"
-                onClick={() =>
-                  dispatch([
-                    'SET_HIGHLIGHTED_LAYER',
-                    layerHighlighted ? null : { layer: layer.name, type: type.type },
-                  ])
-                }
-              >
-                <Text
-                  as="div"
-                  variant="result"
-                  backgroundColor={layerHighlighted ? '#666' : '#F2F2F2'}
-                  color={layerHighlighted ? 'white' : 'black'}
-                >
-                  {type.type}
-                  <Spacer px="10px" />
-                  <FontAwesomeIcon icon={layerHighlighted ? faTimesCircle : faBinoculars} />
-                </Text>
-                <Box w="40px" h="20px" {...type.swatch} />
-              </HStack>
-            );
-          })}
-        </Stack>
+          {folder.layers.map(layer => (
+            <Stack key={layer.name}>
+              <Heading size="md" mb={0} fontSize={16}>
+                {layer.title}
+              </Heading>
+              {layer.types.map(type => {
+                const layerHighlighted = isHighlighted(
+                  { layer: layer.name, type: type.type },
+                  highlightedLayer
+                );
+                return (
+                  <HStack
+                    key={type.type}
+                    alignItems="center"
+                    onClick={() =>
+                      dispatch([
+                        'SET_HIGHLIGHTED_LAYER',
+                        layerHighlighted ? null : { layer: layer.name, type: type.type },
+                      ])
+                    }
+                  >
+                    <Text
+                      as="div"
+                      variant="result"
+                      backgroundColor={layerHighlighted ? '#666' : '#F2F2F2'}
+                      color={layerHighlighted ? 'white' : 'black'}
+                    >
+                      {type.type}
+                      <Spacer px="10px" />
+                      <FontAwesomeIcon icon={layerHighlighted ? faTimesCircle : faBinoculars} />
+                    </Text>
+                    <Box w="40px" h="20px" {...type.swatch} />
+                  </HStack>
+                );
+              })}
+            </Stack>
+          ))}
+        </Box>
       ))}
     </>
   );
