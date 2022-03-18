@@ -35,7 +35,7 @@ const Collection = ({ images, collection }) => {
         <Heading textTransform="capitalize">{collection}</Heading>
       </Container>
       <Container>
-        <Timeline min={1500} max={2020} />
+        <Timeline min={1500} max={new Date().getFullYear()} />
         <Grid
           templateColumns={['1fr 120px', '2fr 1fr 1fr']}
           gap={['5px', '50px']}
