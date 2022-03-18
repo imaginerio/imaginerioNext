@@ -6,13 +6,14 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/pro-regular-svg-icons';
 import { faExternalLink } from '@fortawesome/pro-solid-svg-icons';
-import { Grid, Container, Box } from '@chakra-ui/react';
+import { Grid, Container, Box, Tooltip } from '@chakra-ui/react';
 
 import ImageSearch from '../ImageSearch';
 import ImageFilter from '../ImageFilter';
 import ImageSort from '../ImageSort';
 import ViewButtons from '../ViewButtons';
 import ImageViewer from '../ImageViewer';
+import translations from '../../assets/config/translations';
 
 import { useImages } from '../../providers/ImageContext';
 
@@ -46,22 +47,24 @@ const ImageController = ({ imageWidth, height }) => {
           >
             <FontAwesomeIcon icon={faTimesCircle} width="20px" />
           </Box>
-          <Box
-            float="right"
-            pos="absolute"
-            top="13px"
-            right="50px"
-            color="#666"
-            cursor="pointer"
-            zIndex={12}
-            _hover={{
-              color: 'black',
-            }}
-          >
-            <Link href={`/iconography/${selectedImage.collection}/${selectedImage.ssid}`}>
-              <FontAwesomeIcon icon={faExternalLink} width="20px" />
-            </Link>
-          </Box>
+          <Tooltip label={translations.openItem[locale]}>
+            <Box
+              float="right"
+              pos="absolute"
+              top="13px"
+              right="50px"
+              color="#666"
+              cursor="pointer"
+              zIndex={12}
+              _hover={{
+                color: 'black',
+              }}
+            >
+              <Link href={`/iconography/${selectedImage.collection}/${selectedImage.ssid}`}>
+                <FontAwesomeIcon icon={faExternalLink} width="20px" />
+              </Link>
+            </Box>
+          </Tooltip>
           <Mirador
             config={{
               id: 'mirador',

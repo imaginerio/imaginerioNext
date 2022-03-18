@@ -115,6 +115,30 @@ const translation = {
     en: 'Show view points',
     pt: 'Mostrar pontos de vista',
   },
+  openItem: {
+    en: 'Open item page',
+    pr: 'Abrir página do item',
+  },
+  searchMap: {
+    en: 'Search by area',
+    pt: 'Buscar por área',
+  },
+  filters: {
+    en: 'Filters',
+    pt: 'Filtros',
+  },
+  fullView: {
+    en: 'List view',
+    pt: 'Lista',
+  },
+  smallView: {
+    en: 'Compact view',
+    pt: 'Compacto',
+  },
+  gridView: {
+    en: 'Gallery view',
+    pt: 'Galeria',
+  },
 };
 
 export default translation;
