@@ -20,11 +20,13 @@ import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
 
 const CollectionFilter = () => {
+  const { locale } = useRouter();
   const [{ categories, collection }, dispatch] = useImages();
+
   return (
     <Box mb={1} pb={3} borderBottom="1px solid #ccc">
       <Heading size="sm" mb={2}>
-        Image category:
+        {`${translation.imageCategory[locale]}:`}
       </Heading>
       <RadioGroup
         value={collection || 'all'}
@@ -33,7 +35,9 @@ const CollectionFilter = () => {
         <Stack>
           {Object.keys(categories).map(category => (
             <Radio key={category} value={category}>
-              <Text textTransform="capitalize">{`${category} (${categories[category]})`}</Text>
+              <Text textTransform="capitalize">
+                {`${translation[category.toLowerCase()][locale]} (${categories[category]})`}
+              </Text>
             </Radio>
           ))}
         </Stack>
@@ -43,6 +47,7 @@ const CollectionFilter = () => {
 };
 
 const FilterMenu = ({ xPos }) => {
+  const { locale } = useRouter();
   const [{ dates }, dispatch] = useImages();
   const [tempDates, setTempDates] = useState(dates);
   const [isError, setIsError] = useState(false);
@@ -78,11 +83,11 @@ const FilterMenu = ({ xPos }) => {
       <CollectionFilter />
       <Box>
         <Heading size="sm" mb={2}>
-          Image year:
+          {`${translation.imageYear[locale]}:`}
         </Heading>
         <HStack>
           <Box>
-            <Text>Start</Text>
+            <Text>{translation.start[locale]}</Text>
             <Input
               value={tempDates[0]}
               isInvalid={isError}
@@ -92,7 +97,7 @@ const FilterMenu = ({ xPos }) => {
             />
           </Box>
           <Box>
-            <Text>End</Text>
+            <Text>{translation.end[locale]}</Text>
             <Input
               value={tempDates[1]}
               isInvalid={isError}

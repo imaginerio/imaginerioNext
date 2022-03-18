@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isArray } from 'lodash';
 import { useRouter } from 'next/router';
+import { isArray } from 'lodash';
 import Link from 'next/link';
 import { Box, Heading, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
+import translation from '../../assets/config/translations';
 
 export const ImageMeta = ({ creator, date, source }) => {
+  const { locale } = useRouter();
   let links;
   if (source && source.link) {
     links = [];
@@ -25,19 +27,19 @@ export const ImageMeta = ({ creator, date, source }) => {
     <Box>
       {creator && (
         <Text variant="oneline">
-          <b>Creator: </b>
+          <b>{`${translation.creator[locale]}: `}</b>
           {creator}
         </Text>
       )}
       {date && (
         <Text variant="oneline">
-          <b>Date: </b>
+          <b>{`${translation.date[locale]}: `}</b>
           {date}
         </Text>
       )}
       {source && (
         <Text variant="oneline">
-          <b>Source: </b>
+          <b>{`${translation.source[locale]}: `}</b>
           {links.map(({ link, name }) => (
             <Text as="span" key={name} mr={3}>
               <Link href={link} target="_blank">

@@ -27,6 +27,14 @@ const translation = {
     en: 'Aerials',
     pt: 'Vistas Aéreas',
   },
+  plans: {
+    en: 'Plans',
+    pt: 'Planos',
+  },
+  all: {
+    en: 'All',
+    pt: 'Todas',
+  },
   found: {
     en: 'images found',
     pt: 'imagens encontradas',
@@ -46,6 +54,10 @@ const translation = {
   creator: {
     en: 'Creator',
     pt: 'Criador',
+  },
+  source: {
+    en: 'Source',
+    pt: 'Fonte',
   },
   collection: {
     en: 'Collection',
@@ -131,6 +143,14 @@ const translation = {
     en: 'Filters',
     pt: 'Filtros',
   },
+  imageCategory: {
+    en: 'Image category',
+    pt: 'Categoria de imagem',
+  },
+  imageYear: {
+    en: 'Image year',
+    pt: 'Ano da imagem',
+  },
   fullView: {
     en: 'List view',
     pt: 'Lista',
@@ -178,6 +198,18 @@ const translation = {
   adjustOpacity: {
     en: 'Adjust overlay opacity',
     pt: 'Ajustar transparência',
+  },
+  searchInstructions: {
+    en: 'Click on the map to draw a search area to identify features',
+    pt: 'Clique no mapa para desenhar uma região para identificar feições',
+  },
+  searchClick: {
+    en: 'Search by click',
+    pt: 'Pesquisar por clique',
+  },
+  searchBox: {
+    en: 'Search by box',
+    pt: 'Pesquisar por área',
   },
 };
 

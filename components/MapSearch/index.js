@@ -162,7 +162,7 @@ const MapSearch = ({ handler }) => {
               isActive={clickSearch}
               onClick={() => setClickSearch(true)}
             >
-              Search by click
+              {translations.searchClick[locale]}
             </Button>
             <Button
               size="sm"
@@ -171,14 +171,12 @@ const MapSearch = ({ handler }) => {
               isActive={!clickSearch}
               onClick={() => setClickSearch(false)}
             >
-              Search by box
+              {translations.searchBox[locale]}
             </Button>
           </Stack>
           {!searchResults && (
             <Heading size="sm" textAlign="center" mt={30} fontSize={18} lineHeight={1.5} px={2}>
-              {`Click${
-                clickSearch ? '' : ' and drag'
-              } on the map to draw a search area to identify features.`}
+              {translations.searchInstructions[locale]}
             </Heading>
           )}
         </>
