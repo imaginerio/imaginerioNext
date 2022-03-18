@@ -51,6 +51,14 @@ const translation = {
     en: 'Date',
     pt: 'Data',
   },
+  today: {
+    en: 'Now',
+    pt: 'Agora',
+  },
+  mapped: {
+    en: 'Mapped',
+    pt: 'Mapeado',
+  },
   creator: {
     en: 'Creator',
     pt: 'Criador',
