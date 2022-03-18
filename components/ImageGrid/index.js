@@ -1,16 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { Box, Tooltip } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Text,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
+} from '@chakra-ui/react';
 
 import { ImageLink } from '../ImageList/RowComponents';
+import translation from '../../assets/config/translations';
 
 const FixedSizeGrid = dynamic(() => import('react-window').then(mod => mod.FixedSizeGrid), {
   ssr: false,
 });
 
 const ImageGrid = ({ width, height, activeImages }) => {
+  const { locale } = useRouter();
   const numColumns = Math.floor(width / 185);
   const gridWidth = (width - 40) / numColumns;
 
@@ -20,15 +32,38 @@ const ImageGrid = ({ width, height, activeImages }) => {
     if (!image) {
       return null;
     }
+    const { ssid, title, thumbnail, creator, date } = image;
 
     return (
       <div style={style}>
-        <ImageLink ssid={image.ssid}>
-          <Tooltip label={image.title || 'Untitled'} hasArrow>
-            <Box pos="relative" w={`${gridWidth - 40}px`} h="150px" mx="20px" userSelect="none">
-              {image.thumbnail && <Image src={image.thumbnail} layout="fill" objectFit="contain" />}
-            </Box>
-          </Tooltip>
+        <ImageLink ssid={ssid}>
+          <Popover trigger="hover">
+            <PopoverTrigger>
+              <Box pos="relative" w={`${gridWidth - 40}px`} h="150px" mx="20px" userSelect="none">
+                {thumbnail && <Image src={thumbnail} layout="fill" objectFit="contain" />}
+              </Box>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverBody>
+                <Heading fontSize={18} mt={0} mb={2}>
+                  {title}
+                </Heading>
+                {creator && (
+                  <Text variant="oneline" fontSize={14}>
+                    <b>{`${translation.creator[locale]}: `}</b>
+                    {creator}
+                  </Text>
+                )}
+                {date && (
+                  <Text variant="oneline" fontSize={14}>
+                    <b>{`${translation.date[locale]}: `}</b>
+                    {date}
+                  </Text>
+                )}
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
         </ImageLink>
       </div>
     );
