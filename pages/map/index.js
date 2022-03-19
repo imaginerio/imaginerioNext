@@ -67,7 +67,7 @@ const Atlas = ({ images }) => {
             />
           </Flex>
         </Link>
-        <Timeline min={1500} max={2020} triple />
+        <Timeline min={1500} max={new Date().getFullYear()} triple />
       </Grid>
       <Box h="calc(100vh - 90px)">
         {width > 1000 ? (

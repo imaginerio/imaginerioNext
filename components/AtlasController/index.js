@@ -197,6 +197,7 @@ const AtlasController = ({ width, height, mobile }) => {
         clickHandler={e => {
           if (drawSearch === 'click') dispatch(['SET_DRAW_SEARCH_COORDS', e]);
         }}
+        showSatellite={year === new Date().getFullYear()}
         maxZoom={18}
         hoverHandler={e => {
           if (e.features.length && !mobile) {
