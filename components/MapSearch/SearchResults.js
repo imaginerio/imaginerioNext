@@ -74,10 +74,10 @@ const SearchResults = ({ results: { features, views } }) => {
                   <Spacer px="10px" />
                   <FontAwesomeIcon icon={isHighlighted ? faTimesCircle : faBinoculars} />
                 </HStack>
-                <HStack fontSize={13}>
+                <Stack fontSize={13} spacing={1} mt={1} lineHeight={1.1}>
                   <Text>{`${translation.mapped[locale]}: ${mapped}`}</Text>
                   {creator && <Text>{`${translation.creator[locale]}: ${creator}`}</Text>}
-                </HStack>
+                </Stack>
               </Text>
             );
           })}
