@@ -11,10 +11,10 @@ import MapSearch from '../MapSearch';
 import translations from '../../assets/config/translations';
 
 const Legend = () => {
-  const { locale } = useRouter();
+  const { locale, query } = useRouter();
   const [{ year, drawSearch, highlightedFeature }] = useImages();
-  const [legendOpen, setLegendOpen] = useState(false);
-  const [searchResultsActive, setSearchResultsActive] = useState(false);
+  const [legendOpen, setLegendOpen] = useState(Boolean(query.feature));
+  const [searchResultsActive, setSearchResultsActive] = useState(Boolean(query.feature));
 
   return (
     <>
