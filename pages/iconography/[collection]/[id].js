@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -17,6 +18,8 @@ import {
   Button,
   Stack,
   HStack,
+  Center,
+  Spinner,
 } from '@chakra-ui/react';
 
 import Head from '../../../components/Head';
@@ -33,22 +36,17 @@ const Atlas = dynamic(() => import('../../../components/AtlasController/AtlasSin
   ssr: false,
 });
 
-const ImageDetails = ({ metadata, geojson, id, collection }) => {
+const fetcher = url => axios.get(url).then(r => r.data);
+
+const ImageDetails = ({ metadata, id, collection }) => {
   const { locale } = useRouter();
-  const { properties } = geojson.features[0];
+  const { data: geojson } = useSWR(`${process.env.NEXT_PUBLIC_SEARCH_API}/document/${id}`, fetcher);
   const date = findByLabel(metadata, 'Date') || findByLabel(metadata, 'Data');
   let year = parseInt(date, 10);
   if (!year) year = parseInt(findByLabel(metadata, 'Temporal Coverage'), 10);
-  if (!year) year = properties.firstyear;
-  const title =
-    findByLabel(metadata, 'Title') ||
-    findByLabel(metadata, 'Título') ||
-    properties.title ||
-    'Untitled';
+  const title = findByLabel(metadata, 'Title') || findByLabel(metadata, 'Título') || 'Untitled';
 
   const creator = findByLabel(metadata, 'Creator') || findByLabel(metadata, 'Autor');
-
-  const { latitude, longitude } = geojson.features[0].properties;
   const smapshot = findByLabel(metadata, 'Smapshot');
 
   let width = 480;
@@ -104,24 +102,30 @@ const ImageDetails = ({ metadata, geojson, id, collection }) => {
 
         <Grid templateColumns={['1fr', '480px 1fr']} columnGap="50px" mb={10}>
           <Stack mb={10}>
-            <Atlas
-              year={year}
-              geojson={[
-                {
-                  id,
-                  data: geojson,
-                  paint: { 'fill-color': 'rgba(0,0,0,0.25)' },
-                },
-              ]}
-              activeBasemap={collection === 'views' ? null : id}
-              width={width}
-              height={360}
-              viewport={{
-                latitude,
-                longitude,
-                zoom: 15,
-              }}
-            />
+            {geojson ? (
+              <Atlas
+                year={year}
+                geojson={[
+                  {
+                    id,
+                    data: geojson,
+                    paint: { 'fill-color': 'rgba(0,0,0,0.25)' },
+                  },
+                ]}
+                activeBasemap={collection === 'views' ? null : id}
+                width={width}
+                height={360}
+                viewport={{
+                  latitude: geojson.features[0].properties.latitude,
+                  longitude: geojson.features[0].properties.longitude,
+                  zoom: 15,
+                }}
+              />
+            ) : (
+              <Center height={360} w={width}>
+                <Spinner size="xl" />
+              </Center>
+            )}
             <Button
               as="a"
               href={`/map#${id}`}
@@ -223,9 +227,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params, locale }) {
   const lang = locale === 'pt' ? 'pt-BR' : 'en';
-  const { data: geojson } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SEARCH_API}/document/${params.id}`
-  );
   let { data: metadata } = await axios.get(
     `${process.env.NEXT_PUBLIC_SEARCH_API}/metadata/${params.id}?lang=${lang}`
   );
@@ -241,18 +242,13 @@ export async function getStaticProps({ params, locale }) {
       return aIndex - bIndex;
     });
 
-  return { props: { metadata, geojson, ...params } };
+  return { props: { metadata, ...params } };
 }
 
 ImageDetails.propTypes = {
-  geojson: PropTypes.shape(),
   metadata: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   collection: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-};
-
-ImageDetails.defaultProps = {
-  geojson: null,
 };
 
 export default ImageDetails;
