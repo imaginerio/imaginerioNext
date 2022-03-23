@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -37,7 +38,7 @@ const Atlas = dynamic(() => import('../../../components/AtlasController/AtlasSin
   ssr: false,
 });
 
-axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
+axiosRetry(axios, { retries: 5, retryDelay: axiosRetry.exponentialDelay });
 const fetcher = url => axios.get(url).then(r => r.data);
 
 const ImageDetails = ({ metadata, id, collection }) => {
@@ -229,22 +230,28 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params, locale }) {
   const lang = locale === 'pt' ? 'pt-BR' : 'en';
-  let { data: metadata } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SEARCH_API}/metadata/${params.id}?lang=${lang}`
-  );
+  try {
+    let { data: metadata } = await axios.get(
+      `${process.env.NEXT_PUBLIC_SEARCH_API}/metadata/${params.id}?lang=${lang}`
+    );
 
-  const attributes = process.env.NEXT_PUBLIC_ATTR_ORDER.split(',');
-  metadata = metadata
-    .filter(({ label }) => label.toLowerCase() !== 'height' && label.toLowerCase() !== 'width')
-    .sort((a, b) => {
-      let aIndex = attributes.indexOf(a.label.toLowerCase());
-      let bIndex = attributes.indexOf(b.label.toLowerCase());
-      if (aIndex === -1) aIndex = Infinity;
-      if (bIndex === -1) bIndex = Infinity;
-      return aIndex - bIndex;
-    });
+    const attributes = process.env.NEXT_PUBLIC_ATTR_ORDER.split(',');
+    metadata = metadata
+      .filter(({ label }) => label.toLowerCase() !== 'height' && label.toLowerCase() !== 'width')
+      .sort((a, b) => {
+        let aIndex = attributes.indexOf(a.label.toLowerCase());
+        let bIndex = attributes.indexOf(b.label.toLowerCase());
+        if (aIndex === -1) aIndex = Infinity;
+        if (bIndex === -1) bIndex = Infinity;
+        return aIndex - bIndex;
+      });
 
-  return { props: { metadata, ...params } };
+    return { props: { metadata, ...params } };
+  } catch (e) {
+    console.log(e);
+    console.log(params.id, lang);
+    return { notFound: true };
+  }
 }
 
 ImageDetails.propTypes = {
