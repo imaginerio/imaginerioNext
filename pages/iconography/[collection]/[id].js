@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
@@ -36,6 +37,7 @@ const Atlas = dynamic(() => import('../../../components/AtlasController/AtlasSin
   ssr: false,
 });
 
+axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
 const fetcher = url => axios.get(url).then(r => r.data);
 
 const ImageDetails = ({ metadata, id, collection }) => {
