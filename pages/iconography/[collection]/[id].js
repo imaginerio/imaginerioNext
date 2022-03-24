@@ -107,7 +107,7 @@ const ImageDetails = ({ metadata, id, collection }) => {
           <Stack mb={10}>
             {geojson ? (
               <Atlas
-                year={year}
+                year={year || geojson.features[0].properties.firstyear}
                 geojson={[
                   {
                     id,
