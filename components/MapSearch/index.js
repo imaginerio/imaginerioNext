@@ -28,10 +28,10 @@ import SearchResults from './SearchResults';
 import translations from '../../assets/config/translations';
 
 const MapSearch = ({ handler }) => {
-  const { locale } = useRouter();
+  const { locale, query } = useRouter();
   const [{ year, drawSearch, drawSearchCoords, highlightedFeature }, dispatch] = useImages();
 
-  const [string, setString] = useState('');
+  const [string, setString] = useState(query.feature || '');
   const [searchResults, setSearchResults] = useState(null);
   const [searchActive, setSearchActive] = useState(false);
   const [drawToggle, setDrawToggle] = useState(drawSearch);

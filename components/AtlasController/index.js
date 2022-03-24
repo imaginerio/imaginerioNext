@@ -172,7 +172,11 @@ const AtlasController = ({ width, height, mobile }) => {
       <Atlas
         year={year}
         mapStyle={mapStyle}
-        viewport={{ longitude: -43.18, latitude: -22.9, zoom: 14.5 }}
+        viewport={{
+          longitude: !Number.isNaN(parseFloat(router.query.lng)) ? +router.query.lng : -43.18,
+          latitude: !Number.isNaN(parseFloat(router.query.lat)) ? +router.query.lat : -22.9,
+          zoom: !Number.isNaN(parseFloat(router.query.zoom)) ? +router.query.zoom : 14.5,
+        }}
         width={width}
         height={height}
         viewpoints={showViewPoints && !yearDragging ? viewpoints : null}

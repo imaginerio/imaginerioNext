@@ -22,7 +22,7 @@ const Atlas = ({ images }) => {
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
   height -= 90;
 
-  const { locale } = useRouter();
+  const { locale, query } = useRouter();
   const [, dispatch] = useImages();
 
   useEffect(() => {
@@ -30,6 +30,21 @@ const Atlas = ({ images }) => {
     dispatch(['SET_USE_LINKS', false]);
     document.querySelector('body').classList.add('no-scroll');
   }, []);
+
+  useEffect(() => {
+    Object.keys(query).forEach(key => {
+      switch (key) {
+        case 'q':
+          dispatch(['QUERY', query[key]]);
+          break;
+        case 'year':
+          dispatch(['YEAR', +query[key]]);
+          break;
+        default:
+          break;
+      }
+    });
+  }, [query]);
 
   const [imageWidth, setImageWidth] = useState(500);
 

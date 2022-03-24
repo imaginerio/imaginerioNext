@@ -20,8 +20,14 @@ import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
 
 const CollectionFilter = () => {
-  const { locale } = useRouter();
+  const { locale, query } = useRouter();
   const [{ categories, collection }, dispatch] = useImages();
+
+  useEffect(() => {
+    if (query.collection && Object.keys(categories).includes(query.collection)) {
+      dispatch(['SET_COLLECTION', query.collection]);
+    }
+  }, [query.collection]);
 
   return (
     <Box mb={1} pb={3} borderBottom="1px solid #ccc">
@@ -55,9 +61,9 @@ const FilterMenu = ({ xPos }) => {
   useEffect(() => {
     if (
       tempDates[0] >= 1500 &&
-      tempDates[0] <= 2021 &&
+      tempDates[0] <= new Date().getFullYear() &&
       tempDates[1] >= 1500 &&
-      tempDates[1] <= 2021 &&
+      tempDates[1] <= new Date().getFullYear() &&
       tempDates[0] < tempDates[1]
     ) {
       dispatch(['DATES', tempDates]);
