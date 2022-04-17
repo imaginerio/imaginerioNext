@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useSwr from 'swr';
+import { useRouter } from 'next/router';
 import { sortBy } from 'lodash';
 import { getLegend } from '@imaginerio/diachronic-atlas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,9 +18,13 @@ const isHighlighted = ({ layer, type }, highlightedLayer) =>
 const fetcher = url => axios.get(url).then(({ data }) => data);
 
 const LegendSwatches = () => {
+  const { locale } = useRouter();
   const [legend, setLegend] = useState(null);
   const [{ year, highlightedLayer }, dispatch] = useImages();
-  const { data } = useSwr(`${process.env.NEXT_PUBLIC_SEARCH_API}/layers?year=${year}`, fetcher);
+  const { data } = useSwr(
+    `${process.env.NEXT_PUBLIC_SEARCH_API}/layers?year=${year}&lang=${locale}`,
+    fetcher
+  );
   useEffect(() => {
     if (data) {
       setLegend(
@@ -28,7 +33,10 @@ const LegendSwatches = () => {
           layers: sortBy(
             f.layers.map(layer => ({
               ...layer,
-              types: layer.types.map(type => getLegend({ layer, type, style })),
+              types: layer.types.map(({ name: type, title }) => ({
+                ...getLegend({ layer, type, style }),
+                title,
+              })),
             })),
             'title'
           ),
@@ -91,7 +99,7 @@ const LegendSwatches = () => {
                       backgroundColor={layerHighlighted ? '#666' : '#F2F2F2'}
                       color={layerHighlighted ? 'white' : 'black'}
                     >
-                      {type.type}
+                      {type.title}
                       <Spacer px="10px" />
                       <FontAwesomeIcon icon={layerHighlighted ? faTimesCircle : faBinoculars} />
                     </Text>
