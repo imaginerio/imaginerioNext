@@ -53,7 +53,7 @@ const MapSearch = ({ handler }) => {
   useEffect(() => {
     if (drawSearchCoords) {
       // eslint-disable-next-line prettier/prettier
-      axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/probe/features/${drawSearchCoords.join(',')}?year=${year}`)
+      axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/probe/features/${drawSearchCoords.join(',')}?year=${year}&lang=${locale}`)
         .then(({ data: features }) =>
           // eslint-disable-next-line prettier/prettier
           axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/probe/views/${drawSearchCoords.join(',')}?year=${year}`)
