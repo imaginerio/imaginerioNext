@@ -239,6 +239,9 @@ function ImageContextProvider({ children }) {
   useEffect(() => {
     if (selectedImage) {
       dispatch(['SET_LAST_IMAGE_POS', activeImages.indexOf(selectedImage)]);
+      if (selectedImage.firstyear) {
+        dispatch(['YEAR', selectedImage.firstyear]);
+      }
     }
   }, [selectedImage]);
 
