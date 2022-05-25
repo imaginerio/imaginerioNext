@@ -19,7 +19,9 @@ const textSearch = ({ item, query }) => {
     if (item.depicts) {
       if (Array.isArray(item.depicts.value)) {
         if (item.depicts.value.some(d => unaccent(d).match(regex))) return true;
-      } else if (unaccent(item.depicts.value).match(regex)) return true;
+      } else if (item.depicts.value) {
+        if (unaccent(item.depicts.value).match(regex)) return true;
+      } else if (unaccent(item.depicts).match(regex)) return true;
     }
     return false;
   });
