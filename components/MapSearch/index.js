@@ -41,7 +41,9 @@ const MapSearch = ({ handler }) => {
     () => {
       if (string.length > 2) {
         return axios
-          .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/search?text=${string}&year=${year}`)
+          .get(
+            `${process.env.NEXT_PUBLIC_SEARCH_API}/search?text=${string}&year=${year}&lang=${locale}`
+          )
           .then(({ data }) => setSearchResults({ features: data, views: [] }));
       }
       return Promise.resolve(null);
