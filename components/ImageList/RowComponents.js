@@ -9,9 +9,9 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
 
-export const ImageMeta = ({ creator, date, source }) => {
-  const { locale } = useRouter();
+const MetaLinks = ({ source }) => {
   let links;
+  if (typeof source === 'string') return <>{source}</>;
   if (source && source.link) {
     links = [];
     if (isArray(source.link)) {
@@ -21,14 +21,41 @@ export const ImageMeta = ({ creator, date, source }) => {
     } else {
       links.push({ link: source.link, name: source.value });
     }
+
+    return (
+      <>
+        {links.map(({ link, name }) => (
+          <Text as="span" key={name} mr={3}>
+            <Link href={link} target="_blank">
+              {name || link}
+            </Link>
+          </Text>
+        ))}
+      </>
+    );
   }
+  return <></>;
+};
+
+MetaLinks.propTypes = {
+  source: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      link: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    }),
+  ]).isRequired,
+};
+
+export const ImageMeta = ({ creator, date, source }) => {
+  const { locale } = useRouter();
 
   return (
     <Box>
       {creator && (
         <Text variant="oneline">
           <b>{`${translation.creator[locale]}: `}</b>
-          {creator}
+          <MetaLinks source={creator} />
         </Text>
       )}
       {date && (
@@ -40,13 +67,7 @@ export const ImageMeta = ({ creator, date, source }) => {
       {source && (
         <Text variant="oneline">
           <b>{`${translation.source[locale]}: `}</b>
-          {links.map(({ link, name }) => (
-            <Text as="span" key={name} mr={3}>
-              <Link href={link} target="_blank">
-                {name || link}
-              </Link>
-            </Text>
-          ))}
+          <MetaLinks source={source} />
         </Text>
       )}
     </Box>
