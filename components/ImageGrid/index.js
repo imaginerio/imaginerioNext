@@ -14,7 +14,7 @@ import {
   PopoverArrow,
 } from '@chakra-ui/react';
 
-import { ImageLink } from '../ImageList/RowComponents';
+import { ImageLink, MetaLinks } from '../ImageList/RowComponents';
 import translation from '../../assets/config/translations';
 
 const FixedSizeGrid = dynamic(() => import('react-window').then(mod => mod.FixedSizeGrid), {
@@ -52,7 +52,7 @@ const ImageGrid = ({ width, height, activeImages }) => {
                 {creator && (
                   <Text variant="oneline" fontSize={14}>
                     <b>{`${translation.creator[locale]}: `}</b>
-                    {creator}
+                    <MetaLinks source={creator} />
                   </Text>
                 )}
                 {date && (

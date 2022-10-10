@@ -9,7 +9,7 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
 
-const MetaLinks = ({ source }) => {
+export const MetaLinks = ({ source }) => {
   let links;
   if (typeof source === 'string') return <>{source}</>;
   if (source && source.link) {
