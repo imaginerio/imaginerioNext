@@ -8,7 +8,11 @@ const textSearch = ({ item, query }) => {
   return terms.every(term => {
     const regex = new RegExp(unaccent(term).replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
     if (item.title && unaccent(item.title).match(regex)) return true;
-    if (item.creator && unaccent(item.creator).match(regex)) return true;
+    if (item.creator) {
+      if (Array.isArray(item.creator.value)) {
+        if (item.creator.value.some(d => unaccent(d).match(regex))) return true;
+      } else if (unaccent(item.creator.value).match(regex)) return true;
+    }
     if (item.ssid && item.ssid.match(regex)) return true;
     if (item.date && item.date.toString().match(regex)) return true;
     if (item.source) {
