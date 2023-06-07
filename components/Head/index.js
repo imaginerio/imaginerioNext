@@ -19,9 +19,8 @@ const Head = ({ title }) => {
       />
       <script
         async
-        defer
+        src="https://umami.axismaps.com/script.js"
         data-website-id="6cee94a9-7318-4916-b4e7-4b61d2771dec"
-        src="https://umami.axismaps.com/umami.js"
       />
       <title>{title}</title>
       <meta property="og:title" content={title} />
