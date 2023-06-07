@@ -73,6 +73,7 @@ const ImageController = ({ imageWidth, height }) => {
                 allowFullscreen: true, // Configure to show a "fullscreen" button in the WindowTopBar
                 allowMaximize: false, // Configure if windows can be maximized or not
                 allowTopMenuButton: false,
+                sideBarOpen: true,
               },
               workspace: {
                 showZoomControls: true,
