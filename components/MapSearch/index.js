@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/pro-light-svg-icons';
-import { faSearch, faVectorSquare, faBullseyePointer } from '@fortawesome/pro-regular-svg-icons';
-import { faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
+import { FiArrowLeft, FiSearch, FiSquare, FiTarget, FiXCircle } from 'react-icons/fi';
 import {
   Box,
   InputGroup,
@@ -89,8 +86,7 @@ const MapSearch = ({ handler }) => {
         <InputGroup>
           <InputLeftElement>
             {searchActive ? (
-              <FontAwesomeIcon
-                icon={faArrowLeft}
+              <FiArrowLeft
                 onClick={() => {
                   handler(false);
                   setString('');
@@ -98,7 +94,7 @@ const MapSearch = ({ handler }) => {
                 style={{ cursor: 'pointer' }}
               />
             ) : (
-              <FontAwesomeIcon icon={faSearch} />
+              <FiSearch />
             )}
           </InputLeftElement>
           <Input
@@ -115,7 +111,7 @@ const MapSearch = ({ handler }) => {
             colorScheme="blackAlpha"
             color="black"
             border="none"
-            icon={<FontAwesomeIcon icon={faBullseyePointer} />}
+            icon={<FiTarget />}
             onClick={() => setDrawToggle(!drawToggle)}
           />
         </Tooltip>
@@ -137,7 +133,7 @@ const MapSearch = ({ handler }) => {
             borderColor="#ccc"
             bg="white"
             size="sm"
-            leftIcon={<FontAwesomeIcon icon={faTimesCircle} />}
+            leftIcon={<FiXCircle />}
             onClick={() => dispatch(['SET_HIGHLIGHTED_FEATURE', null])}
           >
             Clear highlighted feature
@@ -160,7 +156,7 @@ const MapSearch = ({ handler }) => {
             <Button
               size="sm"
               color="black"
-              leftIcon={<FontAwesomeIcon icon={faBullseyePointer} />}
+              leftIcon={<FiTarget />}
               isActive={clickSearch}
               onClick={() => setClickSearch(true)}
             >
@@ -169,7 +165,7 @@ const MapSearch = ({ handler }) => {
             <Button
               size="sm"
               color="black"
-              leftIcon={<FontAwesomeIcon icon={faVectorSquare} />}
+              leftIcon={<FiSquare />}
               isActive={!clickSearch}
               onClick={() => setClickSearch(false)}
             >

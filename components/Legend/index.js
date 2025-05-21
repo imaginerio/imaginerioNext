@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faAngleLeft } from '@fortawesome/pro-regular-svg-icons';
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -36,7 +35,7 @@ const Legend = () => {
       >
         <Text>{`${translations.mapContents[locale]} ${year}`}</Text>
         <Spacer />
-        <FontAwesomeIcon icon={legendOpen ? faAngleLeft : faAngleRight} />
+        {legendOpen ? <FiChevronLeft /> : <FiChevronRight />}
       </Flex>
       <Box>
         {legendOpen && (

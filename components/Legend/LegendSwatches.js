@@ -4,8 +4,7 @@ import useSwr from 'swr';
 import { useRouter } from 'next/router';
 import { sortBy } from 'lodash';
 import { getLegend } from '@imaginerio/diachronic-atlas';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBinoculars, faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
+import { FiEye, FiXCircle } from 'react-icons/fi';
 import { Box, Stack, HStack, Flex, Spacer, Heading, Text, Spinner } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -101,7 +100,7 @@ const LegendSwatches = () => {
                     >
                       {type.title}
                       <Spacer px="10px" />
-                      <FontAwesomeIcon icon={layerHighlighted ? faTimesCircle : faBinoculars} />
+                      {layerHighlighted ? <FiXCircle /> : <FiEye />}
                     </Text>
                     <Box w="40px" h="20px" {...type.swatch} />
                   </HStack>

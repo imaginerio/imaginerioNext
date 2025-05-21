@@ -1,17 +1,15 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList, faBars } from '@fortawesome/pro-regular-svg-icons';
-import { faTh } from '@fortawesome/pro-solid-svg-icons';
+import { FiList, FiMenu, FiGrid } from 'react-icons/fi';
 import { IconButton, ButtonGroup, Tooltip } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
 
 const viewButtons = [
-  { key: 'full', icon: faList },
-  { key: 'small', icon: faBars },
-  { key: 'grid', icon: faTh },
+  { key: 'full', icon: FiList },
+  { key: 'small', icon: FiMenu },
+  { key: 'grid', icon: FiGrid },
 ];
 
 const ViewButtons = () => {
@@ -22,7 +20,7 @@ const ViewButtons = () => {
       {viewButtons.map(button => (
         <Tooltip key={button.key} label={translation[`${button.key}View`][locale]}>
           <IconButton
-            icon={<FontAwesomeIcon icon={button.icon} />}
+            icon={<button.icon />}
             variant="outline"
             bg={size === button.key ? '#6CB2F5' : 'transparent'}
             borderColor={size === button.key ? '#6CB2F5' : '#E2E8F0'}

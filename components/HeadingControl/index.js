@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCompass } from '@fortawesome/pro-regular-svg-icons';
+import { FiCompass } from 'react-icons/fi';
 import { Box, IconButton, Tooltip } from '@chakra-ui/react';
 
 const styleProps = {
@@ -22,7 +21,7 @@ const HeadingControl = props => {
         <IconButton
           size="sm"
           {...styleProps}
-          icon={<FontAwesomeIcon icon={faCompass} color="black" />}
+          icon={<FiCompass color="black" />}
           onClick={() => handler(heading ? 0 : targetHeading)}
         />
       </Tooltip>

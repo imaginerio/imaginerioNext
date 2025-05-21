@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { omit } from 'lodash';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/pro-solid-svg-icons';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { Box, IconButton, Tooltip } from '@chakra-ui/react';
 
 import translation from '../../assets/config/translations';
@@ -30,7 +29,7 @@ const ViewControl = props => {
         <IconButton
           size="sm"
           {...styleProps}
-          icon={<FontAwesomeIcon icon={show ? faEye : faEyeSlash} color="black" />}
+          icon={show ? <FiEye color="black" /> : <FiEyeOff color="black" />}
           onClick={handler}
         />
       </Tooltip>

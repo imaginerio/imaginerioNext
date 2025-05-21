@@ -919,46 +919,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fortawesome/fontawesome-common-types@^0.2.35":
-  version "0.2.35"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.35.tgz#01dd3d054da07a00b764d78748df20daf2b317e9"
-  integrity sha512-IHUfxSEDS9dDGqYwIW7wTN6tn/O8E0n5PcAHz9cAaBoZw6UpG20IG/YM3NNLaGPwPqgjBAFjIURzqoQs3rrtuw==
-
-"@fortawesome/fontawesome-svg-core@^1.2.35":
-  version "1.2.35"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-1.2.35.tgz#85aea8c25645fcec88d35f2eb1045c38d3e65cff"
-  integrity sha512-uLEXifXIL7hnh2sNZQrIJWNol7cTVIzwI+4qcBIq9QWaZqUblm0IDrtSqbNg+3SQf8SMGHkiSigD++rHmCHjBg==
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.35"
-
-"@fortawesome/pro-light-svg-icons@^5.15.3":
-  version "5.15.3"
-  resolved "https://npm.fontawesome.com/@fortawesome/pro-light-svg-icons/-/5.15.3/pro-light-svg-icons-5.15.3.tgz#1ebfb43a62e3675ad42746f905ee9dfa9008b579"
-  integrity sha512-mAj25a3sgh0i8HkHhmz8Z1bnSsVJ8OwLm2rDDG8HTkOTllmg2WtZZfRhBg0kZcSH7en7BAcIGUh5Rtx/3/NY9w==
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.35"
-
-"@fortawesome/pro-regular-svg-icons@^5.15.3":
-  version "5.15.3"
-  resolved "https://npm.fontawesome.com/@fortawesome/pro-regular-svg-icons/-/5.15.3/pro-regular-svg-icons-5.15.3.tgz#0b70f7ba6212dfa9bf17f9a82422e5fe7864b5b2"
-  integrity sha512-p546sg0iF4qbng79wQZuyOIDBwF51crLS63nwEP9vpwFJKFkOhg1i8W4TUy0tosas2jcuseJSa5fGb9d/7bPug==
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.35"
-
-"@fortawesome/pro-solid-svg-icons@^5.15.3":
-  version "5.15.3"
-  resolved "https://npm.fontawesome.com/@fortawesome/pro-solid-svg-icons/-/5.15.3/pro-solid-svg-icons-5.15.3.tgz#f443689f17dfb932f51d0943d9af69c9044c8c59"
-  integrity sha512-7W0sJ3gkiMEdIbGOBaAXpND/ZGOccw+fzyJL/iG/nuX3zcDggLz7/41ORDnIArIjaWr+UmIOtHZcXSB7gcOAWg==
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.35"
-
-"@fortawesome/react-fontawesome@^0.1.14":
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.14.tgz#bf28875c3935b69ce2dc620e1060b217a47f64ca"
-  integrity sha512-4wqNb0gRLVaBm/h+lGe8UfPPivcbuJ6ecI4hIgW0LjI7kzpYB9FkN0L9apbVzg+lsBdcTf0AlBtODjcSX5mmKA==
-  dependencies:
-    prop-types "^15.7.2"
-
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"
@@ -5436,6 +5396,11 @@ react-i18next@^11.7.0:
   dependencies:
     "@babel/runtime" "^7.3.1"
     html-parse-stringify2 "2.0.1"
+
+react-icons@^4.10.1:
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.12.0.tgz#54806159a966961bfd5cdb26e492f4dafd6a8d78"
+  integrity sha512-IBaDuHiShdZqmfc/TwHu6+d6k2ltNCf3AszxNmjJc1KUfXdEeRJOKyNvLmAHaarhzGmTSVygNdyu8/opXv2gaw==
 
 react-image@^4.0.1:
   version "4.0.3"

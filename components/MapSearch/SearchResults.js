@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBinoculars, faTimesCircle, faImagePolaroid } from '@fortawesome/pro-solid-svg-icons';
+import { FiEye, FiXCircle, FiImage } from 'react-icons/fi';
 import { Stack, Heading, Text, Spacer, HStack } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -37,10 +36,11 @@ const SearchResults = ({ results: { features, views } }) => {
               >
                 {view.title}
                 <Spacer px="5px" />
-                <FontAwesomeIcon
-                  icon={isHighlighted ? faTimesCircle : faImagePolaroid}
-                  style={{ marginTop: 3 }}
-                />
+                {isHighlighted ? (
+                  <FiXCircle style={{ marginTop: 3 }} />
+                ) : (
+                  <FiImage style={{ marginTop: 3 }} />
+                )}
               </Text>
             );
           })}
@@ -72,7 +72,7 @@ const SearchResults = ({ results: { features, views } }) => {
                 <HStack w="100%">
                   <Text>{name}</Text>
                   <Spacer px="10px" />
-                  <FontAwesomeIcon icon={isHighlighted ? faTimesCircle : faBinoculars} />
+                  {isHighlighted ? <FiXCircle /> : <FiEye />}
                 </HStack>
                 <Stack fontSize={13} spacing={1} mt={1} lineHeight={1.1}>
                   <Text>{`${translation.mapped[locale]}: ${mapped}`}</Text>

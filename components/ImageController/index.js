@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/pro-regular-svg-icons';
-import { faExternalLink } from '@fortawesome/pro-solid-svg-icons';
+import { FiXCircle, FiExternalLink } from 'react-icons/fi';
 import { Grid, Container, Box, Tooltip } from '@chakra-ui/react';
 
 import ImageSearch from '../ImageSearch';
@@ -45,7 +43,7 @@ const ImageController = ({ imageWidth, height }) => {
             }}
             onClick={() => dispatch(['SET_SELECTED_IMAGE', null])}
           >
-            <FontAwesomeIcon icon={faTimesCircle} width="20px" />
+            <FiXCircle size="20px" />
           </Box>
           <Tooltip label={translations.openItem[locale]}>
             <Box
@@ -61,7 +59,7 @@ const ImageController = ({ imageWidth, height }) => {
               }}
             >
               <Link href={`/iconography/${selectedImage.collection}/${selectedImage.ssid}`}>
-                <FontAwesomeIcon icon={faExternalLink} width="20px" />
+                <FiExternalLink size="20px" />
               </Link>
             </Box>
           </Tooltip>

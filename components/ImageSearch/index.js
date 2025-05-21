@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
+import { FiSearch, FiXCircle } from 'react-icons/fi';
 import { InputGroup, Input, InputRightElement, InputLeftElement } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -14,7 +13,7 @@ const ImageSearch = () => {
   return (
     <InputGroup gridColumn={['1 / 3', '1']}>
       <InputLeftElement>
-        <FontAwesomeIcon icon={faSearch} />
+        <FiSearch />
       </InputLeftElement>
       <Input
         value={query}
@@ -23,8 +22,7 @@ const ImageSearch = () => {
       />
       <InputRightElement>
         {query && (
-          <FontAwesomeIcon
-            icon={faTimesCircle}
+          <FiXCircle
             color="#666"
             onClick={() => dispatch(['QUERY', ''])}
             style={{ cursor: 'pointer' }}

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { omit } from 'lodash';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLayerGroup, faTimesCircle } from '@fortawesome/pro-regular-svg-icons';
+import { FiLayers, FiXCircle } from 'react-icons/fi';
 import {
   Box,
   HStack,
@@ -49,11 +48,7 @@ const OpacitySlider = ({ opacity, handler, setIsOpen }) => (
       </SliderTrack>
       <SliderThumb />
     </Slider>
-    <FontAwesomeIcon
-      icon={faTimesCircle}
-      onClick={() => setIsOpen(false)}
-      style={{ marginRight: -3, cursor: 'pointer' }}
-    />
+    <FiXCircle onClick={() => setIsOpen(false)} style={{ marginRight: -3, cursor: 'pointer' }} />
   </HStack>
 );
 
@@ -76,7 +71,7 @@ const OpacityControl = props => {
           <IconButton
             size="sm"
             {...styleProps}
-            icon={<FontAwesomeIcon icon={faLayerGroup} color="black" />}
+            icon={<FiLayers color="black" />}
             onClick={() => setIsOpen(true)}
           />
         </Tooltip>

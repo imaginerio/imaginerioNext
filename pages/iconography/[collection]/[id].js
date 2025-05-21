@@ -7,8 +7,7 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLink } from '@fortawesome/pro-light-svg-icons';
+import { FiExternalLink } from 'react-icons/fi';
 import {
   Container,
   Grid,
@@ -129,12 +128,7 @@ const ImageDetails = ({ metadata, id, collection }) => {
                 <Spinner size="xl" />
               </Center>
             )}
-            <Button
-              as="a"
-              href={`/map#${id}`}
-              colorScheme="blue"
-              rightIcon={<FontAwesomeIcon icon={faExternalLink} />}
-            >
+            <Button as="a" href={`/map#${id}`} colorScheme="blue" rightIcon={<FiExternalLink />}>
               View image in map
             </Button>
           </Stack>

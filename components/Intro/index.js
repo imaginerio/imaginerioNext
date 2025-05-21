@@ -3,8 +3,7 @@ import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/dist/client/router';
 import { Steps } from 'intro.js-react';
 import { IconButton } from '@chakra-ui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestion } from '@fortawesome/pro-solid-svg-icons';
+import { FiHelpCircle } from 'react-icons/fi';
 
 import getSteps from './steps';
 
@@ -49,7 +48,7 @@ const Intro = () => {
           size="sm"
           boxShadow="lg"
           color="gray.600"
-          icon={<FontAwesomeIcon icon={faQuestion} />}
+          icon={<FiHelpCircle />}
           onClick={() => {
             dispatch(['SET_SHOW_INTRO', true]);
             setIntroCookie(false);

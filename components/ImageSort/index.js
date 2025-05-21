@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowDown } from '@fortawesome/pro-solid-svg-icons';
+import { FiArrowUp, FiArrowDown } from 'react-icons/fi';
 import { Flex, Select, IconButton } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -38,7 +37,7 @@ const ImageSort = ({ small, collection }) => {
         borderRadius="0 4px 4px 0"
         borderStyle={small ? 'none' : 'solid'}
         borderColor={small ? 'transparent' : '#E2E8F0'}
-        icon={<FontAwesomeIcon icon={direction ? faArrowUp : faArrowDown} />}
+        icon={direction ? <FiArrowUp /> : <FiArrowDown />}
         onClick={() => dispatch(['DIRECTION'])}
       />
     </Flex>

@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/pro-solid-svg-icons';
+import { FiFilter } from 'react-icons/fi';
 import {
   Stack,
   Box,
@@ -138,7 +137,7 @@ const ImageFilter = () => {
           ref={buttonRef}
           variant="outline"
           colorScheme="blackAlpha"
-          icon={<FontAwesomeIcon icon={faFilter} />}
+          icon={<FiFilter />}
           bg={isActive ? '#6CB2F5' : 'transparent'}
           borderColor={isActive ? '#6CB2F5' : '#E2E8F0'}
           color={isActive ? 'white' : 'gray.500'}
