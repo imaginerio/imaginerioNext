@@ -69,8 +69,8 @@ export async function getStaticProps() {
               length: d.Documents.length,
               thumbnail: {
                 url: thumbnail[0].id,
-                width: thumbnail[0].set_width,
-                height: thumbnail[0].set_height,
+                width: thumbnail[0].width,
+                height: thumbnail[0].height,
               },
             }))
         )
