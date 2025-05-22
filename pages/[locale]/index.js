@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import propTypes from 'prop-types';
-import Image from 'next/image';
 import axios from 'axios';
 import parse from 'html-react-parser';
-import { Box, Button, Container, Grid, Heading, Link, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Grid, Heading, Image, Link, Text } from '@chakra-ui/react';
 
 import Head from '../../components/Head';
 import Header from '../../components/Header';
