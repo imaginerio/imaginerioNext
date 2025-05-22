@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import {
   Box,
   Heading,
@@ -16,7 +15,6 @@ import {
 import { ImageLink, MetaLinks } from '../ImageList/RowComponents';
 import translation from '../../assets/config/translations';
 import { useLocale } from '../../hooks/useLocale';
-import cloudfrontLoader from '../../utils/imageLoader';
 
 const FixedSizeGrid = dynamic(() => import('react-window').then(mod => mod.FixedSizeGrid), {
   ssr: false,
@@ -42,11 +40,13 @@ const ImageGrid = ({ width, height, activeImages }) => {
             <PopoverTrigger>
               <Box pos="relative" w={`${gridWidth - 40}px`} h="150px" mx="20px" userSelect="none">
                 {thumbnail && (
-                  <Image
-                    src={thumbnail}
-                    layout="fill"
-                    objectFit="contain"
-                    loader={cloudfrontLoader}
+                  <Box
+                    bgImage={`url(${thumbnail})`}
+                    bgSize="contain"
+                    w="full"
+                    h="full"
+                    bgPosition="center"
+                    bgRepeat="no-repeat"
                   />
                 )}
               </Box>
