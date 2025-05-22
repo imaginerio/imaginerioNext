@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
-import { FiArrowUp, FiArrowDown } from 'react-icons/fi';
-import { Flex, Select, IconButton } from '@chakra-ui/react';
+import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
+import { Flex, IconButton, Select } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const ImageSort = ({ small, collection }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [{ direction }, dispatch] = useImages();
 
   return (

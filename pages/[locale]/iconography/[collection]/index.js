@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Grid, Container, Heading } from '@chakra-ui/react';
+import { Container, Grid, Heading } from '@chakra-ui/react';
 
-import Head from '../../../components/Head';
-import Header from '../../../components/Header';
-import Breadcrumbs from '../../../components/Breadcrumbs';
-import Timeline from '../../../components/Timeline';
-import ImageSearch from '../../../components/ImageSearch';
-import ViewButtons from '../../../components/ViewButtons';
-import ImageSort from '../../../components/ImageSort';
-import ImageViewer from '../../../components/ImageViewer';
+import Head from '../../../../components/Head';
+import Header from '../../../../components/Header';
+import Breadcrumbs from '../../../../components/Breadcrumbs';
+import Timeline from '../../../../components/Timeline';
+import ImageSearch from '../../../../components/ImageSearch';
+import ViewButtons from '../../../../components/ViewButtons';
+import ImageSort from '../../../../components/ImageSort';
+import ImageViewer from '../../../../components/ImageViewer';
 
-import { useImages } from '../../../providers/ImageContext';
-import useWindowDimensions from '../../../utils/useWindowDimensions';
-import config from '../../../utils/config';
-import pages from '../../../assets/config/pages';
+import { useImages } from '../../../../providers/ImageContext';
+import useWindowDimensions from '../../../../utils/useWindowDimensions';
+import config from '../../../../utils/config';
+import pages from '../../../../assets/config/pages';
 
 const Collection = ({ images, collection }) => {
   let height = 800;
@@ -57,7 +57,7 @@ export async function getStaticPaths() {
     paths: Object.keys(pages).reduce(
       (memo, lang) => [
         ...memo,
-        ...config.collections.map(collection => ({ params: { collection }, locale: lang })),
+        ...config.collections.map(collection => ({ params: { collection, locale: lang } })),
       ],
       []
     ),

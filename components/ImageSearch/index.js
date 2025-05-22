@@ -1,13 +1,13 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import { FiSearch, FiXCircle } from 'react-icons/fi';
-import { InputGroup, Input, InputRightElement, InputLeftElement } from '@chakra-ui/react';
+import { Input, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const ImageSearch = () => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [{ query }, dispatch] = useImages();
 
   return (

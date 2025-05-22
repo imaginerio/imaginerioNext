@@ -9,31 +9,31 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
 import {
-  Container,
-  Grid,
   Box,
-  Heading,
-  Text,
-  Flex,
-  Spacer,
   Button,
-  Stack,
-  HStack,
   Center,
+  Container,
+  Flex,
+  Grid,
+  Heading,
+  HStack,
+  Spacer,
   Spinner,
+  Stack,
+  Text,
 } from '@chakra-ui/react';
 
-import Head from '../../../components/Head';
-import Header from '../../../components/Header';
-import Breadcrumbs from '../../../components/Breadcrumbs';
-import Footer from '../../../components/Footer';
-import { findByLabel } from '../../../utils/iiif';
-import config from '../../../utils/config';
-import pages from '../../../assets/config/pages';
-import useWindowDimensions from '../../../utils/useWindowDimensions';
+import Head from '../../../../components/Head';
+import Header from '../../../../components/Header';
+import Breadcrumbs from '../../../../components/Breadcrumbs';
+import Footer from '../../../../components/Footer';
+import { findByLabel } from '../../../../utils/iiif';
+import config from '../../../../utils/config';
+import pages from '../../../../assets/config/pages';
+import useWindowDimensions from '../../../../utils/useWindowDimensions';
 
-const Mirador = dynamic(() => import('../../../components/Mirador'), { ssr: false });
-const Atlas = dynamic(() => import('../../../components/AtlasController/AtlasSingle'), {
+const Mirador = dynamic(() => import('../../../../components/Mirador'), { ssr: false });
+const Atlas = dynamic(() => import('../../../../components/AtlasController/AtlasSingle'), {
   ssr: false,
 });
 
@@ -204,8 +204,8 @@ export async function getStaticPaths() {
                 params: {
                   collection,
                   id: d.ssid,
+                  locale: lang,
                 },
-                locale: lang,
               })),
             ],
             []
@@ -222,7 +222,8 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params, locale }) {
+export async function getStaticProps({ params }) {
+  const { locale } = params;
   const lang = locale === 'pt' ? 'pt-BR' : 'en';
   try {
     let { data: metadata } = await axios.get(

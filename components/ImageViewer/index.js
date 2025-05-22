@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
-import { Container, Text, Flex, Spacer } from '@chakra-ui/react';
+import { Container, Flex, Spacer, Text } from '@chakra-ui/react';
 
 import ImageList from '../ImageList';
 import ImageGrid from '../ImageGrid';
 
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const ImageViewer = ({ width, height, control }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [{ activeImages, size }] = useImages();
 
   return (

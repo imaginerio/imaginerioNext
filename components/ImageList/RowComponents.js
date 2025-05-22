@@ -106,11 +106,11 @@ ImageTitle.propTypes = {
 };
 
 export const ImageLink = ({ children, ssid, ...rest }) => {
-  const { asPath, locale } = useRouter();
+  const { asPath } = useRouter();
   const [{ useLinks, allImages }, dispatch] = useImages();
   if (useLinks)
     return (
-      <Link href={`/${locale}${asPath}/${ssid}`}>
+      <Link href={`${asPath}/${ssid}`}>
         <a style={{ width: '100%', height: '100%' }}>{children}</a>
       </Link>
     );
