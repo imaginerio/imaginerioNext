@@ -34,7 +34,7 @@ const Home = ({ content: { map, iconography } }) => {
                 <Text my={10} as="div">
                   <ParsedContent content={map} />
                 </Text>
-                <Link href="/map">
+                <Link href={`${locale}/map`}>
                   <Button variant="homepage">{translations.viewMap[locale]}</Button>
                 </Link>
               </Box>
@@ -68,7 +68,7 @@ const Home = ({ content: { map, iconography } }) => {
               <Text my={10} as="div">
                 <ParsedContent content={iconography} />
               </Text>
-              <Link href="/iconography">
+              <Link href={`${locale}/iconography`}>
                 <Button variant="homepage">{translations.browseIconografy[locale]}</Button>
               </Link>
               <Box my={[5, 10]}>
