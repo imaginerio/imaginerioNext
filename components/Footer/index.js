@@ -4,6 +4,7 @@ import { Container, Grid, Box, Heading, Text, Stack, Image, Link } from '@chakra
 
 import pages from '../../assets/config/pages';
 import translations from '../../assets/config/translations';
+import useLocale from '../../hooks/useLocale';
 
 const ContactColumn = () => (
   <Box>
@@ -23,7 +24,8 @@ const ContactColumn = () => (
 );
 
 const NavigationColumn = () => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
+  console.log(locale);
   return (
     <Box>
       <Heading size="md">Menu</Heading>
@@ -48,7 +50,7 @@ const NavigationColumn = () => {
 };
 
 const Footer = () => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   return (
     <Box as="section" backgroundColor="#F7F9FC" py={[5, 50]}>
       <Container>

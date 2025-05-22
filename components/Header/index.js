@@ -16,9 +16,13 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 
 import pages from '../../assets/config/pages';
 import translations from '../../assets/config/translations';
+import useLocale from '../../hooks/useLocale';
 
 const HeaderLinks = () => {
-  const { locale, asPath } = useRouter();
+  const { asPath } = useRouter();
+  const { locale } = useLocale();
+  console.log(locale);
+
   return (
     <>
       <Link
