@@ -61,7 +61,7 @@ const HeaderLinks = () => {
 };
 
 const Header = () => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   return (
     <Container maxW="6xl">
       <Flex h="90px" alignItems="center">

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { FiXCircle, FiExternalLink } from 'react-icons/fi';
-import { Grid, Container, Box, Tooltip } from '@chakra-ui/react';
+import { FiExternalLink, FiXCircle } from 'react-icons/fi';
+import { Box, Container, Grid, Tooltip } from '@chakra-ui/react';
 
 import ImageSearch from '../ImageSearch';
 import ImageFilter from '../ImageFilter';
@@ -14,11 +13,12 @@ import ImageViewer from '../ImageViewer';
 import translations from '../../assets/config/translations';
 
 import { useImages } from '../../providers/ImageContext';
+import { useLocale } from '../../hooks/useLocale';
 
 const Mirador = dynamic(() => import('../Mirador'), { ssr: false });
 
 const ImageController = ({ imageWidth, height }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [{ selectedImage }, dispatch] = useImages();
 
   return (

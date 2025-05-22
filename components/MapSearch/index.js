@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FiArrowLeft, FiSearch, FiSquare, FiTarget, FiXCircle } from 'react-icons/fi';
 import {
   Box,
-  InputGroup,
-  Input,
-  InputLeftElement,
-  Stack,
-  HStack,
-  Flex,
-  Spinner,
-  Heading,
-  IconButton,
   Button,
+  Flex,
+  Heading,
+  HStack,
+  IconButton,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Spinner,
+  Stack,
   Tooltip,
 } from '@chakra-ui/react';
 
@@ -23,9 +23,11 @@ import useDebouncedEffect from '../../utils/useDebouncedEffect';
 
 import SearchResults from './SearchResults';
 import translations from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const MapSearch = ({ handler }) => {
-  const { locale, query } = useRouter();
+  const { query } = useRouter();
+  const { locale } = useLocale();
   const [{ year, drawSearch, drawSearchCoords, highlightedFeature }, dispatch] = useImages();
 
   const [string, setString] = useState(query.feature || '');
@@ -52,10 +54,20 @@ const MapSearch = ({ handler }) => {
   useEffect(() => {
     if (drawSearchCoords) {
       // eslint-disable-next-line prettier/prettier
-      axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/probe/features/${drawSearchCoords.join(',')}?year=${year}&lang=${locale}`)
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_SEARCH_API}/probe/features/${drawSearchCoords.join(
+            ','
+          )}?year=${year}&lang=${locale}`
+        )
         .then(({ data: features }) =>
           // eslint-disable-next-line prettier/prettier
-          axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/probe/views/${drawSearchCoords.join(',')}?year=${year}`)
+          axios
+            .get(
+              `${process.env.NEXT_PUBLIC_SEARCH_API}/probe/views/${drawSearchCoords.join(
+                ','
+              )}?year=${year}`
+            )
             .then(({ data: views }) => setSearchResults({ features, views }))
         );
     }

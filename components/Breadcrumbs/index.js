@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Box, Text } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
+import { useLocale } from '../../hooks/useLocale';
 
 const Breadcrumbs = ({ collection, title }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   return (
     <Box>
       <Link href={`/${locale}/iconography`}>Iconography</Link>

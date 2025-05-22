@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import cookieCutter from 'cookie-cutter';
-import { useRouter } from 'next/dist/client/router';
 import { Steps } from 'intro.js-react';
 import { IconButton } from '@chakra-ui/react';
 import { FiHelpCircle } from 'react-icons/fi';
@@ -8,10 +7,11 @@ import { FiHelpCircle } from 'react-icons/fi';
 import getSteps from './steps';
 
 import { useImages } from '../../providers/ImageContext';
+import { useLocale } from '../../hooks/useLocale';
 
 const Intro = () => {
   const [{ showIntro }, dispatch] = useImages();
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [steps, setSteps] = useState([]);
   const [introCookie, setIntroCookie] = useState(false);
 
@@ -19,7 +19,7 @@ const Intro = () => {
 
   useEffect(() => {
     setSteps(getSteps(locale));
-  }, [showIntro]);
+  }, [showIntro, locale]);
 
   return (
     <>

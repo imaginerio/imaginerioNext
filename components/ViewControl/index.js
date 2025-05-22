@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import { omit } from 'lodash';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { Box, IconButton, Tooltip } from '@chakra-ui/react';
 
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const styleProps = {
   boxShadow: 'md',
@@ -15,7 +15,7 @@ const styleProps = {
 };
 
 const ViewControl = props => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const buttonStyleProps = omit(props, 'handler', 'show');
   const { handler, show } = props;
 

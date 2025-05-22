@@ -1,28 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import {
   Box,
   Heading,
-  Text,
   Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
   PopoverArrow,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Text,
 } from '@chakra-ui/react';
 
 import { ImageLink, MetaLinks } from '../ImageList/RowComponents';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const FixedSizeGrid = dynamic(() => import('react-window').then(mod => mod.FixedSizeGrid), {
   ssr: false,
 });
 
 const ImageGrid = ({ width, height, activeImages }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const numColumns = Math.floor(width / 185);
   const gridWidth = (width - 40) / numColumns;
 

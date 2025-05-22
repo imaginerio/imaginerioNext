@@ -4,9 +4,11 @@ import NextHead from 'next/head';
 import { useRouter } from 'next/router';
 
 import translations from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const Head = ({ title }) => {
-  const { asPath, locale } = useRouter();
+  const { asPath } = useRouter();
+  const { locale } = useLocale();
   return (
     <NextHead>
       <meta charSet="UTF-8" />

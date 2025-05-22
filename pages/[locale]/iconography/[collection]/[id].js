@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import useSWR from 'swr';
-import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
@@ -31,6 +30,7 @@ import { findByLabel } from '../../../../utils/iiif';
 import config from '../../../../utils/config';
 import pages from '../../../../assets/config/pages';
 import useWindowDimensions from '../../../../utils/useWindowDimensions';
+import { useLocale } from '../../../../hooks/useLocale';
 
 const Mirador = dynamic(() => import('../../../../components/Mirador'), { ssr: false });
 const Atlas = dynamic(() => import('../../../../components/AtlasController/AtlasSingle'), {
@@ -41,7 +41,7 @@ axiosRetry(axios, { retries: 5, retryDelay: axiosRetry.exponentialDelay });
 const fetcher = url => axios.get(url).then(r => r.data);
 
 const ImageDetails = ({ metadata, id, collection }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const { data: geojson } = useSWR(`${process.env.NEXT_PUBLIC_SEARCH_API}/document/${id}`, fetcher);
   const date = findByLabel(metadata, 'Date') || findByLabel(metadata, 'Data');
   let year = parseInt(date, 10);
