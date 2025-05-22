@@ -3,25 +3,24 @@ import { useRouter } from 'next/router';
 import {
   Container,
   Flex,
-  Spacer,
-  Stack,
   HStack,
-  Link,
   IconButton,
+  Link,
   Menu,
   MenuButton,
   MenuList,
+  Spacer,
+  Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import pages from '../../assets/config/pages';
 import translations from '../../assets/config/translations';
-import useLocale from '../../hooks/useLocale';
+import { useLocale } from '../../hooks/useLocale';
 
 const HeaderLinks = () => {
   const { asPath } = useRouter();
   const { locale } = useLocale();
-  console.log(locale);
 
   return (
     <>

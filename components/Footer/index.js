@@ -1,10 +1,9 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { Container, Grid, Box, Heading, Text, Stack, Image, Link } from '@chakra-ui/react';
+import { Box, Container, Grid, Heading, Image, Link, Stack, Text } from '@chakra-ui/react';
 
 import pages from '../../assets/config/pages';
 import translations from '../../assets/config/translations';
-import useLocale from '../../hooks/useLocale';
+import { useLocale } from '../../hooks/useLocale';
 
 const ContactColumn = () => (
   <Box>
@@ -25,7 +24,6 @@ const ContactColumn = () => (
 
 const NavigationColumn = () => {
   const { locale } = useLocale();
-  console.log(locale);
   return (
     <Box>
       <Heading size="md">Menu</Heading>

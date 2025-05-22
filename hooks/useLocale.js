@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-const supportedLocales = ['en', 'pt'];
+export const supportedLocales = ['en', 'pt'];
 
-const useLocale = () => {
+export const useLocale = () => {
   const path = useRouter().asPath;
   const [locale, setLocale] = useState(supportedLocales[0]);
 
@@ -16,7 +16,5 @@ const useLocale = () => {
     }
   }, [path]);
 
-  return { locale, setLocale };
-}
-
-export default useLocale;
+  return { locale, setLocale, supportedLocales };
+};

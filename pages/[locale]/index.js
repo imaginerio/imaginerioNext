@@ -11,7 +11,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 import translations from '../../assets/config/translations';
-import useLocale from '../../hooks/useLocale';
+import { supportedLocales, useLocale } from '../../hooks/useLocale';
 
 const ParsedContent = ({ content }) => parse(content);
 
@@ -107,7 +107,7 @@ export default Home;
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { locale: 'en' } }, { params: { locale: 'pt' } }],
+    paths: supportedLocales.map(locale => ({ params: { locale } })),
     fallback: false,
   };
 }

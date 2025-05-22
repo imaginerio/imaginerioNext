@@ -10,6 +10,7 @@ import Head from '../../../components/Head';
 import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
+import { supportedLocales } from '../../../hooks/useLocale';
 
 const Iconography = ({ collections }) => {
   const { locale } = useRouter();
@@ -56,7 +57,7 @@ Iconography.propTypes = {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { locale: 'en' } }, { params: { locale: 'pt' } }],
+    paths: supportedLocales.map(locale => ({ params: { locale } })),
     fallback: false,
   };
 }
