@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Container, Flex, Grid } from '@chakra-ui/react';
 
 import { ImageLink, ImageMeta, ImageTitle } from './RowComponents';
+import cloudfrontLoader from '../../utils/imageLoader';
 
 const calcImageSize = ({ rawWidth, rawHeight, rowWidth, rowHeight }) => {
   let imgHeight = rowHeight;
@@ -61,6 +62,7 @@ const ImageRow = ({
                   width={imgWidth}
                   layout="responsive"
                   ssid={ssid}
+                  loader={cloudfrontLoader}
                 />
               </ImageLink>
             )}
