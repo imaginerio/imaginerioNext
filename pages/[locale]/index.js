@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import Image from 'next/image';
 import axios from 'axios';
 import parse from 'html-react-parser';
-import { Container, Grid, Box, Heading, Text, Button, Link } from '@chakra-ui/react';
+import { Box, Button, Container, Grid, Heading, Link, Text } from '@chakra-ui/react';
 
 import Head from '../../components/Head';
 import Header from '../../components/Header';
@@ -107,10 +107,7 @@ export default Home;
 
 export async function getStaticPaths() {
   return {
-    paths: [
-      { params: { locale: 'en' } },
-      { params: { locale: 'pt' } },
-    ],
+    paths: [{ params: { locale: 'en' } }, { params: { locale: 'pt' } }],
     fallback: false,
   };
 }

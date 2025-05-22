@@ -4,12 +4,12 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { sortBy } from 'lodash';
-import { Container, Heading, Box, Grid, Text } from '@chakra-ui/react';
+import { Box, Container, Grid, Heading, Text } from '@chakra-ui/react';
 
-import Head from '../../components/Head';
-import Header from '../../components/Header';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import Footer from '../../components/Footer';
+import Head from '../../../components/Head';
+import Header from '../../../components/Header';
+import Breadcrumbs from '../../../components/Breadcrumbs';
+import Footer from '../../../components/Footer';
 
 const Iconography = ({ collections }) => {
   const { locale } = useRouter();
@@ -53,6 +53,13 @@ const Iconography = ({ collections }) => {
 Iconography.propTypes = {
   collections: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
+
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { locale: 'en' } }, { params: { locale: 'pt' } }],
+    fallback: false,
+  };
+}
 
 export async function getStaticProps() {
   let collections = await axios
