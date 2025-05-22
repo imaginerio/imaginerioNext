@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
-import { Container, Grid, Flex } from '@chakra-ui/react';
+import { Container, Flex, Grid } from '@chakra-ui/react';
 
-import { ImageMeta, ImageTitle, ImageLink } from './RowComponents';
+import { ImageLink, ImageMeta, ImageTitle } from './RowComponents';
 
 const calcImageSize = ({ rawWidth, rawHeight, rowWidth, rowHeight }) => {
   let imgHeight = rowHeight;
