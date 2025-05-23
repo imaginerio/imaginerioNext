@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { flatten } from 'lodash';
 import { Atlas } from '@imaginerio/diachronic-atlas';
-import { Box, HStack, Checkbox, Text } from '@chakra-ui/react';
+import { Box, Checkbox, HStack, Text } from '@chakra-ui/react';
 
 import Legend from '../Legend';
 import Probe from '../Probe';
@@ -18,6 +18,7 @@ import mapStyle from '../../assets/style/style.json';
 import { useImages } from '../../providers/ImageContext';
 import useDebouncedEffect from '../../utils/useDebouncedEffect';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const fetcher = ssid => {
   if (ssid) {
@@ -53,6 +54,7 @@ const AtlasController = ({ width, height, mobile }) => {
   ] = useImages();
 
   const router = useRouter();
+  const { locale } = useLocale();
   useEffect(() => {
     const hash = router.asPath.split('#')[1];
     if (hash) {
@@ -95,7 +97,9 @@ const AtlasController = ({ width, height, mobile }) => {
       router.replace(`${router.basePath}#${selectedImage.ssid}`);
     } else {
       setViewCone(null);
-      router.replace(router.basePath);
+      if (router.basePath) {
+        router.replace(router.basePath);
+      }
     }
   }, [selectedImage]);
 
@@ -227,7 +231,7 @@ const AtlasController = ({ width, height, mobile }) => {
           cursor="pointer"
         >
           <Checkbox isChecked={searchMove} pointerEvents="none" />
-          <Text>{translation.searchMoves[router.locale]}</Text>
+          <Text>{translation.searchMoves[locale]}</Text>
         </HStack>
       )}
       <ViewControl

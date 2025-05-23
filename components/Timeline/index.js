@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { range, every, last, isEqual } from 'lodash';
+import { every, isEqual, last, range } from 'lodash';
 import ReactSlider from 'react-slider';
-import { Grid, Input, Text, Flex, Heading } from '@chakra-ui/react';
+import { Flex, Grid, Heading, Input, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import useDebouncedEffect from '../../utils/useDebouncedEffect';
 import translations from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const markGap = 20;
 
@@ -46,7 +46,7 @@ const TimeInput = ({ number, text, handler, inputError }) => (
 );
 
 const Timeline = ({ min, max, triple }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [{ dates, year }, dispatch] = useImages();
   const [sliderRange, setSliderRange] = useState(triple ? [dates[0], year, dates[1]] : dates);
   const [tempRange, setTempRange] = useState(sliderRange);

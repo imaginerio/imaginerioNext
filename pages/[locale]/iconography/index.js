@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { sortBy } from 'lodash';
-import { Container, Heading, Box, Grid, Text } from '@chakra-ui/react';
+import { Box, Container, Grid, Heading, Text } from '@chakra-ui/react';
 
-import Head from '../../components/Head';
-import Header from '../../components/Header';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import Footer from '../../components/Footer';
+import Head from '../../../components/Head';
+import Header from '../../../components/Header';
+import Breadcrumbs from '../../../components/Breadcrumbs';
+import Footer from '../../../components/Footer';
+import { supportedLocales, useLocale } from '../../../hooks/useLocale';
 
 const Iconography = ({ collections }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   return (
     <>
       <Head title="Iconography" />
@@ -22,7 +22,7 @@ const Iconography = ({ collections }) => {
         <Heading>Iconography</Heading>
         <Grid pt={5} pb={24} templateColumns={['1fr', '1fr 1fr']} columnGap="40px" rowGap="20px">
           {collections.map(collection => (
-            <Link key={collection.url} href={`${locale}/iconography/${collection.url}`}>
+            <Link key={collection.url} href={`/${locale}/iconography/${collection.url}`}>
               <Box shadow="md" width="100%" px={5} pb={5} cursor="pointer" role="group">
                 <Box
                   mx={-5}
@@ -53,6 +53,13 @@ const Iconography = ({ collections }) => {
 Iconography.propTypes = {
   collections: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
+
+export async function getStaticPaths() {
+  return {
+    paths: supportedLocales.map(locale => ({ params: { locale } })),
+    fallback: false,
+  };
+}
 
 export async function getStaticProps() {
   let collections = await axios

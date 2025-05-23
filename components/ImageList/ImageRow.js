@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
-import { Container, Grid, Flex } from '@chakra-ui/react';
+import { Container, Flex, Grid, Image } from '@chakra-ui/react';
 
-import { ImageMeta, ImageTitle, ImageLink } from './RowComponents';
+import { ImageLink, ImageMeta, ImageTitle } from './RowComponents';
 
 const calcImageSize = ({ rawWidth, rawHeight, rowWidth, rowHeight }) => {
   let imgHeight = rowHeight;
@@ -55,13 +54,7 @@ const ImageRow = ({
           <Flex align="center" justify="flex-end">
             {thumbnail && (
               <ImageLink w={`${imgWidth}px`} h={`${imgHeight}px`} cursor="pointer" ssid={ssid}>
-                <Image
-                  src={thumbnail}
-                  height={imgHeight}
-                  width={imgWidth}
-                  layout="responsive"
-                  ssid={ssid}
-                />
+                <Image src={thumbnail} h={`${imgHeight}px`} w={`${imgWidth}px`} ssid={ssid} />
               </ImageLink>
             )}
           </Flex>

@@ -223,6 +223,10 @@ const translation = {
     en: 'Search by box',
     pt: 'Pesquisar por área',
   },
+  narratives: {
+    en: 'Narratives',
+    pt: 'Narrativas',
+  },
 };
 
 export default translation;

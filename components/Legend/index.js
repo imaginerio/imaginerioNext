@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
@@ -8,9 +8,11 @@ import { useImages } from '../../providers/ImageContext';
 import LegendSwatches from './LegendSwatches';
 import MapSearch from '../MapSearch';
 import translations from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const Legend = () => {
-  const { locale, query } = useRouter();
+  const { query } = useRouter();
+  const { locale } = useLocale();
   const [{ year, drawSearch, highlightedFeature }] = useImages();
   const [legendOpen, setLegendOpen] = useState(Boolean(query.feature));
   const [searchResultsActive, setSearchResultsActive] = useState(Boolean(query.feature));

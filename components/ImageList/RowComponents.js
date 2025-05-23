@@ -8,6 +8,7 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 export const MetaLinks = ({ source }) => {
   let links;
@@ -48,7 +49,7 @@ MetaLinks.propTypes = {
 };
 
 export const ImageMeta = ({ creator, date, source }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
 
   return (
     <Box>
@@ -106,11 +107,11 @@ ImageTitle.propTypes = {
 };
 
 export const ImageLink = ({ children, ssid, ...rest }) => {
-  const { asPath, locale } = useRouter();
+  const { asPath } = useRouter();
   const [{ useLinks, allImages }, dispatch] = useImages();
   if (useLinks)
     return (
-      <Link href={`/${locale}${asPath}/${ssid}`}>
+      <Link href={`${asPath}/${ssid}`}>
         <a style={{ width: '100%', height: '100%' }}>{children}</a>
       </Link>
     );

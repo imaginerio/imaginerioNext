@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
-import { Container, Box, Text } from '@chakra-ui/react';
+import { Box, Container, Text } from '@chakra-ui/react';
 
 import { ImageTitle, MetaLinks } from './RowComponents';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const ImageRowSmall = ({ style, ssid, title, creator }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
 
   return (
     <div style={style}>

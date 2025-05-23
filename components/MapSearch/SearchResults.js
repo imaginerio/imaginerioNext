@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
-import { FiEye, FiXCircle, FiImage } from 'react-icons/fi';
-import { Stack, Heading, Text, Spacer, HStack } from '@chakra-ui/react';
+import { FiEye, FiImage, FiXCircle } from 'react-icons/fi';
+import { Heading, HStack, Spacer, Stack, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const SearchResults = ({ results: { features, views } }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [{ highlightedFeature, selectedImage, allImages }, dispatch] = useImages();
 
   return (

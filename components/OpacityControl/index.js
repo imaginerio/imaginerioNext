@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import { omit } from 'lodash';
 import { FiLayers, FiXCircle } from 'react-icons/fi';
 import {
   Box,
   HStack,
   IconButton,
-  Text,
   Slider,
-  SliderTrack,
   SliderFilledTrack,
   SliderThumb,
+  SliderTrack,
+  Text,
   Tooltip,
 } from '@chakra-ui/react';
 
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const styleProps = {
   boxShadow: 'md',
@@ -58,7 +58,7 @@ OpacitySlider.propTypes = {
 };
 
 const OpacityControl = props => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [isOpen, setIsOpen] = useState(false);
   const buttonStyleProps = omit(props, 'opacity', 'handler');
 

@@ -3,22 +3,25 @@ import { useRouter } from 'next/router';
 import {
   Container,
   Flex,
-  Spacer,
-  Stack,
   HStack,
-  Link,
   IconButton,
+  Link,
   Menu,
   MenuButton,
   MenuList,
+  Spacer,
+  Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import pages from '../../assets/config/pages';
 import translations from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const HeaderLinks = () => {
-  const { locale, asPath } = useRouter();
+  const { asPath } = useRouter();
+  const { locale } = useLocale();
+
   return (
     <>
       <Link
@@ -40,8 +43,11 @@ const HeaderLinks = () => {
             {pages[locale][page].title}
           </Link>
         ))}
-      <Link variant="header" href="https://narratives.imaginerio.org">
-        Narratives
+      <Link variant="header" href="https://forum.imaginerio.org" target="_blank">
+        {translations.forum[locale]}
+      </Link>
+      <Link variant="header" href="https://narratives.imaginerio.org" target="_blank">
+        {translations.narratives[locale]}
       </Link>
       <Link
         variant="header"
@@ -58,7 +64,7 @@ const HeaderLinks = () => {
 };
 
 const Header = () => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   return (
     <Container maxW="6xl">
       <Flex h="90px" alignItems="center">

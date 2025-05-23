@@ -1,10 +1,10 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { FiList, FiMenu, FiGrid } from 'react-icons/fi';
-import { IconButton, ButtonGroup, Tooltip } from '@chakra-ui/react';
+import { FiGrid, FiList, FiMenu } from 'react-icons/fi';
+import { ButtonGroup, IconButton, Tooltip } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const viewButtons = [
   { key: 'full', icon: FiList },
@@ -14,7 +14,7 @@ const viewButtons = [
 
 const ViewButtons = () => {
   const [{ size }, dispatch] = useImages();
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   return (
     <ButtonGroup isAttached colorScheme="blackAlpha">
       {viewButtons.map(button => (

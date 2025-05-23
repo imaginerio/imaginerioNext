@@ -1,25 +1,27 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { FiFilter } from 'react-icons/fi';
 import {
-  Stack,
   Box,
-  Text,
-  IconButton,
   Heading,
+  HStack,
+  IconButton,
+  Input,
   Radio,
   RadioGroup,
-  HStack,
-  Input,
+  Stack,
+  Text,
   Tooltip,
 } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 import translation from '../../assets/config/translations';
+import { useLocale } from '../../hooks/useLocale';
 
 const CollectionFilter = () => {
-  const { locale, query } = useRouter();
+  const { query } = useRouter();
+  const { locale } = useLocale();
   const [{ categories, collection }, dispatch] = useImages();
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const CollectionFilter = () => {
 };
 
 const FilterMenu = ({ xPos }) => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [{ dates }, dispatch] = useImages();
   const [tempDates, setTempDates] = useState(dates);
   const [isError, setIsError] = useState(false);
@@ -122,7 +124,7 @@ FilterMenu.propTypes = {
 };
 
 const ImageFilter = () => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const buttonRef = useRef(null);
   const [isOpen, setIsOpen] = useState();
   const [{ collection }] = useImages();

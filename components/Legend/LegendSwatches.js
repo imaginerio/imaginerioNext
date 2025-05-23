@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useSwr from 'swr';
-import { useRouter } from 'next/router';
 import { sortBy } from 'lodash';
 import { getLegend } from '@imaginerio/diachronic-atlas';
 import { FiEye, FiXCircle } from 'react-icons/fi';
-import { Box, Stack, HStack, Flex, Spacer, Heading, Text, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Heading, HStack, Spacer, Spinner, Stack, Text } from '@chakra-ui/react';
 
 import { useImages } from '../../providers/ImageContext';
 
 import style from '../../assets/style/style.json';
+import { useLocale } from '../../hooks/useLocale';
 
 const isHighlighted = ({ layer, type }, highlightedLayer) =>
   highlightedLayer && layer === highlightedLayer.layer && type === highlightedLayer.type;
@@ -17,7 +17,7 @@ const isHighlighted = ({ layer, type }, highlightedLayer) =>
 const fetcher = url => axios.get(url).then(({ data }) => data);
 
 const LegendSwatches = () => {
-  const { locale } = useRouter();
+  const { locale } = useLocale();
   const [legend, setLegend] = useState(null);
   const [{ year, highlightedLayer }, dispatch] = useImages();
   const { data } = useSwr(

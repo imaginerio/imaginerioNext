@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import parse from 'html-react-parser';
-import { Container, Box } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 
-import pages from '../assets/config/pages';
+import pages from '../../assets/config/pages';
 
-import Head from '../components/Head';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Head from '../../components/Head';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const ParsedContent = ({ content }) => parse(content);
 
@@ -35,7 +35,7 @@ export async function getStaticPaths() {
     paths: Object.keys(pages).reduce(
       (memo, lang) => [
         ...memo,
-        ...Object.keys(pages[lang]).map(page => ({ params: { page }, locale: lang })),
+        ...Object.keys(pages[lang]).map(page => ({ params: { page, locale: lang } })),
       ],
       []
     ),
@@ -44,19 +44,22 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params, locale }) {
+export async function getStaticProps({ params }) {
   const {
     data: {
       post_stream: { posts },
     },
-  } = await axios.get(`${process.env.NEXT_PUBLIC_PAGE_URL}${pages[locale][params.page].url}.json`, {
-    headers: {
-      'Api-Key': process.env.NEXT_PUBLIC_PAGE_API,
-      'Api-Username': 'system',
-    },
-  });
+  } = await axios.get(
+    `${process.env.NEXT_PUBLIC_PAGE_URL}${pages[params.locale][params.page].url}.json`,
+    {
+      headers: {
+        'Api-Key': process.env.NEXT_PUBLIC_PAGE_API,
+        'Api-Username': 'system',
+      },
+    }
+  );
   return {
-    props: { content: posts[0].cooked, title: pages[locale][params.page].title, ...params },
+    props: { content: posts[0].cooked, title: pages[params.locale][params.page].title, ...params },
   };
 }
 

@@ -3,18 +3,21 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { Grid, Flex, Box, Link } from '@chakra-ui/react';
+import { Box, Flex, Grid, Link } from '@chakra-ui/react';
 
-import Head from '../../components/Head';
-import Timeline from '../../components/Timeline';
-import GridResizable from '../../components/GridResizable';
-import ImageController from '../../components/ImageController';
+import Head from '../../../components/Head';
+import Timeline from '../../../components/Timeline';
+import GridResizable from '../../../components/GridResizable';
+import ImageController from '../../../components/ImageController';
 
-import { useImages } from '../../providers/ImageContext';
-import useWindowDimensions from '../../utils/useWindowDimensions';
+import { useImages } from '../../../providers/ImageContext';
+import useWindowDimensions from '../../../utils/useWindowDimensions';
+import { supportedLocales, useLocale } from '../../../hooks/useLocale';
 
-const AtlasController = dynamic(() => import('../../components/AtlasController'), { ssr: false });
-const Intro = dynamic(() => import('../../components/Intro'), { ssr: false });
+const AtlasController = dynamic(() => import('../../../components/AtlasController'), {
+  ssr: false,
+});
+const Intro = dynamic(() => import('../../../components/Intro'), { ssr: false });
 
 const Atlas = ({ images }) => {
   let height = 800;
@@ -22,7 +25,8 @@ const Atlas = ({ images }) => {
   if (typeof window !== 'undefined') ({ height, width } = useWindowDimensions());
   height -= 90;
 
-  const { locale, query } = useRouter();
+  const { query } = useRouter();
+  const { locale } = useLocale();
   const [, dispatch] = useImages();
 
   useEffect(() => {
@@ -108,6 +112,13 @@ const Atlas = ({ images }) => {
 Atlas.propTypes = {
   images: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
+
+export async function getStaticPaths() {
+  return {
+    paths: supportedLocales.map(locale => ({ params: { locale } })),
+    fallback: false,
+  };
+}
 
 export async function getStaticProps({ params }) {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents`);
