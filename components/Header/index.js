@@ -43,8 +43,11 @@ const HeaderLinks = () => {
             {pages[locale][page].title}
           </Link>
         ))}
-      <Link variant="header" href="https://narratives.imaginerio.org">
-        Narratives
+      <Link variant="header" href="https://forum.imaginerio.org" target="_blank">
+        {translations.forum[locale]}
+      </Link>
+      <Link variant="header" href="https://narratives.imaginerio.org" target="_blank">
+        {translations.narratives[locale]}
       </Link>
       <Link
         variant="header"
