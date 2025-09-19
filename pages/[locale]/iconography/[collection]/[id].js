@@ -128,7 +128,12 @@ const ImageDetails = ({ metadata, id, collection }) => {
                 <Spinner size="xl" />
               </Center>
             )}
-            <Button as="a" href={`/map#${id}`} colorScheme="blue" rightIcon={<FiExternalLink />}>
+            <Button
+              as="a"
+              href={`/${locale}/map#${id}`}
+              colorScheme="blue"
+              rightIcon={<FiExternalLink />}
+            >
               View image in map
             </Button>
           </Stack>
