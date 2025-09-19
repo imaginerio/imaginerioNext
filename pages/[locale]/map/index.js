@@ -17,7 +17,7 @@ import { supportedLocales, useLocale } from '../../../hooks/useLocale';
 const AtlasController = dynamic(() => import('../../../components/AtlasController'), {
   ssr: false,
 });
-const Intro = dynamic(() => import('../../../components/Intro'), { ssr: false });
+// const Intro = dynamic(() => import('../../../components/Intro'), { ssr: false });
 
 const Atlas = ({ images }) => {
   let height = 800;
@@ -60,7 +60,7 @@ const Atlas = ({ images }) => {
 
   return (
     <>
-      <Intro />
+      {/* <Intro /> */}
       <Head title="Map" />
       <Grid
         h="90px"
