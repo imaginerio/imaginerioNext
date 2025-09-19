@@ -189,7 +189,7 @@ const AtlasController = ({ width, height, mobile }) => {
         rasterUrl={process.env.NEXT_PUBLIC_RASTER_URL}
         basemapHandler={ssid => {
           if (mobile) {
-            window.open(`/iconography/views/${ssid}`);
+            window.open(`/${locale}/iconography/views/${ssid}`);
           } else {
             dispatch(['SET_SELECTED_IMAGE', allImages.find(i => i.ssid === ssid)]);
           }

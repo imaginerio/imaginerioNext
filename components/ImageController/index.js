@@ -58,7 +58,9 @@ const ImageController = ({ imageWidth, height }) => {
                 color: 'black',
               }}
             >
-              <Link href={`/iconography/${selectedImage.collection}/${selectedImage.ssid}`}>
+              <Link
+                href={`/${locale}/iconography/${selectedImage.collection}/${selectedImage.ssid}`}
+              >
                 <FiExternalLink size="20px" />
               </Link>
             </Box>
