@@ -11,6 +11,7 @@ import ImageSearch from '../../../../components/ImageSearch';
 import ViewButtons from '../../../../components/ViewButtons';
 import ImageSort from '../../../../components/ImageSort';
 import ImageViewer from '../../../../components/ImageViewer';
+import searchBuildHeaders from '../../../../utils/searchApi';
 
 import { useImages } from '../../../../providers/ImageContext';
 import useWindowDimensions from '../../../../utils/useWindowDimensions';
@@ -69,7 +70,8 @@ export async function getStaticProps({ params }) {
   const {
     data: [{ Documents }],
   } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SEARCH_API}/documents?visual=${params.collection}`
+    `${process.env.NEXT_PUBLIC_SEARCH_API}/documents?visual=${params.collection}`,
+    { headers: searchBuildHeaders }
   );
   const images = Documents.map(d => ({ ...d, collection: params.collection }));
   return { props: { images, ...params } };

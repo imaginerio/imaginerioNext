@@ -12,6 +12,7 @@ import ImageController from '../../../components/ImageController';
 
 import { useImages } from '../../../providers/ImageContext';
 import useWindowDimensions from '../../../utils/useWindowDimensions';
+import searchBuildHeaders from '../../../utils/searchApi';
 import { supportedLocales, useLocale } from '../../../hooks/useLocale';
 
 const AtlasController = dynamic(() => import('../../../components/AtlasController'), {
@@ -121,7 +122,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents`);
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents`, {
+    headers: searchBuildHeaders,
+  });
   const images = data.reduce(
     (memo, d) => [
       ...memo,
