@@ -10,6 +10,7 @@ import Header from '../../../components/Header';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import Footer from '../../../components/Footer';
 import { supportedLocales, useLocale } from '../../../hooks/useLocale';
+import searchBuildHeaders from '../../../utils/searchApi';
 
 const Iconography = ({ collections }) => {
   const { locale } = useLocale();
@@ -63,7 +64,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps() {
   let collections = await axios
-    .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents`)
+    .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents`, { headers: searchBuildHeaders })
     .then(({ data }) =>
       Promise.all(
         data.map(d =>

@@ -28,6 +28,7 @@ import Breadcrumbs from '../../../../components/Breadcrumbs';
 import Footer from '../../../../components/Footer';
 import { findByLabel } from '../../../../utils/iiif';
 import config from '../../../../utils/config';
+import searchBuildHeaders from '../../../../utils/searchApi';
 import pages from '../../../../assets/config/pages';
 import useWindowDimensions from '../../../../utils/useWindowDimensions';
 import { useLocale } from '../../../../hooks/useLocale';
@@ -198,7 +199,9 @@ export async function getStaticPaths() {
   let paths = [];
   const getCollection = collection =>
     axios
-      .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents?visual=${collection}`)
+      .get(`${process.env.NEXT_PUBLIC_SEARCH_API}/documents?visual=${collection}`, {
+        headers: searchBuildHeaders,
+      })
       .then(({ data }) => {
         paths = [
           ...paths,
@@ -232,7 +235,8 @@ export async function getStaticProps({ params }) {
   const lang = locale === 'pt' ? 'pt-BR' : 'en';
   try {
     let { data: metadata } = await axios.get(
-      `${process.env.NEXT_PUBLIC_SEARCH_API}/metadata/${params.id}?lang=${lang}`
+      `${process.env.NEXT_PUBLIC_SEARCH_API}/metadata/${params.id}?lang=${lang}`,
+      { headers: searchBuildHeaders }
     );
 
     const attributes = process.env.NEXT_PUBLIC_ATTR_ORDER.split(',');
